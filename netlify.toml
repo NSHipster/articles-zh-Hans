@@ -1,0 +1,34 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy= """
+        default-src 'self' *.nshipster.cn https://www.google-analytics.com 'unsafe-inline';
+        style-src 'self' *.nshipster.cn 'unsafe-inline';
+        img-src 'self' *.nshipster.cn *.gravatar.com;
+        frame-ancestors 'none';
+        object-src 'none';
+        base-uri 'none';
+    """
+    Referrer-Policy = "same-origin"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+[[headers]]
+  for = "/site.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/feed.xml"
+  [headers.values]
+    Content-Type = "application/rss+xml"
+
+[[redirects]]
+  from = "https://nshipster-cn.netlify.com/*"
+  to = "https://nshipster.cn/:splat"
+
+[[redirects]]
+  from = "http://nshipster-cn.netlify.com/*"
+  to = "https://nshipster.cn/:splat"
