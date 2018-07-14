@@ -2,9 +2,10 @@
 _site
 _drafts
 build
-assets/css
 nshipster.com/articles
 nshipster.com/books
 nshipster.com/training
 .sass-cache
-_site-nshipster.com
+.vscode
+.jekyll-cache
+.jekyll-metadata
