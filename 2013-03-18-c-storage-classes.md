@@ -1,6 +1,6 @@
 ---
 title: C Storage Classes
-author: Mattt Thompson
+author: Mattt
 category: Objective-C
 tags: nshipster
 translator: April Peng

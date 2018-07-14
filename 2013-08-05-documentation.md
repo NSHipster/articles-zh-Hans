@@ -1,6 +1,6 @@
 ---
 title: Documentation
-author: Mattt Thompson
+author: Mattt
 category: Objective-C
 translator: April Peng
 excerpt: "Cocoa 开发者间流传着一句格言，Objective-C 的冗长使得其代码就是有效的自我说明。有了 longMethodNamesWithNamedParameters: 以及参数的显式类型，Objective-C 的方法不会给人留下太多的想象空间。"

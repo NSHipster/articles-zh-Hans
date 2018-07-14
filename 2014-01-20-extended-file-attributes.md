@@ -1,6 +1,6 @@
 ---
 title: Extended File Attributes
-author: Mattt Thompson
+author: Mattt
 category: Objective-C
 translator: April Peng
 excerpt: "在 NSA 披露的间谍活动中，在大众的关注下，元数据的概念在政府监控中担当了意想不到的角色。它是什么？它揭示了我们的什么信息和哪些日常习惯？这些是美国人民都在问的问题，他们需要一个答案。"

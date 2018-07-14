@@ -1,6 +1,6 @@
 ---
 title: MKLocalSearch
-author: Mattt Thompson
+author: Mattt
 category: Cocoa
 translator: April Peng
 excerpt: "在喧闹纷繁的事态下，你可能完全没有发现 iOS 6.1 中的 MapKit 增加了什么。"

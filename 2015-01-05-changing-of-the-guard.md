@@ -1,6 +1,6 @@
 ---
 title: "Changing of the Guard"
-author: Mattt Thompson
+author: Mattt
 category: ""
 translator: Croath Liu
 excerpt: "An important site announcement."

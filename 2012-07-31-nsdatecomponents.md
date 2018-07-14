@@ -2,7 +2,7 @@
 layout: post
 title: NSDateComponents
 category: Cocoa
-author: Mattt Thompson
+author: Mattt
 translator: Candyan
 ---
 

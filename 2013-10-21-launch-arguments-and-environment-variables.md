@@ -1,6 +1,6 @@
 ---
 title: "Launch Arguments &<br/>Environment Variables"
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Xcode
 excerpt: "有许多选项可以传递给 target 的 scheme，开启一些有用的调试特性。就像快餐店的秘密菜单一样，它们常常是隐蔽而且不为人知的。"

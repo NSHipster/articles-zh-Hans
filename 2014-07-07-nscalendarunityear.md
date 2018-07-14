@@ -1,6 +1,6 @@
 ---
 title: NSCalendarUnitYear
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Swift
 excerpt: "NSHipster.com 已经走过了两个年头。每周我们都会发表一篇新文章，探讨 Objective-C 或者 Cocoa 当中一些不为人知的话题（除了几周例外）。我们用蛋糕来庆祝一下。"

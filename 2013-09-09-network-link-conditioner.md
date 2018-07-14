@@ -1,6 +1,6 @@
 ---
 title: Network Link Conditioner
-author: Mattt Thompson
+author: Mattt
 category: Xcode
 tag: popular
 translator: April Peng

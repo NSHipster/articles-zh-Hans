@@ -1,6 +1,6 @@
 ---
 title: Swift Default Protocol Implementations
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Swift
 tags: swift

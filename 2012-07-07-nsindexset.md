@@ -1,7 +1,7 @@
 ---
 layout: post
 title: NSIndexSet
-author: Mattt Thompson
+author: Mattt
 translator: Andrew Yang
 category: Cocoa
 ---

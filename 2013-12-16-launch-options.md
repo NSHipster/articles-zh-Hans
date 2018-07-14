@@ -1,6 +1,6 @@
 ---
 title: UIApplicationDelegate launchOptions
-author: Mattt Thompson
+author: Mattt
 category: Cocoa
 translator: Croath Liu
 excerpt: "AppDelegate 是 iOS 各种功能的集散中心。"

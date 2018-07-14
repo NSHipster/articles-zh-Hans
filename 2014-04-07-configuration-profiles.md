@@ -1,6 +1,6 @@
 ---
 title: Configuration Profiles
-author: Mattt Thompson
+author: Mattt
 category: ""
 translator: April Peng
 excerpt: "iOS 作为一个平台的主要缺陷是如何锁定它。 iOS 的 Configuration Profiles 提供了一个有趣的机制来解决这些限制。"

@@ -1,6 +1,6 @@
 ---
 title: Swift System Version Checking
-author: Mattt Thompson
+author: Mattt
 category: Swift
 translator: April Peng
 excerpt: "C 可以使用邪恶的预处理指令。Swift 有预处理指令的安全子集。那么，我们如何检查系统版本的 API 兼容性？"

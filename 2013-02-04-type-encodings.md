@@ -1,6 +1,6 @@
 ---
 title: Type Encodings
-author: Mattt Thompson
+author: Mattt
 translator: Ricky Tan
 category: Objective-C
 tags: nshipster

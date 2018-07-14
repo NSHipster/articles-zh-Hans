@@ -1,7 +1,7 @@
 ---
 layout: post
 title: NSOperation
-author: Mattt Thompson
+author: Mattt
 translator: Henry Lee
 category: Cocoa
 tag: popular

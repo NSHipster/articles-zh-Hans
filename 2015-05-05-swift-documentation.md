@@ -1,6 +1,6 @@
 ---
 title: Swift Documentation
-author: Mattt Thompson & Nate Cook
+author: Mattt & Nate Cook
 authors:
     - Mattt Thompson
     - Nate Cook

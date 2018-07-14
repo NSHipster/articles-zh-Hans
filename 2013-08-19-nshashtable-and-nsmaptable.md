@@ -1,6 +1,6 @@
 ---
 title: "NSHashTable & NSMapTable"
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Cocoa
 tags: nshipster

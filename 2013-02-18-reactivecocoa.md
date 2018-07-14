@@ -3,7 +3,7 @@ layout: post
 title: ReactiveCocoa
 category: Open Source
 excerpt: "打破了苹果API排他性的盾牌，本期NSHipster将介绍一个为Objective-C勇敢构建新纪元的开源项目：ReactiveCocoa"
-author: Mattt Thompson
+author: Mattt
 translator: Croath Liu
 ---
 

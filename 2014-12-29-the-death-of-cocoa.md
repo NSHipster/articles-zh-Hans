@@ -2,7 +2,7 @@
 layout: post
 title: The Death of Cocoa
 category: ""
-author: Mattt Thompson
+author: Mattt
 translator: Henry Lee
 excerpt: "对于我们大多数而言，苹果的简洁、优雅和它软硬件的结合是我们为什么在这个平台开发的原因，尽管如此，即使 Swift 才开始被使用几个月，Cocoa 已经开始失去它原有的光芒了。"
 ---

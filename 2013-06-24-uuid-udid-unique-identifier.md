@@ -1,6 +1,6 @@
 ---
 title: "NSUUID /<br/>CFUUIDRef /<br/>UIDevice -uniqueIdentifier /<br/>-identifierForVendor"
-author: Mattt Thompson
+author: Mattt
 category: Cocoa
 translator: April Peng
 excerpt: "直到最近之前，应用程序，甚至是跨应用程序启动的时候，获得设备的唯一标识一直都是小菜一碟，简单的请求 UIDevice -uniqueIdentifier 就完事了。"

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: NSFileManager
-author: Mattt Thompson
+author: Mattt
 translator: "Lin Xiangyu"
 category: Cocoa
 rating: 7.9

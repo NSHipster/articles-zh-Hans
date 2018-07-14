@@ -1,6 +1,6 @@
 ---
 title: Xcode Key Bindings & Gestures
-author: Mattt Thompson
+author: Mattt
 category: Xcode
 tag: popular
 translator: Croath Liu

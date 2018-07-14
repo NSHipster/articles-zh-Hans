@@ -1,6 +1,6 @@
 ---
 title: NSSecureCoding
-author: Mattt Thompson
+author: Mattt
 category: Cocoa
 translator: April Peng
 excerpt: "本周的简短文章：你需要了解的关于 NSSecureCoding 的一切。"

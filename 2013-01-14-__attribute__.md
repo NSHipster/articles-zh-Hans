@@ -1,6 +1,6 @@
 ---
 title: "__attribute__"
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Objective-C
 tags: nshipster

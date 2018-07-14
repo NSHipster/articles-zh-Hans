@@ -1,6 +1,6 @@
 ---
 title: NSAssertionHandler
-author: Mattt Thompson
+author: Mattt
 translator: Ricky Tan
 category: Cocoa
 excerpt: "编程结合了人类思考过程中众多学科，从高层次的辩论和语义学——我们用来解释一个系统如何工作的故事——到支撑所有一切的数学和哲学机器。"

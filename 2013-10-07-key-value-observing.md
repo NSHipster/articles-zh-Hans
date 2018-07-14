@@ -1,6 +1,6 @@
 ---
 title: "Key-Value Observing"
-author: Mattt Thompson
+author: Mattt
 translator: Tiny Tian
 category: Cocoa
 tag: nshipster, popular

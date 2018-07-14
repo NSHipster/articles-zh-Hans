@@ -1,7 +1,7 @@
 ---
 layout: post
 title: NSURLCache
-author: Mattt Thompson
+author: Mattt
 translator: Ricky Tan
 category: Cocoa
 tag: popular

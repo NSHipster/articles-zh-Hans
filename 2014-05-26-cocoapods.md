@@ -1,7 +1,7 @@
 ---
 layout: post
 title: CocoaPods
-author: Mattt Thompson
+author: Mattt
 translator: David Liu
 category: Open Source
 tag: popular

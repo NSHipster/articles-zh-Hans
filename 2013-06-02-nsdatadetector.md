@@ -1,6 +1,6 @@
 ---
 title: NSDataDetector
-author: Mattt Thompson
+author: Mattt
 category: Cocoa
 tags: nshipster
 translator: April Peng

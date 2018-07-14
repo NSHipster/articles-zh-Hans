@@ -2,7 +2,7 @@
 layout: post
 title: NSPredicate
 category: Cocoa
-author: Mattt Thompson
+author: Mattt
 translator: Zihan Xu
 ---
 

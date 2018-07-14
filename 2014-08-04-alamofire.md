@@ -1,6 +1,6 @@
 ---
 title: Alamofire
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Open Source
 excerpt: "尽管我们离使用 Swift 发布 App 还有几个月的时间，已经有若干使用这门新语言的开源项目开始生根发芽了，Alamofire 便是这些项目中的一个。"

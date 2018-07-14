@@ -1,7 +1,7 @@
 ---
 layout: post
 title: NSExpression
-author: Mattt Thompson
+author: Mattt
 translator: Zihan Xu
 category: Cocoa
 ---

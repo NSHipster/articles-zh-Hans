@@ -1,6 +1,6 @@
 ---
 title: Clang Diagnostics
-author: Mattt Thompson
+author: Mattt
 category: Objective-C
 translator: April Peng
 excerpt: "诊断结合了逻辑与分析来得出一个结论。这是最纯粹的科学和工程学，也是人类最有力的推理。对于我们开发者来说，我们通过代码通知后续代码的生产，创建了一个在过去半个世纪里呈几何级数发展的技术的正反馈循环。尤其对于我们的 Objective-C 开发者来说，最有效的诊断来自 Clang。"

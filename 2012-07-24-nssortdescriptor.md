@@ -1,7 +1,7 @@
 ---
 layout: post
 title: NSSortDescriptor
-author: Mattt Thompson
+author: Mattt
 translator: Zihan Xu
 category: Cocoa
 ---

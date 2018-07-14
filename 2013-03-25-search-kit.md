@@ -1,6 +1,6 @@
 ---
 title: Search Kit
-author: Mattt Thompson
+author: Mattt
 translator: Ricky Tan
 category: Cocoa
 excerpt: "Search Kit 是一个用人类语言来搜索和建立内容索引的 C 框架。它支持词组或部分单词匹配，包括逻辑操作和通配符，且能通过相关性对结果进行排序。Search Kit 也提供了文档总结功能，在生成有代表性的摘要时很有用。最重要的是：它是线程安全的。"

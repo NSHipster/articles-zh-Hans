@@ -1,6 +1,6 @@
 ---
 title: "NSFastEnumeration / NSEnumerator"
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Cocoa
 excerpt: "遍历体现了计算能力的有趣之处。封装只执行一次的逻辑是一回事，把这个封装好的逻辑应用到集合当中的所有元素完全是另一回事了——这也正是计算机程序强大功能的一个体现。"

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: CFStringTransform
-author: Mattt Thompson
+author: Mattt
 translator: Ricky Tan
 category: Cocoa
 excerpt: "NSString 是基础类库中的佼佼者。 它虽然很强大，但是不提提它的可无缝转换的表兄弟 CFMutableString，或者更特殊的 CFStringTransform，是不负责任的。"

@@ -1,6 +1,6 @@
 ---
 title: RawOptionSetType
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Swift
 tags: swift

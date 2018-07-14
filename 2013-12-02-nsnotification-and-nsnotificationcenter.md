@@ -1,6 +1,6 @@
 ---
 title: "NSNotification &<br/>NSNotificationCenter"
-author: Mattt Thompson
+author: Mattt
 translator: Chester Liu
 category: Cocoa
 tags: popular

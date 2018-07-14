@@ -1,6 +1,6 @@
 ---
 title: Method Swizzling
-author: Mattt Thompson
+author: Mattt
 category: Objective-C
 translator: Daniel Hu
 excerpt: "Method swizzling 用来改变已存在的 selector 映射的方法实现。Method swizzling 通过在运行时修改类的消息分发列表中 selector 与实现的映射使得在运行时修改方法的调用成为可能。"
