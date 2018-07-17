@@ -39,7 +39,7 @@ status:
 ```swift
 UINavigationBar.appearance().tintColor = myColor
 ```
-```objective-c
+```objc
 [[UINavigationBar appearance] setTintColor:myColor];
 ```
 
@@ -55,7 +55,7 @@ UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self])
 UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self, UIPopoverController.self])
 				.tintColor = myNavBarColor
 ```
-```objective-c
+```objc
 [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UINavigationBar class]]]
        setTintColor:myNavBarColor];
 [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UINavigationBar class], [UIPopoverController class]]]

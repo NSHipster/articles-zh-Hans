@@ -90,7 +90,7 @@ UIKit 可以很容易的把用户设备里存储的定制设计直接打印出�
 }
 ```
 
-```objective-c
+```objc
 - (IBAction)print:(id)sender {
     if ([UIPrintInteractionController canPrintURL:self.imageURL]) {
         UIPrintInfo *printInfo = [UIPrintInfo printInfo];
@@ -133,7 +133,7 @@ formatter.contentInsets = UIEdgeInsets(top: 72, left: 72, bottom: 72, right: 72)
 printController.printFormatter = formatter
 ```
 
-```objective-c
+```objc
 UIMarkupTextPrintFormatter *formatter = [[UIMarkupTextPrintFormatter alloc] initWithMarkupText:htmlString];
 formatter.contentInsets = UIEdgeInsetsMake(72, 72, 72, 72); // 1" margins
 
@@ -189,7 +189,7 @@ class RecipePrintPageRenderer: UIPrintPageRenderer {
 }
 ```
 
-```objective-c
+```objc
 @interface RecipePrintPageRenderer : UIPrintPageRenderer
 @property (nonatomic, strong) NSString *authorName;
 @property (nonatomic, strong) Recipe *recipe;
@@ -241,7 +241,7 @@ override func drawHeaderForPageAtIndex(pageIndex: Int, var inRect headerRect: CG
 }
 ```
 
-```objective-c
+```objc
 - (void)drawHeaderForPageAtIndex:(NSInteger)index
                           inRect:(CGRect)headerRect
 {
@@ -271,7 +271,7 @@ override func drawContentForPageAtIndex(pageIndex: Int, inRect contentRect: CGRe
     }
 }
 ```
-```objective-c
+```objc
 - (void)drawContentForPageAtIndex:(NSInteger)pageIndex
                            inRect:(CGRect)contentRect
 {
@@ -293,7 +293,7 @@ let renderer = RecipePrintPageRenderer(authorName: "Nate Cook", recipe: selected
 printController.printPageRenderer = renderer
 ```
 
-```objective-c
+```objc
 RecipePrintPageRenderer *renderer = [[RecipePrintPageRenderer alloc] initWithAuthorName:@"Nate Cook" recipe:selectedRecipe];
 printController.printPageRenderer = renderer;
 ```
@@ -319,7 +319,7 @@ printController.printPageRenderer = renderer;
 }
 ```
 
-```objective-c
+```objc
 - (IBAction)openShareSheet:(id)sender {
     UIPrintInfo *printInfo = ...
     UISimpleTextPrintFormatter *formatter = ...
@@ -347,7 +347,7 @@ printerPicker.presentAnimated(true) {
 }
 ```
 
-```objective-c
+```objc
 UIPrinterPickerController *printPicker = [UIPrinterPickerController printerPickerControllerWithInitiallySelectedPrinter:self.savedPrinter];
 [printPicker presentAnimated:YES completionHandler:
     ^(UIPrinterPickerController *printerPicker, BOOL userDidSelect, NSError *error) {

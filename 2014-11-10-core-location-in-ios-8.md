@@ -168,7 +168,7 @@ class CLFloor : NSObject {
 }
 ```
 
-```objective-c
+```objc
 @interface CLFLoor : NSObject
 @property(readonly, nonatomic) NSInteger level
 @end

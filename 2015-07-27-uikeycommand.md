@@ -44,7 +44,7 @@ override func canBecomeFirstResponder() -> Bool {
     return true
 }
 ```
-```objective-c
+```objc
 - (BOOL)canBecomeFirstResponder {
     return YES;
 }
@@ -71,7 +71,7 @@ func selectTab(sender: UIKeyCommand) {
     // ...
 }
 ```
-```objective-c
+```objc
 - (NSArray<UIKeyCommand *>*)keyCommands {
     return @[
         [UIKeyCommand keyCommandWithInput:@"1" modifierFlags:UIKeyModifierCommand action:@selector(selectTab:) discoverabilityTitle:@"Types"],

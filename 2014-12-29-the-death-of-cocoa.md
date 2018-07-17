@@ -107,7 +107,7 @@ Objective-C 还有一个令人震惊的是，他竟然花了这么久（iOS 5 / 
 尽管如此，`NSJSONSerialization` 在 Swift 里依然是一场灾难，我们只能继续用第三方类库。
 
 
-```Objective-c
+```objc
 NSData *data;
 NSError *error = nil;
 id JSON = [NSJSONSerialization JSONObjectWithData:data
@@ -147,7 +147,7 @@ if let JSON = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: 
 
 Objective-C 还是习惯用[错误指针](http://nshipster.com/nserror/)(`NSError **`)来处理运行时异常，而不是用 `@throw` 来抛出。以下是每一个 Cocoa 开发者应该熟悉的范式：
 
-```objective-c
+```objc
 NSError *error = nil;
 BOOL success = [[NSFileManager defaultManager] moveItemAtPath:@"/path/to/target"
                                                        toPath:@"/path/to/destination"

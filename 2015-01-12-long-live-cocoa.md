@@ -58,7 +58,7 @@ func UTCreateStringForOSType(inOSType: OSType) -> Unmanaged<CFString>!
 
 另外的是，Swift 不仅拥抱了 Cocoa 的接口，它还提高了 Cocoa 的接口。例如可敬的 `CGRect`，作为一个 C 结构体，它不能包含任何类方法，所以所有的[操作 `CGRect` 的方法](/cggeometry/)都存在在上层函数里。这些工具很强大，但是你需要确切知道他们的存在并去用他们。这里是将一个 `CGRect` 分成四份的四行代码，可能需要查三次文档：
 
-```objective-c
+```objc
 CGRect nextRect;
 CGRect remainingRect;
 CGRectDivide(sourceRect, &nextRect, &remainingRect, 250, CGRectMinXEdge);

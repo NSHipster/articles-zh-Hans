@@ -45,14 +45,14 @@ Benchmark应该和其他认知论有一样的规律可遵循，像统计量那�
 
 为了建立 benchmark，我们指定一个 `count` 表示有多少个元素需要添加，`iterations` 表示这个测试要运行多少次。
 
-```objective-c
+```objc
 static size_t const count = 1000;
 static size_t const iterations = 10000;
 ```
 
 因为我们不需要测试申请内存的时间，所以我们在 benchmark 外部只声明一次要添加进数组的元素。
 
-```objective-c
+```objc
 id object = @"🐷";
 ```
 
@@ -64,7 +64,7 @@ id object = @"🐷";
 
 那么具体的步骤如下：
 
-```objective-c
+```objc
 CFTimeInterval startTime = CACurrentMediaTime();
 {
     for (size_t i = 0; i < iterations; i++) {
@@ -92,7 +92,7 @@ NSLog(@"Total Runtime: %g s", endTime - startTime);
 
 `dispatch_benchmark` 是 [`libdispatch` (Grand Central Dispatch)](http://libdispatch.macosforge.org) 的一部分。但严肃地说，这个方法并没有被公开声明，所以你必须要自己声明：
 
-```objective-c
+```objc
 extern uint64_t dispatch_benchmark(size_t count, void (^block)(void));
 ```
 
@@ -119,7 +119,7 @@ performance as concurrency is increased.
 
 之前那个例子如果我们用 `dispatch_benchmark` 来写会长成这个样子：
 
-```objective-c
+```objc
 uint64_t t = dispatch_benchmark(iterations, ^{
     @autoreleasepool {
         NSMutableArray *mutableArray = [NSMutableArray array];
@@ -141,7 +141,7 @@ NSLog(@"[[NSMutableArray array] addObject:] Avg. Runtime: %llu ns", t);
 
 一起来看看：
 
-```objective-c
+```objc
 uint64_t t_0 = dispatch_benchmark(iterations, ^{
     @autoreleasepool {
         NSMutableArray *mutableArray = [NSMutableArray array];

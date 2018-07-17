@@ -43,7 +43,7 @@ func buildPathWithRadius(radius: CGFloat, steps: CGFloat, loopCount: CGFloat) ->
     return path
 }
 ```
-```objective-c
+```objc
 - (UIBezierPath *)buildPathWithRadius:(CGFloat)radius steps:(CGFloat)steps loopCount:(CGFloat)loopCount {
     CGFloat x, y;
     CGFloat away = radius / steps;
@@ -99,7 +99,7 @@ func debugQuickLookObject() -> AnyObject {
     return path
 }
 ```
-```objective-c
+```objc
 - (id)debugQuickLookObject {
     UIBezierPath *path = [self buildPathWithRadius:self.radius steps:self.steps loopCount:self.loopCount];
     return path;

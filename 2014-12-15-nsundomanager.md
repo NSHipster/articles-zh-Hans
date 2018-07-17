@@ -40,7 +40,7 @@ func updateScore(score: NSNumber) {
 }
 ```
 
-```objective-c
+```objc
 - (void)updateScore:(NSNumber*)score {
     [undoManager registerUndoWithTarget:self selector:@selector(updateScore:) object:myMovie.score];
     [undoManager setActionName:NSLocalizedString(@"actions.update", @"Update Score")];
@@ -64,7 +64,7 @@ func movePiece(piece: ChessPiece, row:UInt, column:UInt) {
 }
 ```
 
-```objective-c
+```objc
 - (void)movePiece:(ChessPiece*)piece toRow:(NSUInteger)row column:(NSUInteger)column {
     [[undoManager prepareWithInvocationTarget:self] movePiece:piece ToRow:piece.row column:piece.column];
     [undoManager setActionName:NSLocalizedString(@"actions.move-piece", @"Move Piece")];
@@ -111,7 +111,7 @@ class ViewController: UIViewController {
 }
 ```
 
-```objective-c
+```objc
 @implementation ViewController
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -163,7 +163,7 @@ func archiveEmail(email: Email) {
 }
 ```
 
-```objective-c
+```objc
 - (void)readAndArchiveEmail:(Email*)email {
     [undoManager beginUndoGrouping];
     [self markEmail:email asRead:YES];
@@ -213,7 +213,7 @@ func removeItem(item: NSObject) {
 }
 ```
 
-```objective-c
+```objc
 - (void)addItem:(id)item {
     [undoManager registerUndoWithTarget:self selector:@selector(removeItem:) object:item];
     if (![undoManager isUndoing]) {

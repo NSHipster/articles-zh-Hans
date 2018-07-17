@@ -15,7 +15,7 @@ excerpt: " `NSCalendar` 已经悄悄的构建了大量的方法方便大家获�
 ```swift
 let calendar = NSCalendar.currentCalendar()
 ```
-```objective-c
+```objc
 NSCalendar *calendar = [NSCalendar currentCalendar];
 ```
 
@@ -28,7 +28,7 @@ NSCalendar *calendar = [NSCalendar currentCalendar];
 ```swift
 let hour = calendar.component(.CalendarUnitHour, fromDate: NSDate())
 ```
-```objective-c
+```objc
 NSInteger hour = [calendar component:NSCalendarUnitHour fromDate:[NSDate date]];
 ```
 这样就好多了。`NSCalendar`，你还有哪些本事？
@@ -80,7 +80,7 @@ let valentines = cal.dateWithEra(1, year: 2015, month: 2, day: 14, hour: 9, minu
 let components = NSDateComponents()
 components.day = 31
 ```
-```objective-c
+```objc
 NSDate *valentines = [calendar dateWithEra:1 year:2015 month:2 day:14 hour:9 minute:0 second:0 nanosecond:0];
     
 NSDateComponents *components = [[NSDateComponents alloc] init];
@@ -93,7 +93,7 @@ components.day = 31;
 calendar.nextDateAfterDate(valentines, matchingComponents: components, options: .MatchStrictly)
 // Mar 31, 2015, 12:00 AM
 ```
-```objective-c
+```objc
 NSDate *date = [calendar nextDateAfterDate:valentines matchingComponents:components options:NSCalendarMatchStrictly];
 // Mar 31, 2015, 12:00 AM
 ```
@@ -104,7 +104,7 @@ NSDate *date = [calendar nextDateAfterDate:valentines matchingComponents:compone
 calendar.nextDateAfterDate(valentines, matchingComponents: components, options: .MatchNextTime)
 // Mar 1, 2015, 12:00 AM
 ```
-```objective-c
+```objc
 date = [calendar nextDateAfterDate:valentines matchingComponents:components options:NSCalendarMatchNextTime];
 // Mar 1, 2015, 12:00 AM
 ```
@@ -115,7 +115,7 @@ date = [calendar nextDateAfterDate:valentines matchingComponents:components opti
 calendar.nextDateAfterDate(valentines, matchingComponents: components, options: .MatchNextTimePreservingSmallerUnits)
 // Mar 1, 2015, 9:00 AM
 ```
-```objective-c
+```objc
 date = [calendar nextDateAfterDate:valentines matchingComponents:components options:NSCalendarMatchNextTimePreservingSmallerUnits];
 // Mar 1, 2015, 9:00 AM
 ```
@@ -126,7 +126,7 @@ date = [calendar nextDateAfterDate:valentines matchingComponents:components opti
 calendar.nextDateAfterDate(valentines, matchingComponents: components, options: .MatchPreviousTimePreservingSmallerUnits)
 // Feb 28, 2015, 9:00 AM
 ```
-```objective-c
+```objc
 date = [calendar nextDateAfterDate:valentines matchingComponents:components options:NSCalendarMatchPreviousTimePreservingSmallerUnits];
 // Feb 28, 2015, 9:00 AM
 ```
@@ -142,7 +142,7 @@ cal.nextDateAfterDate(valentines, matchingUnit: .CalendarUnitDay, value: 31, opt
 cal.nextDateAfterDate(valentines, matchingHour: 15, minute: 30, second: 0, options: .MatchNextTime)
 // Feb 14, 2015, 3:30 PM
 ```
-```objective-c
+```objc
 // 匹配指定的日历单元
 date = [calendar nextDateAfterDate:valentines matchingUnit:NSCalendarUnitDay value:31 options:NSCalendarMatchStrictly];
 // March 31, 2015, 12:00 AM
@@ -179,7 +179,7 @@ cal.enumerateDatesStartingAfterDate(NSDate(), matchingComponents: leapYearCompon
 // 2000-02-29 05:00:00 +0000
 // ...
 ```
-```objective-c
+```objc
 NSDateComponents *leapYearComponents = [[NSDateComponents alloc] init];
 leapYearComponents.month = 2;
 leapYearComponents.day = 29;
