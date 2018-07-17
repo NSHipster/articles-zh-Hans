@@ -22,7 +22,7 @@ iPhone 6+ 的推出让 `UISplitViewController` 变得更为重要。现在只需
 
 这是一个带有 split view controller 的 Storyboard 的布局概览，它看起来是这样的：
 
-![UISplitViewController Storyboard Layout]({{ site.asseturl }}/uisplitviewcontroller-storyboard-layout.png)
+![UISplitViewController Storyboard Layout]({% asset uisplitviewcontroller-storyboard-layout.png @path %})
 
 让我们来看看更多的细节：
 
@@ -30,11 +30,11 @@ iPhone 6+ 的推出让 `UISplitViewController` 变得更为重要。现在只需
 
 使用 `UISplitViewController` 的第一步是把它拖到 storyboard 里。接下来，指定哪个视图控制器是 **Master** 哪一个是 **Detail**。
 
-![UISplitViewController Master-Detail Storyboard ]({{ site.asseturl }}/uisplitviewcontroller-master-detail-storyboard.png)
+![UISplitViewController Master-Detail Storyboard ]({% asset uisplitviewcontroller-master-detail-storyboard.png @path %})
 
 通过选择适当的 Relationship Segue 来做：
 
-![UISplitViewController Relationship Segue]({{ site.asseturl }}/uisplitviewcontroller-relationship-segue.png)
+![UISplitViewController Relationship Segue]({% asset uisplitviewcontroller-relationship-segue.png @path %})
 
 主视图控制器通常是包含列表视图（在大多数情况下是一个 `UITableView`）的导航控制器。详细信息视图控制器则是显示用户点击列表某项时对应的导航控制器视图。
 
@@ -42,7 +42,7 @@ iPhone 6+ 的推出让 `UISplitViewController` 变得更为重要。现在只需
 
 还有最后一个部分让拆分视图控制器真正工作：指定 "Show Detail" segue：
 
-![UISplitViewController Show Detail Segue]({{ site.asseturl }}/uisplitviewcontroller-show-detail-segue.png)
+![UISplitViewController Show Detail Segue]({% asset uisplitviewcontroller-show-detail-segue.png @path %})
 
 在下面的例子中，当用户点击了 `SelectColorTableViewController` 里的一个单元格，它们会被展示在一个以 `colorviewcontroll` 为根的导航控制器中。
 
@@ -50,11 +50,11 @@ iPhone 6+ 的推出让 `UISplitViewController` 变得更为重要。现在只需
 
 在这一点上，你可能想知道为什么主视图控制器和详细信息视图控制器都必须是导航控制器，特别是当有一个 "Show Detail" segue 从表格视图（这是导航堆栈的一部分）连接到详细信息视图控制器。如果详细视图控制器一开始不带导航控制器呢？
 
-![UISplitViewController No Detail Navigation Controller]({{ site.asseturl }}/uisplitviewcontroller-no-detail-navigation-controller.png)
+![UISplitViewController No Detail Navigation Controller]({% asset uisplitviewcontroller-no-detail-navigation-controller.png @path %})
 
 大体来看，应用程序仍然会工作得很好。在 iPhone 6+ 上，唯一的区别是当手机在横向模式下会没有导航工具栏：
 
-![]({{ site.asseturl }}/uisplitviewcontroller-no-navigation-bar.png)
+![]({% asset uisplitviewcontroller-no-navigation-bar.png @path %})
 
 这不是什么大不了的事，除非你想让你的导航栏显示一个标题。但在 iPad 上这最终会是致命的弱点。
 
@@ -64,7 +64,7 @@ iPhone 6+ 的推出让 `UISplitViewController` 变得更为重要。现在只需
 
 即使有导航控制器，在刚开始的时候用户界面也没有好太多（虽然能看到一个标题绝对是一个改进）：
 
-![UISplitViewController iPad Navigation Bar No Button]({{ site.asseturl }}/uisplitviewcontroller-ipad-navigation-bar-no-button.png)
+![UISplitViewController iPad Navigation Bar No Button]({% asset uisplitviewcontroller-ipad-navigation-bar-no-button.png @path %})
 
 ### `displayModeButtonItem`
 

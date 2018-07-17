@@ -28,7 +28,7 @@ Playgrounds 本质上并不是 Swift 语言的一个特性——相反的，他�
 
 更新后的 Playground 包，包括了一个"Sources"的代码文件夹，十分稳定。所有在"Sources"路径下的文件都是经过编译到一个单独的模块（只有一次，并不是每次你输入都会编译），并且自动导入到 Playground。除了简化你的 Playground 中的代码，该编译*极大*的提升了执行速度。这意味着当你在文件中定义了一个 public 的类型，函数，或者全局常量的时候，就可以立即的使用：
 
-![Compiled Sources]({{ site.asseturl }}/xcplayground-sources.png)
+![Compiled Sources]({% asset xcplayground-sources.png @path %})
 
 在你的 Playground 中试试，打开 Project Navigator (⌘1) 并展开 Playground 文件，你就能看到"Sources"路径。
 
@@ -91,7 +91,7 @@ for forecast in forecasts {
 
 另一种可选的方式是, 选择 **Editor &rarr; Show Result For Current Line** 就会捕获当前线的数值并且直接以图表的形势显示在 Playground 流中：
 
-![Result for Current Line]({{ site.asseturl }}/xcplayground-capture.png)
+![Result for Current Line]({% asset xcplayground-capture.png @path %})
 
 
 
@@ -138,14 +138,14 @@ task.resume()
 
 ### Images, Too
 
-![Remote Image]({{ site.asseturl }}/alert.gif)
+![Remote Image]({% asset alert.gif @path %})
 ![Local Image](bomb.gif) 
 
 *Images in the Resources directory can be referenced locally*
 */
 ```
 
-![Rendered Documentation]({{ site.asseturl }}/xcplayground-documentation.png)
+![Rendered Documentation]({% asset xcplayground-documentation.png @path %})
 
 可以通过选择 **Editor &rarr; Show Rendered Markup** 菜单，从而选择切换到获得多格式文档，也可以在 File Inspector (⌘⌥1) 选中 **Render Documentation** 复选框。
 

@@ -42,7 +42,7 @@ Xcode 快捷键和手势不仅节省了宝贵的工作时间，而且能让你�
 
 ## 快速打开 (`⇧⌘O`)
 
-![Open Quickly]({{ site.asseturl }}/xcode-shortcuts-quick-open.png)
+![Open Quickly]({% asset xcode-shortcuts-quick-open.png @path %})
 
 学习快速打开可以更少依赖 Project Navigator。这个功能太讨人喜欢了，Xcode 通过带有部分匹配和位置匹配功能的快速打开帮助你输入的字符找到你想要的东西。
 
@@ -50,7 +50,7 @@ Xcode 快捷键和手势不仅节省了宝贵的工作时间，而且能让你�
 
 ## 快速查看文档 (`⌥ʘ` / 三指轻拍) <br/> 打开文档 (`⌥ʘʘ`)
 
-![Quick Documentation]({{ site.asseturl }}/xcode-shortcuts-quick-documentation.gif)
+![Quick Documentation]({% asset xcode-shortcuts-quick-documentation.gif @path %})
 
 快速查看文档可能是开发者需要学习的第一个 Xcode 快捷键。只需要在任意类、变量、常量上按住 alt 点击（或三指轻拍），Xcode 就会该处显示出一个简洁的文档。Alt 加双击会打开文档窗口并进入相关界面。
 
@@ -60,7 +60,7 @@ Xcode 快捷键和手势不仅节省了宝贵的工作时间，而且能让你�
 
 ## 副本间切换 (`^⌘↑` / `^⌘↓` / 三指竖划)
 
-![Jump to Next Counterpart]({{ site.asseturl }}/xcode-shortcuts-counterpart.gif)
+![Jump to Next Counterpart]({% asset xcode-shortcuts-counterpart.gif @path %})
 
 下面这个，但不是最后一个，就是副本间切换，这可能是每天用得最多的快捷键了。在 `.h` 文件和与其对应的 `.m` 实现文件中使用三指上下划的动作（如果你喜欢的话也可以使用 `^⌘↑` / `^⌘↓` ）来进行快速切换。
 
@@ -68,23 +68,23 @@ Xcode 快捷键和手势不仅节省了宝贵的工作时间，而且能让你�
 
 ## 注释选中部分 / 当前行 (`⌘/`)
 
-![Comment Selection]({{ site.asseturl }}/xcode-shortcuts-comment.gif)
+![Comment Selection]({% asset xcode-shortcuts-comment.gif @path %})
 
 是的你 _可以_ 通过对代码增删断点的方式来进行调试，但是这里有一个更简单强大的方法可以对代码进行注释或取消注释。这个快捷键可以对当前行或选中部分添加添加 `//` 注释。
 
 ## 显示 Standard Editor (`⌘↵`) <br/> 显示 Assistant Editor (`⌥⌘↵`) <br/> 显示 Version Editor (`⌥⇧⌘↵`)
 
-![Editors]({{ site.asseturl }}/xcode-shortcuts-editors.gif)
+![Editors]({% asset xcode-shortcuts-editors.gif @path %})
 
 Assistant Editor 那么好用但却没有几个工程师可以准确记住开关它的快捷键。现在在你的脑子里记住 `⌘↵` 和 `⌥⌘↵`，以后你就能让 Xcode 帮助你更多了。
 
-![Assistant Editor Position]({{ site.asseturl }}/xcode-shortcuts-assistant-editor-position.png)
+![Assistant Editor Position]({% asset xcode-shortcuts-assistant-editor-position.png @path %})
 
 另一方面，如果不太满意编辑器的排列方式，在 View > Assistant Editor 中可以选择垂直活着水平排列。
 
 ---
 
-![Panels]({{ site.asseturl }}/xcode-shortcuts-panels.gif)
+![Panels]({% asset xcode-shortcuts-panels.gif @path %})
 
 编辑器的左右两侧就像一个三明治，导航栏和工具栏将代码夹在它们爱的怀抱里。在需要内心平静时，学习如何显示有用的部分以及如何让它们 GTFO，能够实现生产力的最大化。
 
@@ -121,7 +121,7 @@ Assistant Editor 那么好用但却没有几个工程师可以准确记住开关
 
 ## 显示/隐藏调试区域 (`⇧⌘Y`) <br/> 激活 Console (`⇧⌘C`)
 
-![Show / Hide Debug Area]({{ site.asseturl }}/xcode-shortcuts-debug-area.gif)
+![Show / Hide Debug Area]({% asset xcode-shortcuts-debug-area.gif @path %})
 
 有人怀念 Xcode 3 中能够独立分离的调试窗口吗？反正我是很怀念。
 
@@ -131,19 +131,19 @@ Assistant Editor 那么好用但却没有几个工程师可以准确记住开关
 
 ## 查找 (`⌘F`) /<br/>查找替换 (`⌥⌘F`) /<br/>在工程中查找 (`⇧⌘F`) /<br/>在工程中查找和替换 (`⌥⇧⌘F`)
 
-![Find]({{ site.asseturl }}/xcode-shortcuts-find.gif)
+![Find]({% asset xcode-shortcuts-find.gif @path %})
 
 因为 Xcode 对代码进行重构的能力实在是太弱了...或者说大多数时候都帮不上忙。另一方面，Xcode 支持对纯文本的引用、定义以及正则搜索。
 
 ## 拼写和语法检查 (`⌘:`)
 
-![Spelling & Grammar]({{ site.asseturl }}/xcode-shortcuts-spelling-and-grammar.png)
+![Spelling & Grammar]({% asset xcode-shortcuts-spelling-and-grammar.png @path %})
 
 Clang 如此强大也不能在注释中更正你那噩梦一般的语法和标点使用。特别是当有人将代码开源时，你需要用 OS X 内建的拼写和语法检查帮自己一把。
 
 ---
 
-![Xcode Shortcut Preferences]({{ site.asseturl }}/xcode-shortcuts-preferences.png)
+![Xcode Shortcut Preferences]({% asset xcode-shortcuts-preferences.png @path %})
 
 当然了还有更有趣的事情！像任何拿得出手的编辑器一样，Xcode 允许你对每一个菜单项和 app 中的所有行为自定义快捷键。
 

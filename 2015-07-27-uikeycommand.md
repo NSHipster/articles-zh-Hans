@@ -96,7 +96,7 @@ func selectTab(sender: UIKeyCommand) {
 
 按住 Command 键显示可视层，关键命令将以你指定的顺序列出：
 
-![Discoverability Layover]({{ site.asseturl }}/uikeycommand-discoverability.png)
+![Discoverability Layover]({% asset uikeycommand-discoverability.png @path %})
 
 *瞧！* 秘密被发现了！
 

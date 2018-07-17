@@ -24,11 +24,11 @@ status:
 
 要在应用中使用启动参数和环境变量，在 Xcode 工具栏中选择你的 target 然后点击 “Edit Scheme...”
 
-![Edit Scheme...]({{ site.asseturl }}/launch-arguments-edit-scheme.png)
+![Edit Scheme...]({% asset launch-arguments-edit-scheme.png @path %})
 
 在左侧的面板中，选择 “Run[AppName].app”，然后在右侧选择 “Arguments” 选项卡，下面会出现两个可下拉的部分，分别是 “Arguments Passed on Launch” 和 “Environment Variables”。
 
-![Edit Scheme Panel]({{ site.asseturl }}/launch-arguments-edit-scheme-panel.png)
+![Edit Scheme Panel]({% asset launch-arguments-edit-scheme-panel.png @path %})
 
 从调试一个应用的 target 这个目的看来，启动参数和环境变量可以认为是相同的——它们都是通过定义一些值来改变应用的运行时行为。在实践中，这两者主要的区别是是启动参数以一个横线（`-`）打头，并且没有单独用于参数值的字段。
 
@@ -70,7 +70,7 @@ status:
 -NSDoubleLocalizedStrings YES
 ```
 
-![NSDoubleLocalizedStrings - Before & After]({{ site.asseturl }}/launch-arguments-nsdoublelocalizedstrings.png)
+![NSDoubleLocalizedStrings - Before & After]({% asset launch-arguments-nsdoublelocalizedstrings.png @path %})
 
 #### NSShowNonLocalizedStrings
 
