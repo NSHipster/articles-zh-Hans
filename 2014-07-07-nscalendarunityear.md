@@ -28,7 +28,7 @@ status:
 
 很可爱吧？让我们看看它在代码里面是什么样子：
 
-~~~{swift}
+```swift
 var cakePath = UIBezierPath()
 cakePath.moveToPoint(CGPointMake(31.5, 32.5))
 cakePath.addCurveToPoint(CGPointMake(6.5, 66.1), controlPoint1: CGPointMake(31.5, 32.5), controlPoint2: CGPointMake(6.9, 46.3))
@@ -36,13 +36,13 @@ cakePath.addCurveToPoint(CGPointMake(6.5, 66.5), controlPoint1: CGPointMake(6.5,
 cakePath.addLineToPoint(CGPointMake(6.5, 95))
 
 ...
-~~~
+```
 
 等等，这是什么，Objective-C？操作 `UIBezierPath`，不是什么突破性质的黑科技，不过通过一些代码，我们可以让这件事变得简单一些。
 
 通过 [自定义操作符](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/AdvancedOperators.html#//apple_ref/doc/uid/TP40014097-CH27-XID_28)，我们来在这个蛋糕上加入一些语法“糖”，怎么样？
 
-~~~{swift}
+```swift
 infix operator ---> { associativity left }
 func ---> (left: UIBezierPath, right: (CGFloat, CGFloat)) -> UIBezierPath {
     let (x, y) = right
@@ -66,7 +66,7 @@ func +~ (left: UIBezierPath, right: ((CGFloat, CGFloat), (CGFloat, CGFloat), (CG
 
     return left
 }
-~~~
+```
 
 > 看到了吗？ `--->` 替代了 `moveToPoint`，`+-` 替代了 `addLineToPoint`，`+~` 替代了 `addCurveToPoint`。这个声明同时还去掉了对于 `CGPointMake` 的冗余调用，转而使用简单的坐标元组。
 
@@ -102,7 +102,7 @@ Swift 对于开发者组织代码这个方面，提供了非常大的灵活性�
 
 （或者管他呢，下面的示例代码完全忽略了这个建议）
 
-~~~{swift}
+```swift
 // Happy 2nd Birthday, NSHipster
 // 😗💨🎂✨2️⃣
 
@@ -168,7 +168,7 @@ UIColor.whiteColor().setFill()
 UIColor.blackColor().setStroke()
 📍.fill()
 📍.stroke()
-~~~
+```
 
 我和你一样感到惊讶，这东西居然能过编译。
 
@@ -179,3 +179,4 @@ UIColor.blackColor().setStroke()
 无论如何，NSHipster，两周年快乐！
 
 谢谢你们，在你们的帮助下，过去这几年的经历对我来说简直美好的难以置信。接下来的日子，我会做好本职工作，继续我们的航程。
+```

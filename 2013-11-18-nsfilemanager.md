@@ -21,18 +21,18 @@ description: "文件系统是一个复杂的主题，它有数十年的历史，
 
 ## 确定文件是否存在
 
-~~~{objective-c}
+```objc
 
 NSFileManager *fileManager = [NSFileManager defaultManager];
 NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 NSString *filePath = [documentsPath stringByAppendingPathComponent:@"file.txt"];
 BOOL fileExists = [fileManager fileExistsAtPath:filePath];
 
-~~~
+```
 
 ## 列出目录里面的所有文件
 
-~~~{objective-c}
+```objc
 
 NSFileManager *fileManager = [NSFileManager defaultManager];
 NSURL *bundleURL = [[NSBundle mainBundle] bundleURL];
@@ -46,13 +46,13 @@ for (NSURL *fileURL in [contents filteredArrayUsingPredicate:predicate]) {
     // 在目录中枚举 .png 文件
 }
 
-~~~
+```
 
 
 ### 在目录中递归地遍历文件
 
 
-~~~{objective-c}
+```objc
 
 NSFileManager *fileManager = [NSFileManager defaultManager];
 NSURL *bundleURL = [[NSBundle mainBundle] bundleURL];
@@ -88,11 +88,11 @@ for (NSURL *fileURL in enumerator) {
     }
 }
 
-~~~
+```
 
 ### 创建一个目录
 
-~~~{objective-c}
+```objc
 
 NSFileManager *fileManager = [NSFileManager defaultManager];
 NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -101,9 +101,9 @@ if (![fileManager fileExistsAtPath:imagesPath]) {
     [fileManager createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:nil];
 }］
 
-~~~
+```
 ### 删除一个目录
-~~~{objective-c}
+```objc
 
 
 NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -114,10 +114,10 @@ NSError *error = nil;
 if (![fileManager removeItemAtPath:filePath error:&error]) {
     NSLog(@"[Error] %@ (%@)", error, filePath);
 }
-~~~
+```
 ### 删除文件的创建日期
 
-~~~{objective-c}
+```objc
 
 NSFileManager *fileManager = [NSFileManager defaultManager];
 NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -128,7 +128,7 @@ if ([fileManager fileExistsAtPath:filePath]) {
     NSDictionary *attributes = [fileManager attributesOfItemAtPath:filePath error:nil];
     creationDate = attributes[NSFileCreationDate];
 }
-~~~
+```
 
 通过NSFileManager的 `-attributesOfItemAtPath:error:` 和其它方法可以访问很多文件的属性
 
@@ -173,7 +173,7 @@ NSFileManager 可以设置一个  `<NSFileManagerDelegate>` protocol 来确认�
 
 > 如果你使用一个delegate 来接受移动，拷贝，涉案出，以及链接的操作，你需要创建一个独一无二的实例，将delegate绑定到你的实例中，用这个fielmanager开始你的操作
 
-~~~{objective-c}
+```objc
 
 NSFileManager *fileManager = [[NSFileManager alloc] init];
 fileManager.delegate = delegate;
@@ -189,13 +189,13 @@ for (NSString *filePath in contents) {
 }
 
 
-~~~
+```
 
 #### CustomFileManagerDelegate.m
 
 
 
-~~~{objective-c}
+```objc
 #pragma mark - NSFileManagerDelegate
 
 - (BOOL)fileManager:(NSFileManager *)fileManager
@@ -203,7 +203,7 @@ shouldRemoveItemAtURL:(NSURL *)URL
 {
     return ![[[URL lastPathComponent] pathExtension] isEqualToString:@"pdf"];
 }
-~~~
+```
 
 ## Ubiquitous Storage
 
@@ -214,7 +214,7 @@ shouldRemoveItemAtURL:(NSURL *)URL
 
 ### 将文件放到iCloud里面
 
-~~~{objective-c}
+```objc
 
 
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -238,7 +238,7 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),
     }
 });
 
-~~~
+```
 
 
 > 你可以在苹果的 `iCloud File Management` 文档里面找到更多信息

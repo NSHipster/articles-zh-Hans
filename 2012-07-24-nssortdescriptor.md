@@ -25,7 +25,7 @@ category: Cocoa
 
 为了更直观的描述，假设我们有一个`Person`对象，它具有`NSString *`类型的`姓`和`名`属性，和`NSUInteger`类型的`年龄`属性。
 
-~~~{objective-c}
+```objc
 @interface Person : NSObject
 @property NSString *firstName;
 @property NSString *lastName;
@@ -39,7 +39,7 @@ category: Cocoa
 }
 
 @end
-~~~
+```
 
 给定以下数据集：
 
@@ -80,7 +80,7 @@ category: Cocoa
 
 以下是几种使用`NSSortDescriptor`的不同组合来将它们排序的方法：
 
-~~~{objective-c}
+```objc
 NSArray *firstNames = @[ @"Alice", @"Bob", @"Charlie", @"Quentin" ];
 NSArray *lastNames = @[ @"Smith", @"Jones", @"Smith", @"Alberts" ];
 NSArray *ages = @[ @24, @27, @33, @31 ];
@@ -113,7 +113,7 @@ NSLog(@"By first name: %@", [people sortedArrayUsingDescriptors:@[firstNameSortD
 
 NSLog(@"By last name, first name: %@", [people sortedArrayUsingDescriptors:@[lastNameSortDescriptor, firstNameSortDescriptor]]);
 // "Quentin Alberts", "Bob Jones", "Alice Smith", "Charlie Smith"
-~~~
+```
 
 * * *
 

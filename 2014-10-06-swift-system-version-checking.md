@@ -18,35 +18,35 @@ Swift 的灵感肯定有不少来自 Haskell、Rust、Python、D， 和其他现
 
 在 Objective-C，检查一个 API 的可用性是通过结合 C 预处理指令和 `class`，`respondsToSelector:` 和 `instancesRespondToSelector:` 来完成的：
 
-~~~{objective-c}
+```objc
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 if ([NSURLSession class] &&
     [NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)]) {
     // ...
 }
 #endif
-~~~
+```
 
 然而，正如前面所提到的，Swift 的编译器指令是 [极度严格的](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithCAPIs.html#//apple_ref/doc/uid/TP40014216-CH8-XID_20),只允许编译器标志和有条件的针对特定操作系统和架构进行编译：
 
-~~~{swift}
+```swift
 #if DEBUG
      println("OTHER_SWIFT_FLAGS = -D DEBUG")
 #endif
-~~~
+```
 
 | Function | Valid Arguments                    |
 |----------|------------------------------------|
 | `os()`   | `OSX`, `iOS`                      |
 | `arch()` | `x86_64`, `arm`, `arm64`, `i386`   |
 
-~~~{swift}
+```swift
 #if os(iOS)
     var image: UIImage?
 #elseif os(OSX)
     var image: NSImage?
 #endif
-~~~
+```
 
 不幸的是，`os()` 不提供任何检查特定 OS X 或 iOS 版本的方法，这意味着，检查必须在运行时进行。而由于 Swift [对待 `nil`](http://nshipster.cn/nil/) 不太宽容的方式，检查 Objective-C 风格的常量将导致崩溃。
 
@@ -64,17 +64,17 @@ if ([NSURLSession class] &&
 
 对于一个简单的检查，比如 “这个应用程序是在 iOS 8 上运行吗？”，`isOperatingSystemAtLeastVersion` 是最直接的方法。
 
-~~~{swift}
+```swift
 if NSProcessInfo().isOperatingSystemAtLeastVersion(NSOperatingSystemVersion(majorVersion: 8, minorVersion: 0, patchVersion: 0)) {
     println("iOS >= 8.0.0")
 }
-~~~
+```
 
 ### operatingSystemVersion
 
 对于更复杂的版本比较，`operatingSystemVersion` 可以直接检查。把 Swift 的模式匹配和 `switch` 语句结合起来：
 
-~~~{swift}
+```swift
 let os = NSProcessInfo().operatingSystemVersion
 switch (os.majorVersion, os.minorVersion, os.patchVersion) {
 case (8, _, _):
@@ -86,7 +86,7 @@ case (7, _, _):
 default:
     println("iOS < 7.0.0")
 }
-~~~
+```
 
 ## UIDevice systemVersion
 
@@ -94,14 +94,14 @@ default:
 
 作为替代方案，可以使用 `UIDevice` 的 `systemVersion` 属性：
 
-~~~{swift}
+```swift
 switch UIDevice.currentDevice().systemVersion.compare("8.0.0", options: NSStringCompareOptions.NumericSearch) {
 case .OrderedSame, .OrderedDescending:
     println("iOS >= 8.0")
 case .OrderedAscending:
     println("iOS < 8.0")
 }
-~~~
+```
 
 > 在比较版本号字符串时，确保使用 `NSStringCompareOptions.NumericSearch`，例如，`"2.5" < "2.10"`。
 
@@ -113,11 +113,11 @@ case .OrderedAscending:
 
 这对于 iOS 是一个死胡同，但 OS X 可以非常可靠地用 `NSAppKitVersionNumber` 检查 AppKit 的版本：
 
-~~~{swift}
+```swift
 if rint(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9 {
     println("OS X >= 10.10")
 }
-~~~
+```
 
 > 苹果在示例代码中使用 `rint` 来四舍五入版本号 `NSAppKitVersionNumber` 进行比较。
 
@@ -129,3 +129,4 @@ if rint(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9 {
 - 仅支持 iOS 8.0 或以上版本的，可以使用 `NSProcessInfo` 的 `operatingSystemVersion` 或 `isOperatingSystemAtLeastVersion`。
 - 要支持 iOS 7.1 或以下版本的，比较 `UIDevice` 的 `systemVersion` 和 `NSStringCompareOptions.NumericSearch`。
 - 对于 OS X，比较 `NSAppKitVersionNumber` 和 AppKit 常数。
+```

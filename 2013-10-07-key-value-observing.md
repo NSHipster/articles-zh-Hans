@@ -34,12 +34,12 @@ KVO 的中心思想其实是相当引人注意的。任意一个对象都可以�
 
 添加一个观察者的方法是 `–addObserver:forKeyPath:options:context:`:
 
-~~~{objective-c}
+```objc
 - (void)addObserver:(NSObject *)observer
          forKeyPath:(NSString *)keyPath
             options:(NSKeyValueObservingOptions)options
             context:(void *)context
-~~~
+```
 
 > * observer:注册 KVO 通知的对象。观察者必须实现 key-value observing 方法 observeValueForKeyPath:ofObject:change:context:。
 > * keyPath:观察者的属性的 keypath，相对于接受者，值不能是 nil。
@@ -66,18 +66,18 @@ KVO 的中心思想其实是相当引人注意的。任意一个对象都可以�
 
 导致KVO丑陋的另外一方面是没有方法指定自定义的selectors来处理观察者，就像控件里使用的 Target-Action 模式那样，相反地，对于观察者，所有的改变都被聚集到一个单独的方法 `-observeValueForKeyPath:ofObject:change:context:`:
 
-~~~{objective-c}
+```objc
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context
-~~~
+```
 
 这些参数跟我们指定的 `–addObserver:forKeyPath:options:context:` 是一样的，change 是个例外，它取决于哪个 `NSKeyValueObservingOptions` 选项被使用。
 
 一个典型的方法实现看起来像这样
 
-~~~{objective-c}
+```objc
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -87,7 +87,7 @@ KVO 的中心思想其实是相当引人注意的。任意一个对象都可以�
     // ...
   }
 }
-~~~
+```
 
 这取决于多少种类的对象在一个单独的类里被观察，这个方法也可以用来引出 `-isKindOfObject:` 或 `-respondsToSelector:` 为了明确区分传过来的事件种类。但是最安全的方法是做一个 `context` 等式检查。尤其是处理那些继承自同一个父类的子类，并且这些子类有相同的 keypath。
 
@@ -95,13 +95,13 @@ KVO 的中心思想其实是相当引人注意的。任意一个对象都可以�
 
 如何设置一个好的 `context` 值呢？这里有个建议：
 
-~~~{objective-c}
+```objc
 static void * XXContext = &XXContext;
-~~~
+```
 
 就是这么简单：一个静态变量存着它自己的指针。这意味着它自己什么也没有，使 `<NSKeyValueObserving>` 更完美：
 
-~~~{objective-c}
+```objc
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -113,20 +113,20 @@ static void * XXContext = &XXContext;
       }
   }
 }
-~~~
+```
 
 ###更好的 Key Paths
 
 传字符串做为 keypath 比直接使用属性更糟糕，因为任何错字或者拼写错误都不会被编译器察觉，最终导致不能正常工作。
 一个聪明的解决方案是使用 `NSStringFromSelector` 和一个 `@selector` 字面值:
 
-~~~{objective-c}
+```objc
 NSStringFromSelector(@selector(isFinished))
-~~~
+```
 
 因为 `@selector` 检查目标中的所有可用 selector，这并不能阻止所有的错误，但它可用捕获大部分-包括捕获 Xcode 自动重构带来的改变
 
-~~~{objective-c}
+```objc
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -140,7 +140,7 @@ NSStringFromSelector(@selector(isFinished))
         // ...
     }
 }
-~~~
+```
 
 ##取消注册
 
@@ -151,7 +151,7 @@ NSStringFromSelector(@selector(isFinished))
 也许 KVO 最明显的烦恼是它如何在最后获取你，如果你调用 `–removeObserver:forKeyPath:context:` 当这个对象没有被注册为观察者（因为它已经解注册了或者开始没有注册），抛出一个异常。有意思的是，没有一个内建的方式来检查对象是否注册。
 这就会导致我们需要用一种相当不好的方式 `@try` 和一个没有处理的 `@catch`：
 
-~~~{objective-c}
+```objc
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -166,7 +166,7 @@ NSStringFromSelector(@selector(isFinished))
         }
     }
 }
-~~~
+```
 
 当然，这个例子中没有处理一个捕获的异常，这其实是一种妥协的方式。因此，只有当面对连续不断的崩溃并且不能通过一般的措施（竞争条件或者来自父类的非法行为）补救才会用这种方式。
 
@@ -180,11 +180,11 @@ KVO 很有用并且被广泛采用。正是因为这样，大部分需要得到�
 
 好吧，你可以实现 `keyPathsForValuesAffectingAddress` 方法（或者 `+keyPathsForValuesAffectingValueForKey:` ）：
 
-~~~{objective-c}
+```objc
 + (NSSet *)keyPathsForValuesAffectingAddress {
     return [NSSet setWithObjects:NSStringFromSelector(@selector(streetAddress)), NSStringFromSelector(@selector(locality)), NSStringFromSelector(@selector(region)), NSStringFromSelector(@selector(postalCode)), nil];
 }
-~~~
+```
 
 ---
 

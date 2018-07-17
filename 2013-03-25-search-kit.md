@@ -66,37 +66,37 @@ Search Kit 是一个用人类语言来搜索和建立内容索引的 C 框架。
 
 对于文件系统上的文档，URI 就是文件在磁盘上的路径：
 
-~~~{objective-c}
+```objc
 NSURL *fileURL = [NSURL fileURLWithPath:@"/path/to/document"];
 SKDocumentRef document = SKDocumentCreateWithURL((__bridge CFURLRef)fileURL);
-~~~
+```
 
 对于 Core Data 管理的对象，可以用 `NSManagedObjectID -URIRepresentation`：
 
-~~~{objective-c}
+```objc
 NSURL *objectURL = [objectID URIRepresentation];
 SKDocumentRef document = SKDocumentCreateWithURL((__bridge CFURLRef)objectURL);
-~~~
+```
 
 > 对于任何其它数据，由开发者自己定义 URI 表示。
 
 当向 `SKIndexRef` 添加 `SKDocumentRef` 的内容时，文本既可以手动指定：
 
-~~~{objective-c}
+```objc
 NSString *string = @"Lorem ipsum dolar sit amet"
 SKIndexAddDocumentWithText(index, document, (__bridge CFStringRef)string, true);
-~~~
+```
 
 ...也可以从文件自动采集：
 
-~~~{objective-c}
+```objc
 NSString *mimeTypeHint = @"text/rtf"
 SKIndexAddDocument(index, document, (__bridge CFStringRef)mimeTypeHint, true);
-~~~
+```
 
 为了改变基于文件的文档内容的处理方式，在创建索引时可以定义一些属性：
 
-~~~{objective-c}
+```objc
 NSSet *stopwords = [NSSet setWithObjects:@"all", @"and", @"its", @"it's", @"the", nil];
 
 NSDictionary *properties = @{
@@ -108,17 +108,17 @@ NSDictionary *properties = @{
 };
 
 SKIndexRef index = SKIndexCreateWithURL((CFURLRef)url, NULL, kSKIndexInverted, (CFDictionaryRef)properties);
-~~~
+```
 
 ### 搜索
 
 `SKSearchRef` 是在 `SKIndexRef` 上执行搜索时构建的数据类型。它包含索引的引用，查询字符串，和一些选项：
 
-~~~{objective-c}
+```objc
 NSString *query = @"kind of blue";
 SKSearchOptions options = kSKSearchOptionDefault;
 SKSearchRef search = SKSearchCreate(index, (CFStringRef)query, options);
-~~~
+```
 
 `SKSearchOptions` 是有以下可能值的位掩码：
 
@@ -135,7 +135,7 @@ SKSearchRef search = SKSearchCreate(index, (CFStringRef)query, options);
 
 将所有这些放到一起的是 `SKIndexCopyDocumentURLsForDocumentIDs`，它执行搜索然后用结果填充数组。在匹配的范围中遍历可以访问文档的 URL 和相关度值（如果计算了的话）：
 
-~~~{objective-c}
+```objc
 NSUInteger limit = ...; // Maximum number of results
 NSTimeInterval time = ...; // Maximum time to get results, in seconds
 SKDocumentID documentIDs[limit];
@@ -159,7 +159,7 @@ NSMutableArray *mutableResults = [NSMutableArray array];
 
     CFRelease(url);
 }];
-~~~
+```
 
 > 更多 Search Kit 实例请查看 [Indragie Karunaratne's](https://github.com/indragiek) 项目，[SNRSearchIndex](https://github.com/indragiek/SNRSearchIndex)。
 

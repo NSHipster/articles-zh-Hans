@@ -21,7 +21,7 @@ excerpt: "比起一个需要我们记住并且输入什么的界面来说，如�
 
 例如，在一个 `UIView` 子类里，这些属性用它们的值来更新背景层：
 
-````swift
+```swift
 @IBInspectable var cornerRadius: CGFloat = 0 {
    didSet {
        layer.cornerRadius = cornerRadius
@@ -38,7 +38,7 @@ excerpt: "比起一个需要我们记住并且输入什么的界面来说，如�
        layer.borderColor = borderColor?.CGColor
    }
 }
-````
+```
 
 标有 `@IBInspectable`（或是 Objective-C 中的 `IBInspectable`），他们就可以很容易在 Interface Builder 的观察面板（inspector panel）里编辑。需要注意的是 Xcode 在这里做了更多的事，属性名称是从 camel- 转换为 title- 模式 并且相关的名称组合在一起：
 
@@ -53,7 +53,7 @@ excerpt: "比起一个需要我们记住并且输入什么的界面来说，如�
 
 内置的 Cocoa 类型如果在 Interface Builder 中的属性检查器中没有列出也可以通过扩展来使属性可视。如果你喜欢圆角，你一定会喜欢这个 `UIView` 扩展：
 
-````swift
+```swift
 extension UIView {
     @IBInspectable var cornerRadius: CGFloat {
         get {
@@ -65,7 +65,7 @@ extension UIView {
         }
     }
 }
-````
+```
 
 变！你创建的任何 `UIView` 都将有一个可配置的边界半径。
 
@@ -76,12 +76,12 @@ extension UIView {
 
 标记一个自定义视图为 `IBDesignable`，只需在类名前加上 `@IBDesignable` 的前缀（或是 Objective-C 里的 `IB_DESIGNABLE` 宏）。你的初始化、布置和绘制方法将被用来在画布上渲染你的自定义视图：
 
-````swift
+```swift
 @IBDesignable
 class MyCustomView: UIView {
     ...
 }
-````
+```
 
 ![IBDesignable Live Preview]({{ site.asseturl }}/IBInspectable-designable.png)
 
@@ -95,13 +95,13 @@ class MyCustomView: UIView {
 
 > - `TARGET_INTERFACE_BUILDER`：`#if TARGET_INTERFACE_BUILDER` 预处理宏在 Objective-C 或 Swift 下都是工作的，它会视情况编译正确代码：
 
-> ````swift
+> ```swift
 #if !TARGET_INTERFACE_BUILDER
     // this code will run in the app itself
 #else
     // this code will execute only in IB
 #endif
-````
+```
 
 
 ## IBCalculatorConstructorSet

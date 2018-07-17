@@ -18,7 +18,7 @@ excerpt: "在喧闹纷繁的事态下，你可能完全没有发现 iOS 6.1 中�
 
 但在你急于去使用 `MKLocalSearch` 之前，你必须了解一些它的朋友的事情。你看，`MKLocalSearch` 是有区别于 `MKLocalSearchRequest` 和 `MKLocalSearchResponse` 的功能的：
 
-~~~{swift}
+```swift
 let request = MKLocalSearchRequest()
 request.naturalLanguageQuery = "Restaurants"
 request.region = mapView.region
@@ -29,9 +29,9 @@ search.startWithCompletionHandler { (response, error) in
         // ...
     }
 }
-~~~
+```
 
-~~~{objective-c}
+```objc
 MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
 request.naturalLanguageQuery = @"Restaurants";
 request.region = mapView.region;
@@ -39,7 +39,7 @@ MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
 [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
     NSLog(@"Map Items: %@", response.mapItems);
 }];
-~~~
+```
 
 像一个 “动物标本剥制师” 一样，`MKLocalSearchRequest` 需要一个 `naturalLanguageQuery` 和一个可选的边界地域 `region` 来约束结果。在实践中，`region` 通常从一个 `MKMapView` 传进来。
 
@@ -68,3 +68,4 @@ MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
 ---
 
 `MKLocalSearch` 提供了一种简单的方法来找到当地兴趣点。由于其无争议的 web 服务集成，以及与 MapKit 的紧密集成，任何基于位置的应用程序都该好好地利用它。
+```

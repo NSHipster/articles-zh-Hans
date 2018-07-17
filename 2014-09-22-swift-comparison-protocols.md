@@ -19,24 +19,24 @@ Objective-C 让我们对相等性和唯一性的本质慢慢有了[带有哲学�
 
 要成为一个 `Equatable` 类型，必须实现 `==` 操作符函数，这个函数同时要接受其相应类型的值作为参数：
 
-~~~{swift}
+```swift
 func ==(lhs: Self, rhs: Self) -> Bool
-~~~
+```
 
 对于带有多类型的相等，是根据每个类型的元素是否相等来判定的。例如有一个 `Complex` 类型，它带有一个遵从 `SignedNumberType` 类型的 `T` 类型：
 
 > 使用 `SignedNumberType` 作为基本数字类型便捷操作方法，它继承于 `Comparable`（也是一种 `Equatable`，下面的章节会提到）和 `IntegerLiteralConvertible`。`Int`、`Double` 和 `Float` 都遵从这个规则。
 
-~~~{swift}
+```swift
 struct Complex<T: SignedNumberType> {
     let real: T
     let imaginary: T
 }
-~~~
+```
 
 因为 [复数（complex number）](http://en.wikipedia.org/wiki/Complex_number) 由实部和虚部组成，当且仅当两个复数的两部分均相等时才能说这两个复数相等：
 
-~~~{swift}
+```swift
 extension Complex: Equatable {}
 
 // MARK: Equatable
@@ -44,17 +44,17 @@ extension Complex: Equatable {}
 func ==<T>(lhs: Complex<T>, rhs: Complex<T>) -> Bool {
     return lhs.real == rhs.real && lhs.imaginary == rhs.imaginary
 }
-~~~
+```
 
 结果：
 
-~~~swift
+```swift
 let a = Complex<Double>(real: 1.0, imaginary: 2.0)
 let b = Complex<Double>(real: 1.0, imaginary: 2.0)
 
 a == b // true
 a != b // false
-~~~
+```
 
 > 我们在 [the article about Swift Default Protocol Implementations](http://nshipster.com/swift-default-protocol-implementations/) 提到过，对于 `!=` 的实现会被标准库自动转向到对于 `==` 的实现方法上。
 
@@ -62,15 +62,15 @@ a != b // false
 
 Objective-C 中对于对象的比较，`==` 操作符的运算结果就是来自 `isEqual:` 方法的结果：
 
-~~~{swift}
+```swift
 class ObjCObject: NSObject {}
 
 ObjCObject() == ObjCObject() // false
-~~~
+```
 
 对于 Swift 中的引用类型，可以根据 `ObjectIdentifier` 构建对象来判断两个对象是否相等：
 
-~~~{swift}
+```swift
 class Object: Equatable {}
 
 // MARK: Equatable
@@ -80,7 +80,7 @@ func ==(lhs: Object, rhs: Object) -> Bool {
 }
 
 Object() == Object() // false
-~~~
+```
 
 ## Comparable
 
@@ -88,11 +88,11 @@ Object() == Object() // false
 
 遵循 `Comparable` 协议的类型应该实现以下几种操作符：
 
-~~~{swift}
+```swift
 func <=(lhs: Self, rhs: Self) -> Bool
 func >(lhs: Self, rhs: Self) -> Bool
 func >=(lhs: Self, rhs: Self) -> Bool
-~~~
+```
 
 这里有一件有趣的事：我们暂时不看_提供_了什么方法，找找什么方法_不见_了？
 
@@ -104,7 +104,7 @@ func >=(lhs: Self, rhs: Self) -> Bool
 
 更复杂的样例可以见 `CSSSelector` 结构，它实现了 selector 的 [cascade ordering](http://www.w3.org/TR/CSS2/cascade.html#cascading-order)：
 
-~~~{swift}
+```swift
 import Foundation
 
 struct CSSSelector {
@@ -143,11 +143,11 @@ struct CSSSelector {
         self.specificity = Specificity(components)
     }
 }
-~~~
+```
 
 我们知道 CSS Selector 是通过评分和顺序来判断相等的，两个 selector 当且仅当它们的评分和顺序都相同时才指向相同元素：
 
-~~~{swift}
+```swift
 extension CSSSelector: Equatable {}
 
 // MARK: Equatable
@@ -156,11 +156,11 @@ func ==(lhs: CSSSelector, rhs: CSSSelector) -> Bool {
     // Naïve equality that uses string comparison rather than resolving equivalent selectors
     return lhs.selector == rhs.selector
 }
-~~~
+```
 
 抛开这种方法，selector 是通过 specificity 来确定相等性的：
 
-~~~{swift}
+```swift
 extension CSSSelector.Specificity: Comparable {}
 
 // MARK: Comparable
@@ -178,13 +178,13 @@ func ==(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
            lhs.`class` == rhs.`class` &&
            lhs.element == rhs.element
 }
-~~~
+```
 
 把这些都结合在一起：
 
 > 为了理解的更为清楚，我们这里认为 `CSSSelector` [遵从 `StringLiteralConvertible` 协议](http://nshipster.com/swift-literal-convertible/).
 
-~~~{swift}
+```swift
 let a: CSSSelector = "#logo"
 let b: CSSSelector = "html body #logo"
 let c: CSSSelector = "body div #logo"
@@ -194,7 +194,7 @@ b == c // false
 b.specificity == c.specificity // true
 c.specificity < a.specificity // false
 d.specificity > c.specificity // true
-~~~
+```
 
 ## Hashable
 
@@ -202,13 +202,13 @@ d.specificity > c.specificity // true
 
 只有 `Hashable` 类型可以被存储在 Swift 的 `Dictionary` 中：
 
-~~~{swift}
+```swift
 struct Dictionary<Key : Hashable, Value> : CollectionType, DictionaryLiteralConvertible { ... }
-~~~
+```
 
 一个遵从 `Hashable` 协议的类型必须提供 `hashValue` 属性的 getter。
 
-~~~{swift}
+```swift
 protocol Hashable : Equatable {
     /// Returns the hash value.  The hash value is not guaranteed to be stable
     /// across different invocations of the same program.  Do not persist the hash
@@ -219,7 +219,7 @@ protocol Hashable : Equatable {
     /// values.
     var hashValue: Int { get }
 }
-~~~
+```
 
 这里如果详解[最佳哈希方法](http://en.wikipedia.org/wiki/Perfect_hash_function) 就远远跑题了，但还好我们不用提及这个，因为大多数值都可以通过 `XOR` 运算来生成比较好的哈希值了。
 
@@ -235,7 +235,7 @@ protocol Hashable : Equatable {
 
 据此也能总结出[生物学中的二项式明明方法](http://en.wikipedia.org/wiki/Binomial_nomenclature)的表示法：
 
-~~~{swift}
+```swift
 struct Binomen {
     let genus: String
     let species: String
@@ -254,14 +254,15 @@ extension Binomen: Hashable {
 func ==(lhs: Binomen, rhs: Binomen) -> Bool {
     return lhs.genus == rhs.genus && lhs.species == rhs.species
 }
-~~~
+```
 
 这样就能对某个生物类型去做哈希，进而可以把他们作为其拉丁命名的 key 了：
 
-~~~{swift}
+```swift
 var commonNames: [Binomen: String] = [:]
 commonNames[Binomen(genus: "Canis", species: "lupis")] = "Grey Wolf"
 commonNames[Binomen(genus: "Canis", species: "rufus")] = "Red Wolf"
 commonNames[Binomen(genus: "Canis", species: "latrans")] = "Coyote"
 commonNames[Binomen(genus: "Canis", species: "aureus")] = "Golden Jackal"
-~~~
+```
+```

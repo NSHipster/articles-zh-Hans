@@ -22,23 +22,23 @@ excerpt: "字符串也许是计算中最通用的数据类型。它们以符号�
 
 在实践中，`key` 往往只是用来翻译的基准字符串，而 `comment` 通常是 `nil`，除非有一个模糊的上下文：
 
-~~~{objective-c}
+```objc
 textField.placeholder = NSLocalizedString(@"Username", nil);
-~~~
+```
 
 `NSLocalizedString` 也可以在 `NSString +stringWithFormat:` 中用来作为格式化字符串。在这种情况下，使用 `comment` 参数来提供达到正确翻译足够的上下文是很重要的。
 
-~~~{objective-c}
+```objc
 self.title = [NSString stringWithFormat:NSLocalizedString(@"%@'s Profile", @"{User First Name}'s Profile"), user.name];
 
 label.text = [NSString stringWithFormat:NSLocalizedString(@"Showing %lu of %lu items", @"Showing {number} of {total number} items"), [page count], [items count]];
-~~~
+```
 
 ## `NSLocalizedString` & Co.
 
 随着控制（和模糊）程度的增加，有四个种类的 `NSLocalizedString`：
 
-~~~{objective-c}
+```objc
 NSString * NSLocalizedString(
   NSString *key,
   NSString *comment
@@ -64,7 +64,7 @@ NSString * NSLocalizedStringWithDefaultValue(
   NSString *value,
   NSString *comment
 )
-~~~
+```
 
 99％ 的情况下，`NSLocalizedString` 就足够了。如果你实现的是一个库或共享组件，应该使用 `NSLocalizedStringFromTable`。
 
@@ -74,12 +74,12 @@ NSString * NSLocalizedStringWithDefaultValue(
 
 就是下面这个样子：
 
-~~~
+```
 /* No comment provided by engineer. */
 "Username"="nom d'utilisateur";
 /* {User First Name}'s Profile */
 "%@'s Profile"="profil de %1$@";
-~~~
+```
 
 `Localizable.strings` 文件最初将由 `genstrings` 产生。
 

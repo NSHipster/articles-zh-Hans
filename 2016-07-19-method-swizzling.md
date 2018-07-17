@@ -29,7 +29,7 @@ Method swizzling 用于改变一个已经存在的 selector 的实现。这项�
 这可以通过在每个视图控制器的 viewDidAppear: 方法中添加追踪代码来实现，但这样会大量重复的样板代码。继承是另一种可行的方式，但是这要求所有被继承的视图控制器如 UIViewController, UITableViewController, UINavigationController 都在 viewDidAppear：实现追踪代码，这同样会造成很多重复代码。
 幸运的是，这里有另外一种可行的方式：从 category 实现 **method swizzling** 。下面是实现方式：
 
-~~~ {objective-c}
+``` {objective-c}
 #import <objc/runtime.h>
 
 @implementation UIViewController (Tracking)
@@ -76,7 +76,7 @@ Method swizzling 用于改变一个已经存在的 selector 的实现。这项�
 }
 
 @end
-~~~
+```
 
 > 计算机科学里，[交换指针指向](http://en.wikipedia.org/wiki/Pointer_swizzling)用来交换基于名字或者位置的指针引用。如果你对 Objective-C 这方面的特性不是很了解的话，这是很值得推荐使用的一个特性，因为 method swizzling 可以通过交换 selector 来改变函数指针的引用。
 
@@ -112,12 +112,12 @@ Method swizzling 修改了类的消息分发列表使得已经存在的 selector
 
 下面代码在正常情况下会出现循环：
 
-~~~ {objective-c}
+``` {objective-c}
 - (void)xxx_viewWillAppear:(BOOL)animated {
     [self xxx_viewWillAppear:animated];
     NSLog(@"viewWillAppear: %@", NSStringFromClass([self class]));
 }
-~~~
+```
 
 然而在交换了方法实现后就不会出现循环了。好的程序员应该对这里出现的方法的递归调用有所警觉，这里我们应该理清在 method swizzling 后方法的实现究竟变成了什么。在交换了方法的实现后，xxx_viewWillAppear:方法的实现已经被替换为了 UIViewController -viewWillAppear：的原生实现，所以这里并不是在递归调用。由于 xxx_viewWillAppear: 这个方法的实现已经被替换为了 viewWillAppear: 的实现，所以，当我们在这个方法中再调用 viewWillAppear: 时便会造成递归循环。
 

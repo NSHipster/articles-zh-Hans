@@ -107,7 +107,7 @@ excerpt: "从数字电台和数学命理到象形文字和流浪汉码，找到�
 
 当然，用图表很不错，但是用代码实践更好：
 
-~~~{objective-c}
+```objc
 NSLog(@"int        : %s", @encode(int));
 NSLog(@"float      : %s", @encode(float));
 NSLog(@"float *    : %s", @encode(float*));
@@ -134,7 +134,7 @@ typedef struct _struct {
     unsigned long long c;
 } Struct;
 NSLog(@"struct     : %s", @encode(typeof(Struct)));
-~~~
+```
 
 结果：
 

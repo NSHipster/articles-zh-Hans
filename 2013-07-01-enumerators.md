@@ -26,12 +26,12 @@ status:
 
 `for` 和 `while` 循环是遍历集合的“经典”方法。任何学过大学计算机基础的人都可以写出下面的代码：
 
-~~~{objective-c}
+```objc
 for (NSUInteger i = 0; i < [array count]; i++) {
   id object = array[i];
   NSLog(@"%@", object)
 }
-~~~
+```
 
 但是用过 C 风格循环的人也都知道，这个方法容易导致 [差一错误](https://zh.wikipedia.org/wiki/%E5%B7%AE%E4%B8%80%E9%94%99%E8%AF%AF)——特别是使用非标准形式时。
 
@@ -41,11 +41,11 @@ for (NSUInteger i = 0; i < [array count]; i++) {
 
 通过使用高层抽象，表明我们想遍历一个集合当中的所有元素，这种方法不仅减少了错误的发生，同时也减少了代码量：
 
-~~~{objective-c}
+```objc
 for (id object in array) {
     NSLog(@"%@", object);
 }
-~~~
+```
 
 在 Cocoa 当中，生成式方法可以用在任何实现了 `NSFastEnumeration` 协议的类上，包括 `NSArray`, `NSSet`, 和 `NSDictionary`。
 
@@ -53,11 +53,11 @@ for (id object in array) {
 
 `NSFastEnumeration` 只包含一个方法：
 
-~~~{objective-c}
+```objc
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
                                   objects:(id *)stackbuf
                                     count:(NSUInteger)len
-~~~
+```
 
 > - `state`: 遍历中需要使用的上下文信息，确保在遍历过程中集合不被修改。
 > - `stackbuf`: 一个 C 数组，内容是将要被调用者遍历的对象们.
@@ -67,14 +67,14 @@ for (id object in array) {
 
 ### `NSFastEnumerationState`
 
-~~~{objective-c}
+```objc
 typedef struct {
       unsigned long state;
       id *itemsPtr;
       unsigned long *mutationsPtr;
       unsigned long extra[5];
 } NSFastEnumerationState;
-~~~
+```
 
 > - `state`: 遍历器使用的一个状态信息，通常在遍历开始时这个值被设置成 0
 > - `itemsPtr`: 一个 C 对象数组
@@ -95,30 +95,30 @@ typedef struct {
 
 在外行人看来，`NSEnumerator` 是一个实现了下面两个方法的抽象类：
 
-~~~{objective-c}
+```objc
 - (id)nextObject
 - (NSArray *)allObjects
-~~~
+```
 
 `nextObject` 返回集合类型中的下一个元素，如果没有就返回 `nil`。`allObjects` 返回所有剩余的元素（如果有的话）。`NSEnumerator` 只能向一个方向遍历，而且只能进行单增。
 
 要想遍历一个集合当中的所有元素，需要这样使用 `NSEnumerator`：
 
-~~~{objective-c}
+```objc
 id object = nil;
 NSEnumerator *enumerator = ...;
 while ((object = [enumerator nextObject])) {
     NSLog(@"%@", object);
 }
-~~~
+```
 
 ...另外，为了跟上现在孩子们的脚步，`NSEnumerator` 本身也实现了 `<NSFastEnumeration>` 协议：
 
-~~~{objective-c}
+```objc
 for (id object in enumerator) {
     NSLog(@"%@", object);
 }
-~~~
+```
 
 如果你想给自己的非集合支持的自定义类添加快速遍历功能的话，使用 `NSEnumerator` 可能是更加方便而且易用的方法，相比深入 `NSFastEnumeration` 的实现细节而言。
 
@@ -132,11 +132,11 @@ for (id object in enumerator) {
 
 最后，随着 OS X Snow Leopard / iOS 4 中 blocks 语法的引入，一种新的基于 block 的遍历集合的方法也被加入进来：
 
-~~~{objective-c}
+```objc
 [array enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
     NSLog(@"%@", object);
 }];
-~~~
+```
 
 诸如 `NSArray`, `NSSet`, `NSDictionary`，和 `NSIndexSet` 这些集合类型都包含了一系列类似的 block 遍历方法。
 
@@ -146,20 +146,20 @@ for (id object in enumerator) {
 
 最后一个需要了解的是，这个系列方法还有带有 `options` 参数的扩展版本：
 
-~~~{objective-c}
+```objc
 - (void)enumerateObjectsWithOptions:(NSEnumerationOptions)opts
                          usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block
-~~~
+```
 
 ### `NSEnumerationOptions`
 
-~~~{objective-c}
+```objc
 enum {
    NSEnumerationConcurrent = (1UL << 0),
    NSEnumerationReverse = (1UL << 1),
 };
 typedef NSUInteger NSEnumerationOptions;
-~~~
+```
 
 > - `NSEnumerationConcurrent`: Specifies that the Block enumeration should be concurrent. The order of invocation is nondeterministic and undefined; this flag is a hint and may be ignored by the implementation under some circumstances; the code of the Block must be safe against concurrent invocation.
 > - `NSEnumerationConcurrent`: 指示 Block 遍历应当是并发的。遍历的顺序是不确定而且未定义的；这个标志位是一个提示，可能在某些情况下会被实现方忽略；Block 中的代码必须在并发调用的情况下是安全的。

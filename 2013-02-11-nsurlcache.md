@@ -16,7 +16,7 @@ excerpt: "NSURLCache 为您的应用的 URL 请求提供了内存中以及磁盘
 
 为了好好利用 `NSURLCache`，你需要初始化并设置一个共享的 URL 缓存。在 iOS 中这项工作需要在 `-application:didFinishLaunchingWithOptions:` 完成，而 OS X 中是在 `–applicationDidFinishLaunching:`：
 
-~~~{objective-c}
+```objc
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -25,7 +25,7 @@ excerpt: "NSURLCache 为您的应用的 URL 请求提供了内存中以及磁盘
                                                            diskPath:nil];
   [NSURLCache setSharedURLCache:URLCache];
 }
-~~~
+```
 
 缓存策略由请求（客户端）和回应（服务端）分别指定。理解这些策略以及它们如何相互影响，是为您的应用程序找到最佳行为的关键。
 
@@ -113,7 +113,7 @@ HTTP 请求和回应用 [headers](http://www.w3.org/Protocols/rfc2616/rfc2616-se
 
 在 `-connection:willCacheResponse:` 中，`cachedResponse` 对象会根据 URL 连接返回的结果自动创建。因为 `NSCachedURLResponse` 没有可变部分，为了改变 `cachedResponse` 中的值必须构造一个新的对象，把改变过的值传入 `–initWithResponse:data:userInfo:storagePolicy:`，例如：
 
-~~~{objective-c}
+```objc
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
                   willCacheResponse:(NSCachedURLResponse *)cachedResponse
 {
@@ -128,17 +128,17 @@ HTTP 请求和回应用 [headers](http://www.w3.org/Protocols/rfc2616/rfc2616-se
                                                 userInfo:mutableUserInfo
                                            storagePolicy:storagePolicy];
 }
-~~~
+```
 
 如果 `-connection:willCacheResponse:` 返回 `nil`，回应将不会缓存。
 
-~~~{objective-c}
+```objc
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
                   willCacheResponse:(NSCachedURLResponse *)cachedResponse
 {
     return nil;
 }
-~~~
+```
 
 如果不实现此方法，`NSURLConnection` 就简单地使用本来要传入 `-connection:willCacheResponse:` 的那个缓存对象，所以除非你需要改变一些值或者阻止缓存，否则这个代理方法不必实现。
 

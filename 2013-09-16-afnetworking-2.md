@@ -101,7 +101,7 @@ AFNetworking 2.0 新构架的突破之一是使用序列化来创建请求、解
 #### 实时性
 
 - `AFEventSource` - [`EventSource` DOM API](http://en.wikipedia.org/wiki/Server-sent_events) 的 Objective-C 实现。建立一个到某主机的持久 HTTP 连接，可以将事件传输到事件源并派发到听众。传输到事件源的消息的格式为 [JSON Patch](http://tools.ietf.org/html/rfc6902) 文件，并被翻译成 `AFJSONPatchOperation` 对象的数组。可以将这些 patch operation 应用到之前从服务器获取的持久性数据集。
-~~~{objective-c}
+```objc
 NSURL *URL = [NSURL URLWithString:@"http://example.com"];
 AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:URL];
 [manager GET:@"/resources" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -119,7 +119,7 @@ AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:UR
         }
     } error:nil];
 } failure:nil];
-~~~
+```
 
 #### UIKit 扩展
 
@@ -140,10 +140,10 @@ AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:UR
 
 将下列代码加入 [`Podfile`](http://cocoapods.org) 就可以开始把玩 AFNetworking 2.0 了：
 
-~~~{ruby}
+```{ruby}
 platform :ios, '7.0'
 pod "AFNetworking", "2.0.0"
-~~~
+```
 
 For anyone coming over to AFNetworking from the current 1.x release, you may find [the AFNetworking 2.0 Migration Guide](https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-2.0-Migration-Guide) especially useful.
 

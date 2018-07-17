@@ -32,9 +32,9 @@ NSHipster 本周披露的知识点是关于我们平时关心最少的、但又�
 
 其他应用通过传递 URL 可以打开一个应用：
 
-~~~{objective-c}
+```objc
 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"app://..."]];
-~~~
+```
 
 例如：`http://` 开头的 URL 会在 Safari 中打开，`mailto://` 开头的 URL 会在邮件中打开，`tel://` 开头的 URL 会在电话中打开。
 
@@ -47,7 +47,7 @@ NSHipster 本周披露的知识点是关于我们平时关心最少的、但又�
 > - `UIApplicationLaunchOptionsSourceApplicationKey`：请求打开应用的应用 id。对应的值是请求打开应用的 bundle ID 的 `NSString` 对象
 > - `UIApplicationLaunchOptionsAnnotationKey`：标示通过 URL 打开应用时携带了自定义数据。对应的值是包含自定义数据的属性列表对象
 
-~~~{objective-c}
+```objc
 NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"Document" withExtension:@"pdf"];
 if (fileURL) {
     UIDocumentInteractionController *documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
@@ -55,7 +55,7 @@ if (fileURL) {
     [documentInteractionController setDelegate:self];
     [documentInteractionController presentPreviewAnimated:YES];
 }
-~~~
+```
 
 ## 响应通知
 
@@ -67,12 +67,12 @@ if (fileURL) {
 
 在 `application:didFinishLaunchingWithOptions:` 中调用 `registerForRemoteNotificationTypes:` 来注册推送通知。
 
-~~~{objective-c}
+```objc
 [application registerForRemoteNotificationTypes:
 	UIRemoteNotificationTypeBadge |
     UIRemoteNotificationTypeSound |
 	UIRemoteNotificationTypeAlert];
-~~~
+```
 
 如果调用成功则会回调 `-application:didRegisterForRemoteNotificationsWithDeviceToken:`，之后该设备就能随时收到推送通知了。
 
@@ -85,7 +85,7 @@ if (fileURL) {
 
 因为通知可以通过两种方式控制，通常的做法是在 `application:didFinishLaunchingWithOptions:` 中手动调用 `application:didReceiveRemoteNotification:`：
 
-~~~{objective-c}
+```objc
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -95,7 +95,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [self application:application didReceiveRemoteNotification:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
     }
 }
-~~~
+```
 
 ### 本地通知
 
@@ -111,7 +111,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 如果应用在运行中收到本地通知需要显示提示框、其他情况不显示提示框，可以手动从 `UILocalNotification` 获取相关信息进行操作：
 
-~~~{objective-c}
+```objc
 // .h
 @import AVFoundation;
 
@@ -147,7 +147,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification
         AudioServicesDisposeSystemSoundID(self.localNotificationSound);
     }
 }
-~~~
+```
 
 ## 地理位置事件
 
@@ -159,7 +159,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 
 以下是检测位置变化来判断启动行为的例子：
 
-~~~{objective-c}
+```objc
 // .h
 @import CoreLocation;
 
@@ -189,7 +189,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [self.locationManager startUpdatingLocation];
     }
 }
-~~~
+```
 
 ## 报刊杂志（Newsstand）
 
@@ -203,10 +203,10 @@ _`欢呼声.aiff`_
 
 这样注册即可：
 
-~~~{objective-c}
+```objc
 [application registerForRemoteNotificationTypes:
 	UIRemoteNotificationTypeNewsstandContentAvailability];
-~~~
+```
 
 然后在启动参数中找到这个键：
 
@@ -223,7 +223,7 @@ iOS 7 开始支持外围蓝牙设备重新唤醒应用。
 > - `UIApplicationLaunchOptionsBluetoothCentralsKey`：标示应用之前曾有过一个或多个 `CBCentralManager` 对象并被蓝牙系统的相关动作唤醒过。对应的值是包含 `NSString` 对象的数组。数组中每一个字符串表示一个中心设备的恢复连接 id。
 > - `UIApplicationLaunchOptionsBluetoothPeripheralsKey`：标示应用之前曾有过一个或多个 `CBPeripheralManager` 对象并被蓝牙系统的相关动作唤醒过。对应的值是包含 `NSString` 对象的数组。数组中每一个字符串表示一个外围设备的恢复连接 id。
 
-~~~{objective-c}
+```objc
 // .h
 @import CoreBluetooth;
 
@@ -240,7 +240,7 @@ if (self.centralManager.state == CBCentralManagerStatePoweredOn) {
     NSDictionary *scanOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@YES};
     [self.centralManager scanForPeripheralsWithServices:services options:scanOptions];
 }
-~~~
+```
 
 * * *
 

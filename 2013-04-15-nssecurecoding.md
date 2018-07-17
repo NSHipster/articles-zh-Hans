@@ -28,29 +28,29 @@ excerpt: "本周的简短文章：你需要了解的关于 NSSecureCoding 的一
 
 而一个标准的，安全的 `-initWithCoder:` 实现可能需要一个检查，比如：
 
-~~~{swift}
+```swift
 if let object = decoder.decodeObjectForKey("key") as? SomeClass {
     // ...
 }
-~~~
+```
 
-~~~{objective-c}
+```objc
 id obj = [decoder decodeObjectForKey:@"myKey"];
 if (![obj isKindOfClass:[MyClass class]]) {
   // fail
 }
-~~~
+```
 
 ...一个符合 `NSSecureCoding` 协议的类应该使用:
 
-~~~{swift}
+```swift
 let object = decoder.decodeObjectOfClass(SomeClass.self, forKey: "key") as SomeClass
-~~~
+```
 
-~~~{objective-c}
+```objc
 id obj = [decoder decodeObjectOfClass:[MyClass class]
                                forKey:@"myKey"];
-~~~
+```
 
 有时候，一点点 API 的变化，会使得所有事情都千差万别。
 
@@ -59,3 +59,4 @@ id obj = [decoder decodeObjectOfClass:[MyClass class]
 所以，现在你知道什么是 `NSSecureCoding` 了。也许不是今天，也许也不是明天，但总有一天，你可能需要实现 `NSSecureCoding`。而当那一天到来的时候，你会做好准备。
 
 保重，各位。
+```

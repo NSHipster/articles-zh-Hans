@@ -29,11 +29,11 @@ Objective-C的一些使用惯例不仅仅是好的编程习惯，更是给编译
 
 你可以自己试着这样：
 
-~~~{objective-c}
+```objc
 [[[NSArray alloc] init] mediaPlaybackAllowsAirPlay]; // ❗ "No visible @interface for `NSArray` declares the selector `mediaPlaybackAllowsAirPlay`"
 
 [[NSArray array] mediaPlaybackAllowsAirPlay]; // (No error)
-~~~
+```
 
 由于 `alloc` 和 `init` 作为相关返回类型遵循命名规范，执行对 `NSArray` 的正确类型检查。然而，等价类构造函数 `array` 不遵循命名规范，它被认为是 `id` 类型。
 
@@ -45,11 +45,11 @@ Objective-C的一些使用惯例不仅仅是好的编程习惯，更是给编译
 
 `instancetype` 关键字，它可以表示一个方法的相关返回类型。例如：
 
-~~~{objective-c}
+```objc
 @interface Person
 + (instancetype)personWithName:(NSString *)name;
 @end
-~~~
+```
 
 > `instancetype` 与 `id` 不一样, `instancetype` 只能在方法声明中作为返回类型使用。
 
@@ -65,7 +65,7 @@ Objective-C的一些使用惯例不仅仅是好的编程习惯，更是给编译
 
 [Jonathan Sterling](https://twitter.com/jonsterling) 写了[这篇十分有趣的文章](http://www.jonmsterling.com/posts/2012-02-05-typed-collections-with-self-types-in-objective-c.html), 文章中详细描述了 `instancetype` 在没有[泛型](http://en.wikipedia.org/wiki/Generic_programming)的情况下是如何用于静态类型collections编码的:
 
-~~~{objective-c}
+```objc
 NSURL <MapCollection> *sites = (id)[NSURL mapCollection];
 [sites put:[NSURL URLWithString:@"http://www.jonmsterling.com/"]
         at:@"jon"];
@@ -73,7 +73,7 @@ NSURL <MapCollection> *sites = (id)[NSURL mapCollection];
         at:@"nshipster"];
 
 NSURL *jonsSite = [sites at:@"jon"]; // => http://www.jonmsterling.com/
-~~~
+```
 
 静态类型collections会使APIs更富有表现力--开发者可以确定一个collection参数中允许使用的对象类型。
 

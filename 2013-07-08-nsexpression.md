@@ -20,10 +20,10 @@ category: Cocoa
 
 这就是我们要学习的`NSExpression`的第一招： **做数学题**。
 
-~~~{objective-c}
+```objc
 NSExpression *expression = [NSExpression expressionWithFormat:@"4 + 5 - 2**3"];
 id value = [expression expressionValueWithObject:nil context:nil]; // => 1
-~~~
+```
 
 这并不是[Wolfram Alpha](http://www.wolframalpha.com/input/?i=finn+the+human+like+curve)，但是如果加入评估数学表达式对于你的应用很有用的话，那么...你就可以使用NSExpression。
 
@@ -31,11 +31,11 @@ id value = [expression expressionValueWithObject:nil context:nil]; // => 1
 
 我们仅仅触及了`NSExpression`的表面。觉得一台电脑仅仅做小学数学不怎么厉害？那高中的统计学怎么样？
 
-~~~{objective-c}
+```objc
 NSArray *numbers = @[@1, @2, @3, @4, @4, @5, @9, @11];
 NSExpression *expression = [NSExpression expressionForFunction:@"stddev:" arguments:@[[NSExpression expressionForConstantValue:numbers]]];
 id value = [expression expressionValueWithObject:nil context:nil]; // => 3.21859...
-~~~
+```
 
 > `NSExpression` 函数以给定数目的子表达式作为参数。比如，在上述例子中，要得到集合的标准差，数列中的数字要被`+expressionForConstantValue:`封装。虽然只是一个小小的不便（它最终却能使得`NSExpression`变得极其灵活），却足以使第一次尝试它的人绊倒。
 
@@ -119,7 +119,7 @@ id value = [expression expressionValueWithObject:nil context:nil]; // => 3.21859
 
 首先，在类别中定义一个对应的函数：
 
-~~~{objective-c}
+```objc
 @interface NSNumber (Factorial)
 - (NSNumber *)factorial;
 @end
@@ -129,14 +129,14 @@ id value = [expression expressionValueWithObject:nil context:nil]; // => 3.21859
     return @(tgamma([self doubleValue] + 1));
 }
 @end
-~~~
+```
 
 然后，这样使用函数（`+expressionWithFormat:` 中的`FUNCTION()`宏是构造`-expressionForFunction:`等等的过程的简写。）:
 
-~~~{objective-c}
+```objc
 NSExpression *expression = [NSExpression expressionWithFormat:@"FUNCTION(4.2, 'factorial')"];
 id value = [expression expressionValueWithObject:nil context:nil]; // 32.578...
-~~~
+```
 
 这样的优势在于， 通过直接调用`-factorial`，我们可以调用`NSPredicate`查询中的函数。比如，我们可以定义一个`location:withinRadius:`方法来轻松的查询用户当前位置附近的管理对象。
 

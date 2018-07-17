@@ -39,9 +39,9 @@ _实际上_，这个方法似乎是为配合 `-replaceItemAtURL:withItemAtURL:ba
 
 这些关于 `NSString` 文件系统的变革整合太多太多了，我们还是直接看一些有用的东西吧：
 
-~~~{objective-c}
+```objc
 [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-~~~
+```
 
 ## 生成唯一的目录名或文件名
 
@@ -49,9 +49,9 @@ _实际上_，这个方法似乎是为配合 `-replaceItemAtURL:withItemAtURL:ba
 
 生成唯一标示符的最佳办法是用 `NSProcessInfo` 的 `globallyUniqueString` 方法。
 
-~~~{objective-c}
+```objc
 NSString *identifier = [[NSProcessInfo processInfo] globallyUniqueString];
-~~~
+```
 
 这个方法会返回这种格式的字符串： `5BD255F4-CA55-4B82-A555-0F4BC5CA2AD6-479-0000018E14D059CC`
 
@@ -59,9 +59,9 @@ NSString *identifier = [[NSProcessInfo processInfo] globallyUniqueString];
 
 还有个办法， `NSUUID` ([我们之前讨论过了](http://nshipster.com/uuid-udid-unique-identifier))也可以生成出可用的结果，但我不觉得你会做出_如此疯狂_的事情来。
 
-~~~{objective-c}
+```objc
 [[NSUUID UUID] UUIDString]
-~~~
+```
 
 这个方法会返回这种格式的字符串： `22361D15-E17B-4C48-AEA6-C73BBEA17011`
 
@@ -69,10 +69,10 @@ NSString *identifier = [[NSProcessInfo processInfo] globallyUniqueString];
 
 用上述方法可以生成唯一标示符了，于是就能生成唯一名字的临时文件地址了：
 
-~~~{objective-c}
+```objc
 NSString *fileName = [NSString stringWithFormat:@"%@_%@", [[NSProcessInfo processInfo] globallyUniqueString], @"file.txt"];
 NSURL *fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
-~~~
+```
 
 ## 建立临时目录
 
@@ -80,16 +80,16 @@ NSURL *fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendin
 
 建立临时目录也是同样的方法调用 `NSFileManager -createDirectoryAtURL:withIntermediateDirectories:attributes:error:` ：
 
-~~~{objective-c}
+```objc
 NSURL *directoryURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]] isDirectory:YES];
 [[NSFileManager defaultManager] createDirectoryAtURL:directoryURL withIntermediateDirectories:YES attributes:nil error:&error];
-~~~
+```
 
 该目录的临时文件的地址要用 `URLByAppendingPathComponent:` 方法接上文件名：
 
-~~~{objective-c}
+```objc
 NSURL *fileURL = [directoryURL URLByAppendingPathComponent:fileName];
-~~~
+```
 
 ## 向临时文件中写入内容
 
@@ -99,19 +99,19 @@ NSURL *fileURL = [directoryURL URLByAppendingPathComponent:fileName];
 
 Foundation库中有很多向硬盘写数据的方法，最直接的方法应该就是 `NSData -writeToURL:options:error` 了：
 
-~~~{objective-c}
+```objc
 NSData *data = ...;
 NSError *error = nil;
 [data writeToURL:fileURL options:NSDataWritingAtomic error:&error];
-~~~
+```
 
 ### NSOutputStream
 
 更高级的API中比较常见的就是直接向数据流传入一个  `NSOutputStream`  实例。同样的，通过建立输出流来向临时文件地址写入和其他写入方法没什么两样：
 
-~~~{objective-c}
+```objc
 NSOutputStream *outputStream = [NSOutputStream outputStreamToFileAtPath:[fileURL absoluteString] append:NO];
-~~~
+```
 
 ### 清除
 
@@ -121,10 +121,10 @@ NSOutputStream *outputStream = [NSOutputStream outputStreamToFileAtPath:[fileURL
 
 用 `NSFileManager -removeItemAtURL:` 方法去删除临时文件或目录：
 
-~~~{objective-c}
+```objc
 NSError *error = nil;
 [[NSFileManager defaultManager] removeItemAtURL:fileURL error:&error];
-~~~
+```
 
 * * *
 

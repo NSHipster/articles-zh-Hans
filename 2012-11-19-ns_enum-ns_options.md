@@ -28,11 +28,11 @@ translator: Croath Liu
 
 > 如果你想在更早的iOS或OS X系统中使用这两个宏，简单定义一下就好了：
 
-~~~{objective-c}
+```objc
 #ifndef NS_ENUM
 #define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
 #endif
-~~~
+```
 
 `enum`，或者其他枚举类型（例如每周的星期几，或TableViewCell的类型等），都是通过C的方法去为预设值定义常量。在一个 `enum` 定义中，没有被赋予特别值的常量都会自动被赋为从0开始的连续值。
 
@@ -40,33 +40,33 @@ translator: Croath Liu
 
 例如：
 
-~~~{objective-c}
+```objc
 enum {
     UITableViewCellStyleDefault,
     UITableViewCellStyleValue1,
     UITableViewCellStyleValue2,
     UITableViewCellStyleSubtitle
 };
-~~~
+```
 
 ...定义整型值，但不定义类型。
 
 另一种方法:
 
-~~~{objective-c}
+```objc
 typedef enum {
     UITableViewCellStyleDefault,
     UITableViewCellStyleValue1,
     UITableViewCellStyleValue2,
     UITableViewCellStyleSubtitle
 } UITableViewCellStyle;
-~~~
+```
 
 ...定义适合特性参数的 `UITableViewCellStyle` 类型。
 
 然而，之前苹果自己的代码中都用这种方法来定义 `enum` ：
 
-~~~{objective-c}
+```objc
 typedef enum {
     UITableViewCellStyleDefault,
     UITableViewCellStyleValue1,
@@ -75,7 +75,7 @@ typedef enum {
 };
 
 typedef NSInteger UITableViewCellStyle;
-~~~
+```
 
 ...这种方法给出了 `UITableViewCellStyle` 确定的大小，但并没有告诉编译器这个类型和之前的 `enum` 有什么关系。
 
@@ -85,14 +85,14 @@ typedef NSInteger UITableViewCellStyle;
 
 从现在开始 `UITableViewCellStyle` 的定义已经变成这个样子了：
 
-~~~{objective-c}
+```objc
 typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
     UITableViewCellStyleDefault,
     UITableViewCellStyleValue1,
     UITableViewCellStyleValue2,
     UITableViewCellStyleSubtitle
 };
-~~~
+```
 
 `NS_ENUM` 的第一个参数是用于存储的新类型的类型。在64位环境下，`UITableViewCellStyle` 和 `NSInteger` 一样有8bytes长。你要保证你给出的所有值能被该类型容纳，否则就会产生错误。第二个参数是新类型的名字。大括号里面和以前一样，是你要定义的各种值。
 

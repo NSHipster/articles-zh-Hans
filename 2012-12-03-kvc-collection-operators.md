@@ -15,21 +15,21 @@ Ruby爱好者总爱嘲笑Objective-C臃肿的语法。
 
 "给我这个列表里面所有员工的平均薪酬"，等等。。。
 
-~~~{objective-c}
+```objc
 double totalSalary = 0.0;
 for (Employee *employee in employees) {
   totalSalary += [employee.salary doubleValue];
 }
 double averageSalary = totalSalary / [employees count];
-~~~
+```
 
 ╮(╯_╰)╭
 
 幸运的是，[键-值编码](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/KeyValueCoding/Articles/KeyValueCoding.html)给我们了一种更加简洁的，几乎像Ruby一样的方式来做这件事：
 
-~~~{objective-c}
+```objc
 [employees valueForKeyPath:@"@avg.salary"];
-~~~
+```
 
 [KVC集合运算符](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/KeyValueCoding/Articles/CollectionOperators.html#//apple_ref/doc/uid/20002176-BAJEAIEE)允许在`valueForKeyPath:`方法中使用key path符号在一个集合中执行方法。无论什么时候你在key path中看见了`@`，它都代表了一个特定的集合方法，其结果可以被返回或者链接，就像其他的key path一样。
 
@@ -41,13 +41,13 @@ double averageSalary = totalSalary / [employees count];
 
 要理解其工作原理，最好方式就是去action里面看看。想象一个`Product`类和一个由以下数据所组成的`products`数组：
 
-~~~{objective-c}
+```objc
 @interface Product : NSObject
 @property NSString *name;
 @property double price;
 @property NSDate *launchedOn;
 @end
-~~~
+```
 
 > 键-值 编码会在必要的时候把基本数据类型的数据自动装箱和拆箱到`NSNumber`或者`NSValue`中来确保一切工作正常。
 
@@ -93,13 +93,13 @@ double averageSalary = totalSalary / [employees count];
 
 _例如_：
 
-~~~{objective-c}
+```objc
 [products valueForKeyPath:@"@count"]; // 4
 [products valueForKeyPath:@"@sum.price"]; // 3526.00
 [products valueForKeyPath:@"@avg.price"]; // 881.50
 [products valueForKeyPath:@"@max.price"]; // 1699.00
 [products valueForKeyPath:@"@min.launchedOn"]; // June 11, 2012
-~~~
+```
 
 >Pro提示：你可以简单的通过把self作为操作符后面的key path来获取一个由`NSNumber`组成的数组或者集合的总值，例如`[@[@(1), @(2), @(3)] valueForKeyPath:@"@max.self"]` (/感谢 [@davandermobile](http://twitter.com/davandermobile), 来自 [Objective Sea](http://objectivesea.tumblr.com/post/34552840247/max-value-nsset-kvc))
 
@@ -107,18 +107,18 @@ _例如_：
 
 想象下，我们有一个`inventory`数组，代表了当地苹果商店的当前库存(iPad Mini不足，并且没有新的iMac，因为还没有发货)：
 
-~~~{objective-c}
+```objc
 NSArray *inventory = @[iPhone5, iPhone5, iPhone5, iPadMini, macBookPro, macBookPro];
-~~~
+```
 
 - `@unionOfObjects` / `@distinctUnionOfObjects`: 返回一个由操作符右边的key path所指定的对象属性组成的数组。其中`@distinctUnionOfObjects` 会对数组去重, 而且 `@unionOfObjects` 不会.
 
 _例如_：
 
-~~~{objective-c}
+```objc
 [inventory valueForKeyPath:@"@unionOfObjects.name"]; // "iPhone 5", "iPhone 5", "iPhone 5", "iPad Mini", "MacBook Pro", "MacBook Pro"
 [inventory valueForKeyPath:@"@distinctUnionOfObjects.name"]; // "iPhone 5", "iPad Mini", "MacBook Pro"
-~~~
+```
 
 ### 数组和集合操作符
 
@@ -130,9 +130,9 @@ _例如_：
 
 _例如_：
 
-~~~{objective-c}
+```objc
 [@[appleStoreInventory, verizonStoreInventory] valueForKeyPath:@"@distinctUnionOfArrays.name"]; // "iPhone 5", "iPad Mini", "MacBook Pro"
-~~~
+```
 
 ---
 
@@ -148,17 +148,17 @@ _例如_：
 
 [Guy English](https://twitter.com/gte)有一篇[很神奇的文章](http://kickingbear.com/blog/archives/9)，在文章中，他[swizzles `valueForKeyPath:`](https://gist.github.com/4196641#file_kb_collection_extensions.m)来解析自定义的[DSL](http://en.wikipedia.org/wiki/Domain-specific_language)，其扩展了一些有趣的效果：
 
-~~~{objective-c}
+```objc
 NSArray *names = [allEmployees valueForKeyPath: @"[collect].{daysOff<10}.name"];
-~~~
+```
 
 这段代码可以得到只有休了不足10天假期的人的名字（无疑是要提醒他们去休个假吧！）
 
 或者，来看个可笑的极端情况：
 
-~~~{objective-c}
+```objc
 NSArray *albumCovers = [records valueForKeyPath:@"[collect].{artist like 'Bon Iver'}.<NSUnarchiveFromDataTransformerName>.albumCoverImageData"];
-~~~
+```
 
 Ruby小伙伴们羡慕吧。只用一行就在艺人记录中过滤出来了名字叫"Bon Iver"的艺人，并且用匹配到的专辑的专辑封面的图像数据初始化了一个`NSImage`对象。
 

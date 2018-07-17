@@ -33,15 +33,15 @@ status:
 
 考虑下面在标准库中被广泛使用的 `Equatable` 协议：
 
-~~~{swift}
+```swift
 protocol Equatable {
     func ==(lhs: Self, rhs: Self) -> Bool
 }
-~~~
+```
 
 给出一个 `Article` 结构体，其中有 `title` 和 `body` 属性，实现 `Equatable` 的方法简单直接：
 
-~~~{swift}
+```swift
 struct Article {
     let title: String
     let body: String
@@ -52,11 +52,11 @@ extension Article: Equatable {}
 func ==(lhs: Article, rhs: Article) -> Bool {
     return lhs.title == rhs.title && lhs.body == rhs.body
 }
-~~~
+```
 
 这些都准备就绪之后，让我们看看 `Equatable` 是如何工作的：
 
-~~~{swift}
+```swift
 let title = "Swift Custom Operators: Syntactic Sugar or Menace to Society?"
 let body = "..."
 
@@ -65,7 +65,7 @@ let b = Article(title: title, body: body)
 
 a == b // true
 a != b // false
-~~~
+```
 
 等等... `!=` 是从哪里出来的？
 
@@ -73,25 +73,25 @@ a != b // false
 
 `!=` 实际上是在标准库当中的这个方法里实现的：
 
-~~~{swift}
+```swift
 func !=<T : Equatable>(lhs: T, rhs: T) -> Bool
-~~~
+```
 
 由于 `!=` 是 `Equatable` 的泛型方法，任何遵循 `Equatable` 的类型，包括 `Article`，都自动得到了使用 `!=` 操作符的能力。
 
 如果我们想要做的话，可以重载 `!=` 的实现：
 
-~~~{swift}
+```swift
 func !=(lhs: Article, rhs: Article) -> Bool {
     return !(lhs == rhs)
 }
-~~~
+```
 
 对于相等检验来说，我们不太可能提供比 `==` 的否定检查更加高效的方法，不过这种重载在某些情况下可能是有用处的。Swift 的类型推断系统允许更加准确的声明，用于覆盖掉泛型或者隐式的对应声明。
 
 标准库中大量使用泛型操作符，例如位运算操作：
 
-~~~{swift}
+```swift
 protocol BitwiseOperationsType {
     func &(_: Self, _: Self) -> Self
     func |(_: Self, _: Self) -> Self
@@ -100,7 +100,7 @@ protocol BitwiseOperationsType {
 
     class var allZeros: Self { get }
 }
-~~~
+```
 
 当想要在已有的架构上进行扩展时，通过这种方法来实现功能，可以大幅度地减少对于模板代码的需求。
 
@@ -110,15 +110,15 @@ protocol BitwiseOperationsType {
 
 对于一个协议 `P` 来说，它有一个方法 `m()`，这个方法以一个 `Int` 作为参数。
 
-~~~{swift}
+```swift
 protocol P {
     func m(arg: Int)
 }
-~~~
+```
 
 我们能实现的最接近默认实现的办法，是提供一个顶层的泛型函数，它显式地接受 `self` 作为第一个参数：
 
-~~~{swift}
+```swift
 protocol P {
     func m() /* {
         f(self)
@@ -128,7 +128,7 @@ protocol P {
 func f<T: P>(_ arg: T) {
     // ...
 }
-~~~
+```
 
 > 协议中注释掉的代码用于在方法实现和使用者之间进行交互。
 
@@ -140,9 +140,9 @@ func f<T: P>(_ arg: T) {
 
 以 `contains` 方法为例：
 
-~~~{swift}
+```swift
 func contains<S : SequenceType where S.Generator.Element : Equatable>(seq: S, x: S.Generator.Element) -> Bool
-~~~
+```
 
 因为序列生成器的元素被限定为 `Equatable`，这个方法不能被定义在泛型容器上，除非要求容器中的元素都遵循 `Equatable`。
 
@@ -151,5 +151,6 @@ func contains<S : SequenceType where S.Generator.Element : Equatable>(seq: S, x:
 尽管这个问题在 1.0 的时候不太可能被解决掉（同时也有很多更加紧急的事情需要解决），解决办法还是有很多的：
 
 - 提供 mixin 或者 trait 功能，能够对协议进行扩展，允许提供默认实现。
-- 允许 extensions 带有泛型参数，通过类型 `extension Array<T: Equatable>` 这种形式来定义额外的方法，例如 `func contains(x: T)`，这个 extension 只有当有关类型满足特定条件时才可用。 
+- 允许 extensions 带有泛型参数，通过类型 `extension Array<T: Equatable>` 这种形式来定义额外的方法，例如 `func contains(x: T)`，这个 extension 只有当有关类型满足特定条件时才可用。
 - 在函数调用时自动把 `Self` 设置为第一个参数，使得 `self` 可以被隐式使用。
+```

@@ -30,16 +30,16 @@ translator: Sheldon Huang
 
 你可以自己定义一个和`@interface`同名的静态变量，编译之后你会得到一个错误：
 
-~~~{objective-c}
+```objc
 @interface XXObject : NSObject
 @end
 
 static char * XXObject;//将“XXObject”重新定义为不同的符号
-~~~
+```
 
 也就是说，Objective-C的runtime在C语言的类型系统上又创建了一个抽象层，它甚至可以允许下面这段代码被编译:
 
-~~~{objective-c}
+```objc
 @protocol Foo
 @end
 
@@ -63,7 +63,7 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
     return Foo;
 }
 @end
-~~~
+```
 
 2. 通过Objective-C的环境，程序能区别所有相同名字的类，协议，类别，实例变量，实例方法和类方法。
 
@@ -165,21 +165,21 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
 不仅是类容易造成命名冲突，selectors也很容易造成命名冲突，甚至方法比类会有更多的问题。
 考虑一下这个category：
 
-~~~{objective-c}
+```objc
 @interface NSString (PigLatin)
 - (NSString *)pigLatinString;
 @end
-~~~
+```
 
 如果 `-pigLatinString`方法被另一个category实现了（或者以后版本的iOS或者OS X 在NSString类中也添加了同样名字的方法），那么调用这个方法就会得到未定义的行为错误，因为我们不能保证在runtime中哪个方法会先被定义。
 
 我们可以通过在方法名前加前缀来避免这个问题，就像加这个类名一样（在类别名前加前缀也是个好办法）：
 
-~~~{objective-c}
+```objc
 @interface NSString (XXXPigLatin)
 - (NSString *)xxx_pigLatinString;
 @end
-~~~
+```
 
 苹果官方建议[所有category方法都要使用前缀](https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4)，这个建议比类名需要加前缀的规定更加广为人知和接受。
 
@@ -195,7 +195,7 @@ category的主要功能是通过语法糖将一些有用的功能包裹进原来
 
 在Swizzling时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于[swizzling](http://nshipster.com/method-swizzling/)的文章中提到过。
 
-~~~{objective-c}
+```objc
 @implementation UIViewController (Swizzling)
 
 - (void)xxx_viewDidLoad {
@@ -203,7 +203,7 @@ category的主要功能是通过语法糖将一些有用的功能包裹进原来
 
     // Swizzled implementation
 }
-~~~
+```
 
 ##我们_真的_需要命名空间么？
 
@@ -215,7 +215,7 @@ category的主要功能是通过语法糖将一些有用的功能包裹进原来
 
 你还是不赞同，那么你想象一下Objective-C的命名空间的实现可能会像这个样子，你会觉得怎么样:
 
-~~~{objective-c}
+```objc
 @namespace XX
     @implementation Object
 
@@ -229,7 +229,7 @@ category的主要功能是通过语法糖将一些有用的功能包裹进原来
 
     @end
 @end
-~~~
+```
 
 虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论`NSString`的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，NSString这个类名在google这些搜索引擎中[很容易就可以找到， 你不会得到其他结果](http://lmgtfy.com/?q=NSString)。
 

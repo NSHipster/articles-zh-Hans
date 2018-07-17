@@ -22,7 +22,7 @@ Clang 是 C / Objective-C 的前端的 LLVM 编译器。它对 Objective-C 的�
 
 现在，我们支持这个建议，并鼓励其他开发者更严肃的对待编译警告。然而，也有一些情况下，你和 Clang 会陷入僵局。例如，考虑以下 `switch` 语句：
 
-~~~{objective-c}
+```objc
 switch (style) {
     case UITableViewCellStyleDefault:
     case UITableViewCellStyleValue1:
@@ -32,13 +32,13 @@ switch (style) {
     default:
         return;
 }
-~~~
+```
 
 当启用这些标志后，Clang 会警告说 "default label in switch which covers all enumeration values"。然而，放大到一个更大的背景下，如果我们 _知道_ `style` 是（不管怎样）从外部来源的描述（如JSON资源），允许无约束的 `NSInteger` 值，则 `default` 情况是必要的保障。坚持这个必然性的唯一方法就是使用 `#pragma` 暂时忽略警告标志：
 
 > `push` & `pop` 用于保存和恢复编译器的状态，类似 Core Graphics 或 OpenGL 上下文。
 
-~~~{objective-c}
+```objc
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wcovered-switch-default"
 switch (style) {
@@ -51,7 +51,7 @@ switch (style) {
         return;
 }
 #pragma clang diagnostic pop
-~~~
+```
 
 > 而且，怎么强调都不为过，Clang 至少在 99％ 的情况下都是对的。事实上修正一个分析警告 _最好的_ 办法就是忽略它。使用 `#pragma clang diagnostic ignored` 作为最后的方法。
 

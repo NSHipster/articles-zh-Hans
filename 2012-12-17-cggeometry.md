@@ -34,13 +34,13 @@ excerpt: "除非你是个数学极客或者一个古希腊人，否则几何学�
 
 > `CGRectOffset`: 返回一个原点在源矩形基础上进行了偏移的矩形。
 
-~~~{objective-c}
+```objc
 CGRect CGRectOffset(
   CGRect rect,
   CGFloat dx,
   CGFloat dy
 )
-~~~
+```
 
 注意，用这个你只改变了矩形的原点。它不仅能让你在同时改变水平和垂直位置的时候减少一行代码，更重要的是，它所表示的平移比直接分开操作原点的值更具有几何意义。
 
@@ -48,13 +48,13 @@ CGRect CGRectOffset(
 
 > `CGRectInset`: 返回一个与源矩形共中心点的，或大些或小些的新矩形。
 
-~~~{objective-c}
+```objc
 CGRect CGRectInset(
   CGRect rect,
   CGFloat dx,
   CGFloat dy
 )
-~~~
+```
 
 想一个视图中的视图更好看吗？用`CGRectInset`给它设置一个 10pt 的边距吧。需要记住的是，矩形将围绕它的中心点进行缩放，左右分别增减`dx`（总共`2 x dx`），上下分别增减 `dy`（总共 `2 x dy`）。
 
@@ -64,11 +64,11 @@ CGRect CGRectInset(
 
 > `CGRectIntegral`: 返回包围源矩形的最小整数矩形。
 
-~~~{objective-c}
+```objc
 CGRect CGRectIntegral (
   CGRect rect
 )
-~~~
+```
 
 将`CGRect` 取整到最近的完整点是非常重要的。小数值会让边框画在_像素边界_处。因为像素已经是最小单元（不能再细分），小数值会使绘制时取周围几个像素的平均值，这样看起来就模糊了。
 
@@ -94,11 +94,11 @@ CGRect CGRectIntegral (
 
 这六个函数返回矩形`x`或`y`的最小、中间或最大值，原型如下：
 
-~~~{objective-c}
+```objc
 CGFloat CGRectGet[Min|Mid|Max][X|Y] (
   CGRect rect
 )
-~~~
+```
 
 用这些函数代替诸如`frame.origin.x + frame.size.width`之类的代码将更加清晰、语义上更为生动的（特别是用取中间和取最大函数）。
 
@@ -106,19 +106,19 @@ CGFloat CGRectGet[Min|Mid|Max][X|Y] (
 
 > `CGRectGetHeight`: 返回矩形的高度。
 
-~~~{objective-c}
+```objc
 CGFloat CGRectGetHeight (
    CGRect rect
 )
-~~~
+```
 
 > `CGRectGetWidth`: 返回矩形的宽度。
 
-~~~{objective-c}
+```objc
 CGFloat CGRectGetWidth (
    CGRect rect
 )
-~~~
+```
 
 跟之前的函数一样，用`CGRectGetWidth` 和 `CGRectGetHeight`返回`CGRect`的`size`成员更可取。这绝不只是节省了几个字符，语义上的清晰胜过简洁。
 
@@ -148,7 +148,7 @@ CGFloat CGRectGetWidth (
 
 > `CGRectDivide`: 将源矩形分为两个子矩形。
 
-~~~{objective-c}
+```objc
 void CGRectDivide(
   CGRect rect,
   CGRect *slice,
@@ -156,7 +156,7 @@ void CGRectDivide(
   CGFloat amount,
   CGRectEdge edge
 )
-~~~
+```
 
 `CGRectDivide` 用以下方式将矩形分割为两部分：
 
@@ -167,14 +167,14 @@ void CGRectDivide(
 
 其中 `edge` 参数是一个`CGRectEdge` 枚举类型：
 
-~~~{objective-c}
+```objc
 enum CGRectEdge {
    CGRectMinXEdge,
    CGRectMinYEdge,
    CGRectMaxXEdge,
    CGRectMaxYEdge
 }
-~~~
+```
 
 `CGRectDivide` 用于在几个视图之间分割可用空间真是太完美了（把它在随后的`remainder`容纳多于两个的视图）。下次当你需要手机布局一个`UITableViewCell`时试试吧。`CGRectDivide`  is perfect for dividing up available space among several views (call it on subsequent `remainder` amounts to accommodate more than two views). Give it a try next time you're manually laying-out a `UITableViewCell`.
 

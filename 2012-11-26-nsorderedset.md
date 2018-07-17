@@ -25,17 +25,17 @@ _可变/不可变的类簇_
 
 开始，让我们来看下 `-mutableCopy` 在类簇中是如果工作的：
 
-~~~{objective-c}
+```objc
 NSSet* immutable = [NSSet set];
 NSMutableSet* mutable = [immutable mutableCopy];
 
 [mutable isKindOfClass:[NSSet class]]; // YES
 [mutable isKindOfClass:[NSMutableSet class]]; // YES
-~~~
+```
 
 现在让我们假设下`NSOrderedSet`事实上是`NSSet`的子类：
 
-~~~{objective-c}
+```objc
 // @interface NSOrderedSet : NSSet
 
 NSOrderedSet* immutable = [NSOrderedSet orderedSet];
@@ -43,7 +43,7 @@ NSMutableOrderedSet* mutable = [immutable mutableCopy];
 
 [mutable isKindOfClass:[NSSet class]]; // YES
 [mutable isKindOfClass:[NSMutableSet class]]; // NO (!)
-~~~
+```
 
 <object data="{{ site.asseturl }}/nsorderedset-case-1.svg" type="image/svg+xml">
   <img src="{{ site.asseturl }}/nsorderedset-case-1.png" />
@@ -51,7 +51,7 @@ NSMutableOrderedSet* mutable = [immutable mutableCopy];
 
 这样不太好。。。因为这样`NSMutableOrderedSet`就不能被用来做`NSMutableSet`类型的方法参数了。那么如果我们让`NSMutableOrderedSet`作为`NSMutableSet`的子类会发生什么事情哪？
 
-~~~{objective-c}
+```objc
 // @interface NSOrderedSet : NSSet
 // @interface NSMutableOrderedSet : NSMutableSet
 
@@ -61,7 +61,7 @@ NSMutableOrderedSet* mutable = [immutable mutableCopy];
 [mutable isKindOfClass:[NSSet class]]; // YES
 [mutable isKindOfClass:[NSMutableSet class]]; // YES
 [mutable isKindOfClass:[NSOrderedSet class]]; // NO (!)
-~~~
+```
 
 <object data="http://nshipster.s3.amazonaws.com/nsorderedset-case-2.svg" type="image/svg+xml">
   <img src="http://nshipster.s3.amazonaws.com/nsorderedset-case-2.png" />

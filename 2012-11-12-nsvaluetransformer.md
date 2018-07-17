@@ -22,7 +22,7 @@ excerpt: "在 Foundation 框架的所有类中，NSValueTransformer 也许是从
 
 下面是一个常见的实现代码：
 
-~~~{objective-c}
+```objc
 @interface ClassNameTransformer: NSValueTransformer {}
 @end
 
@@ -41,11 +41,11 @@ excerpt: "在 Foundation 框架的所有类中，NSValueTransformer 也许是从
     return (value == nil) ? nil : NSStringFromClass([value class]);
 }
 @end
-~~~
+```
 
 我们通常不会直接初始化 `NSValueTransformer`。而是，与 `NSPersistentStore` 和 `NSURLProtocol` 类似，需要注册相应的实现类，由管理者角色的对象负责初始化它们——这里有点不同的是，你需要把_对象_注册为一个带有指定名字的单例。
 
-~~~{objective-c}
+```objc
 NSString * const ClassNameTransformerName = @"ClassNameTransformer";
 
 // Set the value transformer
@@ -53,7 +53,7 @@ NSString * const ClassNameTransformerName = @"ClassNameTransformer";
 
 // Get the value transformer
 NSValueTransformer *valueTransformer = [NSValueTransformer valueTransformerForName:ClassNameTransformerName];
-~~~
+```
 
 通常，我们会在 `NSValueTransformer` 实现类的 `+initialize` 方法中注册单例对象，这样在需要用它的时候就不用再做别的什么事情了。
 
@@ -63,7 +63,7 @@ NSValueTransformer *valueTransformer = [NSValueTransformer valueTransformerForNa
 
 [一点儿元编程](https://github.com/mattt/TransformerKit/blob/master/TransformerKit/NSValueTransformer%2BTransformerKit.m#L36)就可以轻松搞定这件事情。注意啦：
 
-~~~{objective-c}
+```objc
 NSString * const TKCapitalizedStringTransformerName = @"TKCapitalizedStringTransformerName";
 
 [NSValueTransformer registerValueTransformerWithName:TKCapitalizedStringTransformerName
@@ -71,7 +71,7 @@ NSString * const TKCapitalizedStringTransformerName = @"TKCapitalizedStringTrans
 returningTransformedValueWithBlock:^id(id value) {
   return [value capitalizedString];
 }];
-~~~
+```
 
 我并不是为了迎合读者你，但是在写本篇文章时，我特别想看看怎么能够提升使用 `NSValueTransformer` 的体验。最终的结果就是 [TransformerKit](https://github.com/mattt/TransformerKit)。
 

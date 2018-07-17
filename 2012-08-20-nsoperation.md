@@ -65,11 +65,11 @@ excerpt: "我们都知道，让程序瞬间加载并且快速响应的秘诀在�
 
 比如说，对于服务器下载并压缩一张图片的整个过程，你可能会将这个整个过程分为两个操作（可能你还会用到这个网络子过程再去下载另一张图片，然后用压缩子过程去压缩磁盘上的图片）。显然图片需要等到下载完成之后才能被调整尺寸，所以我们定义网络子操作是压缩子操作的_依赖_，通过代码来说就是：
 
-~~~{objective-c}
+```objc
 [resizingOperation addDependency:networkingOperation];
 [operationQueue addOperation:networkingOperation];
 [operationQueue addOperation:resizingOperation];
-~~~
+```
 
 除非一个操作的依赖的`isFinished`返回`YES`，不然这个操作不会开始。时时牢记将所有的依赖关系添加到操作队列很重要，不然会像走路遇到一条大沟，就走不过去了哟。
 

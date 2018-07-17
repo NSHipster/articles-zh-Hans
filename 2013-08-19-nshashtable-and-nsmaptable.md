@@ -30,22 +30,22 @@ status:
 
 ### 用法
 
-~~~{swift}
+```swift
 let hashTable = NSHashTable(options: .CopyIn)
 hashTable.addObject("foo")
 hashTable.addObject("bar")
 hashTable.addObject(42)
 hashTable.removeObject("bar")
 print("Members: \(hashTable.allObjects)")
-~~~
-~~~{objective-c}
+```
+```objc
 NSHashTable *hashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsCopyIn];
 [hashTable addObject:@"foo"];
 [hashTable addObject:@"bar"];
 [hashTable addObject:@42];
 [hashTable removeObject:@"bar"];
 NSLog(@"Members: %@", [hashTable allObjects]);
-~~~
+```
 
 `NSHashTable` 对象在初始化时可以选择下面任意一个选项来产生不同的行为。在 `NSHashTable` 从具有垃圾回收机制的 OS X 环境被移植到 ARC 化的 iOS 环境的过程中，有一些选项枚举值被废弃了。其余的选项值对应着 [NSPointerFunctions](http://developer.apple.com/library/ios/DOCUMENTATION/Cocoa/Reference/Foundation/Classes/NSPointerFunctions_Class/Introduction/Introduction.html) 的选项，这部分内容会在下周的 NSHipster 中进行讲解。（译者注：下面具体的内容来自官方文档，不再做翻译，NSMapTable 部分做相同处理）
 
@@ -71,20 +71,20 @@ NSLog(@"Members: %@", [hashTable allObjects]);
 
 下面的例子展示了如何使用 `NSMapTable` 来包含不可拷贝的键，以及存储键对应的 delegate 或其他值的弱引用。
 
-~~~{swift}
+```swift
 let delegate: AnyObject = ...
 let mapTable = NSMapTable(keyOptions: .StrongMemory, valueOptions: .WeakMemory)
 
 mapTable.setObject(delegate, forKey: "foo")
 print("Keys: \(mapTable.keyEnumerator().allObjects)")
-~~~
-~~~{objective-c}
+```
+```objc
 id delegate = ...;
 NSMapTable *mapTable = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory
                                              valueOptions:NSMapTableWeakMemory];
 [mapTable setObject:delegate forKey:@"foo"];
 NSLog(@"Keys: %@", [[mapTable keyEnumerator] allObjects]);
-~~~
+```
 
 `NSMapTable` 对象在初始化时需要使用下面这些选项来指定键和值的具体行为：
 
@@ -99,7 +99,7 @@ Equal to `NSPointerFunctionsObjectPointerPersonality`.
 
 `NSMapTable` 没有实现[对象下标索引](http://nshipster.cn/object-subscripting/)，不过通过 category 来添加这个特性并不是很麻烦。`NSDictionary` 对于键要遵守 `NSCopying` 的要求，只适用于 `NSDictionary` 本身：
 
-~~~{swift}
+```swift
 extension NSMapTable {
     subscript(key: AnyObject) -> AnyObject? {
         get {
@@ -115,9 +115,9 @@ extension NSMapTable {
         }
     }
 }
-~~~
+```
 
-~~~{objective-c}
+```objc
 @implementation NSMapTable (NSHipsterSubscripting)
 
 - (id)objectForKeyedSubscript:(id)key
@@ -135,8 +135,9 @@ extension NSMapTable {
 }
 
 @end
-~~~
+```
 
 ---
 
 和往常一样，记住一点，编程并不是要做到多么聪明：永远先从最高的抽象层次去尝试解决问题。`NSSet` 和 `NSDictionary` 都是 _非常好_  的工具。在 99% 的情况下，它们毋庸置疑是正确的选择。如果你碰到的问题包含上面提到的具体的内存管理需求，那么 `NSHashTable` 和 `NSMapTable` 值得你一看。
+```

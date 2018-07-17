@@ -25,7 +25,7 @@ iOS 3 的杀手特性毫无疑问是推送通知，然而支持复制-粘贴的�
 
 一个可能的原因是，它的实现很繁琐。让我们先看一个简单的实现，然后再深入研究 API 的细节。首先，是 label 本身：
 
-~~~{swift}
+```swift
 class HipsterLabel : UILabel {
     override func canBecomeFirstResponder() -> Bool {
         return true
@@ -39,10 +39,10 @@ class HipsterLabel : UILabel {
 
     override func copy(sender: AnyObject?) {
         UIPasteboard.generalPasteboard().string = text
-    }    
+    }
 }
-~~~
-~~~{objective-c}
+```
+```objc
 // HipsterLabel.h
 @interface HipsterLabel : UILabel
 @end
@@ -67,14 +67,14 @@ class HipsterLabel : UILabel {
 }
 
 @end
-~~~
+```
 
 有了这些之后，在视图控制器中使用它：
 
-~~~{swift}
+```swift
 override func viewDidLoad() {
 	super.viewDidLoad()
-	
+
 	let label: HipsterLabel = ...
 	label.userInteractionEnabled = true
 	view.addSubview(label)
@@ -95,8 +95,8 @@ func handleLongPressGesture(recognizer: UIGestureRecognizer) {
 		recognizerView.becomeFirstResponder()
 	}
 }
-~~~
-~~~{objective-c}
+```
+```objc
 - (void)viewDidLoad {
 	HipsterLabel *label = ...;
 	label.userInteractionEnabled = YES;
@@ -116,7 +116,7 @@ func handleLongPressGesture(recognizer: UIGestureRecognizer) {
         [menuController setMenuVisible:YES animated:YES];
     }
 }
-~~~
+```
 
 总结一下，为了能够支持复制一个 label 中的文字，需要完成下面几步：
 
@@ -174,3 +174,4 @@ func handleLongPressGesture(recognizer: UIGestureRecognizer) {
 - 对于可编辑的控件，保证你的 `paste:` 实现能够处理各种有效或者无效输入
 
 如果移动计算在绝大部分人的生活中都占了非常大的比例，我们有必要尽我们最大的努力去提升移动设备的使用效率。经过你细致考虑并采用的 `UIMenuController`，不会成为没有人注意到的无用功。
+```

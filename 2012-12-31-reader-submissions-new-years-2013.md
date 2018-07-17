@@ -21,15 +21,15 @@ Category是Objective-C非常著名的特性，通过它你可以给已存在的�
 
 ### NSObject+IndieBandName.h
 
-~~~{objective-c}
+```objc
 @interface NSObject (IndieBandName)
 @property (nonatomic, strong) NSString *indieBandName;
 @end
-~~~
+```
 
 ### NSObject+IndieBandName.m
 
-~~~{objective-c}
+```objc
 #import "NSObject+Extension.h"
 #import <objc/runtime.h>
 
@@ -47,7 +47,7 @@ static const void *IndieBandNameKey = &IndieBandNameKey;
 }
 
 @end
-~~~
+```
 
 通过这种方法，你所有的乐团对象都可以用他们乐队的名字来存储和访问。哦对了，表演在本周三晚上开始，一定要来哦。
 
@@ -103,7 +103,7 @@ Xcode Snippets
 
 这儿有一个很有用的宏定义，可以非常方便地记录某一块代码的运行时间。本段代码由[@alextud](https://github.com/alextud)提供：
 
-~~~{objective-c}
+```objc
 NS_INLINE void MVComputeTimeWithNameAndBlock(const char *caller, void (^block)()) {
     CFTimeInterval startTimeInterval = CACurrentMediaTime();
     block();
@@ -112,7 +112,7 @@ NS_INLINE void MVComputeTimeWithNameAndBlock(const char *caller, void (^block)()
 }
 
 #define MVComputeTime(...) MVComputeTimeWithNameAndBlock(__PRETTY_FUNCTION__, (__VA_ARGS__))
-~~~
+```
 
 用block写迭代方法
 -------------------------
@@ -132,7 +132,7 @@ NS_INLINE void MVComputeTimeWithNameAndBlock(const char *caller, void (^block)()
 
 所有[Cocoa Auto Layout](https://developer.apple.com/library/mac/#documentation/UserExperience/Conceptual/AutolayoutPG/Articles/Introduction.html#//apple_ref/doc/uid/TP40010853)的粉丝都应该来看看这个，来自[Vadim Shpakovski](https://github.com/shpakovski)：
 
-~~~{objective-c}
+```objc
 viewConstraint.constant = <#Constant Value From#>;
 [view layoutIfNeeded];
 
@@ -142,7 +142,7 @@ viewConstraint.constant = <#Constant Value To#>;
 [UIView animateWithDuration:ConstantAnimationDuration animations:^{
      [view layoutIfNeeded];
 }];
-~~~
+```
 
 细心的读者可能已经做好本条的笔记了，顺便说一句，上面这些代码也可以写成一个优秀的Xcode Snippet哦。
 
@@ -151,13 +151,13 @@ viewConstraint.constant = <#Constant Value To#>;
 
 看完了这么一堆小技巧，我们再次用[Cédric Luthi](https://github.com/0xced)提供的一个小窍门来结尾，这次我们发掘私有方法 `cache_print` 来窥探[`NSCache`](http://nshipster.cn/nscache/)的内部结构：
 
-~~~{objective-c}
+```objc
 extern void cache_print(void *cache);
 
 - (void) printCache:(NSCache *)cache {
     cache_print(*((void **)(__bridge void *)cache + 3));
 }
-~~~
+```
 
 这段代码样例只能用在iOS上，并且只能用作debug（提交到Apple Store之前要移除这些代码！）。
 

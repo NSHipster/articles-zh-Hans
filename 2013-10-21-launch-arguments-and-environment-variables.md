@@ -66,9 +66,9 @@ status:
 
 当你在等待第一批翻译工作完成的时候，或者你只是想看看多语言环境下 UI 到底能被破坏成什么样子，指定下面这个启动选项：
 
-~~~
+```
 -NSDoubleLocalizedStrings YES
-~~~
+```
 
 ![NSDoubleLocalizedStrings - Before & After]({{ site.asseturl }}/launch-arguments-nsdoublelocalizedstrings.png)
 
@@ -78,9 +78,9 @@ status:
 
 如果你使用了 `NSShowNonLocalizedStrings` 这个启动选择，所有没有被本地化的字符串全都会变成大写，多么美妙！（译者注：英文中使用大写字母有对人大声喊叫的含义）
 
-~~~
+```
 -NSShowNonLocalizedStrings YES
-~~~
+```
 
 #### AppleLanguages
 
@@ -88,9 +88,9 @@ status:
 
 一般情况下，要想更改系统语言环境需要经过设置 -> 通用 -> 国际化 -> 语言，然后等待模拟器或者设备重启。现在使用下面这个简单的启动参数就可以完成同样的事情：
 
-~~~
+```
 -AppleLanguages (es)
-~~~
+```
 
 > `AppleLanguages` 的值可以是语言的名称（"Spanish"），也可以是语言的编码（`es`）。考虑到本地化文件是使用 ISO 639 编码来定位的，因此使用编码比使用语言名称要好一些。
 
@@ -104,19 +104,19 @@ status:
 
 设置下面这个启动参数：
 
-~~~
+```
 -com.apple.CoreData.SQLDebug 3
-~~~
+```
 
 ...然后让子弹飞一会儿。
 
-~~~
+```
 CoreData: sql: pragma cache_size=1000
 CoreData: sql: SELECT Z_VERSION, Z_UUID, Z_PLIST FROM Z_METADATA
 CoreData: sql: SELECT 0, t0.Z_PK, t0.Z_OPT, t0.ZAUTHOR, t0.ZTITLE, t0.ZCOPYRIGHT FROM ZBOOK t0 ORDER BY t0.ZAUTHOR, t0.ZTITLE
 CoreData: annotation: sql connection fetch time: 0.0001s
 CoreData: annotation: total fetch execution time: 0.0010s for 20 rows.
-~~~
+```
 
 `com.apple.CoreData.SQLDebug` 接收的值在 `1` 到 `3` 直接，值越高代表输出会越详细。
 
@@ -124,17 +124,17 @@ CoreData: annotation: total fetch execution time: 0.0010s for 20 rows.
 
 想让你的调试语句 _更加炫酷_ 一些？把 `com.apple.CoreData.SyntaxColoredLogging` 这个选项也扔进去，然后做好被各种颜色轰炸的准备：
 
-~~~
+```
 -com.apple.CoreData.SyntaxColoredLogging YES
-~~~
+```
 
 #### 迁移调试
 
 在其他的持久层当中，迁移数据是一件易事。然而出于某种原因，Core Data 成功地把这件事变成了噩梦。当事情的发展和预期不符，你没有别人可以去责备，只能默默埋怨自己的无知，你感觉自己确实不配使用这样一个直观的，经过良好设计的 <del>ORM</del> <ins>图持久化框架</ins>时，有一个选项可以帮到你：
 
-~~~
+```
 -com.apple.CoreData.MigrationDebug
-~~~
+```
 
 * * *
 

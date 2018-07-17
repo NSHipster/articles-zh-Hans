@@ -45,7 +45,7 @@ translator: Zihan Xu
   </tbody>
 </table>
 
-~~~{objective-c}
+```objc
 @interface Person : NSObject
 @property NSString *firstName;
 @property NSString *lastName;
@@ -87,7 +87,7 @@ NSLog(@"Smiths: %@", [people filteredArrayUsingPredicate:smithPredicate]);
 
 // ["Charlie Smith", "Quentin Alberts"]
 NSLog(@"30's: %@", [people filteredArrayUsingPredicate:thirtiesPredicate]);
-~~~
+```
 
 ## 集合中使用`NSPredicate`
 
@@ -110,21 +110,21 @@ Foundation提供使用谓词（predicate）来过滤`NSArray`／`NSMutableArray`
 > - `%@`是对值为字符串，数字或者日期的对象的替换值。
 > - `%K`是key path的替换值。
 
-~~~{objective-c}
+```objc
 NSPredicate *ageIs33Predicate = [NSPredicate predicateWithFormat:@"%K = %@", @"age", @33];
 
 // ["Charlie Smith"]
 NSLog(@"Age 33: %@", [people filteredArrayUsingPredicate:ageIs33Predicate]);
-~~~
+```
 
 > - `$VARIABLE_NAME`是可以被`NSPredicate -predicateWithSubstitutionVariables:`替换的值。
 
-~~~{objective-c}
+```objc
 NSPredicate *namesBeginningWithLetterPredicate = [NSPredicate predicateWithFormat:@"(firstName BEGINSWITH[cd] $letter) OR (lastName BEGINSWITH[cd] $letter)"];
 
 // ["Alice Smith", "Quentin Alberts"]
 NSLog(@"'A' Names: %@", [people filteredArrayUsingPredicate:[namesBeginningWithLetterPredicate predicateWithSubstitutionVariables:@{@"letter": @"A"}]]);
-~~~
+```
 
 ### 基本比较
 
@@ -179,11 +179,11 @@ NSLog(@"'A' Names: %@", [people filteredArrayUsingPredicate:[namesBeginningWithL
 
 例如，下列谓词是相等的：
 
-~~~{objective-c}
+```objc
 [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate predicateWithFormat:@"age > 25"], [NSPredicate predicateWithFormat:@"firstName = %@", @"Quentin"]]];
 
 [NSPredicate predicateWithFormat:@"(age > 25) AND (firstName = %@)", @"Quentin"];
-~~~
+```
 
 虽然语法字符串文字更加容易输入，但是在有的时候，你需要结合现有的谓词。在那些情况下，你可以使用`NSCompoundPredicate -andPredicateWithSubpredicates:`&`-orPredicateWithSubpredicates:`。
 
@@ -194,13 +194,13 @@ NSLog(@"'A' Names: %@", [people filteredArrayUsingPredicate:[namesBeginningWithL
 就像`NSCompoundPredicate`一样，`NSComparisonPredicate`从子部件构建了一个`NSPredicate`－－在这种情况下，左侧和右侧都是`NSExpression`。
 分析它的类的构造函数可以让我们一窥`NSPredicate`的格式字符串是如何解析的：
 
-~~~{objective-c}
+```objc
 + (NSPredicate *)predicateWithLeftExpression:(NSExpression *)lhs
 							 rightExpression:(NSExpression *)rhs
 									modifier:(NSComparisonPredicateModifier)modifier
 										type:(NSPredicateOperatorType)type
 									 options:(NSUInteger)options
-~~~
+```
 
 #### 参数
 
@@ -212,7 +212,7 @@ NSLog(@"'A' Names: %@", [people filteredArrayUsingPredicate:[namesBeginningWithL
 
 ### `NSComparisonPredicate`类型
 
-~~~{objective-c}
+```objc
 enum {
    NSLessThanPredicateOperatorType = 0,
    NSLessThanOrEqualToPredicateOperatorType,
@@ -230,7 +230,7 @@ enum {
    NSBetweenPredicateOperatorType
 };
 typedef NSUInteger NSPredicateOperatorType;
-~~~
+```
 
 ### `NSComparisonPredicate`选项
 
@@ -243,14 +243,14 @@ typedef NSUInteger NSPredicateOperatorType;
 
 最后，如果你实在不愿意学习`NSPredicate`的格式语法，你也可以学学`NSPredicate +predicateWithBlock:`。
 
-~~~{objective-c}
+```objc
 NSPredicate *shortNamePredicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
             return [[evaluatedObject firstName] length] <= 5;
         }];
 
 // ["Alice Smith", "Bob Jones"]
 NSLog(@"Short Names: %@", [people filteredArrayUsingPredicate:shortNamePredicate]);
-~~~
+```
 
 ...好吧，虽然使用`predicateWithBlock:`是懒人的做法，但它也并不是一无是处。
 

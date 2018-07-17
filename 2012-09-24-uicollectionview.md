@@ -27,12 +27,12 @@ translator: JJ Mao
 在另一个不同于早期table view的做法中，视图的回收过程有明显改善。
 
 在 `-tableView:cellForRowAtIndexPath:` 中，开发者必须调用熟悉的咒语：
-~~~{objective-c}
+```objc
 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:...];
 if (!cell) {
   cell = [[UITableViewCell alloc] initWithStyle:... reuseIdentifier:...];
 }
-~~~
+```
 
 谢天谢地，`UICollectionView` 不用这样了。如果没有可重用的cells，通过创建一个新的cell，`-dequeueReusableCellWithReuseIdentifier:forIndexPath:`确保返回一个有效对象。只需为特定的重用标识符注册一个 `UICollectionReusableView` 子类，一切都会自动工作。值得庆幸的是，iOS 6中 `UITableView` 也支持这种用法。
 

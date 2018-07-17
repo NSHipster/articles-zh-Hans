@@ -50,28 +50,28 @@ excerpt: "直到最近之前，应用程序，甚至是跨应用程序启动的�
 
 在 iOS 6 中被加到 Foundation 的 `NSUUID` 可以用来轻松地创建的 UUID。有多容易呢？
 
-~~~{swift}
+```swift
 let UUID = NSUUID.UUID().UUIDString
-~~~
+```
 
-~~~{objective-c}
+```objc
 NSString *UUID = [[NSUUID UUID] UUIDString];
-~~~
+```
 
 不过，如果你的应用针对 iOS 5 或更早的版本，你必须设置 Core Foundation 的 `CFUUIDRef`：
 
-~~~{swift}
+```swift
 let UUID = CFUUIDCreateString(nil, CFUUIDCreate(nil))
-~~~
+```
 
-~~~{objective-c}
+```objc
 CFUUIDRef uuid = CFUUIDCreate(NULL);
 NSString *UUID = CFUUIDCreateString(NULL, uuid);
-~~~
+```
 
 对那些基于基础 SDK 而没有使用运营商或广告标识 API 的应用程序来说，使用弃用说明里推荐的方法就可以达到类似的效果，使用 [`NSUserDefaults`](http://developer.apple.com/library/ios/#documentation/cocoa/reference/foundation/Classes/NSUserDefaults_Class/Reference/Reference.html):
 
-~~~{swift}
+```swift
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
 
     let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -84,9 +84,9 @@ NSString *UUID = CFUUIDCreateString(NULL, uuid);
 
     return true
 }
-~~~
+```
 
-~~~{objective-c}
+```objc
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -100,10 +100,11 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
-~~~
+```
 
 以此方式，一个 UUID 会在应用程序启动的第一时间被生成，然后存储在 `NSUserDefaults` 以便随后每次应用程序的启动所调用。不同于广告或运营商标识的是，这些标识不会同其他应用程序共享，但对于大多数的意图和目的来说，这已经足够达到目的了。
 
 ---
 
 当然，UUID 还有许多其他用途：用于记录在分布式系统的主标识符，临时文件的名称，或甚至是一个散色生成器（把十六进制串成每组 6 个，一共 5 组的表示方式！）。但在 iOS 上，它主要还是用于跟踪，用于发现在网络和可能性的汪洋中遗失了什么。理解你有多独特是了解一切的第一步。
+```

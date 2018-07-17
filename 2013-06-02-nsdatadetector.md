@@ -25,7 +25,7 @@ excerpt: "当人类在他们所有的日常交往中都使用 RDF 后，人工�
 
 `NSDataDetector` 对象用一个需要检查的信息的位掩码类型来初始化，然后传入一个需要匹配的字符串。像 `NSRegularExpression` 一样，在一个字符串中找到的每个匹配是用 `NSTextCheckingResult` 来表示的，它有诸如字符范围和匹配类型的详细信息。然而，`NSDataDetector` 的特定类型也可以包含元数据，如地址或日期组件。
 
-~~~{swift}
+```swift
 let string = "123 Main St. / (555) 555-5555"
 let types: NSTextCheckingType = .Address | .PhoneNumber
 var error: NSError?
@@ -33,9 +33,9 @@ let detector = NSDataDetector(types: types.rawValue, error: &error)
 detector.enumerateMatchesInString(string, options: nil, range: NSMakeRange(0, (string as NSString).length)) { (result, flags, _) in
     println(result)
 }
-~~~
+```
 
-~~~{objective-c}
+```objc
 NSError *error = nil;
 NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeAddress
                                                         | NSTextCheckingTypePhoneNumber
@@ -49,7 +49,7 @@ NSString *string = @"123 Main St. / (555) 555-5555";
 ^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
   NSLog(@"Match: %@", result);
 }];
-~~~
+```
 
 > 当初始化 `NSDataDetector` 的时候，确保只指定你感兴趣的类型。每当增加一个需要检查的类型，随着而来的是不小的性能损失为代价。
 
@@ -136,10 +136,10 @@ NSString *string = @"123 Main St. / (555) 555-5555";
 
 `UIDataDetectorTypes` 和 `NSTextCheckingTypes` 相同的那些枚举常量其实是不同的（如 `UIDataDetectorTypePhoneNumber` 和 `NSTextCheckingTypePhoneNumber`），他们的整数值并不一样，而且一个中的所有值也并不能在另外一个里面都能找到。可以用以下方法把 `UIDataDetectorTypes` 转换为 `NSTextCheckingTypes`：
 
-~~~{swift}
+```swift
 func NSTextCheckingTypesFromUIDataDetectorTypes (dataDetectorType: UIDataDetectorTypes) -> NSTextCheckingType {
     var textCheckingType: NSTextCheckingType = nil
-    
+
     if dataDetectorType & .Address != nil {
         textCheckingType |= .Address
     }
@@ -155,11 +155,11 @@ func NSTextCheckingTypesFromUIDataDetectorTypes (dataDetectorType: UIDataDetecto
     if dataDetectorType & .PhoneNumber != nil {
         textCheckingType |= .PhoneNumber
     }
-    
+
     return textCheckingType
 }
-~~~
-~~~{objective-c}
+```
+```objc
 static inline NSTextCheckingType NSTextCheckingTypesFromUIDataDetectorTypes(UIDataDetectorTypes dataDetectorType) {
     NSTextCheckingType textCheckingType = 0;
     if (dataDetectorType & UIDataDetectorTypeAddress) {
@@ -180,10 +180,11 @@ static inline NSTextCheckingType NSTextCheckingTypesFromUIDataDetectorTypes(UIDa
 
     return textCheckingType;
 }
-~~~
+```
 
 ---
 
 现在还对自然语言和结构化数据之间的翻译转换很容易这件事有怀疑吗？其实这并不奇怪，因为有 [超级](http://nshipster.com/cfstringtransform/) [棒](http://nshipster.com/nslinguistictagger/) 的 Cocoa 语言 API。
 
 不要让你的用户因为一个程序的疏忽而重新输入信息。在你的应用程序里充分利用 `NSDataDetector` 解锁那些已经隐藏在众目睽睽下的结构化信息吧。
+```

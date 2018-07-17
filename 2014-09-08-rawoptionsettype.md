@@ -15,27 +15,27 @@ status:
 
 当要在 Swift 中和 Foundation 这样的框架进行交互时，`NS_ENUM` 定义会自动转换成 `enum`。通常情况下和原有的 Objective-C 代码相比，这种转换是一种进步，因为去除了名字当中的重复部分：
 
-~~~{swift}
+```swift
 enum UITableViewCellStyle : Int {
     case Default
     case Value1
     case Value2
     case Subtitle
 }
-~~~
+```
 
-~~~{objective-c}
+```objc
 typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
    UITableViewCellStyleDefault,
    UITableViewCellStyleValue1,
    UITableViewCellStyleValue2,
    UITableViewCellStyleSubtitle
 };
-~~~
+```
 
 不幸的是，对于 `NS_OPTIONS` 来说，它的 Swift 替代品可以说是相当糟糕：
 
-~~~{swift}
+```swift
 struct UIViewAutoresizing : RawOptionSetType {
     init(_ value: UInt)
     var value: UInt
@@ -47,9 +47,9 @@ struct UIViewAutoresizing : RawOptionSetType {
     static var FlexibleHeight: UIViewAutoresizing { get }
     static var FlexibleBottomMargin: UIViewAutoresizing { get }
 }
-~~~
+```
 
-~~~{objective-c}
+```objc
 typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
    UIViewAutoresizingNone                 = 0,
    UIViewAutoresizingFlexibleLeftMargin   = 1 << 0,
@@ -59,7 +59,7 @@ typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
    UIViewAutoresizingFlexibleHeight       = 1 << 4,
    UIViewAutoresizingFlexibleBottomMargin = 1 << 5
 };
-~~~
+```
 
 * * *
 
@@ -69,7 +69,7 @@ typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
 
 和语法上清晰而明确的 `enum` 声明相比，`RawOptionsSetType` 显得笨拙而冗长，需要一些模板代码来支持计算属性(computed properties)：
 
-~~~{swift}
+```swift
 struct Toppings : RawOptionSetType, BooleanType {
     private var value: UInt = 0
 
@@ -120,7 +120,7 @@ struct Toppings : RawOptionSetType, BooleanType {
     static var GreenPepper: Toppings    { return self(0b0100) }
     static var Pineapple: Toppings      { return self(0b1000) }
 }
-~~~
+```
 
 > 在 Xcode 6 Beta 6 中，`RawOptionSetType` 不再遵守 `BooleanType` 协议，如果想支持按位检查的话还是需要支持 `BooleanType`。
 
@@ -128,7 +128,7 @@ struct Toppings : RawOptionSetType, BooleanType {
 
 以下面这个大一些的例子为例：
 
-~~~{swift}
+```swift
 struct Pizza {
     enum Style {
         case Neopolitan, Sicilian, NewHaven, DeepDish
@@ -148,11 +148,11 @@ struct Pizza {
 }
 
 let dinner = Pizza(inchesInDiameter: 12, style: .Neopolitan, toppings: .Pepperoni | .GreenPepper)
-~~~
+```
 
 对于值的归属检查，可以使用 `&` 运算符，就像在 C 中操作无符号整数一样：
 
-~~~{swift}
+```swift
 extension Pizza {
     var isVegetarian: Bool {
         return toppings & Toppings.Pepperoni ? false : true
@@ -160,7 +160,7 @@ extension Pizza {
 }
 
 dinner.isVegetarian // false
-~~~
+```
 
 * * *
 
@@ -168,7 +168,7 @@ dinner.isVegetarian // false
 
 不管怎样，如果你想在代码中实现类似 `NS_OPTIONS` 的结构，下面是一段 [Xcode snippet](http://nshipster.com/xcode-snippets/)，可以帮助你快速上手：
 
-~~~{swift}
+```swift
 struct <# Options #> : RawOptionSetType, BooleanType {
     let rawValue: UInt
     init(nilLiteral: ()) { self.value = 0 }
@@ -182,4 +182,5 @@ struct <# Options #> : RawOptionSetType, BooleanType {
     static var <# Option #>: <# Options #>     { return self(0b0001) }
     // ...
 }
-~~~
+```
+```

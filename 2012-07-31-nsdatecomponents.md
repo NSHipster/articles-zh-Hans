@@ -14,11 +14,11 @@ translator: Candyan
 
 `NSDateComponents`类能够被手动初始化，但是在大多数时候，会使用`NSCalendar -components:fromDate:`来提取某个日期的日期组件。
 
-~~~{objective-c}
+```objc
 NSCalendar *calendar = [NSCalendar currentCalendar];
 NSDate *date = [NSDate date];
 [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:date];
-~~~
+```
 
 其中`components`参数是一个用来获取日期组件值的[掩码](http://zh.wikipedia.org/zh-cn/%E6%8E%A9%E7%A0%81)([bitmask](http://en.wikipedia.org/wiki/Bitmask))，有下面这些值可以选择：
 
@@ -45,7 +45,7 @@ NSDate *date = [NSDate date];
 
 `NSDateComponents`对象可以用来计算相对日期。使用 `NSCalendar -dateByAddingComponents:toDate:options:`方法来确定昨天，下周或者5小时30分钟之后的日期。
 
-~~~{objective-c}
+```objc
 NSCalendar *calendar = [NSCalendar currentCalendar];
 NSDate *date = [NSDate date];
 
@@ -54,13 +54,13 @@ NSDateComponents *components = [[NSDateComponents alloc] init];
 [components setHour:12];
 
 NSLog(@"1 week and twelve hours from now: %@", [calendar dateByAddingComponents:components toDate:date options:0]);
-~~~
+```
 
 ## 用Components来创建日期
 
 `NSDateComponents`类最强大的特性也许就是能够通过组件反向创建`NSDate`对象。`NSCalendar -dateFromComponents:`就是用来实现这个目的的：
 
-~~~{objective-c}
+```objc
 NSCalendar *calendar = [NSCalendar currentCalendar];
 
 NSDateComponents *components = [[NSDateComponents alloc] init];
@@ -72,7 +72,7 @@ NSDateComponents *components = [[NSDateComponents alloc] init];
 [components setSecond:0];
 
 NSLog(@"Awesome time: %@", [calendar dateFromComponents:components]);
-~~~
+```
 
 特别有意思的地方在于，这个方法除了正常的月/日/年方式之外，也可以用某些信息来确定一个日期。只要提供的信息能够唯一确定一个日期，你就会得到一个结果。例如：指定2013年的第316天，那么就会返回一个2013年12月11日0点0分0秒的`NSDate`对象（如果没有指定时间，时间组件的默认值是0）。
 

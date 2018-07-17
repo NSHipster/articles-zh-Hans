@@ -163,11 +163,11 @@ Wrapper库为Core Data繁琐复杂的接口提供一些必要的语法糖和便�
 
 对外行来说，LINQ就像是[SQL](http://en.wikipedia.org/wiki/SQL)，但整合成了一种语言特性。想想`NSPredicate`，[`NSSortDescriptor`](http://nshipster.com/nssortdescriptor/)，和[`Key-Value Coding`](http://nshipster.com/kvc-collection-operators/)都有更棒的语法：
 
-~~~
+```
 from c in SomeCollection
   where c.SomeProperty < 10
   select new {c.SomeProperty, c.OtherProperty};
-~~~
+```
 
 #### [ios-queryable](https://github.com/martydill/ios-queryable)
 

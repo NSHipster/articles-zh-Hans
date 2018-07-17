@@ -17,7 +17,7 @@ Perl，它的短小的带有特殊字符的变量名，读起来就像是[Q\*ber
 
 Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com/joelonsoftware3/default.asp?cmd=show&ixPost=94232&ixReplies=38)最能体现，据说俄罗斯在80年代为了证明他们成功窃取了一些SDI导弹拦截代码的源代码而展示了如下页面：
 
-~~~ lisp
+``` lisp
                 )))
               ) )
             ))) ) ))
@@ -28,7 +28,7 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
     )))) ))
   )))
 )
-~~~
+```
 
 所以如果我们要对这难以捉摸的 Objective-C 品种观“码”，我们要看些什么？对了，以下就是：
 
@@ -55,16 +55,16 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
 
 #### MyObject+CategoryName.h
 
-~~~{objective-c}
+```objc
 @interface MyObject (CategoryName)
   - (void)foo;
   - (BOOL)barWithBaz:(NSInteger)baz;
 @end
-~~~
+```
 
 #### MyObject+CategoryName.m
 
-~~~{objective-c}
+```objc
 @implementation MyObject (CategoryName)
   - (void)foo {
     // ...
@@ -74,7 +74,7 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
     return YES;
   }
 @end
-~~~
+```
 
 类别对于在标准框架类上添加便利函数非常有用（只是不要过分使用你的工具函数）。
 
@@ -82,7 +82,7 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
 
 扩展看上去很像类别，但是省略了类别名称。这些通常在 `@implementation` 前定义来指定私有接口，甚至会覆盖interface中定义的属性：
 
-~~~{objective-c}
+```objc
 @interface MyObject ()
 @property (readwrite, nonatomic, strong) NSString *name;
 - (void)doSomething;
@@ -94,7 +94,7 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
 // ...
 
 @end
-~~~
+```
 
 ### 属性
 
@@ -127,7 +127,7 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
 - `@protected`：实例变量仅可由其类和其衍生类访问
 - `@private`：实例变量仅可由其类访问
 
-~~~{objective-c}
+```objc
 @interface Person : NSObject {
   @public
   NSString name;
@@ -136,7 +136,7 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
   @private
   int salary;
 }
-~~~
+```
 
 ## 协议
 
@@ -156,13 +156,13 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
 
 `@required` 和 `@optional` 的语法遵循能见宏：
 
-~~~{objective-c}
+```objc
 @protocol CustomControlDelegate
   - (void)control:(CustomControl *)control didSucceedWithResult:(id)result;
 @optional
   - (void)control:(CustomControl *)control didFailWithError:(NSError *)error;
 @end
-~~~
+```
 
 ## 处理异常
 
@@ -170,7 +170,7 @@ Objective-C 主要通过 `NSError` 来沟通意想不到的异常状态。而其
 
 `@`指令用于 `try/catch/finally` 块的传统惯例上：
 
-~~~{objective-c}
+```objc
 @try{
   // 试图执行下列语句
   [self getValue:&value error:&error];
@@ -185,7 +185,7 @@ Objective-C 主要通过 `NSError` 来沟通意想不到的异常状态。而其
   // 总是在@try或@catch block的尾部执行这个
   [self cleanup];
 }
-~~~
+```
 
 ## 常量
 
@@ -219,11 +219,11 @@ Objective-C 主要通过 `NSError` 来沟通意想不到的异常状态。而其
 - `@encode()`：返回一个类型的[类型编码](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html)。这个类型值可以用于 `NSCoder -encodeValueOfObjCType:at` 中的第一个参数编码。
 - `@defs()`：返回一个 Objective-C 类的布局。比如，定义一个与 `NSObject` 有相同布局的 struct，你只需要这样：
 
-~~~{objective-c}
+```objc
 struct {
   @defs(NSObject)
 }
-~~~
+```
 
 > 编者注：正如读者[@secboffin](http://twitter.com/secboffin) & [@ameaijou](http://twitter.com/ameaijou)所指出的，`@defs` 已经无法在现在的Objective-C runtime中使用。
 
@@ -242,7 +242,7 @@ struct {
 
 比如 [PSTCollectionView](https://github.com/steipete/PSTCollectionView) 使用了 `@compatibility_alias` 来显著提高对 [UICollectionView](http://nshipster.com/uicollectionview/) 向后兼容的直接替换的使用体验：
 
-~~~{objective-c}
+```objc
 // 允许代码使用 UICollectionView 如同它可以在iOS SDK 5使用一样。
 // http://developer.apple.com/legacy/mac/library/#documentation/DeveloperTools/gcc-3.3/gcc/compatibility_005falias.html
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
@@ -256,7 +256,7 @@ struct {
 @protocol UICollectionViewDataSource <PSTCollectionViewDataSource> @end
 @protocol UICollectionViewDelegate <PSTCollectionViewDelegate> @end
 #endif
-~~~
+```
 
 只要聪明的使用这些宏的组合，开发者可以通过引入 `PSTCollectionView` 来开发 `UICollectionView` －－而不需要担心最终项目的部署目标。作为快速替换，同样的代码在iOS6中工作起来几乎和在iOS 4.3中一样。
 

@@ -19,7 +19,7 @@ translator: Croath Liu
 
 几乎所有Unix的发行版都包含一些用换行分割的词表文件。在OS X上，你可以在`/usr/share/dict`找到他们：
 
-~~~
+```
 $ ls /usr/share/dict
     README
     connectives
@@ -27,18 +27,18 @@ $ ls /usr/share/dict
     web2
     web2a
     words@ -> web2
-~~~
+```
 
 连接到`words`的`web2`词表，虽然内容不是很详尽，但还是相当占了相当大的空间的：
 
-~~~
+```
 $ wc /usr/share/dict/words
     235886  235886 2493109
-~~~
+```
 
 如果你把它的头部打出来你就会发现其实这里面的内容相当有趣。我异常兴奋地发现了一堆以"a"开头的词：
 
-~~~
+```
 $ head /usr/share/dict/words
     A
     a
@@ -50,7 +50,7 @@ $ head /usr/share/dict/words
     aardvark
     aardwolf
     Aaron
-~~~
+```
 
 这些系统提供的巨大词表文件让`grep`纵横交错的文字难题、生成易于记忆的密码、种子数据库都变得简单。但从用户的视角来看，`/usr/share/dict`只是一个缺乏整体意义的单词表，所以对日常的使用没什么太大意义。
 
@@ -63,7 +63,7 @@ OS X在这个基础上构建了系统词典。OS X在对扩展壮大Unix的功�
 OS X模仿`/usr/share/dict`的结构，创造了`/Library/Dictionaries`目录。
 我们现在就看一下OS X在共享性的系统字典方面比Unix有所超越的地方————它同样认同非英语字典的存在：
 
-~~~
+```
 $ ls /Library/Dictionaries/
 
     Apple Dictionary.dictionary/
@@ -82,13 +82,13 @@ $ ls /Library/Dictionaries/
     Sanseido The WISDOM English-Japanese Japanese-English Dictionary.dictionary/
     Simplified Chinese - English.dictionary/
     The Standard Dictionary of Contemporary Chinese.dictionary/
-~~~
+```
 
 OS X为我们带来了包括英文字典在内的汉语、法语、德语、意大利语、日语、韩语专业字典，甚至包含一个专门讲解Apple术语的字典！
 
 让我们研究的更深一点，看看这些`.dictionary`的bundle文件里面到底有什么：
 
-~~~
+```
 $ ls "/Library/Dictionaries/New Oxford American Dictionary.dictionary/Contents"
 
     Body.data
@@ -102,7 +102,7 @@ $ ls "/Library/Dictionaries/New Oxford American Dictionary.dictionary/Contents"
     Resources/
     _CodeSignature/
     version.plist
-~~~
+```
 
 通过对字典文件结构的观察，确实可以发现一些有趣的细节。观察新牛津字典（New Oxford American Dictionary），可以发现如下内容：
 
@@ -118,13 +118,13 @@ $ ls "/Library/Dictionaries/New Oxford American Dictionary.dictionary/Contents"
 
 在OS X获取一个单词的释义，需要用到Core Services framework的`DCSCopyTextDefinition`函数：
 
-~~~{objective-c}
+```objc
 #import <CoreServices/CoreServices.h>
 
 NSString *word = @"apple";
 NSString *definition = (__bridge_transfer NSString *)DCSCopyTextDefinition(NULL, (__bridge CFStringRef)word, CFRangeMake(0, [word length]));
 NSLog(@"%@", definition);
-~~~
+```
 
 先别急用，我们来看看这些牛逼的字典到底是怎么被获取数据的。
 
@@ -138,7 +138,7 @@ NSLog(@"%@", definition);
 
 Now, there's nothing programmers love to hate to love more than the practice of exploiting loopholes to side-step Apple platform restrictions. Behold: an entirely error-prone approach to getting, say, thesaurus results instead of the first definition available in the standard dictionary:
 
-~~~{objective-c}
+```objc
 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 NSMutableDictionary *dictionaryPreferences = [[userDefaults persistentDomainForName:@"com.apple.DictionaryServices"] mutableCopy];
 NSArray *activeDictionaries = [dictionaryPreferences objectForKey:@"DCSActiveDictionaries"];
@@ -151,7 +151,7 @@ dictionaryPreferences[@"DCSActiveDictionaries"] = @[@"/Library/Dictionaries/Oxfo
 }
 dictionaryPreferences[@"DCSActiveDictionaries"] = activeDictionaries;
 [userDefaults setPersistentDomain:dictionaryPreferences forName:@"com.apple.DictionaryServices"];
-~~~
+```
 
 看到这里你可能会愤怒地说："但这是OS X啊，一般应用是不能通过沙箱从Cupertino获取manifest权限的，就没有更方便的方法么？比如说私有API？"
 
@@ -161,7 +161,7 @@ dictionaryPreferences[@"DCSActiveDictionaries"] = activeDictionaries;
 
 这些API没有公开暴露出来，但是为了满足我们对字典的渴望，这些API仍然能够通过调用Core Services的一些函数来实现：
 
-~~~{objective-c}
+```objc
 extern CFArrayRef DCSCopyAvailableDictionaries();
 extern CFStringRef DCSDictionaryGetName(DCSDictionaryRef dictionary);
 extern CFStringRef DCSDictionaryGetShortName(DCSDictionaryRef dictionary);
@@ -179,13 +179,13 @@ extern CFStringRef DCSRecordGetRawHeadword(CFTypeRef record);
 extern CFStringRef DCSRecordGetString(CFTypeRef record);
 extern CFStringRef DCSRecordGetTitle(CFTypeRef record);
 extern DCSDictionaryRef DCSRecordGetSubDictionary(CFTypeRef record);
-~~~
+```
 
 这些API都是私有的，所以当然也不会有文档来解释他们的用途和使用方法，所以先来看一下到底怎么用这些API吧：
 
 #### 获取可用字典
 
-~~~{objective-c}
+```objc
 NSMapTable *availableDictionariesKeyedByName =
     [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsCopyIn
                           valueOptions:NSPointerFunctionsObjectPointerPersonality];
@@ -194,13 +194,13 @@ for (id dictionary in (__bridge_transfer NSArray *)DCSCopyAvailableDictionaries(
     NSString *name = (__bridge NSString *)DCSDictionaryGetName((__bridge DCSDictionaryRef)dictionary);
     [availableDictionariesKeyedByName setObject:dictionary forKey:name];
 }
-~~~
+```
 
 #### 获取单词释义
 
 在上述处理中获取了很多难以琢磨的`DCSDictionaryRef`类型的实例，现在用这些实例我们来看看能对第一个参数`DCSCopyTextDefinition`做些什么事：
 
-~~~{objective-c}
+```objc
 NSString *word = @"apple";
 
 for (NSString *name in availableDictionariesKeyedByName) {
@@ -227,7 +227,7 @@ for (NSString *name in availableDictionariesKeyedByName) {
         }
     }
 }
-~~~
+```
 
 这种方法最有趣的地方是你要从HTML格式的内容中来获取有用的信息，这些HTML还包含了CSS文件，他们都是用来在系统的字典应用(Dictionary.app)来显示内容用的。
 
@@ -245,21 +245,21 @@ iOS开发毫无疑问是一件照本宣科的事，所以尝试逆向工程会�
 
 用需要查找term来进行初始化：
 
-~~~{objective-c}
+```objc
 UIReferenceLibraryViewController *referenceLibraryViewController =
     [[UIReferenceLibraryViewController alloc] initWithTerm:@"apple"];
 [viewController presentViewController:referenceLibraryViewController
                              animated:YES
                            completion:nil];
-~~~
+```
 
 这种行为和用户点击`UITextView`中高亮词汇弹出的"定义"的`UIMenuItem`的效果差不多。
 
 `UIReferenceLibraryViewController`也提供了一个类方法`dictionaryHasDefinitionForTerm:`，开发者可以在dictionary view controller出现之前调用这个方法，就可以在不必需的时候不显示那个view controller了。
 
-~~~{objective-c}
+```objc
 [UIReferenceLibraryViewController dictionaryHasDefinitionForTerm:@"apple"];
-~~~
+```
 
 > 在这两种情况下，`UIReferenceLibraryViewController`会以非常好的形式去格式化搜索结果，所以并不需要开发者手动去掉空格或者调整大小写来优化搜索。
 

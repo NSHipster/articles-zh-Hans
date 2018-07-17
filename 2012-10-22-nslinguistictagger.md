@@ -21,7 +21,7 @@ translator: Croath Liu
 
 电脑不可能通过逐字翻译"理解"问题的含义，不过我们耍一点儿小花招就可以合理地理解这个问题的_含义_：
 
-~~~{objective-c}
+```objc
 NSString *question = @"What is the weather in San Francisco?";
 NSLinguisticTaggerOptions options = NSLinguisticTaggerOmitWhitespace | NSLinguisticTaggerOmitPunctuation | NSLinguisticTaggerJoinNames;
 NSLinguisticTagger *tagger = [[NSLinguisticTagger alloc] initWithTagSchemes: [NSLinguisticTagger availableTagSchemesForLanguage:@"en"] options:options];
@@ -30,7 +30,7 @@ tagger.string = question;
     NSString *token = [question substringWithRange:tokenRange];
     NSLog(@"%@: %@", token, tag);
 }];
-~~~
+```
 
 输出如下：
 

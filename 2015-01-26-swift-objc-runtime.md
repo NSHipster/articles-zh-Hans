@@ -18,7 +18,7 @@ Swift extension 能对已经存在 Cocoa 类中添加极为丰富的功能，但
 
 令人庆幸的是 Objective-C 的 *关联对象* 可以缓解这种局面。例如要向一个工程里所有的 view controllers 中添加一个 `descriptiveName` 属性，我们可以简单的使用  `objc_get/setAssociatedObject()`来填充其 `get` 和 `set` 块：
 
-````swift
+```swift
 extension UIViewController {
     private struct AssociatedKeys {
         static var DescriptiveName = "nsh_DescriptiveName"
@@ -40,7 +40,7 @@ extension UIViewController {
         }
     }
 }
-````
+```
 
 > 注意，在私有嵌套 `struct` 中使用 `static var`，这样会生成我们所需的关联对象键，但不会污染整个命名空间。
 
@@ -50,7 +50,7 @@ extension UIViewController {
 
 这个例子中我们交叉 `UIViewController` 的 `viewWillAppear` 方法以打印出每一个在屏幕上显示的 view。方法交叉发生在 `initialize` 类方法调用时(如下代码所示)；替代的实现在 `nsh_viewWillAppear` 方法中：
 
-````swift
+```swift
 extension UIViewController {
     public override class func initialize() {
         struct Static {
@@ -90,7 +90,7 @@ extension UIViewController {
         }
     }
 }
-````
+```
 
 
 ### load vs. initialize (Swift 版本)

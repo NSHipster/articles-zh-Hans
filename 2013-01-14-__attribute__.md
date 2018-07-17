@@ -15,7 +15,7 @@ status:
 
 使用这个关键字的语法是 `__attribute__` 后面跟两组括号（两个括号可以让它很容易在宏里面使用，特别是有多个属性的时候）。在括号里面是用逗号分隔的属性列表。`__attribute__` 指令可以放在函数，变量和类型声明之后。
 
-~~~{objective-c}
+```objc
 // Return the square of a number
 int square(int n) __attribute__((const));
 
@@ -26,7 +26,7 @@ void f(void)
 // Send printf-like message to stderr and exit
 extern void die(const char *format, ...)
   __attribute__((noreturn, format(printf, 1, 2)));
-~~~
+```
 
 如果这个让你想起了 ISO C 当中的 [`#pragma`](http://nshipster.cn/pragma)，并不是只有你一个人会这样想。
 
@@ -54,11 +54,11 @@ GCC
 
 > `format` 属性用于指定一个函数接收类似 `printf`， `scanf`， `strftime` 和 `strfmon` 风格的参数，应该按照参数对格式化字符串进行类型检查。
 
-~~~{objective-c}
+```objc
 extern int
 my_printf (void *my_object, const char *my_format, ...)
   __attribute__((format(printf, 2, 3)));
-~~~
+```
 
 Objective-C 程序员还可以使用 `__NSString__` 来应用跟 `NSString +stringWithFormat:` 和 `NSLog()` 一样的格式化字符串规则。
 
@@ -66,11 +66,11 @@ Objective-C 程序员还可以使用 `__NSString__` 来应用跟 `NSString +stri
 
 > `nonnull` 属性表明一些函数参数应该是非空的指针。
 
-~~~{objective-c}
+```objc
 extern void *
 my_memcpy (void *dest, const void *src, size_t len)
   __attribute__((nonnull (1, 2)));
-~~~
+```
 
 使用 `nonnull` 把对于值的预期进行了显式的硬编码，可以帮助我们找到所有调用函数时可能潜伏的 `NULL` 指针 bug。记住一点，编译期错误 ≫ 运行时错误。
 
@@ -86,9 +86,9 @@ my_memcpy (void *dest, const void *src, size_t len)
 
 > `const` 属性表明这个函数除了参数之外不会对值进行检查，除了返回值之外也没有其他副作用。注意，一个有指针类型的参数同时检查指针指向的数据的函数，一定不要声明为 `const`。同样的，一个调用在内部非 `const` 函数的函数通常也不能是 `const`。`const` 函数返回 `void` 类型是没有意义的。
 
-~~~{objective-c}
+```objc
 int square(int n) __attribute__((const));
-~~~
+```
 
 `pure` 和 `const` 都是为了支持高效的性能优化而营造出函数式编程范例的属性。`const` 可以被看做是更加严格的 `pure`，因为它不依赖于全局变量或者指针。
 
@@ -111,9 +111,9 @@ LLVM
 
 > Clang 引入了可用性属性，可以放在声明之后，表明这个声明在操作系统版本层次上的生命周期。考虑下面这个虚构的函数 f 的声明：
 
-~~~{objective-c}
+```objc
 void f(void) __attribute__((availability(macosx,introduced=10.4,deprecated=10.6,obsoleted=10.7)));
-~~~
+```
 
 > `availability` 属性指出 `f` 在 OS X Tiger 中被引入，在 OS X Snow Leopard 中被废弃，在 OS X Lion 中被淘汰。
 
@@ -138,12 +138,12 @@ void f(void) __attribute__((availability(macosx,introduced=10.4,deprecated=10.6,
 
 > Clang 在 C 语言中提供了 C++ 函数重载支持，通过 `overloadable` 这个属性实现。例如我们要提供多个不同重载版本的 `tgsin` 函数，它会调用合适的标准库函数，分别提供对 `float`，`double` 和 `long double` 精度的值计算 `sine` 值。
 
-~~~{objective-c}
+```objc
 #include <math.h>
 float __attribute__((overloadable)) tgsin(float x) { return sinf(x); }
 double __attribute__((overloadable)) tgsin(double x) { return sin(x); }
 long double __attribute__((overloadable)) tgsin(long double x) { return sinl(x); }
-~~~
+```
 
 注意 `overloadable`只能用于函数。你可以通过使用 `id` 和 `void *` 这种泛型的返回值和参数类型，在一定程度上实现方法声明的重载。
 

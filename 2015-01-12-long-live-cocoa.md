@@ -36,21 +36,21 @@ Swift 的设计初衷还就是为了在 Cocoa 下的精心使用。如果我提�
 
 这里是一个做了内存标注的和没有做的函数例子，首先 C 版本：
 
-````c
+```c
 // 创建一个不可变的字符串
 CFStringRef CFStringCreateCopy ( CFAllocatorRef alloc, CFStringRef theString );
 // 讲一个 OSType编码进字符串好让它可以用作一个标签参数
 CFStringRef UTCreateStringForOSType ( OSType inOSType );
-````
+```
 
 两个函数都返回了一个 `CFStringRef`，一个 `CFString` 的引用。 一个 `CFStringRef` 可以与 Swift 里的 `CFString` 实力桥接，但是这这只在这个方法已经被标注了一个后。在 Swift 里，你能很容易地看出区别：
 
-````swift
+```swift
 // 标注了的: 返回一个已经被内存管理的 `CFString`
 func CFStringCreateCopy(alloc: CFAllocator!, theString: CFString!) -> CFString!
 // 没被标注的: 返回一个没有被内存管理的 `CFString`
 func UTCreateStringForOSType(inOSType: OSType) -> Unmanaged<CFString>!
-````
+```
 
 在收到了一个 `Unmanaged<CFString>!` 以后，你接下来需要用 `.takeRetainedValue()` 和 `.takeUnretainedValue()` 来得到一个已经内存管理好的 `CFString` 实例，而究竟调用那个，你需要去看文档或者知道管理结果是否是 retained 或者 unretained 的既有习惯。而标注了这些方法以后，苹果为你做了这些工作，保证了在 Cocoa 的很大范围内的内存安全。
 
@@ -58,19 +58,19 @@ func UTCreateStringForOSType(inOSType: OSType) -> Unmanaged<CFString>!
 
 另外的是，Swift 不仅拥抱了 Cocoa 的接口，它还提高了 Cocoa 的接口。例如可敬的 `CGRect`，作为一个 C 结构体，它不能包含任何类方法，所以所有的[操作 `CGRect` 的方法](/cggeometry/)都存在在上层函数里。这些工具很强大，但是你需要确切知道他们的存在并去用他们。这里是将一个 `CGRect` 分成四份的四行代码，可能需要查三次文档：
 
-````objective-c
+```objective-c
 CGRect nextRect;
 CGRect remainingRect;
 CGRectDivide(sourceRect, &nextRect, &remainingRect, 250, CGRectMinXEdge);
 NSLog("Remaining rect: %@", NSStringFromCGRect(remainingRect));
-````
+```
 
 但是在 Swift 里，结构体也欣然地有了实例方法和计算过的属性，所以 Core Graphics 拓展了 `CGRect ` 来让找到并且使用这些方法变得更加容易了。由于 `CGRect *` 的方法全都被放进了实力函数或者属性里，上面的代码可以简化成这样：
 
-````swift
+```swift
 let (nextRect, remainingRect) = sourceRect.rectsByDividing(250, CGRectEdge.MinXEdge)
 println("Remaining rect: \(remainingRect)")
-````
+```
 
 ### 一直都在变好
 
@@ -78,7 +78,7 @@ println("Remaining rect: \(remainingRect)")
 
 例如，`NSTimer` 有一个很好的接口，不管是通过 target-selector 还是 `NSInovation` 的模式，他需要一个 Objective-C 的方法来调用。当定义这个计时器的时候，我们很可能有了所有需要的东西，[有了这个使用自动桥接的 Core Foundation对应类 `CFTimer` 写的简单的`NSTimer`拓展](https://gist.github.com/natecook1000/b0285b518576b22c4dc8)，我们分分钟就开始进入业务逻辑：
 
-````swift
+```swift
 let message = "Are we there yet?"
 let alert = UIAlertController(title: message, message: nil, preferredStyle: .Alert)
 alert.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
@@ -89,7 +89,7 @@ NSTimer.scheduledTimerWithTimeInterval(10, repeats: true) { [weak self] timer in
     }
 }
 // I swear I'll turn this car around.
-````
+```
 
 * * *
 

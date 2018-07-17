@@ -8,9 +8,9 @@ author: Mattt
 translator: Croath Liu
 ---
 
-~~~{objective-c}
+```objc
 #import <objc/runtime.h>
-~~~
+```
 
 Objective-C开发者应该小心谨慎地遵循这个危险咒语的各种准则。一个很好的原因的就是：混乱的运行时代码会改变运行在其架构之上的所有代码。
 
@@ -30,15 +30,15 @@ Objective-C开发者应该小心谨慎地遵循这个危险咒语的各种准则
 
 #### NSObject+AssociatedObject.h
 
-~~~{objective-c}
+```objc
 @interface NSObject (AssociatedObject)
 @property (nonatomic, strong) id associatedObject;
 @end
-~~~
+```
 
 #### NSObject+AssociatedObject.m
 
-~~~{objective-c}
+```objc
 @implementation NSObject (AssociatedObject)
 @dynamic associatedObject;
 
@@ -49,15 +49,15 @@ Objective-C开发者应该小心谨慎地遵循这个危险咒语的各种准则
 - (id)associatedObject {
     return objc_getAssociatedObject(self, @selector(associatedObject));
 }
-~~~
+```
 
 通常推荐的做法是添加的属性最好是 `static char` 类型的，当然更推荐是指针型的。通常来说该属性应该是常量、唯一的、在适用范围内用getter和setter访问到：
 
-~~~{objective-c}
+```objc
 static char kAssociatedObjectKey;
 
 objc_getAssociatedObject(self, &kAssociatedObjectKey);
-~~~
+```
 
 然而可以用更简单的方式实现：用selector。
 

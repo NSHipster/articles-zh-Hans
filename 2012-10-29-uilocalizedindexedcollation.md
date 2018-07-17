@@ -82,7 +82,7 @@ NSHipster 的老读者可能已经猜到了，我们肯定不想自己去生成�
 
 都说完了，下边是列表数据源的一个常见实现：
 
-~~~{objective-c}
+```objc
 - (void)setObjects:(NSArray *)objects {
     SEL selector = @selector(localizedTitle);
     NSInteger index, sectionTitlesCount = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] count];
@@ -123,7 +123,7 @@ sectionForSectionIndexTitle:(NSString *)title
 {
     return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
 }
-~~~
+```
 
 ## UITableViewIndexSearch
 

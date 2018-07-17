@@ -31,7 +31,7 @@ translator: Candyan
 
 所有的单元测试会被添加到 Xcode 工程中的一个单独的测试 Target 中。每个测试文件都定义了一个 `SentestCase` 的子类，并且在其中定义了一系列以 `test` 开头的方法。其用 C 语言 `assert` 风格的宏来判断测试是不是满足某个特定的条件。每个测试都是按照顺序独立运行的，并且在运行之后会把结果记录下来：
 
-~~~{objective-c}
+```objc
 #import <SenTestingKit/SenTestingKit.h>
 #import "Person.h"
 
@@ -45,7 +45,7 @@ translator: Candyan
    person.lastName = @"Picasso";
    STAssertEqualObjects([person fullName], @"Pablo Picasso", nil);
 }
-~~~
+```
 
 SenTestingKit 的断言提供了你所期望的最基本的相等，存在性检测和真值检查：
 
@@ -166,7 +166,7 @@ Objective-C 的持续集成要比别的语言更困难，因为它需要在一�
 
 #### .travis.yml
 
-~~~
+```
 language: objective-c
 before_install:
   - brew update
@@ -174,7 +174,7 @@ before_install:
   - cd Tests && pod install && cd $TRAVIS_BUILD_DIR
   - mkdir -p "Tests/AFNetworking Tests.xcodeproj/xcshareddata/xcschemes" && cp Tests/Schemes/*.xcscheme "Tests/AFNetworking Tests.xcodeproj/xcshareddata/xcschemes/"
 script: rake test
-~~~
+```
 
 在 [Travis-CI.org](http://about.travis-ci.org/docs/user/build-configuration/) 上，你可以找到 Travis 配置文件的全部文档。
 

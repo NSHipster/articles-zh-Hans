@@ -31,9 +31,9 @@ excerpt: "Address Book UI是用来在用户地址簿展示、选择、编辑和�
 
 `kABPersonAddressCountryCodeKey` 是一个尤其重要的属性，它决定了用来格式化地址字符串的语言。如果你对国家代码不是很确定或者没有确定的国家代码数据集，你可以通过`NSLocale`像这样来确定：
 
-~~~{objective-c}
+```objc
 [mutableAddressComponents setValue:[[[NSLocale alloc] initWithIdentifier:@"en_US"] objectForKey:NSLocaleCountryCode] forKey:(__bridge NSString *)kABPersonAddressCountryCodeKey];
-~~~
+```
 
 在其他任何框架里你都找不到实用性这么好的功能，这不需要用到[`NSLocale`](http://nshipster.com/nslocale/)，甚至也不需要Map Kit和Core Location来定位。苹果尽了如此多的努力来提高很多本地化的细节，而你会很惊奇这么一个重要的功能被放在了一个模糊不清、感觉上不怎么相关的一个框架里。
 

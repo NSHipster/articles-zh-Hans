@@ -49,7 +49,7 @@ excerpt: "基础类库（Foundation）拥有最好的、功能也最全的string
 
 假设你去掉字符串两端的多余空格之后，还想去除单词之间的多余空格，这里有个非常简便的方法：
 
-~~~{objective-c}
+```objc
 NSString *string = @"Lorem    ipsum dolar   sit  amet.";
 string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
@@ -57,7 +57,7 @@ NSArray *components = [string componentsSeparatedByCharactersInSet:[NSCharacterS
 components = [components filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self <> ''"]];
 
 string = [components componentsJoinedByString:@" "];
-~~~
+```
 
 首先，删除字符串首尾的空格；然后用 `NSString -componentsSeparatedByCharactersInSet:` 在空格处将字符串分割成一个 `NSArray`；再用一个 `NSPredicate` 去除空串；最后，用 `NSArray -componentsJoinedByString:` 用单个空格符将数组重新拼成字符串。注意：这种方法仅适用于英语这种用空格分割的语言。
 
@@ -100,15 +100,15 @@ string = [components componentsJoinedByString:@" "];
 
 例如，你想从这样一个字符串中解析出开门时间：
 
-~~~
+```
 Mon-Thurs:  8:00 - 18:00
 Fri:        7:00 - 17:00
 Sat-Sun:    10:00 - 15:00
-~~~
+```
 
 你会 `enumerateLinesUsingBlock:` 并像这样用一个 `NSScanner` 来解析：
 
-~~~{swift}
+```swift
 let skippedCharacters = NSMutableCharacterSet()
 skippedCharacters.formIntersectionWithCharacterSet(NSCharacterSet.punctuationCharacterSet())
 skippedCharacters.formIntersectionWithCharacterSet(NSCharacterSet.whitespaceCharacterSet())
@@ -131,9 +131,9 @@ string.enumerateLines { (line, _) in
     scanner.scanInteger(&endHour)
     scanner.scanInteger(&endMinute)
 }
-~~~
+```
 
-~~~{objective-c}
+```objc
 NSMutableCharacterSet *skippedCharacters = [NSMutableCharacterSet punctuationCharacterSet];
 [skippedCharacters formUnionWithCharacterSet:[NSCharacterSet whitespaceCharacterSet]];
 
@@ -152,7 +152,7 @@ NSMutableCharacterSet *skippedCharacters = [NSMutableCharacterSet punctuationCha
   [scanner scanInteger:&endHour];
   [scanner scanInteger:&endMinute];
 }];
-~~~
+```
 
 我们首先从空格字符集和标点符号字符集的并集构造了一个 `NSMutableCharacterSet`。告诉 `NSScanner` 忽略这些字符以极大地减少解析这些字符的必要逻辑。
 
@@ -167,3 +167,4 @@ NSMutableCharacterSet *skippedCharacters = [NSMutableCharacterSet punctuationCha
 如果“不出错”对一个 NSHipster 来说不是最重要的事情，那我也不想成为正确的了！
 
 > Ed. Speaking of (not) being wrong, the original version of this article contained errors in both code samples. These have since been corrected.
+```

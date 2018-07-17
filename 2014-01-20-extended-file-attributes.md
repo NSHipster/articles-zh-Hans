@@ -18,7 +18,7 @@ excerpt: "在 NSA 披露的间谍活动中，在大众的关注下，元数据�
 
 你问这是什么样的信息？在终端调用 `ls` 命令，并通过 `@` 选项来查看在众目睽睽下隐藏了什么样的信息。
 
-~~~
+```
 $ ls -l@
 -rw-r--r--@ 1 mattt  staff  12292 Oct 19 05:59 .DS_Store
 	com.apple.FinderInfo	   32
@@ -28,7 +28,7 @@ $ ls -l@
 -rw-r--r--@ 1 mattt  staff   1438 Dec 18 14:31 Podfile
 	com.macromates.selectionRange	     4
 	com.macromates.visibleIndex	     1
-~~~
+```
 
 - Finder 存储了 32 个字节的信息在 `.DS_Store`，但其原因尚不完全清楚。
 - Xcode 中需要 15 个字节为一个特定的文件表示 TextEncoding 。
@@ -36,16 +36,16 @@ $ ls -l@
 
 扩展属性 API 声明在 `<sys/xattr.h>`，有获取，设置，列出和删除属性的功能：
 
-~~~{objective-c}
+```objc
 ssize_t getxattr(const char *path, const char *name, void *value, size_t size, u_int32_t position, int options);
 int setxattr(const char *path, const char *name, void *value, size_t size, u_int32_t position, int options);
 ssize_t listxattr(const char *path, char *namebuf, size_t size, int options);
 int removexattr(const char *path, const char *name, int options);
-~~~
+```
 
 为了显示这些功能，我们来假设使用扩展属性把一个 [HTTP Etag](http://en.wikipedia.org/wiki/HTTP_ETag) 与一个文件相关联：
 
-~~~{objective-c}
+```objc
 NSHTTPURLResponse *response = ...;
 NSURL *fileURL = ...;
 
@@ -53,11 +53,11 @@ const char *filePath = [fileURL fileSystemRepresentation];
 const char *name = "com.Example.Etag";
 const char *value = [[response allHeaderFields][@"Etag"] UTF8String];
 int result = setxattr(filePath, name, value, strlen(value), 0, 0);
-~~~
+```
 
 举另一个 iOS 5.0.1 的例子，EAs 是设计来表示一个不应该被 iCloud  同步的特定文件（如 iOS 5.1 中，如果使用 `NSURL -setResourceValue:forKey:error:`，它将设置 `com.apple.metadata:com_apple_backup_excludeItem` 的 EA）：
 
-~~~{objective-c}
+```objc
 #include <sys/xattr.h>
 
 if (!&NSURLIsExcludedFromBackupKey) {
@@ -73,7 +73,7 @@ if (!&NSURLIsExcludedFromBackupKey) {
                    forKey:NSURLIsExcludedFromBackupKey
                     error:&error];
 }
-~~~
+```
 
 为了避免扩展属性变成与 “对一把锤子来说，一切看起来都像钉子” 接近的结果，我们需要清楚的是：**扩展属性不应该被用于关键数据**。并非所有卷格式支持扩展属性，也就是说，HFS+ 和 FAT32 之间的复制可能导致信息丢失。同时也需要清楚，没有什么能阻止任何应用程序在任何时候删除或覆盖扩展属性。
 

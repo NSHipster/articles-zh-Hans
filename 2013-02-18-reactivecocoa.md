@@ -41,7 +41,7 @@ Objective-C在几十年间的非凡发展史可以分为四个阶段：
 
 ### 传统范式
 
-~~~{objective-c}
+```objc
 - (BOOL)isFormValid {
     return [self.usernameField.text length] > 0 &&
             [self.emailField.text length] > 0 &&
@@ -59,7 +59,7 @@ replacementString:(NSString *)string
 
     return YES;
 }
-~~~
+```
 
 传统范式的样例中，逻辑被放在了很多方法里，零碎地摆放在view controller里，通过到处散布到delegate里的`self.createButton.enabled = [self isFormValid];`方法在页面的生命周期中被调用。
 
@@ -67,7 +67,7 @@ replacementString:(NSString *)string
 
 ### ReactiveCocoa
 
-~~~{objective-c}
+```objc
 RACSignal *formValid = [RACSignal
   combineLatest:@[
     self.username.rac_textSignal,
@@ -80,7 +80,7 @@ RACSignal *formValid = [RACSignal
   }];
 
 RAC(self.createButton.enabled) = formValid;
-~~~
+```
 
 所有对于判断表单输入是否合法的逻辑都被整合为一串逻辑了。每次不论哪个输入框被修改了，用户的输入都会被reduce成一个布尔值，然后就可以自动来控制注册按钮的可用状态了。
 
@@ -112,7 +112,7 @@ signal 和 sequence 都是[streams](https://github.com/ReactiveCocoa/ReactiveCoc
 >
 > `RACSequence` 允许任意Cocoa集合在统一且显式地进行操作。
 
-~~~{objective-c}
+```objc
 RACSequence *normalizedLongWords = [[words.rac_sequence
     filter:^ BOOL (NSString *word) {
         return [word length] >= 10;
@@ -120,7 +120,7 @@ RACSequence *normalizedLongWords = [[words.rac_sequence
     map:^(NSString *word) {
         return [word lowercaseString];
     }];
-~~~
+```
 
 ## Cocoa中的先例
 

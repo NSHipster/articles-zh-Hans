@@ -58,14 +58,14 @@ Objective-C 用一个面向对象的途径混合了 C 语言风格的断言宏�
 
 ### LoggingAssertionHandler.h
 
-~~~{objective-c}
+```objc
 @interface LoggingAssertionHandler : NSAssertionHandler
 @end
-~~~
+```
 
 ### LoggingAssertionHandler.m
 
-~~~{objective-c}
+```objc
 @implementation LoggingAssertionHandler
 
 - (void)handleFailureInMethod:(SEL)selector
@@ -86,7 +86,7 @@ Objective-C 用一个面向对象的途径混合了 C 语言风格的断言宏�
 }
 
 @end
-~~~
+```
 
 每个线程都可以指定断言处理器。想设置一个 `NSAssertionHandler` 的子类来处理失败的断言，在线程的 `threadDictionary` 对象中设置 `NSAssertionHandlerKey` 字段即可。
 
@@ -94,7 +94,7 @@ Objective-C 用一个面向对象的途径混合了 C 语言风格的断言宏�
 
 ### AppDelegate.m
 
-~~~{objective-c}
+```objc
 - (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -105,7 +105,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
   return YES;
 }
-~~~
+```
 
 ---
 

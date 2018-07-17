@@ -40,7 +40,7 @@ Core Data的持久化储存是可以与[Active Record](http://ar.rubyonrails.org
 
 一个类最开始被加载的时候调用`+initialize`方法，所以一般在这个方法内注册`NSPersistentStoreCoordinator`。
 
-~~~{objective-c}
+```objc
 + (void)initialize {
   [NSPersistentStoreCoordinator registerStoreClass:self forStoreType:[self type]];
 }
@@ -48,18 +48,18 @@ Core Data的持久化储存是可以与[Active Record](http://ar.rubyonrails.org
 + (NSString *)type {
   return NSStringFromClass(self);
 }
-~~~
+```
 
 ### `-loadMetadata:`
 
 `loadMetadata:`是可增长储存配置自己的方法，而且有一个大概怎么把所有事情配置好的模板。特别地，你需要给每个储存配置UUID和储存类型，以下是配置的例子：
 
-~~~{objective-c}
+```objc
 NSMutableDictionary *mutableMetadata = [NSMutableDictionary dictionary];
 [mutableMetadata setValue:[[NSProcessInfo processInfo] globallyUniqueString] forKey:NSStoreUUIDKey];
 [mutableMetadata setValue:[[self class] type] forKey:NSStoreTypeKey];
 [self setMetadata:mutableMetadata];
-~~~
+```
 
 ### `-executeRequest:withContext:error:`
 
@@ -113,9 +113,9 @@ Here's where things get interesting, from an implementation standpoint. (And whe
 
 这一般会对应着对持久层的写入，例如SQL里的一个`INSERT`操作。比如说如果对象对应的行是一个自增的`id`列，那你应该这样生成一个`objectID`：
 
-~~~{objective-c}
+```objc
 [self newObjectIDForEntity:entity referenceObject:[NSNumber numberWithUnsignedInteger:rowID]];
-~~~
+```
 
 ## 玩转你自己的Core Data后端
 

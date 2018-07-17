@@ -84,15 +84,15 @@ status:
 
 上面提到的两个方法使用 `name` 和 `object` 这两个参数来确定通知是否符合观察者的需要。如果设置了 `name`，那么只有对应名称的通知会触发。如果设置成了 `nil`，那么 _所有_ 的名称都会触发。同样的规则也适用于 `object`。如果同时设置了 `name` 和 `object` 那么只有来自特定对象的对应名称的通知才会响应。要是 `name` 和 `object` 都是 `nil`，那么 _所有_ 的通知都会触发响应。
 
-> <sup>*</sup> 控制好你的代码！一个普通的 iOS 应用在启动之后的几秒钟内就会发出几十个通知，其中的大部分你可能都没有听说过，也不需要去关心。
+> <sup>\*</sup> 控制好你的代码！一个普通的 iOS 应用在启动之后的几秒钟内就会发出几十个通知，其中的大部分你可能都没有听说过，也不需要去关心。
 
-~~~{swift}
+```swift
 let center = NSNotificationCenter.defaultCenter()
 center.addObserverForName(nil, object: nil, queue: nil) { notification in
     print("\(notification.name): \(notification.userInfo ?? [:])")
 }
-~~~
-~~~{objective-c}
+```
+```objc
 NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 [center addObserverForName:nil
                     object:nil
@@ -101,7 +101,7 @@ NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 {
      NSLog(@"%@", notification.name);
 }];
-~~~
+```
 
 ### 移除观察者
 
@@ -119,7 +119,7 @@ NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
 类似的，`userInfo` 里的键值也应该定义成字符串常量。应该在文档中清晰地注明哪个键对应哪种类型的值，因为编译器不能像针对对象那样对字典类型中的值类型进行限制。
 
-~~~{swift}
+```swift
 class FooController : UIViewController {
     enum Notifications {
         static let FooDidBar    = "XXFooDidBarNotification"
@@ -128,14 +128,14 @@ class FooController : UIViewController {
 
     // ...
 }
-~~~
-~~~{objective-c}
+```
+```objc
 // Foo.h
 extern NSString * const XXFooDidBarNotification;
 
 // Foo.m
 NSString * const XXFooDidBarNotification = @"XXFooDidBarNotification";
-~~~
+```
 
 发送通知可以使用 `postNotificationName:object:userInfo:`，或者它的简化方法 `–postNotificationName:object:`，这个方法会自动把 `userInfo` 置为 `nil`。`–postNotification:` 这个方法也是存在的，不过通常建议把创建通知对象的过程交给系统方法去处理。
 
@@ -149,32 +149,32 @@ NSString * const XXFooDidBarNotification = @"XXFooDidBarNotification";
 
 #### Key-Value Observing
 
-~~~{swift}
-func addObserver(observer: NSObject, forKeyPath keyPath: String, 
-    options: NSKeyValueObservingOptions, 
+```swift
+func addObserver(observer: NSObject, forKeyPath keyPath: String,
+    options: NSKeyValueObservingOptions,
     context: UnsafeMutablePointer<Void>)
-~~~
-~~~{objective-c}
+```
+```objc
 - (void)addObserver:(NSObject *)observer
          forKeyPath:(NSString *)keyPath
             options:(NSKeyValueObservingOptions)options
             context:(void *)context
-~~~
+```
 
 #### NSNotificationCenter
 
-~~~{swift}
-func addObserver(observer: AnyObject, 
+```swift
+func addObserver(observer: AnyObject,
     selector aSelector: Selector,
-    name aName: String?, 
+    name aName: String?,
     object anObject: AnyObject?)
 
-func addObserverForName(name: String?, 
+func addObserverForName(name: String?,
     object obj: AnyObject?,
-    queue: NSOperationQueue?, 
+    queue: NSOperationQueue?,
     usingBlock block: (NSNotification) -> Void) -> NSObjectProtocol
-~~~
-~~~{objective-c}
+```
+```objc
 - (void)addObserver:(id)notificationObserver
            selector:(SEL)notificationSelector
                name:(NSString *)notificationName
@@ -184,7 +184,7 @@ func addObserverForName(name: String?,
                   object:(id)obj
                    queue:(NSOperationQueue *)queue
               usingBlock:(void (^)(NSNotification *))block
-~~~
+```
 
 **Key-Value Observing 是在 keypaths 上添加观察者，而 NSNotificationCenter 是在通知上添加观察者。** 牢记这个区别，就可以自信地去使用这两套 API 了。
 
@@ -195,3 +195,4 @@ func addObserverForName(name: String?,
 在人生中思考通知的意义，可以帮助你改善和其他人的关系。能够在沟通中展现自己的意图，以及给出必要的提醒，是一个成熟踏实的成年人的特征。
 
 ...但是不要过分采用这个建议并且把它作为直播自己生活的理由，或者任何东西的理由。说真的，别再拍照片了，赶紧吃你的饭吧，_我说的在理吧_？
+```

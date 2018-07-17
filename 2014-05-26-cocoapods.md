@@ -66,9 +66,9 @@ CocoaPods是由[Eloy Durán](https://twitter.com/alloy)于2011年8月12日创建
 
 CocoaPods可以方便地通过RubyGems安装，打开Terminal，然后键入以下命令：
 
-~~~{bash}
+```{bash}
 $ sudo gem install cocoapods
-~~~
+```
 
 就这么简单，现在你应该可以开始使用pod命令了。
 
@@ -86,39 +86,39 @@ $ sudo gem install cocoapods
 
 `cd`进入`.xcodeproj`文件所在的目录，通过以下命令来创建一个Podfile
 
-~~~{bash}
+```{bash}
 $ pod init
-~~~
+```
 
 #### Podfile
 
-~~~{ruby}
+```{ruby}
 platform :ios, '7.0'
 
 target "AppName" do
 
 end
-~~~
+```
 
 你可以申明需要不同版本的库，大部分情况下，申明到minor或者patch版本就足够了
 
-~~~{ruby}
+```{ruby}
 pod 'X', '~> 1.1'
-~~~
+```
 
 CocoaPods遵循[语意化版本规范](http://semver.org/lang/zh-CN/)。
 
 对于那些不在CocoaPods公共Git仓库中的库，你可以用任何一个Git, Mercurial或者SVN仓库取代，并且还可以指定具体的commit, branch或者tag。
 
-~~~{ruby}
+```{ruby}
 pod 'Y', :git => 'https://github.com/NSHipster/Y.git', :commit => 'b4dc0ffee'
-~~~
+```
 
 一旦所有的相关性都申明完毕，你可以使用以下指令来安装所需要的库：
 
-~~~{bash}
+```{bash}
 $ pod install
-~~~
+```
 
 安装过程中，CocoPods会使用递归来分析所有的需求，并且建立一个代码相关性的图，最后将Podfile序列化为`Podfile.lock`
 
@@ -128,9 +128,9 @@ CocoaPods会创建一个新的包含之前安装好的静态库Xcode项目，然
 
 反复使用pod install命令，只会让CocoaPods重复以上步骤，重新安装这些库。所以，当你需要升级它们时，请使用以下命令：
 
-~~~{bash}
+```{bash}
 $ pod update
-~~~
+```
 
 ### 试着使用CocoaPod
 
@@ -138,9 +138,9 @@ $ pod update
 
 你只需要在`try`后面加上任意一个CocoaPods公共库的名称，就能试用它了！
 
-~~~{bash}
+```{bash}
 $ pod try Ono
-~~~
+```
 
 ## 建立自己的CocoaPod
 
@@ -156,7 +156,7 @@ $ pod try Ono
 
 #### 以下是NSHipsterKit.podspec
 
-~~~{ruby}
+```{ruby}
 Pod::Spec.new do |s|
   s.name     = 'NSHipsterKit'
   s.version  = '1.0.0'
@@ -170,21 +170,21 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/nshipster/NSHipsterKit.git', :tag => '1.0.0' }
   s.source_files = 'NSHipsterKit'
 end
-~~~
+```
 
 一旦把这个`.podspec`发布到公共数据库中，任何想使用它的开发者，只需要在Podfile中加入如下声明即可：
 
 #### Podfile
 
-~~~{ruby}
+```{ruby}
 pod 'NSHipsterKit', '~> 1.0'
-~~~
+```
 
 `.podspec`文件也可以作为管理内部代码的利器：
 
-~~~{ruby}
+```{ruby}
 pod 'Z', :path => 'path/to/directory/with/podspec'
-~~~
+```
 
 ### 发布CocoaPod
 
@@ -196,15 +196,15 @@ CocoaPods Trunk服务的引入，解决了很多类似的问题。CocoaPods作�
 
 要想使用Trunk服务，首先你需要注册自己的电脑。这很简单，只要你指明你的邮箱地址（spec文件中的）和名称即可。
 
-~~~{bash}
+```{bash}
 $ pod trunk register mattt@nshipster.com "Mattt Thompson"
-~~~
+```
 
 至此，你就可以通过以下命令来方便地发布和升级你的Pod！
 
-~~~{bash}
+```{bash}
 $ pod trunk push NAME.podspec
-~~~
+```
 
 > 已经发布Pod的作者可以通过[几个简单的步骤](http://blog.cocoapods.org/Claim-Your-Pods/)来声明所有权。
 

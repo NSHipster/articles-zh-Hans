@@ -51,7 +51,7 @@ C 里有四种存储类：
 
 Objective-C 中一个常见的模式是 `静态` 单例，在这个 case 里，一个静态声明的变量被初始化，并在任何一个函数或类方法中被返回。 `dispatch once` 用于保证变量初始化在一个线程安全的方式下 _只_ 发生一次：
 
-~~~{objective-c}
+```objc
 + (instancetype)sharedInstance {
   static id _sharedInstance = nil;
   static dispatch_once_t onceToken;
@@ -61,7 +61,7 @@ Objective-C 中一个常见的模式是 `静态` 单例，在这个 case 里，�
 
   return _sharedInstance;
 }
-~~~
+```
 
 单例模式对于创建整个应用程序共享的对象是很有用的，诸如 HTTP 客户端或一个通知管理，或创建过程很昂贵的对象，诸如格式化。
 
@@ -79,15 +79,15 @@ Objective-C 中一个常见的模式是 `静态` 单例，在这个 case 里，�
 
 #### AppDelegate.h
 
-~~~{objective-c}
+```objc
 extern NSString * const kAppErrorDomain;
-~~~
+```
 
 #### AppDelegate.m
 
-~~~{objective-c}
+```objc
 NSString * const kAppErrorDomain = @"com.example.yourapp.error";
-~~~
+```
 
 字符串的值并没有特别的需要注意的事情，只要它是唯一的。使用字符串常量建立了严格的约束，用该常数变量来代替字符串的文本值本身。
 
@@ -99,7 +99,7 @@ NSString * const kAppErrorDomain = @"com.example.yourapp.error";
 
 #### TransactionStateMachine.h
 
-~~~{objective-c}
+```objc
 typedef NS_ENUM(NSUInteger, TransactionState) {
     TransactionOpened,
     TransactionPending,
@@ -107,11 +107,11 @@ typedef NS_ENUM(NSUInteger, TransactionState) {
 };
 
 extern NSString * NSStringFromTransactionState(TransactionState state);
-~~~
+```
 
 #### TransactionStateMachine.m
 
-~~~{objective-c}
+```objc
 NSString * NSStringFromTransactionState(TransactionState state) {
   switch (state) {
     case TransactionOpened:
@@ -124,7 +124,7 @@ NSString * NSStringFromTransactionState(TransactionState state) {
       return nil;
   }
 }
-~~~
+```
 
 ---
 
