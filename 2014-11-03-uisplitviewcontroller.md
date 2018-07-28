@@ -10,11 +10,11 @@ iPhone 6+ 的推出让 `UISplitViewController` 变得更为重要。现在只需
 
 看看 `UISplitViewController` 怎样在 iPhone 6+ 上施展魔力的：
 
-<video preload="none" src="{{ site.asseturl }}/SplitViewDemo.mov" poster="{{ site.asseturl }}/SplitViewDemo.jpg" width="640" controls/>
+<video preload="none" src="{% asset SplitViewDemo.mov @path %} " poster="{% asset SplitViewDemo.jpg @path %}" width="640" controls/>
 
->注意，当 iPhone 6+ 是 _缩放_ 显示模式视图时不会分屏！（你可以在 Settings.app → Display & Brightness → View 里切换 Standard 或 Zoomed 显示模式）
+> 注意，当 iPhone 6+ 是 _缩放_ 显示模式视图时不会分屏！（你可以在 Settings.app → Display & Brightness → View 里切换 Standard 或 Zoomed 显示模式）
 
-<video preload="none" src="{{ site.asseturl }}/SplitViewZoomedDemo.mov" poster="{{ site.asseturl }}/SplitViewZoomedDemo.jpg" width="640" controls/>
+<video preload="none" src="{% asset SplitViewZoomedDemo.mov @path %}" poster="{% asset SplitViewZoomedDemo.jpg @path %}" width="640" controls/>
 
 同样，究竟在什么时候显示拆分视图的逻辑苹果都会处理。
 
@@ -58,7 +58,7 @@ iPhone 6+ 的推出让 `UISplitViewController` 变得更为重要。现在只需
 
 这不是什么大不了的事，除非你想让你的导航栏显示一个标题。但在 iPad 上这最终会是致命的弱点。
 
-<video preload="none" src="{{ site.asseturl }}/iPadSplitViewNoNavBar.mov" poster="{{ site.asseturl }}/iPadSplitViewNoNavBar.jpg" width="540" controls/>
+<video preload="none" src="{% asset iPadSplitViewNoNavBar.mov @path %}" poster="{% asset iPadSplitViewNoNavBar.jpg @path %}" width="540" controls/>
 
 请注意，当 iPad 应用程序第一次打开的时候，没有任何迹象表明这是一个拆分视图控制器！触发主视图控制器，用户必须奇迹般的知道要去向右滑动。
 
@@ -83,11 +83,11 @@ override func viewDidLoad() {
 
 编译并重新在 iPad 上运行，现在用户就看到很好的指示，显示如何显示应用程序的其余部分：
 
-<video preload="none" src="{{ site.asseturl }}/iPadNavBarWithButton.mov" poster="{{ site.asseturl }}/iPadNavBarWithButton.jpg" width="540" controls/>
+<video preload="none" src="{% asset iPadNavBarWithButton.mov @path %}" poster="{% asset iPadNavBarWithButton.jpg @path %}" width="540" controls/>
 
 `UISplitViewController` 的 `displayModeButtonItem` 在 iPhone 6+ 的横向模式下也增加了一些额外的炫酷功能：
 
-<video preload="none" src="{{ site.asseturl }}/iPhone6PluseDisplayModeButton.mov" poster="{{ site.asseturl }}/iPhone6PluseDisplayModeButton.jpg" width="640" controls/>
+<video preload="none" src="{% asset iPhone6PluseDisplayModeButton.mov @path %}" poster="{% asset iPhone6PluseDisplayModeButton.jpg %}" width="640" controls/>
 
 通过使用 `displayModeButtonItem`，你再次让苹果来决定在不同屏幕尺寸、旋转下怎样做最合适。而不是自己辛苦的做这些小事，就可以高枕无忧了。
 
@@ -129,13 +129,12 @@ class SelectColorTableViewController: UITableViewController, UISplitViewControll
 
 当用户第一次在 iPhone 6+ 上以纵向模式打开应用程序的时候，`SelectColorViewController` 被显示为主视图控制器。一旦用户选择一种颜色，或该应用进入后台，`SelectColorViewController` 被再次折叠，并显示 `ColorViewController`：
 
-<video preload="none" src="https://nshipster.s3.amazonaws.com/iPhone6PlusPrimaryVCRotation.mov" poster="https://nshipster.s3.amazonaws.com/iPhone6PlusPrimaryVCRotation.jpg" width="640" controls/>
+<video preload="none" src="{% asset nshipster.s3.amazonaws.com/iPhone6PlusPrimaryVCRotation.mov @path %}" poster="{% asset iPhone6PlusPrimaryVCRotation.jpg @path %}" width="640" controls/>
 
-* * *
+---
 
 一定要查看一下 [`UISplitViewControllerDelegate`](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UISplitViewControllerDelegate_protocol/index.html) 的文档来了解所有其他你可以用 `UISplitViewController` 来实现的花哨东西。
 
 鉴于现在作为 iOS 开发者，我们不得不处理新的不同的设备尺寸，UISplitViewController 很快就会成为我们新的好朋友！
 
 > 你可以[在 GitHub](https://github.com/NatashaTheRobot/UISplitViewControllerDemo) 上得到这篇文章所用项目的完整源代码。
-
