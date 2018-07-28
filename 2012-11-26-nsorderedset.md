@@ -61,9 +61,7 @@ NSMutableOrderedSet* mutable = [immutable mutableCopy];
 [mutable isKindOfClass:[NSOrderedSet class]]; // NO (!)
 ```
 
-<object data="https://nshipster.s3.amazonaws.com/nsorderedset-case-2.svg" type="image/svg+xml">
-  <img src="https://nshipster.s3.amazonaws.com/nsorderedset-case-2.png" />
-</object>
+{% asset nsorderedset-case-2.svg %}
 
 这样也许更糟，因为，现在`NSMutableOrderedSet`就不能被用来做`NSOrderedSet`类型的方法参数了。
 
