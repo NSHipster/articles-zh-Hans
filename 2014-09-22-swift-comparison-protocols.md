@@ -7,7 +7,7 @@ translator: Croath Liu
 excerpt: "Objective-C 让我们对相等性和唯一性的本质慢慢有了带有哲学色彩的思考。为了解救那些不愿意向论文一样的哲理卑身屈膝的开发者，Swift 为此作出了很多改进。"
 ---
 
-Objective-C 让我们对相等性和唯一性的本质慢慢有了[带有哲学色彩的思考](http://nshipster.com/equality/)。为了解救那些不愿意向论文一样的哲理卑身屈膝的开发者，Swift 为此作出了很多改进。
+Objective-C 让我们对相等性和唯一性的本质慢慢有了[带有哲学色彩的思考](https://nshipster.com/equality/)。为了解救那些不愿意向论文一样的哲理卑身屈膝的开发者，Swift 为此作出了很多改进。
 
 在 Swift 中，`Equatable` 是一个基本类型，由此也演变出了 `Comparable` 和 `Hashable` 两种类型。这三个一起组成了这门语言关于对象比较的核心元素。
 
@@ -34,7 +34,7 @@ struct Complex<T: SignedNumberType> {
 }
 ```
 
-因为 [复数（complex number）](http://en.wikipedia.org/wiki/Complex_number) 由实部和虚部组成，当且仅当两个复数的两部分均相等时才能说这两个复数相等：
+因为 [复数（complex number）](https://en.wikipedia.org/wiki/Complex_number) 由实部和虚部组成，当且仅当两个复数的两部分均相等时才能说这两个复数相等：
 
 ```swift
 extension Complex: Equatable {}
@@ -56,7 +56,7 @@ a == b // true
 a != b // false
 ```
 
-> 我们在 [the article about Swift Default Protocol Implementations](http://nshipster.com/swift-default-protocol-implementations/) 提到过，对于 `!=` 的实现会被标准库自动转向到对于 `==` 的实现方法上。
+> 我们在 [the article about Swift Default Protocol Implementations](https://nshipster.com/swift-default-protocol-implementations/) 提到过，对于 `!=` 的实现会被标准库自动转向到对于 `==` 的实现方法上。
 
 对于引用类型，相等要通过唯一内存指向来判断。于是世界就更科学了：两个一样的 `Name` 是相等的，但拥有相同名字的两个 `Person` 可能是两个人。
 
@@ -98,7 +98,7 @@ func >=(lhs: Self, rhs: Self) -> Bool
 
 首先最能引起注意的就是 `==` 不见了，因为 `>=` 是 `>` 和 `==` 的组合。因为 `Comparable` 继承自 `Equatable`，所以它也应该提供 `==` 方法。
 
-其次，如果仔细观察会发现一个细节，同时这也是理解其本质的关键点：`<` 也不见了。“小于” 方法去哪了？其实它在 `_Comparable` 协议中。为什么知道这一点很重要呢？像我们在 [the article about Swift Default Protocol Implementations](http://nshipster.com/swift-default-protocol-implementations/) 中提到的，Swift 标准库提供了完全基于 `_Comparable` 的 `Comparable` 协议。这个设计_简直完美_。因为所有的比较方法都可以仅由 `<` 和 `==` 推论出，这就让实用性大大增加了。
+其次，如果仔细观察会发现一个细节，同时这也是理解其本质的关键点：`<` 也不见了。“小于” 方法去哪了？其实它在 `_Comparable` 协议中。为什么知道这一点很重要呢？像我们在 [the article about Swift Default Protocol Implementations](https://nshipster.com/swift-default-protocol-implementations/) 中提到的，Swift 标准库提供了完全基于 `_Comparable` 的 `Comparable` 协议。这个设计_简直完美_。因为所有的比较方法都可以仅由 `<` 和 `==` 推论出，这就让实用性大大增加了。
 
 > 与此不同的是 Ruby 中比较操作符的实现方法，它仅由一个 `<=>` （也叫 “UFO 操作符”）操作符来做判断。[这里有写明 Swift 具体是如何实现的](https://gist.github.com/mattt/7e4db72ce1b6c8a18bb4)。
 
@@ -182,7 +182,7 @@ func ==(lhs: CSSSelector.Specificity, rhs: CSSSelector.Specificity) -> Bool {
 
 把这些都结合在一起：
 
-> 为了理解的更为清楚，我们这里认为 `CSSSelector` [遵从 `StringLiteralConvertible` 协议](http://nshipster.com/swift-literal-convertible/).
+> 为了理解的更为清楚，我们这里认为 `CSSSelector` [遵从 `StringLiteralConvertible` 协议](https://nshipster.com/swift-literal-convertible/).
 
 ```swift
 let a: CSSSelector = "#logo"
@@ -221,7 +221,7 @@ protocol Hashable : Equatable {
 }
 ```
 
-这里如果详解[最佳哈希方法](http://en.wikipedia.org/wiki/Perfect_hash_function) 就远远跑题了，但还好我们不用提及这个，因为大多数值都可以通过 `XOR` 运算来生成比较好的哈希值了。
+这里如果详解[最佳哈希方法](https://en.wikipedia.org/wiki/Perfect_hash_function) 就远远跑题了，但还好我们不用提及这个，因为大多数值都可以通过 `XOR` 运算来生成比较好的哈希值了。
 
 下面这些 Swift 内建类型都实现了 `hashValue`：
 
@@ -233,7 +233,7 @@ protocol Hashable : Equatable {
 - `UnicodeScalar`
 - `ObjectIdentifier`
 
-据此也能总结出[生物学中的二项式明明方法](http://en.wikipedia.org/wiki/Binomial_nomenclature)的表示法：
+据此也能总结出[生物学中的二项式明明方法](https://en.wikipedia.org/wiki/Binomial_nomenclature)的表示法：
 
 ```swift
 struct Binomen {

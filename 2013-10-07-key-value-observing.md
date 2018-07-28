@@ -30,7 +30,7 @@ KVO 的中心思想其实是相当引人注意的。任意一个对象都可以�
 
 ##注册
 
-对象可以让观察者添加一个特定的 keypath，这个在[这篇文章](http://nshipster.cn/kvc-collection-operators/)中描述过，其实就是用点符号分隔的 key 指定了一系列的属性。在大多数情况下，这些都是对象的顶级属性。
+对象可以让观察者添加一个特定的 keypath，这个在[这篇文章](https://nshipster.cn/kvc-collection-operators/)中描述过，其实就是用点符号分隔的 key 指定了一系列的属性。在大多数情况下，这些都是对象的顶级属性。
 
 添加一个观察者的方法是 `–addObserver:forKeyPath:options:context:`:
 

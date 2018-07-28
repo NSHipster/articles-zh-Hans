@@ -24,7 +24,7 @@ excerpt: 即使这个博客就是专门讲一些晦涩接口，但是`NSIncremen
 
 如果你不是很精通Core Data，这里是一些背景知识：
 
-[Core Data](http://developer.apple.com/library/mac/#documentation/cocoa/Conceptual/CoreData/cdProgrammingGuide.html)是苹果关于对象关系映射的一个框架，至少有一半以上的苹果iOS和Mac商店上的应用、和成千上万的第三方应用使用了Core Data。Core Data很复杂，那是因为它专门用来解决复杂问题，从用的最多的场景到边界情况都涵盖了。
+[Core Data](https://developer.apple.com/library/mac/#documentation/cocoa/Conceptual/CoreData/cdProgrammingGuide.html)是苹果关于对象关系映射的一个框架，至少有一半以上的苹果iOS和Mac商店上的应用、和成千上万的第三方应用使用了Core Data。Core Data很复杂，那是因为它专门用来解决复杂问题，从用的最多的场景到边界情况都涵盖了。
 
 这其实都是在说，Core Data是你绝对应该在你应用里使用的一个框架。
 

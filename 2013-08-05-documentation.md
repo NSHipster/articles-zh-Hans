@@ -18,7 +18,7 @@ Cocoa 开发者间流传着一句格言，Objective-C 的冗长使得其代码�
 
 每一个现代编程语言都有注释：由一个特殊的字符序列标记的非可执行的自然语言，如 `//`，`/**/`，`＃` 和 `--`。使用特殊格式注释的文档，提供了代码的辅助解释和上下文，可以用编译工具提取和解析。
 
-在 Objective-C，可选的文档工具是 [`appledoc`](https://github.com/tomaz/appledoc)。使用类似 [Javadoc](http://en.wikipedia.org/wiki/Javadoc) 的语法，`appledoc` 能够从 `.h` 文件生成 HTML 和 Xcode 兼容的 `.docset` 文档，外观和[苹果官方文档](https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/NSArray.html) [几乎相同](http://cocoadocs.org/docsets/AFNetworking/1.3.1/Classes/AFHTTPClient.html) .
+在 Objective-C，可选的文档工具是 [`appledoc`](https://github.com/tomaz/appledoc)。使用类似 [Javadoc](https://en.wikipedia.org/wiki/Javadoc) 的语法，`appledoc` 能够从 `.h` 文件生成 HTML 和 Xcode 兼容的 `.docset` 文档，外观和[苹果官方文档](https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/NSArray.html) [几乎相同](http://cocoadocs.org/docsets/AFNetworking/1.3.1/Classes/AFHTTPClient.html) .
 
 > [Doxygen](http://www.stack.nl/~dimitri/doxygen/)，主要用于 C++，是 Objective-C 的另一种可行选择，但一般在 iOS / OS X 的开发者社区不很受待见。
 
@@ -44,7 +44,7 @@ Objective-C 的文档是由 `/** */` 标记的注释块（注意额外的初始�
 
 属性往往被描述在一个简单的句子里，并且应该包括它的默认值。
 
-相关的属性和方法应该由一个 `@name` 声明来分组，类似于一个[`#pragma mark`](http://nshipster.com/pragma/) 的功能，并且可以与三重斜线（`///`）的注释类型一起使用。
+相关的属性和方法应该由一个 `@name` 声明来分组，类似于一个[`#pragma mark`](https://nshipster.com/pragma/) 的功能，并且可以与三重斜线（`///`）的注释类型一起使用。
 
 在编写你自己的文档前试着阅读一些其他的文档，这样才能得到正确的基调和风格的认知。当对术语或冗长的描述有质疑的时候，你可以遵循从苹果的官方文档能找到的最接近的文档模式。
 

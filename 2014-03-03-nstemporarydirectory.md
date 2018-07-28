@@ -57,7 +57,7 @@ NSString *identifier = [[NSProcessInfo processInfo] globallyUniqueString];
 
 > 也有其他人建议直接调用系统的 `mktemp(3)` 命令去防止重名冲突。但是用 `NSProcessInfo -globallyUniqueString` 方法显然不像能产生冲突的样子。
 
-还有个办法， `NSUUID` ([我们之前讨论过了](http://nshipster.com/uuid-udid-unique-identifier))也可以生成出可用的结果，但我不觉得你会做出_如此疯狂_的事情来。
+还有个办法， `NSUUID` ([我们之前讨论过了](https://nshipster.com/uuid-udid-unique-identifier))也可以生成出可用的结果，但我不觉得你会做出_如此疯狂_的事情来。
 
 ```objc
 [[NSUUID UUID] UUIDString]

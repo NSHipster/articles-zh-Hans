@@ -9,7 +9,7 @@ excerpt: "产品设计是一种感同身受。知道用户想要什么，他们�
 
 产品设计是一种感同身受。知道用户想要什么，他们喜欢什么，他们不喜欢什么，什么原因会让他们沮丧，学习去理解并且把那些动机实现于设计 —— 这就是把一些疯狂的事情做得漂亮需要去做的事情。
 
-因此，我们在自己的工作领域之外的世界范围内去投资。我们在[不同地区](http://nshipster.com/nslocalizedstring/)调整我们的经验。我们考虑[屏幕阅读器或其他辅助技术](http://nshipster.com/uiaccessibility/)的可用性影响。我们[持续评估](http://nshipster.com/unit-testing/)我们对这些期望的实现。
+因此，我们在自己的工作领域之外的世界范围内去投资。我们在[不同地区](https://nshipster.com/nslocalizedstring/)调整我们的经验。我们考虑[屏幕阅读器或其他辅助技术](https://nshipster.com/uiaccessibility/)的可用性影响。我们[持续评估](https://nshipster.com/unit-testing/)我们对这些期望的实现。
 
 尽管还有一个应用程序开发人员开始常常错过的关键因素，那就是**网络状况**，或更具体的说是互联网连接的延迟和带宽。对于一款产品来说，对用户体验如此重要的东西，基本上大多数开发者采取 ad-hoc 的方式来测试不同环境是非常不幸的。
 
@@ -43,7 +43,7 @@ Network Link Conditioner 可以在 “Xcode 的硬件 IO 工具” 包中找到�
 - Very Bad Network
 - 100% Loss
 
-每个预置可以设置上行或下行的[带宽](http://en.wikipedia.org/wiki/Bandwidth_%28computing%29)极限，[延迟](http://en.wikipedia.org/wiki/Latency_％28engineering％29％23Communication_latency)，和[丢包](http://en.wikipedia.org/wiki/Packet_loss)概率（当任何值被设置为 0 时，该值将会同你的计算机的网络环境保持一致）。
+每个预置可以设置上行或下行的[带宽](https://en.wikipedia.org/wiki/Bandwidth_%28computing%29)极限，[延迟](https://en.wikipedia.org/wiki/Latency_％28engineering％29％23Communication_latency)，和[丢包](https://en.wikipedia.org/wiki/Packet_loss)概率（当任何值被设置为 0 时，该值将会同你的计算机的网络环境保持一致）。
 
 ![Preset]({% asset network-link-conditioner-preset.png @path %})
 

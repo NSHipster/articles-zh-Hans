@@ -11,13 +11,13 @@ excerpt: "Xcode 快捷键和手势不仅节省了宝贵的工作时间，而且�
 
 而作为一个 NSHipster 的建议既简单又有一点轻微的寓言式的意味：“Xcode 就是 NSHipster 的小胡子（见我们的 logo），你要勤于修剪它，给它打点蜡来保持锋利的边角，不要生虫（此处原文是一个双关，free of bugs，也表示没有 bug）。”
 
-无论怎样我们先看看几周前发布的 [Xcode Snippets](http://nshipster.com/xcode-snippets/) 通过减少重复代码键入对你的生产力提高有多少。本周，我们继续这个话题来看快捷键和手势。
+无论怎样我们先看看几周前发布的 [Xcode Snippets](https://nshipster.com/xcode-snippets/) 通过减少重复代码键入对你的生产力提高有多少。本周，我们继续这个话题来看快捷键和手势。
 
 Xcode 快捷键和手势不仅节省了宝贵的工作时间，而且能让你在工作过程中感到更自信、能力变得更强，这样的工作方式也更合理。学习下列技巧你将成为 Xcode 资深用户。
 
 ---
 
-> 此处提供一些通用的按键符以供参考（也可以参考这个 [我们不要脸地借用来的国际语音学字母表](http://en.wikipedia.org/wiki/Click_consonant)）：
+> 此处提供一些通用的按键符以供参考（也可以参考这个 [我们不要脸地借用来的国际语音学字母表](https://en.wikipedia.org/wiki/Click_consonant)）：
 
 <table id="xcode-key-bindings-modifiers">
   <thead>

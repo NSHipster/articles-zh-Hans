@@ -48,7 +48,7 @@ if ([NSURLSession class] &&
 #endif
 ```
 
-不幸的是，`os()` 不提供任何检查特定 OS X 或 iOS 版本的方法，这意味着，检查必须在运行时进行。而由于 Swift [对待 `nil`](http://nshipster.cn/nil/) 不太宽容的方式，检查 Objective-C 风格的常量将导致崩溃。
+不幸的是，`os()` 不提供任何检查特定 OS X 或 iOS 版本的方法，这意味着，检查必须在运行时进行。而由于 Swift [对待 `nil`](https://nshipster.cn/nil/) 不太宽容的方式，检查 Objective-C 风格的常量将导致崩溃。
 
 那么，你如何查看 Swift 的系统版本以确定 API 是否可用？请接着阅读来找出答案。
 

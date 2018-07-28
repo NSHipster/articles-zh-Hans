@@ -22,7 +22,7 @@ excerpt: "本周的简短文章：你需要了解的关于 NSSecureCoding 的一
 
 这不是一个苹果跟另一个苹果的比较，而有点类似于[最近在 Rails 中发现的 YAML 漏洞](http://tenderlovemaking.com/2013/02/06/yaml-f7u12.html)。
 
-对于一个 [XPC service](http://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingXPCServices.html) 来说，它的目的是为安全考虑的，因此数据的完整性显得尤为重要。很可能 XPC 会对后续的 iOS 和 OS X 版本增加影响，所以最好把这一切都铭记在心。
+对于一个 [XPC service](https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingXPCServices.html) 来说，它的目的是为安全考虑的，因此数据的完整性显得尤为重要。很可能 XPC 会对后续的 iOS 和 OS X 版本增加影响，所以最好把这一切都铭记在心。
 
 总之，`NSSecureCoding` 通过建立关系给补上这个漏洞做了最佳实践。现在，要对一个对象进行解码，需要该类提前被声明。
 

@@ -94,7 +94,7 @@ Xcode Snippets
 
 [Maximilian Tagher](https://github.com/MaxGabriel) 大声疾呼Xcode Snippets的好处。
 
-优秀的开发者都以充分了解和最大利用开发工具为荣。无论[是好](https://twitter.com/javisoto/status/285531250373046272)或[是坏](http://www.textfromxcode.com)，这都说明了解Xcode就要像了解我们的手背那样熟悉。Objective-C冗长无比，但"少说多干"才是生产力的代表，[Xcode Snippets](http://developer.apple.com/library/mac/#recipes/xcode_help-source_editor/CreatingaCustomCodeSnippet/CreatingaCustomCodeSnippet.html#//apple_ref/doc/uid/TP40009975-CH14-SW1)是帮你走上这条路的最佳方法之一。
+优秀的开发者都以充分了解和最大利用开发工具为荣。无论[是好](https://twitter.com/javisoto/status/285531250373046272)或[是坏](http://www.textfromxcode.com)，这都说明了解Xcode就要像了解我们的手背那样熟悉。Objective-C冗长无比，但"少说多干"才是生产力的代表，[Xcode Snippets](https://developer.apple.com/library/mac/#recipes/xcode_help-source_editor/CreatingaCustomCodeSnippet/CreatingaCustomCodeSnippet.html#//apple_ref/doc/uid/TP40009975-CH14-SW1)是帮你走上这条路的最佳方法之一。
 
 如果你不知道从哪开始，下载并且fork[这些Xcode Snippets](https://github.com/mattt/Xcode-Snippets)。
 
@@ -149,7 +149,7 @@ viewConstraint.constant = <#Constant Value To#>;
 打印 `NSCache` Usage
 ------------------------
 
-看完了这么一堆小技巧，我们再次用[Cédric Luthi](https://github.com/0xced)提供的一个小窍门来结尾，这次我们发掘私有方法 `cache_print` 来窥探[`NSCache`](http://nshipster.cn/nscache/)的内部结构：
+看完了这么一堆小技巧，我们再次用[Cédric Luthi](https://github.com/0xced)提供的一个小窍门来结尾，这次我们发掘私有方法 `cache_print` 来窥探[`NSCache`](https://nshipster.cn/nscache/)的内部结构：
 
 ```objc
 extern void cache_print(void *cache);

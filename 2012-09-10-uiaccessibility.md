@@ -9,11 +9,11 @@ excerpt: 辅助功能，如同国际化一样，是一个很难让开发者提�
 ---
 
 > 我们想互相帮助，人类理应如此。
-> - [Charlie Chaplin](http://en.wikiquote.org/wiki/Charlie_Chaplin)
+> - [Charlie Chaplin](https://en.wikiquote.org/wiki/Charlie_Chaplin)
 
 你知道我最想每个人都从苹果抄袭什么么？它们的肢体障碍者辅助技术。
 
-iPhones 和 iPad 本身已经如此神奇，但是凭借苹果的肢体障碍者辅助功能，它们同时让许多肢体障碍者和他们的家人的生活_完全改变_。我们就可以看看最近的 [WWDC 2012 开场视频](http://www.youtube.com/watch?v=MbP_pxR5cMk)，视频里一个叫 Per Busch 的德国盲人，在 [Ariadne GPS](http://www.ariadnegps.eu) 的帮助下，竟然能在 Kassel 森林里行走。这其实是一个提醒，告诉你你的工作可能对另一个人的生活产生巨大的影响。
+iPhones 和 iPad 本身已经如此神奇，但是凭借苹果的肢体障碍者辅助功能，它们同时让许多肢体障碍者和他们的家人的生活_完全改变_。我们就可以看看最近的 [WWDC 2012 开场视频](https://www.youtube.com/watch?v=MbP_pxR5cMk)，视频里一个叫 Per Busch 的德国盲人，在 [Ariadne GPS](http://www.ariadnegps.eu) 的帮助下，竟然能在 Kassel 森林里行走。这其实是一个提醒，告诉你你的工作可能对另一个人的生活产生巨大的影响。
 
 辅助功能，如同国际化一样，是一个很难让开发者提起兴致来的话题，但是你也知道，让你对这些东西感兴趣起来就是 NSHipster 的任务。让我们现在开始吧：
 
@@ -68,7 +68,7 @@ iPhones 和 iPad 本身已经如此神奇，但是凭借苹果的肢体障碍者
 - **`accessibilityLabel`** 标识一个 UI 元素。每一个有辅助功能的视图和控件都_必须_支持这个属性。
 - **`accessibilityHint`** 描述与这个 UI 元素交互的结果。这个提示只需要在之前元素的标签表征不明显的时候支持就好了。
 
-[辅助功能编程指南](http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html)提供了一些在文字标签和提示的指导:
+[辅助功能编程指南](https://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html)提供了一些在文字标签和提示的指导:
 
 > ### 创建标签指南
 
@@ -135,6 +135,6 @@ iPhones 和 iPad 本身已经如此神奇，但是凭借苹果的肢体障碍者
 
 让辅助功能成为苹果软件和硬件上的一等公民这件事，是苹果为人类服务做的一大贡献。你如果忽视了 `UIAccessibility`，那你会错过为数不多苹果在工程、设计和技术文档方面做得最好的工作。
 
-帮自己一个忙，读一下这篇_一级棒_的 [iOS 辅助功能变成指南](http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Introduction/Introduction.html)吧，可能只需要一两个小时你就能掌握全部的东西了。
+帮自己一个忙，读一下这篇_一级棒_的 [iOS 辅助功能变成指南](https://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Introduction/Introduction.html)吧，可能只需要一两个小时你就能掌握全部的东西了。
 
 谁知道呢，你可能因为这个最后改变了一个人的生活。

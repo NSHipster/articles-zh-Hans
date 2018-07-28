@@ -109,7 +109,7 @@ $ ls "/Library/Dictionaries/New Oxford American Dictionary.dictionary/Contents"
 - 二进制编码的 `KeyText.data`、`KeyText.index`和`Content.data`文件
 - 用于绘制的CSS文件
 - 从A-Frame到Zither共1207张图片
-- 用于切换到[US English Diacritical Pronunciation](http://en.wikipedia.org/wiki/Pronunciation_respelling_for_English)和[IPA](http://en.wikipedia.org/wiki/International_Phonetic_Alphabet) (International Phonetic Alphabet)的链接
+- 用于切换到[US English Diacritical Pronunciation](https://en.wikipedia.org/wiki/Pronunciation_respelling_for_English)和[IPA](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet) (International Phonetic Alphabet)的链接
 - Manifest和签名文件
 
 通常情况下拥有对二进制文件读权限才可以获得相关的数据，但幸运的是Core Services为我们提供了相关的API。
@@ -265,4 +265,4 @@ UIReferenceLibraryViewController *referenceLibraryViewController =
 
 * * *
 
-无论是Unix的词汇表还是基于其发展而来的OS X（或iOS）的`.dictionary` bundles，它与数学常量以及Apple的"Sosumi"提醒一样，对于编程来说都是至关重要的。你可以思考一下如何将上述API引入你的app，或者用它们来创建你以前从未尝试过的应用。这里有很多Apple系统内部关于语言学的链接供你参考：a [wealth](http://nshipster.com/nslocalizedstring/) [of](http://nshipster.com/nslinguistictagger/) [linguistic](http://nshipster.com/search-kit/) [technologies](http://nshipster.com/uilocalizedindexedcollation/)。
+无论是Unix的词汇表还是基于其发展而来的OS X（或iOS）的`.dictionary` bundles，它与数学常量以及Apple的"Sosumi"提醒一样，对于编程来说都是至关重要的。你可以思考一下如何将上述API引入你的app，或者用它们来创建你以前从未尝试过的应用。这里有很多Apple系统内部关于语言学的链接供你参考：a [wealth](https://nshipster.com/nslocalizedstring/) [of](https://nshipster.com/nslinguistictagger/) [linguistic](https://nshipster.com/search-kit/) [technologies](https://nshipster.com/uilocalizedindexedcollation/)。

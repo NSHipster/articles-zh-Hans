@@ -13,11 +13,11 @@ excerpt: "所以如果我们要对这难以捉摸的 Objective-C 品种观“码
 
 但有些东西就像是竖着的酸痛的大拇指：
 
-Perl，它的短小的带有特殊字符的变量名，读起来就像是[Q\*bert的脏话](http://imgur.com/WyG2D)。
+Perl，它的短小的带有特殊字符的变量名，读起来就像是[Q\*bert 的脏话](http://imgur.com/WyG2D)。
 
-Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com/joelonsoftware3/default.asp?cmd=show&ixPost=94232&ixReplies=38)最能体现，据说俄罗斯在80年代为了证明他们成功窃取了一些SDI导弹拦截代码的源代码而展示了如下页面：
+Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com/joelonsoftware3/default.asp?cmd=show&ixPost=94232&ixReplies=38)最能体现，据说俄罗斯在 80 年代为了证明他们成功窃取了一些 SDI 导弹拦截代码的源代码而展示了如下页面：
 
-``` lisp
+```lisp
                 )))
               ) )
             ))) ) ))
@@ -80,7 +80,7 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
 
 > 小贴士：你可以创建一个定义类似 `+appNameDarkGrayColor` 类方法的 `NSColor`／`UIColor` 调色板类别，而不是胡乱使用随机的，任意的颜色值。之后你可以通过创建方法的别名如 `+appNameTextColor` 的方式增加一个语义层，新的方法返回 `+appNameDarkGrayColor`。
 
-扩展看上去很像类别，但是省略了类别名称。这些通常在 `@implementation` 前定义来指定私有接口，甚至会覆盖interface中定义的属性：
+扩展看上去很像类别，但是省略了类别名称。这些通常在 `@implementation` 前定义来指定私有接口，甚至会覆盖 interface 中定义的属性：
 
 ```objc
 @interface MyObject ()
@@ -104,7 +104,7 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
 - `@synthesize`
 - `@dynamic`
 
-关于属性值得注意的一点是，从 Xcode 4.4 开始，我们再也不需要明确的合成属性了。在 `@interface` 中被声明的属性在 implementation 中被自动的合成（与前面有下划线的ivar名称一起，比如 `@synthesize propertyName = _propertyName` ）。
+关于属性值得注意的一点是，从 Xcode 4.4 开始，我们再也不需要明确的合成属性了。在 `@interface` 中被声明的属性在 implementation 中被自动的合成（与前面有下划线的 ivar 名称一起，比如 `@synthesize propertyName = _propertyName` ）。
 
 ### 正向类声明
 
@@ -118,12 +118,12 @@ Lisp,它使用括号之多由那个[古老的笑话](http://discuss.fogcreek.com
 
 类提供状态以及通过属性和方法提供变化的接口而不是直接展示实例变量，这是一个通用的惯例。
 
-尽管ARC通过内存管理使得使用实例变量更加安全，但上述的自动属性合成删除了实例变量被声明的地方。
+尽管 ARC 通过内存管理使得使用实例变量更加安全，但上述的自动属性合成删除了实例变量被声明的地方。
 
-不管怎么说，在实例变量_被_直接操作的情况下，有以下可见性指令：
+不管怎么说，在实例变量*被*直接操作的情况下，有以下可见性指令：
 
 - `@public`：实例变量可使用符号 `person->age = 32"` 被直接读取。
-- `@package`：实例变量是公开的，除非它被指定在框架外（仅适用64位架构）
+- `@package`：实例变量是公开的，除非它被指定在框架外（仅适用 64 位架构）
 - `@protected`：实例变量仅可由其类和其衍生类访问
 - `@private`：实例变量仅可由其类访问
 
@@ -193,9 +193,9 @@ Objective-C 主要通过 `NSError` 来沟通意想不到的异常状态。而其
 
 ### 对象常量
 
-不久前，Objective-C只有 `NSString` 常量。但随着[Apple的LLVM 4.0编译器](http://clang.llvm.org/docs/ObjectiveCLiterals.html)的发布，让我们欣喜的是`NSNumber`，`NSArray`和`NSDictionary`常量被添加了。
+不久前，Objective-C 只有 `NSString` 常量。但随着[Apple 的 LLVM 4.0 编译器](http://clang.llvm.org/docs/ObjectiveCLiterals.html)的发布，让我们欣喜的是`NSNumber`，`NSArray`和`NSDictionary`常量被添加了。
 
-- `@""`：返回一个由引号内Unicode内容初始化的 `NSString` 对象。
+- `@""`：返回一个由引号内 Unicode 内容初始化的 `NSString` 对象。
 - `@42`，`@3.14`，`@YES`，`@'Z'`：返回一个由相关类构造初始化的 `NSNumber` 对象，比如 `@42` → `[NSNumber numberWithInteger:42]`，或者 `@YES` → `[NSNumber numberWithBool:YES]`。支持使用后缀进一步指定类型，如 `@42U` → `[NSNumber numberWithUnsignedInt:42U]`。
 - `@[]`：返回一个由冒号分隔的对象列表作为内容的 `NSArray` 对象。比如，`@[@"A", @NO, @2.718]` → `[NSArray arrayWithObjects:@"A", @NO, @2.718, nil]` （注意在数组常量中结束标记`nil`是不需要的）。
 - `@{}`：返回一个由特定键－值对初始化作为内容的`NSDictionary`对象，格式： `@{@"someKey" : @"theValue"}`。
@@ -212,11 +212,11 @@ Objective-C 主要通过 `NSError` 来沟通意想不到的异常状态。而其
 
 常量也能以别的方式工作，如将 Objective-C 对象转换成 C 值。这些指令能让我们揭开 Objective-C 的神秘面纱，让我们开始了解究竟发生了什么。
 
-你知不知道所有的Objective-C的类和对象都只是被美化了的 `struct`？又或者一个对象的整个身份的关键在于那个 `struct` 的一个 `isa` 字段？
+你知不知道所有的 Objective-C 的类和对象都只是被美化了的 `struct`？又或者一个对象的整个身份的关键在于那个 `struct` 的一个 `isa` 字段？
 
 对于大多数人来说，至少大多数时间，学习这方面只是仅仅是学术练习。但对于任何在低层最优化冒险的人来说，这仅仅是根本的出发点。
 
-- `@encode()`：返回一个类型的[类型编码](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html)。这个类型值可以用于 `NSCoder -encodeValueOfObjCType:at` 中的第一个参数编码。
+- `@encode()`：返回一个类型的[类型编码](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html)。这个类型值可以用于 `NSCoder -encodeValueOfObjCType:at` 中的第一个参数编码。
 - `@defs()`：返回一个 Objective-C 类的布局。比如，定义一个与 `NSObject` 有相同布局的 struct，你只需要这样：
 
 ```objc
@@ -225,13 +225,13 @@ struct {
 }
 ```
 
-> 编者注：正如读者[@secboffin](http://twitter.com/secboffin) & [@ameaijou](http://twitter.com/ameaijou)所指出的，`@defs` 已经无法在现在的Objective-C runtime中使用。
+> 编者注：正如读者[@secboffin](https://twitter.com/secboffin) & [@ameaijou](https://twitter.com/ameaijou)所指出的，`@defs` 已经无法在现在的 Objective-C runtime 中使用。
 
 ## 优化
 
 有一些 `@` 编译器指令专门用来为常用的优化提供快捷。
 
-- `@autoreleasepool{}`：如果你的代码中包含创建大量临时对象的紧密的循环，你可以通过 `@autorelease` 更加积极的释放这些寿命短暂，局部范围内的对象来达到优化。`@autoreleasepool` 替换并且改进了旧的又慢又不能在ARC中使用的 `NSAutoreleasePool`。
+- `@autoreleasepool{}`：如果你的代码中包含创建大量临时对象的紧密的循环，你可以通过 `@autorelease` 更加积极的释放这些寿命短暂，局部范围内的对象来达到优化。`@autoreleasepool` 替换并且改进了旧的又慢又不能在 ARC 中使用的 `NSAutoreleasePool`。
 - `@synchronized(){}`：这个指令为在一特定的环境中（通常是 `self` ）确保安全执行某一特定块提供了一个便捷的方法。这种情况的死锁很昂贵，所以，对于针对特定级别的线程安全的类来说，建议使用专用的 `NSLock` 属性或者使用如 `OSAtomicCompareAndSwap32(3)` 的底层的死锁函数。
 
 ## 兼容性
@@ -240,11 +240,11 @@ struct {
 
 - `@compatibility_alias`：允许现有类有不同的名称作为别名。
 
-比如 [PSTCollectionView](https://github.com/steipete/PSTCollectionView) 使用了 `@compatibility_alias` 来显著提高对 [UICollectionView](http://nshipster.com/uicollectionview/) 向后兼容的直接替换的使用体验：
+比如 [PSTCollectionView](https://github.com/steipete/PSTCollectionView) 使用了 `@compatibility_alias` 来显著提高对 [UICollectionView](https://nshipster.com/uicollectionview/) 向后兼容的直接替换的使用体验：
 
 ```objc
 // 允许代码使用 UICollectionView 如同它可以在iOS SDK 5使用一样。
-// http://developer.apple.com/legacy/mac/library/#documentation/DeveloperTools/gcc-3.3/gcc/compatibility_005falias.html
+// https://developer.apple.com/legacy/mac/library/#documentation/DeveloperTools/gcc-3.3/gcc/compatibility_005falias.html
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
 @compatibility_alias UICollectionViewController PSTCollectionViewController;
 @compatibility_alias UICollectionView PSTCollectionView;
@@ -258,7 +258,7 @@ struct {
 #endif
 ```
 
-只要聪明的使用这些宏的组合，开发者可以通过引入 `PSTCollectionView` 来开发 `UICollectionView` －－而不需要担心最终项目的部署目标。作为快速替换，同样的代码在iOS6中工作起来几乎和在iOS 4.3中一样。
+只要聪明的使用这些宏的组合，开发者可以通过引入 `PSTCollectionView` 来开发 `UICollectionView` －－而不需要担心最终项目的部署目标。作为快速替换，同样的代码在 iOS6 中工作起来几乎和在 iOS 4.3 中一样。
 
 ---
 
@@ -327,4 +327,4 @@ struct {
 
 > 这应该是一个完整的清单了，但是我们总有可能忽视一些新的或者长期被遗忘的用途。如果你知道有哪些 `@` 指令不在清单里，一定要让 [@NSHipster](https://twitter.com/nshipster) 知道啊。
 
-[1]: http://en.wikipedia.org/wiki/Jizz_(birding)
+[1]: https://en.wikipedia.org/wiki/Jizz_(birding)

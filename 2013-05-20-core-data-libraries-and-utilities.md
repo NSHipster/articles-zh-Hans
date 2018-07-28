@@ -7,11 +7,11 @@ author: Mattt
 translator: JJ Mao
 ---
 
-因此我们姑且认为你已经确定自己的特定需求并且对比过所有的备选方案，选择在你的下一个应用中使用[Core Data](http://developer.apple.com/library/mac/#documentation/cocoa/Conceptual/CoreData/cdProgrammingGuide.html)。
+因此我们姑且认为你已经确定自己的特定需求并且对比过所有的备选方案，选择在你的下一个应用中使用[Core Data](https://developer.apple.com/library/mac/#documentation/cocoa/Conceptual/CoreData/cdProgrammingGuide.html)。
 
 没错！Core Data是应用模型、持久化和大量对象图查找的最佳选择。
 
-当然，Core Data很复杂、繁琐，有时还是个[讨厌鬼](http://nshipster.com/nscoding#figure-2)— 但是，天杀的，史上最好和最受欢迎的一些应用都用Core Data。既然Core Data对他们来说已经足够好了，那对你来说也应该够好了。
+当然，Core Data很复杂、繁琐，有时还是个[讨厌鬼](https://nshipster.com/nscoding#figure-2)— 但是，天杀的，史上最好和最受欢迎的一些应用都用Core Data。既然Core Data对他们来说已经足够好了，那对你来说也应该够好了。
 
 ...但这并不意味着Core Data无法改善了。
 
@@ -144,7 +144,7 @@ Wrapper库为Core Data繁琐复杂的接口提供一些必要的语法糖和便�
 
 学习了一种做事方式后将这些想法和习惯用于其他技术这件事对于程序员们来说应该是不足为奇的。一大波熟悉范式[Active Record](http://api.rubyonrails.org/classes/ActiveRecord/Base.html)的Ruby开发者涌入iOS行列。
 
-与主流看法相反，Core Data _不是_ 一个[Object-Relational Mappers](http://en.wikipedia.org/wiki/Object-relational_mapping)，而是一个对象图和持久性框架，它的能力远超于单独的[Active Record 模式](http://en.wikipedia.org/wiki/Active_record_pattern)。使用Core Data作为ORM（对象关系映射）必然限制Core Data功能并混淆其概念的纯粹。但对于许多渴望熟悉ORM的开发者，这个交易的代价是双倍的！
+与主流看法相反，Core Data _不是_ 一个[Object-Relational Mappers](https://en.wikipedia.org/wiki/Object-relational_mapping)，而是一个对象图和持久性框架，它的能力远超于单独的[Active Record 模式](https://en.wikipedia.org/wiki/Active_record_pattern)。使用Core Data作为ORM（对象关系映射）必然限制Core Data功能并混淆其概念的纯粹。但对于许多渴望熟悉ORM的开发者，这个交易的代价是双倍的！
 
 #### [Magical Record](https://github.com/magicalpanda/MagicalRecord)
 
@@ -157,11 +157,11 @@ Wrapper库为Core Data繁琐复杂的接口提供一些必要的语法糖和便�
 > 没有AppDelegate代码。
 > 经过[Kiwi](https://github.com/allending/Kiwi)的完整测试。
 
-### 来自[LINQ](http://en.wikipedia.org/wiki/Language_Integrated_Query)的启发
+### 来自[LINQ](https://en.wikipedia.org/wiki/Language_Integrated_Query)的启发
 
-这儿有个有趣的游戏：下次你遇到来自.NET界的开发者，设置一个定时器看看他们夸赞[LINQ](http://en.wikipedia.org/wiki/Language_Integrated_Query)用了多长时间。说真的，LINQ是 _真爱_ 。
+这儿有个有趣的游戏：下次你遇到来自.NET界的开发者，设置一个定时器看看他们夸赞[LINQ](https://en.wikipedia.org/wiki/Language_Integrated_Query)用了多长时间。说真的，LINQ是 _真爱_ 。
 
-对外行来说，LINQ就像是[SQL](http://en.wikipedia.org/wiki/SQL)，但整合成了一种语言特性。想想`NSPredicate`，[`NSSortDescriptor`](http://nshipster.com/nssortdescriptor/)，和[`Key-Value Coding`](http://nshipster.com/kvc-collection-operators/)都有更棒的语法：
+对外行来说，LINQ就像是[SQL](https://en.wikipedia.org/wiki/SQL)，但整合成了一种语言特性。想想`NSPredicate`，[`NSSortDescriptor`](https://nshipster.com/nssortdescriptor/)，和[`Key-Value Coding`](https://nshipster.com/kvc-collection-operators/)都有更棒的语法：
 
 ```
 from c in SomeCollection
@@ -175,7 +175,7 @@ from c in SomeCollection
 
 ### 来自[ReactiveCocoa](https://github.com/ReactiveCocoa)的启发
 
-ReactiveCocoa [为Objective-C带来了函数式反应型范例](http://nshipster.com/reactivecocoa/), 它现在正为Core Data带来一些函数式的稳健性和条理性。这仍是个未知的领域，但最初的结果是的确是有希望的。
+ReactiveCocoa [为Objective-C带来了函数式反应型范例](https://nshipster.com/reactivecocoa/), 它现在正为Core Data带来一些函数式的稳健性和条理性。这仍是个未知的领域，但最初的结果是的确是有希望的。
 
 #### [ReactiveCoreData](https://github.com/apparentsoft/ReactiveCoreData)
 
@@ -191,7 +191,7 @@ ReactiveCocoa [为Objective-C带来了函数式反应型范例](http://nshipster
 
 #### [RestKit](https://github.com/RestKit/RestKit)
 
-> RestKit是一个现代化的Objective-C框架用于在iOS和OS X上实现RESTful网络服务客户端。它提供一种强大的[对象映射](https://github.com/RestKit/RestKit/wiki/Object-mapping)引擎与[Core Data](http://developer.apple.com/library/mac/#documentation/cocoa/Conceptual/CoreData/cdProgrammingGuide.html)无缝集成，并为建立在[AFNetworking](https://github.com/AFNetworking/AFNetworking)之上的映射HTTP请求和响应提供了一组简单的网络层原语。它有一套精心设计的接口，使得访问和建模RESTful资源几乎有种不可思议的感觉。
+> RestKit是一个现代化的Objective-C框架用于在iOS和OS X上实现RESTful网络服务客户端。它提供一种强大的[对象映射](https://github.com/RestKit/RestKit/wiki/Object-mapping)引擎与[Core Data](https://developer.apple.com/library/mac/#documentation/cocoa/Conceptual/CoreData/cdProgrammingGuide.html)无缝集成，并为建立在[AFNetworking](https://github.com/AFNetworking/AFNetworking)之上的映射HTTP请求和响应提供了一组简单的网络层原语。它有一套精心设计的接口，使得访问和建模RESTful资源几乎有种不可思议的感觉。
 
 #### [AFIncrementalStore](https://github.com/AFNetworking/AFIncrementalStore)
 

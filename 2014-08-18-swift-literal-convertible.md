@@ -9,7 +9,7 @@ status:
     swift: 1.2
 ---
 
-上周我们探讨了如何在 Swift 中 [重载和创建自定义操作符](http://nshipster.cn/swift-operators/)，这个语言特性十分强大，同时也颇具争议。
+上周我们探讨了如何在 Swift 中 [重载和创建自定义操作符](https://nshipster.cn/swift-operators/)，这个语言特性十分强大，同时也颇具争议。
 
 从各方面来看，本周的文章也恐将两极分化，因为它的内容是 Swift 当中一个无处不在，然而又不被人注意的特性：字面值可转换性。
 
@@ -23,7 +23,7 @@ let float = 6.02
 let string = "Hello"
 ```
 
-字面值对于开发者而言，是编程时已经根深蒂固的一个概念，以至于我们当中的大多数人不会去主动思考编译器真正做了些什么（因此也并不了解类似 [字符串驻留](http://en.wikipedia.org/wiki/String_interning) 等巧妙的技巧，一种幸福的无知）。
+字面值对于开发者而言，是编程时已经根深蒂固的一个概念，以至于我们当中的大多数人不会去主动思考编译器真正做了些什么（因此也并不了解类似 [字符串驻留](https://en.wikipedia.org/wiki/String_interning) 等巧妙的技巧，一种幸福的无知）。
 
 简单了解一下这些最基础的内容，有助于让代码变得更加好读好写。
 
@@ -90,7 +90,7 @@ var b: AnyObject? = nil
 
 Swift 字面值可转换性可以用来为自定义对象提供方便的快速初始化方法。
 
-回忆一下我们上周的 [`Regex`](http://nshipster.cn/swift-operators/) 例子：
+回忆一下我们上周的 [`Regex`](https://nshipster.cn/swift-operators/) 例子：
 
 ```swift
 struct Regex {
@@ -149,7 +149,7 @@ regex.match(string) // true
 "foo".match(string) // true
 ```
 
-和 [自定义运算符 `=~`](http://nshipster.cn/swift-operators) 结合起来，还可以写成更加符合习惯的语法：
+和 [自定义运算符 `=~`](https://nshipster.cn/swift-operators) 结合起来，还可以写成更加符合习惯的语法：
 
 ```swift
 "foo bar baz" =~ "foo" // true
@@ -263,7 +263,7 @@ extension NSURL: StringLiteralConvertible {
 字面值可转换性的另一个不错的特性是，类型推导甚至不需要变量定义也可以工作：
 
 ```swift
-"http://nshipster.com/".host // nshipster.com
+"https://nshipster.com/".host // nshipster.com
 ```
 
 * * *

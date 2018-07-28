@@ -97,7 +97,7 @@ extension UInt8 {
 
 在错误处理方面，`guard` 和新的 `throw` 语法之间，Swift 2.0 也鼓励用尽早返回错误（这也是 NSHipster 最喜欢的方式）来代替嵌套 if 的处理方式。尽早返回让处理更清晰了，但是已经被初始化（可能也正在被使用）的资源必须在返回前被处理干净。
 
-新的 `defer` 关键字为此提供了安全又简单的处理方式：声明一个 block，当前代码执行的闭包退出时会执行该 block。下面的代码是使用 Accelerate framework 对 `vImage` 进行操作的一些函数（这个函数是从 [image resizing](http://nshipster.com/image-resizing/) 这篇文章中截取的）：
+新的 `defer` 关键字为此提供了安全又简单的处理方式：声明一个 block，当前代码执行的闭包退出时会执行该 block。下面的代码是使用 Accelerate framework 对 `vImage` 进行操作的一些函数（这个函数是从 [image resizing](https://nshipster.com/image-resizing/) 这篇文章中截取的）：
 
 ```swift
 func resizeImage(url: NSURL) -> UIImage? {

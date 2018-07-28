@@ -11,7 +11,7 @@ excerpt: 当 UITableView 有一百来行时，它就变得有些笨重了。如�
 
 那么，你可以做些什么呢？
 
-首先，你可以按层级的方式组织你的数据，基于层级的[分支数](http://en.wikipedia.org/wiki/Branching_factor)，这种方式可以很明显地减少每个节目上的行数。
+首先，你可以按层级的方式组织你的数据，基于层级的[分支数](https://en.wikipedia.org/wiki/Branching_factor)，这种方式可以很明显地减少每个节目上的行数。
 
 同时，你也可以在列表上方加个 `UISearchBar`，允许用户根据关键字过滤，从而找到他们想要的东西（或者，也许更重要的是，看他们想要找的东西在不在列表里）。
 

@@ -40,7 +40,7 @@ status:
 
 本地化本身是一项非常具有挑战性而且耗费时间的工作。幸运的是，有一些启动参数可以让这个过程变得容易 _很多_ 。
 
-> 想了解更多有关本地化的信息，可以查看我们关于 [`NSLocalizedString`](http://nshipster.cn/nslocalizedstring/) 的文章。
+> 想了解更多有关本地化的信息，可以查看我们关于 [`NSLocalizedString`](https://nshipster.cn/nslocalizedstring/) 的文章。
 
 #### NSDoubleLocalizedStrings
 

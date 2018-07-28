@@ -7,7 +7,7 @@ category: Cocoa
 excerpt: "基础类库（Foundation）拥有最好的、功能也最全的string类的实现。但是仅当程序员熟练掌握它时，一个string的实现才是真的好。所以本周，我们将浏览一些基础类库的string生态系统中经常用到且用错的重要组成部分：NSCharacterSet。"
 ---
 
-正如[之前](http://nshipster.com/cfstringtransform/)提前过的，基础类库（Foundation）拥有最好的、功能也最全的string类的实现。
+正如[之前](https://nshipster.com/cfstringtransform/)提前过的，基础类库（Foundation）拥有最好的、功能也最全的string类的实现。
 
 但是仅当程序员熟练掌握它时，一个string的实现才是真的好。所以本周，我们将浏览一些基础类库的string生态系统中经常用到且用错的重要组成部分：`NSCharacterSet`。
 
@@ -35,7 +35,7 @@ excerpt: "基础类库（Foundation）拥有最好的、功能也最全的string
 
 与它的名字所表述的相反，`NSCharacterSet` 跟 `NSSet` 一点关系都_没有_。
 
-虽然底层实现不太一样，但是 `NSCharacterSet` 在概念上跟 `NSIndexSet` 还_有点_相似的。`NSIndexSet`，[之前](http://nshipster.cn/nsindexset/)提到过，表示一个有序的不重复的无符号整数的集合。Unicode字符跟无符号整数类似，大致对应一些拼写表示。所以，一个 `NSCharacterSet +lowercaseCharacterSet` 字符集与一个包含97到122范围的 `NSIndexSet` 是等价的。
+虽然底层实现不太一样，但是 `NSCharacterSet` 在概念上跟 `NSIndexSet` 还_有点_相似的。`NSIndexSet`，[之前](https://nshipster.cn/nsindexset/)提到过，表示一个有序的不重复的无符号整数的集合。Unicode字符跟无符号整数类似，大致对应一些拼写表示。所以，一个 `NSCharacterSet +lowercaseCharacterSet` 字符集与一个包含97到122范围的 `NSIndexSet` 是等价的。
 
 现在我们对理解 `NSCharacterSet` 的基本概念已经有了少许自信，让我们来看一些它的模式与反模式吧：
 

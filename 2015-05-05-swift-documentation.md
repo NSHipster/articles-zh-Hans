@@ -15,13 +15,13 @@ revisions:
 
 代码的结构和组织关乎了开发童鞋们的节操问题。明确和一致的代码表示了明确和一贯的思想。编译器并没有一个挑剔的口味，但当谈到命名，空格或文档，人类的差异就体现出来了。
 
-NSHipster 的读者无疑会记得[去年发表的关于文档的文章](http://nshipster.cn/documentation/)，但很多东西已经在 Xcode 6 中发生了变化（幸运的是，基本上算是变得更好了）。因此，这一周，我们将在此为嗷嗷待哺的 Swift 开发者们记录一下文档说明。
+NSHipster 的读者无疑会记得[去年发表的关于文档的文章](https://nshipster.cn/documentation/)，但很多东西已经在 Xcode 6 中发生了变化（幸运的是，基本上算是变得更好了）。因此，这一周，我们将在此为嗷嗷待哺的 Swift 开发者们记录一下文档说明。
 
 好了，来让我们仔细看看。
 
 * * *
 
-从 00 年代早期，[Headerdoc](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/HeaderDoc/intro/intro.html#//apple_ref/doc/uid/TP40001215-CH345-SW1) 就一直作为苹果首选的文档标准。从 Perl 脚本解析勉强的 [Javadoc](http://en.wikipedia.org/wiki/Javadoc) 注释作为出发点，Headerdoc 最终成为了苹果在线文档及 Xcode 中的开发者文档的后台引擎。
+从 00 年代早期，[Headerdoc](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/HeaderDoc/intro/intro.html#//apple_ref/doc/uid/TP40001215-CH345-SW1) 就一直作为苹果首选的文档标准。从 Perl 脚本解析勉强的 [Javadoc](https://en.wikipedia.org/wiki/Javadoc) 注释作为出发点，Headerdoc 最终成为了苹果在线文档及 Xcode 中的开发者文档的后台引擎。
 
 随着 WWDC 2014 的发布，开发者文档被翻修并进行了时尚的新设计，包含了 Swift 和 Objective-C 的切换。 （如果你[看过任何新的 iOS 8 的在线 API](https://developer.apple.com/library/prerelease/ios/documentation/HomeKit/Reference/HomeKit_Framework/index.html#//apple_ref/doc/uid/TP40014519)，那你已经见过这个新设计了）
 
@@ -240,7 +240,7 @@ class Bicycle {
 
 ## MARK / TODO / FIXME
 
-在 Objective-C 里，[预处理指令 `#pragma mark`](http://nshipster.com/pragma/) 用来把功能区分成有意义的，易于导航的章节。在 Swift 里，没有预处理指令（最接近的是相似的-井号[编译配置][1]），但同样可以用注释达到效果 `// MARK: `。
+在 Objective-C 里，[预处理指令 `#pragma mark`](https://nshipster.com/pragma/) 用来把功能区分成有意义的，易于导航的章节。在 Swift 里，没有预处理指令（最接近的是相似的-井号[编译配置][1]），但同样可以用注释达到效果 `// MARK: `。
 
 在 Xcode 6β4 中，以下注释将出现在 Xcode 的代码导航（source navigator）中：
 

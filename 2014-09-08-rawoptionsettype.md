@@ -9,7 +9,7 @@ status:
     swift: 1.2
 ---
 
-在 Objective-C 中，[`NS_ENUM` & `NS_OPTIONS`](http://nshipster.com/ns_enum-ns_options/)被用于注释 C 语言中的 `enum` 类型，它实现的很漂亮，给编译器和开发者都设置了清晰的期望。自从在 Xcode 4.5 中被引进以后，这两个宏已经成为了系统框架中的标准规范，也是社区公认的最佳实践。
+在 Objective-C 中，[`NS_ENUM` & `NS_OPTIONS`](https://nshipster.com/ns_enum-ns_options/)被用于注释 C 语言中的 `enum` 类型，它实现的很漂亮，给编译器和开发者都设置了清晰的期望。自从在 Xcode 4.5 中被引进以后，这两个宏已经成为了系统框架中的标准规范，也是社区公认的最佳实践。
 
 在 Swift 中，枚举类型成了和 `struct` 与 `class` 一样的一等语言结构，包含了很多富于表现力的新特性，例如原始类型(raw types)和关联值(associated values)。枚举非常适合于封装一组固定值的封闭集合，开发者们在代码中都很积极地尝试去使用它。
 
@@ -166,7 +166,7 @@ dinner.isVegetarian // false
 
 平心而论，现在来谈论选项(option)类型在 Swift 语言当中的角色还为时过早。很有可能 Swift 中的其他结构，例如元组(tuple)和模式匹配(pattern matching)，也可能就是 `enum` 本身，会让选项类型变得不仅仅只是来自过去的遗迹。
 
-不管怎样，如果你想在代码中实现类似 `NS_OPTIONS` 的结构，下面是一段 [Xcode snippet](http://nshipster.com/xcode-snippets/)，可以帮助你快速上手：
+不管怎样，如果你想在代码中实现类似 `NS_OPTIONS` 的结构，下面是一段 [Xcode snippet](https://nshipster.com/xcode-snippets/)，可以帮助你快速上手：
 
 ```swift
 struct <# Options #> : RawOptionSetType, BooleanType {

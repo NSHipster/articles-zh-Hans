@@ -8,7 +8,7 @@ excerpt: "Address Book UI是用来在用户地址簿展示、选择、编辑和�
 
 ---
 
-[Address Book UI](http://developer.apple.com/library/ios/#documentation/AddressBookUI/Reference/AddressBookUI_Framework/_index.html)是用来在用户地址簿展示、选择、编辑和创建联系人的iOS框架。与[Message UI](http://developer.apple.com/library/ios/#documentation/MessageUI/Reference/MessageUI_Framework_Reference/_index.html)框架相似，Address Book UI包含了一些可以用dismissViewControllerAnimated:completion:方法来展示的试图控制器，它通过一些统一的接口提供常用的系统功能。
+[Address Book UI](https://developer.apple.com/library/ios/#documentation/AddressBookUI/Reference/AddressBookUI_Framework/_index.html)是用来在用户地址簿展示、选择、编辑和创建联系人的iOS框架。与[Message UI](https://developer.apple.com/library/ios/#documentation/MessageUI/Reference/MessageUI_Framework_Reference/_index.html)框架相似，Address Book UI包含了一些可以用dismissViewControllerAnimated:completion:方法来展示的试图控制器，它通过一些统一的接口提供常用的系统功能。
 
 要用到这个框架，你需要添加`AddressBook.framework`和`AddressBookUI.framework`两个框架到你工程中build phase的"Link Binary With Libraries"之下。
 
@@ -35,7 +35,7 @@ excerpt: "Address Book UI是用来在用户地址簿展示、选择、编辑和�
 [mutableAddressComponents setValue:[[[NSLocale alloc] initWithIdentifier:@"en_US"] objectForKey:NSLocaleCountryCode] forKey:(__bridge NSString *)kABPersonAddressCountryCodeKey];
 ```
 
-在其他任何框架里你都找不到实用性这么好的功能，这不需要用到[`NSLocale`](http://nshipster.com/nslocale/)，甚至也不需要Map Kit和Core Location来定位。苹果尽了如此多的努力来提高很多本地化的细节，而你会很惊奇这么一个重要的功能被放在了一个模糊不清、感觉上不怎么相关的一个框架里。
+在其他任何框架里你都找不到实用性这么好的功能，这不需要用到[`NSLocale`](https://nshipster.com/nslocale/)，甚至也不需要Map Kit和Core Location来定位。苹果尽了如此多的努力来提高很多本地化的细节，而你会很惊奇这么一个重要的功能被放在了一个模糊不清、感觉上不怎么相关的一个框架里。
 
 > 不过，电话簿UI在OS X里不提供，似乎这个平台也没有其他相同功能的内容。
 
@@ -55,7 +55,7 @@ excerpt: "Address Book UI是用来在用户地址簿展示、选择、编辑和�
     Country
 
 
-这个和不同地区有不同的[全角半角逗号](http://en.wikipedia.org/wiki/Decimal_mark#Hindu.E2.80.93Arabic_numeral_system)一样烦人，所以，你还是在展示结构化的地址的时候尽量多地用这些函数把。
+这个和不同地区有不同的[全角半角逗号](https://en.wikipedia.org/wiki/Decimal_mark#Hindu.E2.80.93Arabic_numeral_system)一样烦人，所以，你还是在展示结构化的地址的时候尽量多地用这些函数把。
 
 > 还有一个很棒的利用已经本地化的地址簿的方式就是[FormatterKit](https://github.com/mattt/FormatterKit)，他在它的1.1版中添加了`TTTAddressFormatter`。
 

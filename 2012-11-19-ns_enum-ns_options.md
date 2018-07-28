@@ -110,4 +110,4 @@ typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
 
 `NS_ENUM` 和 `NS_OPTIONS` 都是Objective-C开发中的提升开发体验的新特性，也再次展示了这门语言在对象化和过程化之间健康和谐的辩证关系。记住这一点，它就好像在你成长的道路中认识到的：我们身边的万物都是运作在矛盾且共存的严谨逻辑关系中。
 
-[1]: http://en.wikipedia.org/wiki/Mask_(computing)
+[1]: https://en.wikipedia.org/wiki/Mask_(computing)

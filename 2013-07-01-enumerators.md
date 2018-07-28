@@ -35,7 +35,7 @@ for (NSUInteger i = 0; i < [array count]; i++) {
 
 但是用过 C 风格循环的人也都知道，这个方法容易导致 [差一错误](https://zh.wikipedia.org/wiki/%E5%B7%AE%E4%B8%80%E9%94%99%E8%AF%AF)——特别是使用非标准形式时。
 
-幸运的是，Smalltalk 使用一种叫做 [列表生成式](http://en.wikipedia.org/wiki/List_comprehension) 的方法改善了这个问题，也就是大家今天所熟知的 `for/in` 循环。
+幸运的是，Smalltalk 使用一种叫做 [列表生成式](https://en.wikipedia.org/wiki/List_comprehension) 的方法改善了这个问题，也就是大家今天所熟知的 `for/in` 循环。
 
 ## 列表生成式 （`for/in`）
 

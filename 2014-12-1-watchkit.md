@@ -7,7 +7,7 @@ translator: Bob Liu
 excerpt: "看过WatchKit之后，会有许多东西从UIKit里冒出来。这些主观、固执己见的东西不太好整理成文档。但是对于正在学习的人来说，可能是有趣或是有用的。"
 ---
 
-[ᴡᴀᴛᴄʜ](http://www.apple.com/watch/) 令每个人们兴奋。对于开发者来说更甚。
+[ᴡᴀᴛᴄʜ](https://apple.com/watch/) 令每个人们兴奋。对于开发者来说更甚。
 
 入门学习最好的方法是什么？只有 [Apple's WatchKit developer resources](https://developer。apple.com/watchkit/)。
 
@@ -56,7 +56,7 @@ excerpt: "看过WatchKit之后，会有许多东西从UIKit里冒出来。这些
 | `WKInterfaceTable`                       | `UITableView`                                      |
 | `WKInterfaceTimer`                       | `UILabel` + `NSDateFormatter` + `NSTimer`          |
 
-> 作为前缀 [namespace prefix](http://nshipster.com/namespacing/)，`WKInterface` 别出心裁，但是 `WK` 是伴随新的 [WebKit](http://nshipster.com/wkwebkit/)框架最近才发布的。尽管手表平台可以有网页还有很长一段路要走，但把他们区别开来的决定还是非常明智的。
+> 作为前缀 [namespace prefix](https://nshipster.com/namespacing/)，`WKInterface` 别出心裁，但是 `WK` 是伴随新的 [WebKit](https://nshipster.com/wkwebkit/)框架最近才发布的。尽管手表平台可以有网页还有很长一段路要走，但把他们区别开来的决定还是非常明智的。
 
 尽管有许多的重叠，但是也会有很多不同。理解这其中的区别既可以为如何将 WatchKit 做好提供资源信息，还可以教给我们苹果是如何思考 API 和时间可持续进步的。
 

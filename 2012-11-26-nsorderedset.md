@@ -9,7 +9,7 @@ translator: Candyan
 
 有个问题：为什吗`NSOrderedSet`不是继承自`NSSet`的捏？
 
-毕竟 `NSOrderedSet`是一个 `NSSet` 的*子类*这个逻辑看起来是很完美的。它跟 `NSSet` 具有相同的方法，还添加了一些 `NSArray`风格的方法，像 `objectAtIndex:`。据大家所说，它似乎完全满足了[里氏替换原则](http://zh.wikipedia.org/zh-cn/%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99)的要求，其大致含义为：
+毕竟 `NSOrderedSet`是一个 `NSSet` 的*子类*这个逻辑看起来是很完美的。它跟 `NSSet` 具有相同的方法，还添加了一些 `NSArray`风格的方法，像 `objectAtIndex:`。据大家所说，它似乎完全满足了[里氏替换原则](https://zh.wikipedia.org/zh-cn/%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99)的要求，其大致含义为：
 
 > 在一段程序中， 如果 `S` 是 `T`的子类型，那么`T`类型的对象就有可能在没有任何警告的情况下被替换为`S`类型的对象。
 
@@ -17,7 +17,7 @@ translator: Candyan
 
 _可变/不可变的类簇_
 
-[类簇](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CocoaFundamentals/CocoaObjects/CocoaObjects.html%23//apple_ref/doc/uid/TP40002974-CH4-SW34)是 Foundation framework 核心所使用的一种设计模式；也是日常使用 Objective-C 简洁性的本质。
+[类簇](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CocoaFundamentals/CocoaObjects/CocoaObjects.html%23//apple_ref/doc/uid/TP40002974-CH4-SW34)是 Foundation framework 核心所使用的一种设计模式；也是日常使用 Objective-C 简洁性的本质。
 
 当类簇提供简单的可扩展性的同时，他也把有些事情变得很棘手，尤其是对于一对可变/不可变类像 `NSSet` / `NSMutableSet`来说。
 
@@ -61,16 +61,16 @@ NSMutableOrderedSet* mutable = [immutable mutableCopy];
 [mutable isKindOfClass:[NSOrderedSet class]]; // NO (!)
 ```
 
-<object data="http://nshipster.s3.amazonaws.com/nsorderedset-case-2.svg" type="image/svg+xml">
-  <img src="http://nshipster.s3.amazonaws.com/nsorderedset-case-2.png" />
+<object data="https://nshipster.s3.amazonaws.com/nsorderedset-case-2.svg" type="image/svg+xml">
+  <img src="https://nshipster.s3.amazonaws.com/nsorderedset-case-2.png" />
 </object>
 
 这样也许更糟，因为，现在`NSMutableOrderedSet`就不能被用来做`NSOrderedSet`类型的方法参数了。
 
 无论怎样去处理它，我们都不能在现有的一对可变/不可变的类上去实现另外一对可变/不可变的类。这在 Objective-C 上是行不通的。
 
-我们可以使用协议来让我们摆脱这个困境（每隔一段时间，多继承的幽灵就会冒出来），而不是自己去承担[多继承](http://en.wikipedia.org/wiki/Multiple_inheritance)的风险。
-事实上，通过添加以下的协议，Foundation 的集合类**可以**变的更加[面向侧面](http://zh.wikipedia.org/zh-cn/%E9%9D%A2%E5%90%91%E4%BE%A7%E9%9D%A2%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)：
+我们可以使用协议来让我们摆脱这个困境（每隔一段时间，多继承的幽灵就会冒出来），而不是自己去承担[多继承](https://en.wikipedia.org/wiki/Multiple_inheritance)的风险。
+事实上，通过添加以下的协议，Foundation 的集合类**可以**变的更加[面向侧面](https://zh.wikipedia.org/zh-cn/%E9%9D%A2%E5%90%91%E4%BE%A7%E9%9D%A2%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1)：
 
 - `NSArray : NSObject <NSOrderedCollection>`
 - `NSSet : NSObject <NSUniqueCollection>`
@@ -82,7 +82,7 @@ NSMutableOrderedSet* mutable = [immutable mutableCopy];
 
 ---
 
-在 iOS 5 和 OS X Lion 中介绍了 `NSOrderedSet`。然后，唯一的 API 变化就是在[Core Data](http://developer.apple.com/library/mac/#releasenotes/DataManagement/RN-CoreData/_index.html)部分增加了对`NSOrderedSet`的支持。
+在 iOS 5 和 OS X Lion 中介绍了 `NSOrderedSet`。然后，唯一的 API 变化就是在[Core Data](https://developer.apple.com/library/mac/#releasenotes/DataManagement/RN-CoreData/_index.html)部分增加了对`NSOrderedSet`的支持。
 
 这是对使用 Core Data 的人来说极好的消息，因为它解决了一个长期存在的烦恼（没有办法对一个关系集合做任意的排序）。从前，你不得不添加一个`位置`属性，当每次集合被修改时都要重新计算这个属性。没有一个内置的方法去验证你的位置集合是一个唯一的或者没有间隙的序列。
 

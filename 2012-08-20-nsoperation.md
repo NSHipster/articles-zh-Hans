@@ -10,7 +10,7 @@ excerpt: "我们都知道，让程序瞬间加载并且快速响应的秘诀在�
 
 我们都知道，让程序瞬间加载并且快速响应的秘诀在于后台异步执行任务。
 
-现在的Objective-C开发者一般有两个选择，分别是[Grand Central Dispatch](http://en.wikipedia.org/wiki/Grand_Central_Dispatch)或者[`NSOperation`](https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/NSOperation_class/Reference/Reference.html)。现在GCD已经逐渐发展成主流了，所以我们来谈谈后者，一个面向对象的解决办法。
+现在的Objective-C开发者一般有两个选择，分别是[Grand Central Dispatch](https://en.wikipedia.org/wiki/Grand_Central_Dispatch)或者[`NSOperation`](https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/NSOperation_class/Reference/Reference.html)。现在GCD已经逐渐发展成主流了，所以我们来谈谈后者，一个面向对象的解决办法。
 
 `NSOperation`表示了一个独立的计算单元。作为一个抽象类，它给了它的子类一个十分有用而且线程安全的方式来建立状态、优先级、依赖性和取消等的模型。或者，你不是很喜欢再自己继承`NSOperation`的话，框架还提供`NSBlockOperation`，这是一个继承自`NSOperation`且封装了block的实体类。
 

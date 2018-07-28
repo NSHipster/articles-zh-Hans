@@ -9,9 +9,9 @@ status:
     reviewed: September 9, 2015
 ---
 
-从两年前 [一篇关于 NSIndexSet 的小文章](http://nshipster.cn/nsindexset/) 发布到现在，NSHipster.com 已经走过了两个年头。每周我们都会发表一篇新文章，探讨 Objective-C 或者 Cocoa 当中一些不为人知的话题（除了几周例外），这些文章的读者覆盖超过 180 个国家，人数高达数百万。
+从两年前 [一篇关于 NSIndexSet 的小文章](https://nshipster.cn/nsindexset/) 发布到现在，NSHipster.com 已经走过了两个年头。每周我们都会发表一篇新文章，探讨 Objective-C 或者 Cocoa 当中一些不为人知的话题（除了几周例外），这些文章的读者覆盖超过 180 个国家，人数高达数百万。
 
-> 这篇文章实际上是我们的第 101 篇文章，意味着 [按照电视工业的标准](http://en.wikipedia.org/wiki/100_episodes)，这个站点已经可以在电视上广播了。（湖南卫视我们来了！）
+> 这篇文章实际上是我们的第 101 篇文章，意味着 [按照电视工业的标准](https://en.wikipedia.org/wiki/100_episodes)，这个站点已经可以在电视上广播了。（湖南卫视我们来了！）
 
 我们用蛋糕来庆祝一下：
 

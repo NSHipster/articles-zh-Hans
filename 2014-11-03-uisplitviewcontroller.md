@@ -129,7 +129,7 @@ class SelectColorTableViewController: UITableViewController, UISplitViewControll
 
 当用户第一次在 iPhone 6+ 上以纵向模式打开应用程序的时候，`SelectColorViewController` 被显示为主视图控制器。一旦用户选择一种颜色，或该应用进入后台，`SelectColorViewController` 被再次折叠，并显示 `ColorViewController`：
 
-<video preload="none" src="http://nshipster.s3.amazonaws.com/iPhone6PlusPrimaryVCRotation.mov" poster="http://nshipster.s3.amazonaws.com/iPhone6PlusPrimaryVCRotation.jpg" width="640" controls/>
+<video preload="none" src="https://nshipster.s3.amazonaws.com/iPhone6PlusPrimaryVCRotation.mov" poster="https://nshipster.s3.amazonaws.com/iPhone6PlusPrimaryVCRotation.jpg" width="640" controls/>
 
 * * *
 

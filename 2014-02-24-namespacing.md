@@ -14,7 +14,7 @@ translator: Sheldon Huang
 
 >你既然这么问了，实际上`NS`代表了`NeXTSTEP`（好吧，其实是代表`NeXTSTEP/Sun`，我们只是做个简单的介绍），它被用于...
 
-你越解释，你会发现对方越失望*，接下来，他们不在只是随便问问了，他们开始问一些你更难解释的问题--在Objective-C中[@](http://nshipster.com/at-compiler-directives/)是什么？
+你越解释，你会发现对方越失望*，接下来，他们不在只是随便问问了，他们开始问一些你更难解释的问题--在Objective-C中[@](https://nshipster.com/at-compiler-directives/)是什么？
 
 命名一直是Objective-C的硬伤，和那些优雅的语言相比，Objective-C缺乏标识符容器这点引来了很多不切实际的批评家。
 
@@ -142,7 +142,7 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
         </tr>
     </thead>
     <tbody>
-        <tr><td><tt>AF</tt></td><td><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> ("<a href="http://en.wikipedia.org/wiki/Gowalla">Alamofire</a>")</td></tr>
+        <tr><td><tt>AF</tt></td><td><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> ("<a href="https://en.wikipedia.org/wiki/Gowalla">Alamofire</a>")</td></tr>
         <tr><td><tt>RK</tt></td><td><a href="https://github.com/RestKit/RestKit">RestKit</a></td></tr>
         <tr><td><tt>GPU</tt></td><td><a href="https://github.com/BradLarson/GPUImage">GPUImage</a></td></tr>
         <tr><td><tt>SD</tt></td><td><a href="https://github.com/rs/SDWebImage">SDWebImage</a></td></tr>
@@ -158,7 +158,7 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
 
 我们已经看到在在这个[第三方库](https://github.com/AshFurrow/AFTabledCollectionView)的前缀已经和我的[AFNetworking](https://github.com/AFNetworking/AFNetworking)一样了，所以最好还是要在你的代码中遵守要三个字母以上的作为类前缀的规定(https://github.com/AshFurrow/AFTabledCollectionView)。
 
->对于那些针对特殊功能而写的第三方库的作者，可以考虑在下一次主要升级时使用[@compatibility_alias](http://nshipster.com/at-compiler-directives/)来为那些使用者们提供一个天衣无缝的转移路径。
+>对于那些针对特殊功能而写的第三方库的作者，可以考虑在下一次主要升级时使用[@compatibility_alias](https://nshipster.com/at-compiler-directives/)来为那些使用者们提供一个天衣无缝的转移路径。
 
 ##方法前缀
 
@@ -193,7 +193,7 @@ category的主要功能是通过语法糖将一些有用的功能包裹进原来
 
 ###Swizzling
 
-在Swizzling时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于[swizzling](http://nshipster.com/method-swizzling/)的文章中提到过。
+在Swizzling时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于[swizzling](https://nshipster.com/method-swizzling/)的文章中提到过。
 
 ```objc
 @implementation UIViewController (Swizzling)

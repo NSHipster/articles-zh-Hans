@@ -43,7 +43,7 @@ _supplementary views_。
 
 每个cell可以有多个与之关联的supplementary views--每个命名为"kind"。正因如此，headers和footers仅仅是supplementary views所施展的一成功力。
 
-关键在于supplementary views，即使最复杂的layout也可以被实现而不影响cells的语义完整性。`UITableView` hacks对于[`spacer.gif`](http://en.wikipedia.org/wiki/Spacer_GIF)就像 `UICollectionView` cells对于[semantic HTML](http://en.wikipedia.org/wiki/Semantic_HTML)。
+关键在于supplementary views，即使最复杂的layout也可以被实现而不影响cells的语义完整性。`UITableView` hacks对于[`spacer.gif`](https://en.wikipedia.org/wiki/Spacer_GIF)就像 `UICollectionView` cells对于[semantic HTML](https://en.wikipedia.org/wiki/Semantic_HTML)。
 
 ### Decoration 视图
 
@@ -79,7 +79,7 @@ Layouts是使 `UICollectionView` 如此神奇的核心。把它们看作是CSS�
 
 - `-layoutAttributesForElementsInRect:`
 
-例如，你可以使用它来当items靠近屏幕边缘时淡出。或者，由于所有的layout属性特性是自动支持动画的，你可以用一套正确的3D transforms在短短几行代码里创建一个简陋的[cover flow](http://en.wikipedia.org/wiki/Cover_Flow) layout。
+例如，你可以使用它来当items靠近屏幕边缘时淡出。或者，由于所有的layout属性特性是自动支持动画的，你可以用一套正确的3D transforms在短短几行代码里创建一个简陋的[cover flow](https://en.wikipedia.org/wiki/Cover_Flow) layout。
 
 实际上，collection views甚至可以大规模的交换layouts，在不改变底层数据的情况下允许视图在不同模式下无缝交换。
 

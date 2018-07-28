@@ -28,7 +28,7 @@ extern void die(const char *format, ...)
   __attribute__((noreturn, format(printf, 1, 2)));
 ```
 
-如果这个让你想起了 ISO C 当中的 [`#pragma`](http://nshipster.cn/pragma)，并不是只有你一个人会这样想。
+如果这个让你想起了 ISO C 当中的 [`#pragma`](https://nshipster.cn/pragma)，并不是只有你一个人会这样想。
 
 事实上，当 `__attribute__` 首次被引入 GCC 时就受到了一些人的反对，他们建议使用 `#pragma` 来完成同样的事情。
 

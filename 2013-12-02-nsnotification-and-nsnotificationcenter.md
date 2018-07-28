@@ -60,7 +60,7 @@ status:
     </tbody>
 </table>
 
-我们在 [关于 Key-Value Observing](http://nshipster.cn/key-value-observing/) 的文章中探讨了通过 API 进行事件传递方式的重要性。这周，我们把视野放到其他的选择上，`NSNotificationCenter` 和 `NSNotification`。
+我们在 [关于 Key-Value Observing](https://nshipster.cn/key-value-observing/) 的文章中探讨了通过 API 进行事件传递方式的重要性。这周，我们把视野放到其他的选择上，`NSNotificationCenter` 和 `NSNotification`。
 
 * * *
 
@@ -145,7 +145,7 @@ NSString * const XXFooDidBarNotification = @"XXFooDidBarNotification";
 
 ## KVO != NSNotificationCenter
 
-有一点经常让开发者们犯糊涂，`NSNotificationCenter` 的方法签名和 [Key-Value Observing](http://nshipster.cn/key-value-observing/) 非常相似。
+有一点经常让开发者们犯糊涂，`NSNotificationCenter` 的方法签名和 [Key-Value Observing](https://nshipster.cn/key-value-observing/) 非常相似。
 
 #### Key-Value Observing
 

@@ -10,11 +10,11 @@ status:
     reviewed: September 11, 2015
 ---
 
-`NSSet` 和 `NSDictionary`，连同 `NSArray` 是 Foundation 框架中最常用的几个集合类型。和[其它标准库](http://en.wikipedia.org/wiki/Java_collections_framework)不同的是，它们的实现细节[没有](http://ridiculousfish.com/blog/posts/array.html)对开发者公开，使得开发者只能编写简单的代码，相信框架（在合理的程度上）是高效的。
+`NSSet` 和 `NSDictionary`，连同 `NSArray` 是 Foundation 框架中最常用的几个集合类型。和[其它标准库](https://en.wikipedia.org/wiki/Java_collections_framework)不同的是，它们的实现细节[没有](http://ridiculousfish.com/blog/posts/array.html)对开发者公开，使得开发者只能编写简单的代码，相信框架（在合理的程度上）是高效的。
 
 然而，再好的抽象也有不好用的时候。当对他们底层的实现假设不符合预期的时候，开发者要么继续在抽象层次上进行探索，要么在可能的情况下，使用更加通用的解决方案。
 
-对于 `NSSet` 和 `NSDictionary` 来说，不符合预期的部分通常在于它们存储对象时在内存中的表现。对于 `NSSet`，对象在存储时会被强引用，`NSDictionary` 中值的存储也是一样。对键来说，在 `NSDictionary` 中会被拷贝。如果开发者想存储弱引用的值，或者使用一个没有遵守 `<NSCopying>` 的对象作为键，他可以选择聪明的办法，使用 [`NSValue +valueWithNonretainedObject`](http://nshipster.cn/nsvalue/)。或者，在 iOS 6（以及 OS X Leopard）上，他可以使用 `NSHashTable` 或 `NSMapTable`，分别对应着 `NSSet` 和 `NSDictionary`，是它们更加通用的版本。
+对于 `NSSet` 和 `NSDictionary` 来说，不符合预期的部分通常在于它们存储对象时在内存中的表现。对于 `NSSet`，对象在存储时会被强引用，`NSDictionary` 中值的存储也是一样。对键来说，在 `NSDictionary` 中会被拷贝。如果开发者想存储弱引用的值，或者使用一个没有遵守 `<NSCopying>` 的对象作为键，他可以选择聪明的办法，使用 [`NSValue +valueWithNonretainedObject`](https://nshipster.cn/nsvalue/)。或者，在 iOS 6（以及 OS X Leopard）上，他可以使用 `NSHashTable` 或 `NSMapTable`，分别对应着 `NSSet` 和 `NSDictionary`，是它们更加通用的版本。
 
 废话不多说，对这两个 Foundation 框架中最不知名的集合类型，下面是你所需要知道的一切：
 
@@ -47,12 +47,12 @@ NSHashTable *hashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsCop
 NSLog(@"Members: %@", [hashTable allObjects]);
 ```
 
-`NSHashTable` 对象在初始化时可以选择下面任意一个选项来产生不同的行为。在 `NSHashTable` 从具有垃圾回收机制的 OS X 环境被移植到 ARC 化的 iOS 环境的过程中，有一些选项枚举值被废弃了。其余的选项值对应着 [NSPointerFunctions](http://developer.apple.com/library/ios/DOCUMENTATION/Cocoa/Reference/Foundation/Classes/NSPointerFunctions_Class/Introduction/Introduction.html) 的选项，这部分内容会在下周的 NSHipster 中进行讲解。（译者注：下面具体的内容来自官方文档，不再做翻译，NSMapTable 部分做相同处理）
+`NSHashTable` 对象在初始化时可以选择下面任意一个选项来产生不同的行为。在 `NSHashTable` 从具有垃圾回收机制的 OS X 环境被移植到 ARC 化的 iOS 环境的过程中，有一些选项枚举值被废弃了。其余的选项值对应着 [NSPointerFunctions](https://developer.apple.com/library/ios/DOCUMENTATION/Cocoa/Reference/Foundation/Classes/NSPointerFunctions_Class/Introduction/Introduction.html) 的选项，这部分内容会在下周的 NSHipster 中进行讲解。（译者注：下面具体的内容来自官方文档，不再做翻译，NSMapTable 部分做相同处理）
 
 > - `NSHashTableStrongMemory`: Equal to `NSPointerFunctionsStrongMemory`. This is the default behavior, equivalent to `NSSet` member storage.
 > - `NSHashTableWeakMemory`: Equal to `NSPointerFunctionsWeakMemory`. Uses weak read and write barriers. Using `NSPointerFunctionsWeakMemory`, object references will turn to `NULL` on last release.
 > - `NSHashTableZeroingWeakMemory`: This option has been deprecated. Instead use the `NSHashTableWeakMemory` option.
-> - `NSHashTableCopyIn`: Use the memory acquire function to allocate and copy items on input (see [`NSPointerFunction -acquireFunction`](http://developer.apple.com/library/ios/DOCUMENTATION/Cocoa/Reference/Foundation/Classes/NSPointerFunctions_Class/Introduction/Introduction.html#//apple_ref/occ/instp/NSPointerFunctions/acquireFunction)). Equal to `NSPointerFunctionsCopyIn`.
+> - `NSHashTableCopyIn`: Use the memory acquire function to allocate and copy items on input (see [`NSPointerFunction -acquireFunction`](https://developer.apple.com/library/ios/DOCUMENTATION/Cocoa/Reference/Foundation/Classes/NSPointerFunctions_Class/Introduction/Introduction.html#//apple_ref/occ/instp/NSPointerFunctions/acquireFunction)). Equal to `NSPointerFunctionsCopyIn`.
 > - `NSHashTableObjectPointerPersonality`: Use shifted pointer for the hash value and direct comparison to determine equality; use the description method for a description. Equal to `NSPointerFunctionsObjectPointerPersonality`.
 
 ## `NSMapTable`
@@ -91,13 +91,13 @@ NSLog(@"Keys: %@", [[mapTable keyEnumerator] allObjects]);
 > - `NSMapTableStrongMemory`: Specifies a strong reference from the map table to its contents.
 > - `NSMapTableWeakMemory`: Uses weak read and write barriers appropriate for ARC or GC. Using `NSPointerFunctionsWeakMemory`, object references will turn to `NULL` on last release. Equal to `NSMapTableZeroingWeakMemory`.
 > - `NSHashTableZeroingWeakMemory`: This option has been superseded by the `NSMapTableWeakMemory` option.
-> - `NSMapTableCopyIn`: Use the memory acquire function to allocate and copy items on input (see acquireFunction (see [`NSPointerFunction -acquireFunction`](http://developer.apple.com/library/ios/DOCUMENTATION/Cocoa/Reference/Foundation/Classes/NSPointerFunctions_Class/Introduction/Introduction.html#//apple_ref/occ/instp/NSPointerFunctions/acquireFunction)). Equal to NSPointerFunctionsCopyIn.
+> - `NSMapTableCopyIn`: Use the memory acquire function to allocate and copy items on input (see acquireFunction (see [`NSPointerFunction -acquireFunction`](https://developer.apple.com/library/ios/DOCUMENTATION/Cocoa/Reference/Foundation/Classes/NSPointerFunctions_Class/Introduction/Introduction.html#//apple_ref/occ/instp/NSPointerFunctions/acquireFunction)). Equal to NSPointerFunctionsCopyIn.
 > - `NSMapTableObjectPointerPersonality`: Use shifted pointer hash and direct equality, object description.
 Equal to `NSPointerFunctionsObjectPointerPersonality`.
 
 ### 使用下标
 
-`NSMapTable` 没有实现[对象下标索引](http://nshipster.cn/object-subscripting/)，不过通过 category 来添加这个特性并不是很麻烦。`NSDictionary` 对于键要遵守 `NSCopying` 的要求，只适用于 `NSDictionary` 本身：
+`NSMapTable` 没有实现[对象下标索引](https://nshipster.cn/object-subscripting/)，不过通过 category 来添加这个特性并不是很麻烦。`NSDictionary` 对于键要遵守 `NSCopying` 的要求，只适用于 `NSDictionary` 本身：
 
 ```swift
 extension NSMapTable {

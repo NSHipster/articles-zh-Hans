@@ -19,9 +19,9 @@ status:
 > 你会怎么做？<br/>
 > 在这样的权利下我们迷失了自己并对自己的行为全然不知<br/>
 > 这时你会怎么做？<br/>
-> <cite><strong>The Flaming Lips</strong>, <em><a href="http://en.wikipedia.org/wiki/The_Yeah_Yeah_Yeah_Song_(With_All_Your_Power)">"The Yeah Yeah Yeah Song (With All Your Power)"</a></em></cite>
+> <cite><strong>The Flaming Lips</strong>, <em><a href="https://en.wikipedia.org/wiki/The_Yeah_Yeah_Yeah_Song_(With_All_Your_Power)">"The Yeah Yeah Yeah Song (With All Your Power)"</a></em></cite>
 
-在上周的 [associated objects](http://nshipster.com/associated-objects/) 文章中，我们开始探索了 Objective-C 的运行时黑魔法。这周我们将会继续深入讨论 Objective-C 的运行时中最具争议的黑魔法：method swizzling。
+在上周的 [associated objects](https://nshipster.com/associated-objects/) 文章中，我们开始探索了 Objective-C 的运行时黑魔法。这周我们将会继续深入讨论 Objective-C 的运行时中最具争议的黑魔法：method swizzling。
 
 * * *
 
@@ -78,7 +78,7 @@ Method swizzling 用于改变一个已经存在的 selector 的实现。这项�
 @end
 ```
 
-> 计算机科学里，[交换指针指向](http://en.wikipedia.org/wiki/Pointer_swizzling)用来交换基于名字或者位置的指针引用。如果你对 Objective-C 这方面的特性不是很了解的话，这是很值得推荐使用的一个特性，因为 method swizzling 可以通过交换 selector 来改变函数指针的引用。
+> 计算机科学里，[交换指针指向](https://en.wikipedia.org/wiki/Pointer_swizzling)用来交换基于名字或者位置的指针引用。如果你对 Objective-C 这方面的特性不是很了解的话，这是很值得推荐使用的一个特性，因为 method swizzling 可以通过交换 selector 来改变函数指针的引用。
 
 现在，UIViewController 或其子类的实例对象在调用 viewWillAppear: 的时候会有 log 的输出。
 
@@ -134,6 +134,6 @@ Method swizzling 修改了类的消息分发列表使得已经存在的 selector
 
 * * * 
 
-[associated objects](http://nshipster.cn/associated-objects/) 的链接， method swizzling 是 Objective-C 拥有的强大特性，但请谨慎使用。
+[associated objects](https://nshipster.cn/associated-objects/) 的链接， method swizzling 是 Objective-C 拥有的强大特性，但请谨慎使用。
 
 

@@ -103,7 +103,7 @@ HTTP 请求和回应用 [headers](http://www.w3.org/Protocols/rfc2616/rfc2616-se
 除了 `Cache-Control` 以外，服务器也可能发送一些附加的头用于根据需要有条件地请求（如上一节所提到的）：
 
 * `Last-Modified` - 这个头的值表明所请求的资源上次修改的时间。例如，一个客户端请求最近照片的时间线，`/photos/timeline`，`Last-Modified` 的值可以是最近一张照片的拍摄时间。
-* `Etag` - 这是 “entity tag” 的缩写，它是一个表示所请求资源的内容的标识符。在实践中，`Etag` 的值可以是类似于资源的 [`MD5`](http://en.wikipedia.org/wiki/MD5) 之类的东西。这对于那些动态生成的、可能没有明显的 `Last-Modified` 值的资源非常有用。
+* `Etag` - 这是 “entity tag” 的缩写，它是一个表示所请求资源的内容的标识符。在实践中，`Etag` 的值可以是类似于资源的 [`MD5`](https://en.wikipedia.org/wiki/MD5) 之类的东西。这对于那些动态生成的、可能没有明显的 `Last-Modified` 值的资源非常有用。
 
 ## `NSURLConnectionDelegate`
 
@@ -144,7 +144,7 @@ HTTP 请求和回应用 [headers](http://www.w3.org/Protocols/rfc2616/rfc2616-se
 
 ## 注意事项
 
-正如它那个毫无关系但是名字相近的小伙伴 [`NSCache`](http://nshipster.cn/nscache/) 一样，`NSURLCache` 也是有一些特别的。
+正如它那个毫无关系但是名字相近的小伙伴 [`NSCache`](https://nshipster.cn/nscache/) 一样，`NSURLCache` 也是有一些特别的。
 
 在 iOS 5，磁盘缓存开始支持，但仅支持 HTTP，非 HTTPS（iOS 6 中增加了此支持）。Peter Steinberger [关于这个主题写了一篇优秀的文章](http://petersteinberger.com/blog/2012/nsurlcache-uses-a-disk-cache-as-of-ios5/)，在深入研究内部细节后实现[他自己的 NSURLCache 子类](https://github.com/steipete/SDURLCache)。
 

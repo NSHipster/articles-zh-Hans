@@ -72,7 +72,7 @@ UIBarButtonItem.appearanceWhenContainedInInstancesOfClasses([UIToolbar.self, UIP
 
 <del>因为 <tt>+appearance</tt> 返回的是 <tt>id</tt>, Xcode 不能提供任何代码补全信息，这个造成困惑和问题的主要原因</del>
 
-<ins>在 iOS 7 上, UIAppearance 现在返回的是 <a href="http://nshipster.cn/instancetype/"><tt>instancetype</tt></a>，使得代码补全可以正常工作了。 万岁！</ins>
+<ins>在 iOS 7 上, UIAppearance 现在返回的是 <a href="https://nshipster.cn/instancetype/"><tt>instancetype</tt></a>，使得代码补全可以正常工作了。 万岁！</ins>
 
 要想知道哪些方法可以应用于 `UIAppearance`，你得[去头文件中找](http://stackoverflow.com/questions/9424112/what-properties-can-i-set-via-an-uiappearance-proxy)：
 
@@ -88,7 +88,7 @@ $ grep -H UI_APPEARANCE_SELECTOR ./* | sed 's/ __OSX_AVAILABLE_STARTING(__MAC_NA
 
 ## 在自定义的 UIView 子类中实现 `<UIAppearance>`
 
-就像 [`NSLocalizedString`](http://nshipster.cn/nslocalizedstring/)  和 [`#pragma`](http://nshipster.cn/pragma/)是高质量的 Objective-C 代码的标志一样，让自定义的界面类支持 `UIAppearance`，不仅仅是一种最佳实践，同时也展示了开发者在代码实现上花费了一定程度的心血。
+就像 [`NSLocalizedString`](https://nshipster.cn/nslocalizedstring/)  和 [`#pragma`](https://nshipster.cn/pragma/)是高质量的 Objective-C 代码的标志一样，让自定义的界面类支持 `UIAppearance`，不仅仅是一种最佳实践，同时也展示了开发者在代码实现上花费了一定程度的心血。
 
 [Peter Steinberger](https://twitter.com/steipete) 撰写了 [这篇优秀的博文](http://petersteinberger.com/blog/2013/uiappearance-for-custom-views/)，其中描述了在自定义视图中实现 `UIAppearance` 时需要注意的一些地方。对于在开源 UI 控件中追求极致实现的人来说，这篇文章是必读的。
 
@@ -102,7 +102,7 @@ $ grep -H UI_APPEARANCE_SELECTOR ./* | sed 's/ __OSX_AVAILABLE_STARTING(__MAC_NA
 
 ---
 
-Cocoa 开发者痴迷于视觉审美的历史可以追溯到很久之前，他们经常会通过很极致的方法来实现想要的效果。回忆一下 Mac 开发者的 [美味时代](http://en.wikipedia.org/wiki/Delicious_Generation)，以及诸如 [Disco](http://discoapp.com) 这样的 App，它[在烧录光盘时会释放出虚拟的烟雾效果](http://www.youtube.com/watch?v=8Dwi47XOqwI)。
+Cocoa 开发者痴迷于视觉审美的历史可以追溯到很久之前，他们经常会通过很极致的方法来实现想要的效果。回忆一下 Mac 开发者的 [美味时代](https://en.wikipedia.org/wiki/Delicious_Generation)，以及诸如 [Disco](http://discoapp.com) 这样的 App，它[在烧录光盘时会释放出虚拟的烟雾效果](http://www.youtube.com/watch?v=8Dwi47XOqwI)。
 
 这种决心让东西看起来好看的精神，在 iOS 平台上同样蔚然成风。作为社区和生态系统的一员，在用户对于应用的期望上，我们不懈地努力，去挑战极限。在这个过程中，我们的工作变得更加具有挑战性，也使得开发 iOS 的体验更加像是一种享受。
 

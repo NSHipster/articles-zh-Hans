@@ -8,7 +8,7 @@ excerpt: "一般搞 iOS 开发都得用到 Xcode。如果我们已经准备在�
 
 一般搞 iOS 开发都得用到 Xcode。值得表扬的是，过去几年 Xcode 一直在不断地改进。当然 [还是有些坑...](http://www.textfromxcode.com) ，不过嘿 - 还有比它 [更糟的](http://www.eclipse.org) 呢。
 
-使用 IDE 进行开发可能没有你最爱的 [老一辈编辑器](http://en.wikipedia.org/wiki/Vim_(text_editor)) （或 [另一个](http://en.wikipedia.org/wiki/Emacs) ）酷。但是你知道什么更酷吗？[自动补全](http://www.textfromxcode.com/post/24542673087) 。且不说还有 [编译 & 分析](http://clang-analyzer.llvm.org/xcode.html)， [断点](https://developer.apple.com/library/ios/recipes/xcode_help-source_editor/Creating，Disabling，andDeletingBreakpoints/Creating，Disabling，andDeletingBreakpoints.html)，和 [测试仪器工具集（Instruments）](https://developer.apple.com/library/ios/DOCUMENTATION/DeveloperTools/Conceptual/InstrumentsUserGuide/InstrumentsQuickStart/InstrumentsQuickStart.html)。
+使用 IDE 进行开发可能没有你最爱的 [老一辈编辑器](https://en.wikipedia.org/wiki/Vim_(text_editor)) （或 [另一个](https://en.wikipedia.org/wiki/Emacs) ）酷。但是你知道什么更酷吗？[自动补全](http://www.textfromxcode.com/post/24542673087) 。且不说还有 [编译 & 分析](http://clang-analyzer.llvm.org/xcode.html)， [断点](https://developer.apple.com/library/ios/recipes/xcode_help-source_editor/Creating，Disabling，andDeletingBreakpoints/Creating，Disabling，andDeletingBreakpoints.html)，和 [测试仪器工具集（Instruments）](https://developer.apple.com/library/ios/DOCUMENTATION/DeveloperTools/Conceptual/InstrumentsUserGuide/InstrumentsQuickStart/InstrumentsQuickStart.html)。
 
 
 我的观点是：如果我们已经准备在开发流程中使用 IDE，那我们就应该充分利用它，不是么？所以本周的 NSHipster，我们就来聊聊 Xcode 中强大但未被充分利用的功能之一：**代码块**。
@@ -46,7 +46,7 @@ excerpt: "一般搞 iOS 开发都得用到 Xcode。如果我们已经准备在�
 - Objective-C `@interface` 声明（包括类扩展和分类），`@implementation`，`@protocol` 
 - Objective-C KVO 样板，包括相对模糊的 `keyPathsForValuesAffecting<Key>`，用来 [注册相关的键](https://developer.apple.com/library/ios/DOCUMENTATION/Cocoa/Conceptual/KeyValueObserving/Articles/KVODependentKeys.html)
 - Objective-C Core Data 访问，属性存取，属性验证样板。
-- Objective-C 枚举 [`NSIndexSet`](http://nshipster.com/nsindexset/) 惯用语
+- Objective-C 枚举 [`NSIndexSet`](https://nshipster.com/nsindexset/) 惯用语
 - Objective-C `init`，`initWithCoder:` 和 `initWithFrame:` 实现方法
 - Objective-C `@try` / `@catch` / `@finally` 和 `@autorelease` blocks
 - GCD `dispatch_once` 和 `dispatch_after` 惯用语

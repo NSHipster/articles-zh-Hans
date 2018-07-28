@@ -6,7 +6,7 @@ translator: Zihan Xu
 category: Cocoa
 ---
 
-每当涉及查询或者整理信息时，Cocoa总是其他标准库羡慕的对象。通过使用`NSPredicate`，[`NSSortDescriptor`](http://nshipster.com/nssortdescriptor/)，以及偶尔使用`NSFetchRequest`，即使是最复杂的数据任务也可以被简化成为几行_极其容易读懂_的代码。
+每当涉及查询或者整理信息时，Cocoa总是其他标准库羡慕的对象。通过使用`NSPredicate`，[`NSSortDescriptor`](https://nshipster.com/nssortdescriptor/)，以及偶尔使用`NSFetchRequest`，即使是最复杂的数据任务也可以被简化成为几行_极其容易读懂_的代码。
 
 现在，NSHipster们无疑已经熟悉`NSPredicate` 了（如果你还不熟悉，下周一定要过来看看），不过如果我们更进一步看看`NSPredicate`，我们会发现`NSPredicate`其实是由更小的部分而组成：两个`NSExpression`（一个左手值和一个右手值），和一个运算符相比较（比如`<`，`IN`，`LIKE`等等）。
 
@@ -39,9 +39,9 @@ id value = [expression expressionValueWithObject:nil context:nil]; // => 3.21859
 
 > `NSExpression` 函数以给定数目的子表达式作为参数。比如，在上述例子中，要得到集合的标准差，数列中的数字要被`+expressionForConstantValue:`封装。虽然只是一个小小的不便（它最终却能使得`NSExpression`变得极其灵活），却足以使第一次尝试它的人绊倒。
 
-如果你觉得 [键值编码简单集合运算符](http://nshipster.com/kvc-collection-operators/) （`@avg`，`@sum`等等）不够用，也许`NSExpression`的自带的统计，算术和位运算功能能激起你的兴趣。
+如果你觉得 [键值编码简单集合运算符](https://nshipster.com/kvc-collection-operators/) （`@avg`，`@sum`等等）不够用，也许`NSExpression`的自带的统计，算术和位运算功能能激起你的兴趣。
 
-> **要注意的是**：[根据Apple的`NSExpression`文档中的表格](http://developer.apple.com/library/ios/#documentation/cocoa/reference/foundation/Classes/NSExpression_Class/Reference/NSExpression.html)，很明显，OS X & iOS的功能可用性之间没有重叠。看起来最近的iOS版本的确支持如`stddev`之类的函数，但这些变化并没有显示在头文件或者文档里。如果你注意到任何变化，请以[pull request的形式](https://github.com/NSHipster/articles/pulls)告诉我，不胜感激。
+> **要注意的是**：[根据Apple的`NSExpression`文档中的表格](https://developer.apple.com/library/ios/#documentation/cocoa/reference/foundation/Classes/NSExpression_Class/Reference/NSExpression.html)，很明显，OS X & iOS的功能可用性之间没有重叠。看起来最近的iOS版本的确支持如`stddev`之类的函数，但这些变化并没有显示在头文件或者文档里。如果你注意到任何变化，请以[pull request的形式](https://github.com/NSHipster/articles/pulls)告诉我，不胜感激。
 
 ### 统计
 

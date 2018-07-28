@@ -8,7 +8,7 @@ translator: Zihan Xu
 
 `NSPredicate`是一个Foundation类，它指定数据被获取或者过滤的方式。它的查询语言就像SQL的`WHERE`和正则表达式的交叉一样，提供了具有表现力的，自然语言界面来定义一个集合被搜寻的逻辑条件。
 
-相比较抽象的谈论它，展示`NSPredicate`的使用方法更加容易，所以我们来重新审视[`NSSortDescriptor`](http://nshipster.com/nssortdescriptor/)中使用的示例数据集吧：
+相比较抽象的谈论它，展示`NSPredicate`的使用方法更加容易，所以我们来重新审视[`NSSortDescriptor`](https://nshipster.com/nssortdescriptor/)中使用的示例数据集吧：
 
 <table>
   <thead>
@@ -189,7 +189,7 @@ NSLog(@"'A' Names: %@", [people filteredArrayUsingPredicate:[namesBeginningWithL
 
 ## `NSComparisonPredicate`
 
-同样的，如果你在读过[上周的文章](http://nshipster.com/nsexpression/)之后发现你使用了太多的`NSExpression`的话，`NSComparisonPredicate`可以帮助你解决这个问题。
+同样的，如果你在读过[上周的文章](https://nshipster.com/nsexpression/)之后发现你使用了太多的`NSExpression`的话，`NSComparisonPredicate`可以帮助你解决这个问题。
 
 就像`NSCompoundPredicate`一样，`NSComparisonPredicate`从子部件构建了一个`NSPredicate`－－在这种情况下，左侧和右侧都是`NSExpression`。
 分析它的类的构造函数可以让我们一窥`NSPredicate`的格式字符串是如何解析的：

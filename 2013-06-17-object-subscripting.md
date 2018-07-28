@@ -93,7 +93,7 @@ id piece = chessBoard[@"E1"];
 NSArray *results = managedObjectContext[@"Product WHERE stock > 20"];
 ```
 
-考虑到下标的灵活性和简洁，它完全可以用来生成[DSL](http://en.wikipedia.org/wiki/Domain-specific_language)。当在你自己的类中定义自定义下标索引时，它们是如何被实现的并没有限制。你可以使用这个语法来提供定义应用路线，搜索查询，复合属性存取器或者仅仅是旧的KVO的缩写。
+考虑到下标的灵活性和简洁，它完全可以用来生成[DSL](https://en.wikipedia.org/wiki/Domain-specific_language)。当在你自己的类中定义自定义下标索引时，它们是如何被实现的并没有限制。你可以使用这个语法来提供定义应用路线，搜索查询，复合属性存取器或者仅仅是旧的KVO的缩写。
 
 ---
 

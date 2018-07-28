@@ -9,7 +9,7 @@ excerpt: "当人类在他们所有的日常交往中都使用 RDF 后，人工�
 
 机器只用二进制说话，而人类的语言却充满了谜语，真假，和省略。
 
-当人类在他们所有的日常交往中都使用 [RDF](http://en.wikipedia.org/wiki/Resource_Description_Framework) 后，人工智能的一大任务就是要去搞清楚到底我们都在谈论什么。
+当人类在他们所有的日常交往中都使用 [RDF](https://en.wikipedia.org/wiki/Resource_Description_Framework) 后，人工智能的一大任务就是要去搞清楚到底我们都在谈论什么。
 
 因为在我们的日常生活中，跟人碰面，制定计划，上网查找信息，这些基本交互都包含把隐晦的人类语言自动转换成明确的结构化数据的巨大价值，因此我们才可以很容易地把这些信息加入到我们的日历，地址簿，地图和提醒中去。
 
@@ -184,7 +184,7 @@ static inline NSTextCheckingType NSTextCheckingTypesFromUIDataDetectorTypes(UIDa
 
 ---
 
-现在还对自然语言和结构化数据之间的翻译转换很容易这件事有怀疑吗？其实这并不奇怪，因为有 [超级](http://nshipster.com/cfstringtransform/) [棒](http://nshipster.com/nslinguistictagger/) 的 Cocoa 语言 API。
+现在还对自然语言和结构化数据之间的翻译转换很容易这件事有怀疑吗？其实这并不奇怪，因为有 [超级](https://nshipster.com/cfstringtransform/) [棒](https://nshipster.com/nslinguistictagger/) 的 Cocoa 语言 API。
 
 不要让你的用户因为一个程序的疏忽而重新输入信息。在你的应用程序里充分利用 `NSDataDetector` 解锁那些已经隐藏在众目睽睽下的结构化信息吧。
 ```

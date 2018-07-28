@@ -36,7 +36,7 @@ Search Kit 是一个用人类语言来搜索和建立内容索引的 C 框架。
 
 首先，内容必须从 [语料库](https://zh.wikipedia.org/wiki/%E8%AF%AD%E6%96%99%E5%BA%93) 中抽取出来。对一个文本文档而言，这会涉及到移除样式，格式或其他元信息。对一个数据记录而言，比如 `NSManagedObject`，这意味着将所有主要的字段合并为一种表示形式。
 
-一旦抽取完毕，内容将被 [符号化](http://en.wikipedia.org/wiki/Tokenization) 为后续过程作准备。
+一旦抽取完毕，内容将被 [符号化](https://en.wikipedia.org/wiki/Tokenization) 为后续过程作准备。
 
 ### 过滤
 

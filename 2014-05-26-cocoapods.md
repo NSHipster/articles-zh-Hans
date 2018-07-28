@@ -42,7 +42,7 @@ excerpt: "只要设计和施工得当，基础设施可以帮助社会成倍的�
 
 缺乏框架，iOS的代码虽然可以被打包成静态库，但是配置和同步分发却成了一个艰巨的任务。
 
-另外一个思路是用Git Submodules把源码直接放入项目。但是链接框架和配置生成环境的繁琐也使得这种方法也没有好到哪里去，尤其是当[ARC和 non-ARC](http://en.wikipedia.org/wiki/Automatic_Reference_Counting)的代码需要分开的时候。
+另外一个思路是用Git Submodules把源码直接放入项目。但是链接框架和配置生成环境的繁琐也使得这种方法也没有好到哪里去，尤其是当[ARC和 non-ARC](https://en.wikipedia.org/wiki/Automatic_Reference_Counting)的代码需要分开的时候。
 
 ### 进入CocoaPods时代
 
@@ -163,7 +163,7 @@ Pod::Spec.new do |s|
   s.license  = 'MIT'
   s.summary  = "A pretty obscure library.
                 You've probably never heard of it."
-  s.homepage = 'http://nshipster.com'
+  s.homepage = 'https://nshipster.com'
   s.authors  = { 'Mattt Thompson' =>
                  'mattt@nshipster.com' }
   s.social_media_url = "https://twitter.com/mattt"

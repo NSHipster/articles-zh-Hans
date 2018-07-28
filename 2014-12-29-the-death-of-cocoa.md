@@ -30,7 +30,7 @@ Swift的现代语言特性使用它产出的代码更安全也更有效率。但
 
 在做得好的情况下，标准库不仅提供了一些最常用基础架构的实现，而且他们用一种可移植的方式厘清了很多概念，这也是一门语言标准库偏离现有的习俗开始[拥有自己的风格](http://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/)的时候。
 
-例如，[`NSURLComponents`](http://nshipster.com/nsurl/) 符合 [RFC 3986](http://www.ietf.org/rfc/rfc3986) 标准，并在[文档](https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSURLComponents_class/index.html)里标说明很清楚。不仅 API 使用者自动地吸收了作为用法副产品的术语和概念，而且对于那些已经熟悉 RFC 3986 的新的 API 使用者依旧能积极地开始工作（究竟写文档有多容易呢？你还是点开链接自己去读文档吧）。
+例如，[`NSURLComponents`](https://nshipster.com/nsurl/) 符合 [RFC 3986](http://www.ietf.org/rfc/rfc3986) 标准，并在[文档](https://developer.apple.com/library/prerelease/ios/documentation/Foundation/Reference/NSURLComponents_class/index.html)里标说明很清楚。不仅 API 使用者自动地吸收了作为用法副产品的术语和概念，而且对于那些已经熟悉 RFC 3986 的新的 API 使用者依旧能积极地开始工作（究竟写文档有多容易呢？你还是点开链接自己去读文档吧）。
 
 标准库理应实现标准。
 
@@ -43,13 +43,13 @@ Swift的现代语言特性使用它产出的代码更安全也更有效率。但
 
 `Number`是一个纯粹封装了整数、浮点数、双精度数和布尔值等原始数据类型的对象。没有了以上顾虑的 Swift ，倒是没有建立这个结构的必要了。
 
-Swift标准库已经通过绝妙的[上层函数与操作符](http://nshipster.com/swift-default-protocol-implementations/)的结合与类型继承在建立基本数值类型上做了很棒的工作(额外加分项还有包括 [二进制文件的文字化、八进制十六进制与十进制的相加](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html#//apple_ref/doc/uid/TP40014097-CH5-XID_487))。由于缺乏一些现在比较真实的反馈，这里只有一些可以被加进来的建议：
+Swift标准库已经通过绝妙的[上层函数与操作符](https://nshipster.com/swift-default-protocol-implementations/)的结合与类型继承在建立基本数值类型上做了很棒的工作(额外加分项还有包括 [二进制文件的文字化、八进制十六进制与十进制的相加](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html#//apple_ref/doc/uid/TP40014097-CH5-XID_487))。由于缺乏一些现在比较真实的反馈，这里只有一些可以被加进来的建议：
 
 - `NSDecimalNumber` 的一个合适的替换者。Swift 的 `Double` 在[文档上](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html#//apple_ref/doc/uid/TP40014097-CH5-XID_484)说是有64位的，而 `NSDecimalNumber` 是可以代表["可以表示为 `小数部分x10^次方` 的任意数，小数部分是一个高达38位的十进制数，而指数部分则是可以从 `-128` 到 `127` 的整数"](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSDecimalNumber_Class/index.html)。同时，[这个代码段](https://gist.github.com/mattt/1ed12090d7c89f36fd28)也为Swift的 `NSDecimalNumber` 提供了一些必要的补充。
 
 - 复数的支持，例如在这个[代码段](https://gist.github.com/mattt/0576b9e4396ab5645aa9)里说的。
 
-- 更简单的本地的随机数[生成方法](http://nshipster.com/random/)。[这个代码段](https://gist.github.com/mattt/f2ee2eed3570d1a9d644)提供了一些类似的例子。
+- 更简单的本地的随机数[生成方法](https://nshipster.com/random/)。[这个代码段](https://gist.github.com/mattt/f2ee2eed3570d1a9d644)提供了一些类似的例子。
 
 - 一些通过 Swift 的重载，为单个或多个数的运算提供统一的接口，例如 [Surge](https://github.com/mattt/surge) 里做的。
 
@@ -57,13 +57,13 @@ Swift标准库已经通过绝妙的[上层函数与操作符](http://nshipster.c
 
 ### String
 
-字符串的危险在于它能够编码如此不同的信息，例如在[前文所述](http://nshipster.com/nslocalizedstring/)：
+字符串的危险在于它能够编码如此不同的信息，例如在[前文所述](https://nshipster.com/nslocalizedstring/)：
 
 > 字符串可能是在计算里最通用的数据类型了。他们能传递符号、编码数值、连接键值、表示支援了路径、储存与发信息和格式化的内容。
 
 尽管如此，`NSString` 可能有些_太过_通用了。虽然它处理Unicode的时候信手拈来，但是整个API被字符串和路径的混合所负累，`stringByAppendingPathComponent:` 和与它类似的方法都十分有用，但是这个有用最终导致了把URL当做字符串的滥用。
 
-以上其实是因为像类似于 `@"this"` （一个字符串本身）比 `[NSURL URLWithString:@"that"]` （一个构造函数）要方便多了。但是，有了[ Swift 字符串转换工具](http://nshipster.com/swift-literal-convertible/)，建立URL或者路径将会更容易。
+以上其实是因为像类似于 `@"this"` （一个字符串本身）比 `[NSURL URLWithString:@"that"]` （一个构造函数）要方便多了。但是，有了[ Swift 字符串转换工具](https://nshipster.com/swift-literal-convertible/)，建立URL或者路径将会更容易。
 
 Swift 的 `String` 一个真心聪明的设计选择是，它在内部使用了与编码无关的Unicode字符串，并暴露了以下编码方式：
 
@@ -71,7 +71,7 @@ Swift 的 `String` 一个真心聪明的设计选择是，它在内部使用了�
 > - UTF-16 字符集（通过 `String` 的 `utf16` 属性访问）
 > - 21位的 Unicode 标量，相当于字符串的 UTF-32 编码 （通过 `String` 的 `unicodeScalars` 属性访问）
 
-对 Swift 的 `String` 的唯一一个小抱怨就是，它的功能多少有些被它上层函数隐蔽的命名方式所掩盖了。许多开发者都被训练成打一个 `.` 然后等待着方法自动完成蹦出来类似 `count` 的属性，用类似 `countElements` 之类的上层函数查阅起来相较而言肯定没那么明显。（再一次强调，正如在[协议的默认实现](http://nshipster.com/swift-default-protocol-implementations/)）一篇文章里描述的一样，这可以通过 Xcode 或者 Swift 本身桥接模糊函数来解决。
+对 Swift 的 `String` 的唯一一个小抱怨就是，它的功能多少有些被它上层函数隐蔽的命名方式所掩盖了。许多开发者都被训练成打一个 `.` 然后等待着方法自动完成蹦出来类似 `count` 的属性，用类似 `countElements` 之类的上层函数查阅起来相较而言肯定没那么明显。（再一次强调，正如在[协议的默认实现](https://nshipster.com/swift-default-protocol-implementations/)）一篇文章里描述的一样，这可以通过 Xcode 或者 Swift 本身桥接模糊函数来解决。
 
 ###URI、URL 和 URN
 
@@ -85,18 +85,18 @@ Swift 的 `String` 一个真心聪明的设计选择是，它在内部使用了�
 
 如果Swift标准库能提供类似树、单向链表、双向链表、栈、列表等结构的标准实现那就更好了，不过我只做一个举例：无序数据集（`Set`）。
 
-在 Foundation 框架里的三大集合分别是 `NSArray`、`NSDictionary`、和 `NSSet`（以及他们的可变对应），而在 Swift 里，`Set` 是唯一缺失的。作为一个基础数据结构，它能应用到很广泛的案例当中。特别是对于 Swift，集合能解决越来越尴尬的语言问题的其中一个 [RawOptionSetType](http://nshipster.com/rawoptionsettype/)。
+在 Foundation 框架里的三大集合分别是 `NSArray`、`NSDictionary`、和 `NSSet`（以及他们的可变对应），而在 Swift 里，`Set` 是唯一缺失的。作为一个基础数据结构，它能应用到很广泛的案例当中。特别是对于 Swift，集合能解决越来越尴尬的语言问题的其中一个 [RawOptionSetType](https://nshipster.com/rawoptionsettype/)。
 
-> 另外，[Nate Cook](http://nshipster.com/authors/nate-cook/) 已经实现了一个[漂亮、完备的 `Set` 实现](http://natecook.com/blog/2014/08/creating-a-set-type-in-swift/)供您参考。
+> 另外，[Nate Cook](https://nshipster.com/authors/nate-cook/) 已经实现了一个[漂亮、完备的 `Set` 实现](http://natecook.com/blog/2014/08/creating-a-set-type-in-swift/)供您参考。
 
 
 ### 日期和时间
 
 日历功能是Cocoa里历史最悠久也是最健壮的功能之一了吧。相较于其他语言令人恐惧的日期编程，你不会在用 `NSDate` 或者 `NSCalendar` 的时候有类似的恐惧。尽管如此，它还是越来越难用并且难以扩展。
 
-为了进行如计算从今天起一个月以后的日期的日历计算，你会用到 `NSCalendar` 和 [`NSDateComponents`](http://nshipster.com/nsdatecomponents/)，这_是正确的_做法，但是至少，大部分开发者还在用 `dateWithTimeIntervalSinceNow:` 加以写死的秒数常数来计算时间间隔。悲剧的是，没有一个 API 能直接立马做以上功能，不过那也好过通过一个错的方式做到。
+为了进行如计算从今天起一个月以后的日期的日历计算，你会用到 `NSCalendar` 和 [`NSDateComponents`](https://nshipster.com/nsdatecomponents/)，这_是正确的_做法，但是至少，大部分开发者还在用 `dateWithTimeIntervalSinceNow:` 加以写死的秒数常数来计算时间间隔。悲剧的是，没有一个 API 能直接立马做以上功能，不过那也好过通过一个错的方式做到。
 
-另一个`NSCalendar`的一个小失误是它没有给新的日历功能提供接口，如果有时候我们需要实现[法国公历](http://en.wikipedia.org/wiki/French_Republican_Calendar)还是很麻烦的。
+另一个`NSCalendar`的一个小失误是它没有给新的日历功能提供接口，如果有时候我们需要实现[法国公历](https://en.wikipedia.org/wiki/French_Republican_Calendar)还是很麻烦的。
 
 不过幸运的是，Swift 的所有新语言特性能用来非常优雅地解决这些问题，我已经完成了实现了一些，但是一个有通用术语的日历系统还是需要蛮多功夫的。如果你想带我一起完成这个挑战，[这是我的一些想法](https://gist.github.com/mattt/7edb54f8f4fde4a3783e)。
 
@@ -137,7 +137,7 @@ if let JSON = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: 
 > 帮苹果辩护一下的话，我曾经在WWDC Lab上问过一个苹果的工程师，为什么 iOS 经过了那么长时间才开始支持 JSON，他们的回答还是十分在理的，如下：
 >> 苹果是一家需要有十分长远技术眼光的公司，而实际上要去看清一个像 JSON 的技术是否能持久还是昙花一现_十分_困难。苹果曾经发布过一个给 [PubSub](https://developer.apple.com/library/mac/documentation/InternetWeb/Reference/PubSubReference/_index.html) 用的框架，这个框架并没有被广泛了解或使用，但是苹果仍需要为一些可预测的未来给它提供支持，每项技术都是对工程师资源的一次赌博。
 
-数据排列和序列化是无聊的任务，无聊的任务更应该交给一个标注库去处理，苹果在开发Cocoa的时候就知道这个道理，他们据此开发了健壮的字符串和二进制文件机制[属性列表](http://en.wikipedia.org/wiki/Property_list)，它是iOS和OSX的生命血液。也许预计其他的数据交换格式的长期发展是一件困难的事情，但是为紧急的技术提供官方支持的基础试用版本，能够帮开发者提供提高很多。
+数据排列和序列化是无聊的任务，无聊的任务更应该交给一个标注库去处理，苹果在开发Cocoa的时候就知道这个道理，他们据此开发了健壮的字符串和二进制文件机制[属性列表](https://en.wikipedia.org/wiki/Property_list)，它是iOS和OSX的生命血液。也许预计其他的数据交换格式的长期发展是一件困难的事情，但是为紧急的技术提供官方支持的基础试用版本，能够帮开发者提供提高很多。
 
 ### 正则表达式
 
@@ -145,7 +145,7 @@ if let JSON = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: 
 
 ### 错误
 
-Objective-C 还是习惯用[错误指针](http://nshipster.com/nserror/)(`NSError **`)来处理运行时异常，而不是用 `@throw` 来抛出。以下是每一个 Cocoa 开发者应该熟悉的范式：
+Objective-C 还是习惯用[错误指针](https://nshipster.com/nserror/)(`NSError **`)来处理运行时异常，而不是用 `@throw` 来抛出。以下是每一个 Cocoa 开发者应该熟悉的范式：
 
 ```objc
 NSError *error = nil;
@@ -198,7 +198,7 @@ AppKit和UIKit是整篇讨论的主题，似乎他们俩在各自分开走路一
 
 或许我们把一个基本库能成为的东西想得太小了。
 
-作为一个编程语言，Wolfram 有[所有 Demo 之母](https://www.youtube.com/watch?v=_P9HqHVPeik#t=1m02.5s)的 Demo 集（[抱歉冒犯了，Douglas Engelbart](http://en.wikipedia.org/wiki/The_Mother_of_All_Demos)）。
+作为一个编程语言，Wolfram 有[所有 Demo 之母](https://www.youtube.com/watch?v=_P9HqHVPeik#t=1m02.5s)的 Demo 集（[抱歉冒犯了，Douglas Engelbart](https://en.wikipedia.org/wiki/The_Mother_of_All_Demos)）。
 
 > 即使在另外一个平行宇宙，其他语言都不存在，Wolfram的语言本身也可以说是一团糟。
 
@@ -225,7 +225,7 @@ AppKit和UIKit是整篇讨论的主题，似乎他们俩在各自分开走路一
 
 确实，把 Cocoa 和其他标准库区分开的是它在 `NSLocale` 和 `NSCalendar` 里的一些特定信息，但是其他的更多基本信息都来自于 [Unicode Common Locale Data Repository (CLDR)](http://cldr.unicode.org)。
 
-那究竟是什么让标准库停止吸收其他数据源里的内容呢？为什么标准库不暴露一个接口去访问 [libphonenumber](https://github.com/googlei18n/libphonenumber)，或者拓展[ HealthKit 已经做了的](http://nshipster.com/nsformatter/#mass,-length,-&-energy-formatters)到一些更基本的计算单位？
+那究竟是什么让标准库停止吸收其他数据源里的内容呢？为什么标准库不暴露一个接口去访问 [libphonenumber](https://github.com/googlei18n/libphonenumber)，或者拓展[ HealthKit 已经做了的](https://nshipster.com/nsformatter/#mass,-length,-&-energy-formatters)到一些更基本的计算单位？
 
 把这类数据通过一个有序、很有意义的方式组合起来这件事，对于第三方框架来说可能工作量有些过多，而对于自由市场下的开源软件又承担了太重的责任。
 

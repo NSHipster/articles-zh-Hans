@@ -21,13 +21,13 @@ _但你有没有听说过它的新版呢？_
 
 ## AFNetworking 的大体思路
 
-始于 2011 年 5 月，AFNetworking 作为一个[已死的 LBS 项目](http://en.wikipedia.org/wiki/Gowalla)中对 [Apple 范例代码](https://developer.apple.com/library/ios/samplecode/mvcnetworking/Introduction/Intro.html)的延伸，它的成功更是由于时机。彼时 [ASIHTTPRequest](https://github.com/pokeb/asi-http-request) 是网络方面的主流方案，AFNetworking 的核心思路使它正好成为开发者渴求的更现代的方案。
+始于 2011 年 5 月，AFNetworking 作为一个[已死的 LBS 项目](https://en.wikipedia.org/wiki/Gowalla)中对 [Apple 范例代码](https://developer.apple.com/library/ios/samplecode/mvcnetworking/Introduction/Intro.html)的延伸，它的成功更是由于时机。彼时 [ASIHTTPRequest](https://github.com/pokeb/asi-http-request) 是网络方面的主流方案，AFNetworking 的核心思路使它正好成为开发者渴求的更现代的方案。
 
 ### NSURLConnection + NSOperation
 
 `NSURLConnection` 是 Foundation URL 加载系统的基石。一个 `NSURLConnection` 异步地加载一个 `NSURLRequest` 对象，调用 delegate 的 `NSURLResponse` / `NSHTTPURLResponse` 方法，其 `NSData` 被发送到服务器或从服务器读取；delegate 还可用来处理 `NSURLAuthenticationChallenge`、重定向响应、或是决定 `NSCachedURLResponse` 如何存储在共享的 `NSURLCache` 上。
 
-[`NSOperation`](http://nshipster.com/nsoperation) 是抽象类，模拟单个计算单元，有状态、优先级、依赖等功能，可以取消。
+[`NSOperation`](https://nshipster.com/nsoperation) 是抽象类，模拟单个计算单元，有状态、优先级、依赖等功能，可以取消。
 
 AFNetworking 的第一个重大突破就是将两者结合。`AFURLConnectionOperation` 作为 `NSOperation` 的子类，遵循 `NSURLConnectionDelegate` 的方法，可以从头到尾监视请求的状态，并储存请求、响应、响应数据等中间状态。
 
@@ -90,7 +90,7 @@ AFNetworking 2.0 新构架的突破之一是使用序列化来创建请求、解
 
 感谢 [Dustin Barker](https://github.com/dstnbrkr)、[Oliver Letterer](https://github.com/OliverLetterer)、[Kevin Harwood](https://github.com/kcharwood) 等人做出的贡献，AFNetworking 现在带有内置的 [SSL pinning](http://blog.lumberlabs.com/2012/04/why-app-developers-should-care-about.html) 支持，这对于处理敏感信息的应用是十分重要的。
 
-- `AFSecurityPolicy` - 评估服务器对安全连接针对指定的固定证书或公共密钥的信任。tl;dr 将你的服务器证书添加到 app bundle，以帮助防止 [中间人攻击](http://en.wikipedia.org/wiki/Man-in-the-middle_attack)。
+- `AFSecurityPolicy` - 评估服务器对安全连接针对指定的固定证书或公共密钥的信任。tl;dr 将你的服务器证书添加到 app bundle，以帮助防止 [中间人攻击](https://en.wikipedia.org/wiki/Man-in-the-middle_attack)。
 
 #### 可达性
 
@@ -100,7 +100,7 @@ AFNetworking 2.0 新构架的突破之一是使用序列化来创建请求、解
 
 #### 实时性
 
-- `AFEventSource` - [`EventSource` DOM API](http://en.wikipedia.org/wiki/Server-sent_events) 的 Objective-C 实现。建立一个到某主机的持久 HTTP 连接，可以将事件传输到事件源并派发到听众。传输到事件源的消息的格式为 [JSON Patch](http://tools.ietf.org/html/rfc6902) 文件，并被翻译成 `AFJSONPatchOperation` 对象的数组。可以将这些 patch operation 应用到之前从服务器获取的持久性数据集。
+- `AFEventSource` - [`EventSource` DOM API](https://en.wikipedia.org/wiki/Server-sent_events) 的 Objective-C 实现。建立一个到某主机的持久 HTTP 连接，可以将事件传输到事件源并派发到听众。传输到事件源的消息的格式为 [JSON Patch](http://tools.ietf.org/html/rfc6902) 文件，并被翻译成 `AFJSONPatchOperation` 对象的数组。可以将这些 patch operation 应用到之前从服务器获取的持久性数据集。
 ```objc
 NSURL *URL = [NSURL URLWithString:@"http://example.com"];
 AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:URL];

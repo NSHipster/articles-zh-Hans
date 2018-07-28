@@ -7,15 +7,15 @@ tags: nshipster
 excerpt: "从数字电台和数学命理到象形文字和流浪汉码，找到看似平常的东西中隐藏的意思真是令人着迷。即使它们中隐藏的信息很少用到或者并不特别有趣，但正是那种寻找的快感激发着我们强烈的好奇心。"
 ---
 
-从 [数字电台](http://en.wikipedia.org/wiki/Numbers_station) 和 [数学命理](http://en.wikipedia.org/wiki/Numerology) 到 [象形文字](http://en.wikipedia.org/wiki/Egyptian_hieroglyphs) 和 [流浪汉码](http://en.wikipedia.org/wiki/Hobo#Hobo_.28sign.29_code)，找到看似平常的东西中隐藏的意思真是令人着迷。即使它们中隐藏的信息很少用到或者并不特别有趣，但正是那种寻找的快感激发着我们强烈的好奇心。
+从 [数字电台](https://en.wikipedia.org/wiki/Numbers_station) 和 [数学命理](https://en.wikipedia.org/wiki/Numerology) 到 [象形文字](https://en.wikipedia.org/wiki/Egyptian_hieroglyphs) 和 [流浪汉码](https://en.wikipedia.org/wiki/Hobo#Hobo_.28sign.29_code)，找到看似平常的东西中隐藏的意思真是令人着迷。即使它们中隐藏的信息很少用到或者并不特别有趣，但正是那种寻找的快感激发着我们强烈的好奇心。
 
 在这种精神下，本周的 NSHipster 我们来看看 [Objective-C Type Encodings](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html)。
 
 ---
 
-[上一周](http://nshipster.cn/nsvalue/)，在讨论 `NSValue` 时提到了 `+valueWithBytes:objCType:`，它的第二个参数需要用 Objective-C 的编译器指令 `@encode()` 来创建。
+[上一周](https://nshipster.cn/nsvalue/)，在讨论 `NSValue` 时提到了 `+valueWithBytes:objCType:`，它的第二个参数需要用 Objective-C 的编译器指令 `@encode()` 来创建。
 
-`@encode`，[`@`编译器指令](http://nshipster.com/at-compiler-directives/) 之一，返回一个给定类型编码为一种内部表示的字符串（例如，`@encode(int)` → `i`），类似于 ANSI C 的 `typeof` 操作。苹果的 Objective-C 运行时库内部利用类型编码帮助加快消息分发。
+`@encode`，[`@`编译器指令](https://nshipster.com/at-compiler-directives/) 之一，返回一个给定类型编码为一种内部表示的字符串（例如，`@encode(int)` → `i`），类似于 ANSI C 的 `typeof` 操作。苹果的 Objective-C 运行时库内部利用类型编码帮助加快消息分发。
 
 这里有一个所有不同的 Objective-C 类型编码的概要：
 

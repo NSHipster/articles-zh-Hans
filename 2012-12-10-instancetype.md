@@ -11,7 +11,7 @@ translator: JJ Mao
 
 Objective-C 是一门正迅速发展的语言，这种发展速度在别的现有语言中是不曾有过的。ARC，object literals，subscripting，blocks：在短短的三年时间里，Objective-C编程的许多方式发生了改变（变得更好）。
 
-这一切的创新都是Apple垂直整合的成果。正如Apple在设计[自主研发芯片](http://en.wikipedia.org/wiki/Apple_A4)中的投资一样，利用杠杠作用与手机硬件展开激烈的竞争。在[LLVM](http://llvm.org) 上的投资也是一样，使软件跟上业界最新步伐。
+这一切的创新都是Apple垂直整合的成果。正如Apple在设计[自主研发芯片](https://en.wikipedia.org/wiki/Apple_A4)中的投资一样，利用杠杠作用与手机硬件展开激烈的竞争。在[LLVM](http://llvm.org) 上的投资也是一样，使软件跟上业界最新步伐。
 
 Clang从普通到范例转变的发展，真要说清它们之间的差异还得慢慢来。因为我们正在讨论的是底层语言的特性，对于API设计的更深层含义还比较难理解。
 
@@ -55,7 +55,7 @@ Objective-C的一些使用惯例不仅仅是好的编程习惯，更是给编译
 
 使用 `instancetype` ，编译器将正确的推断出 `+personWithName:` 是 `Person` 的一个实例。
 
-为了在不久的将来使用 `instancetype` ，你可以在Foundation中查找类构造函数。例如[UICollectionViewLayoutAttributes](http://developer.apple.com/library/ios/#documentation/uikit/reference/UICollectionViewLayoutAttributes_class/Reference/Reference.html) 就已经正在使用 `instancetype` 了。
+为了在不久的将来使用 `instancetype` ，你可以在Foundation中查找类构造函数。例如[UICollectionViewLayoutAttributes](https://developer.apple.com/library/ios/#documentation/uikit/reference/UICollectionViewLayoutAttributes_class/Reference/Reference.html) 就已经正在使用 `instancetype` 了。
 
 ## 深层含义
 
@@ -63,7 +63,7 @@ Objective-C的一些使用惯例不仅仅是好的编程习惯，更是给编译
 
 然而 `instancetype` 看似普通，尽管它能为编译器锦上添花，但它可用于更棒的结果。
 
-[Jonathan Sterling](https://twitter.com/jonsterling) 写了[这篇十分有趣的文章](http://www.jonmsterling.com/posts/2012-02-05-typed-collections-with-self-types-in-objective-c.html), 文章中详细描述了 `instancetype` 在没有[泛型](http://en.wikipedia.org/wiki/Generic_programming)的情况下是如何用于静态类型collections编码的:
+[Jonathan Sterling](https://twitter.com/jonsterling) 写了[这篇十分有趣的文章](http://www.jonmsterling.com/posts/2012-02-05-typed-collections-with-self-types-in-objective-c.html), 文章中详细描述了 `instancetype` 在没有[泛型](https://en.wikipedia.org/wiki/Generic_programming)的情况下是如何用于静态类型collections编码的:
 
 ```objc
 NSURL <MapCollection> *sites = (id)[NSURL mapCollection];
@@ -87,4 +87,4 @@ NSURL *jonsSite = [sites at:@"jon"]; // => http://www.jonmsterling.com/
 
 以此作为如何关注底层细节的例子，将给你带来全新的视角以强有力的方式去改变Objective-C。
 
-[1]: http://en.wikipedia.org/wiki/C_Sharp_(programming_language)
+[1]: https://en.wikipedia.org/wiki/C_Sharp_(programming_language)

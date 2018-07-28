@@ -16,7 +16,7 @@ Clang 是 C / Objective-C 的前端的 LLVM 编译器。它对 Objective-C 的�
 
 当你在 XCode 中运行 "Build & Analyze" (`⌘⇧B`) 后得到的惊人结果是 Clang 的更细腻，更深沉一面的功能：它的代码诊断。
 
-在我们关于 [`#pragma`](http://nshipster.com/pragma/) 文章中，我们打趣的说：
+在我们关于 [`#pragma`](https://nshipster.com/pragma/) 文章中，我们打趣的说：
 
 > 资深提示：尝试设置 `-Weverything` 标志，并在你的编译设置中勾选上 "Treat Warnings as Errors"。这将在 Xcode 中开启困难模式。
 

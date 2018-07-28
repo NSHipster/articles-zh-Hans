@@ -8,7 +8,7 @@ translator: Candyan
 
 `NSDateComponents` 类在Foundation的日期和时间API中扮演着重要的角色。其本身并没有什么令人印象深刻的特征，仅仅是一个日期信息的容器（信息包括：月，年，月中的某天，年中的某周，或者是否是闰月)。然而，值得一提的是，在其结合 `NSCalendar`和`NSDateComponents` 类之后，日历格式的转换变得十分方便。
 
-日期代表了时间中的某个特定时刻，而日期组件的表示则依赖于其所使用的日历系统。很多时候，这个表示形式会和我们大多数人使用的[Gregorian Calendar](http://en.wikipedia.org/wiki/Gregorian_calendar)有着很大的不同。例如[Islamic Calendar](http://en.wikipedia.org/wiki/Islamic_calendar)一年有354或者355天，而[Buddhist calendar](http://en.wikipedia.org/wiki/Buddhist_calendar)一年会有354，355，384或者385天。
+日期代表了时间中的某个特定时刻，而日期组件的表示则依赖于其所使用的日历系统。很多时候，这个表示形式会和我们大多数人使用的[Gregorian Calendar](https://en.wikipedia.org/wiki/Gregorian_calendar)有着很大的不同。例如[Islamic Calendar](https://en.wikipedia.org/wiki/Islamic_calendar)一年有354或者355天，而[Buddhist calendar](https://en.wikipedia.org/wiki/Buddhist_calendar)一年会有354，355，384或者385天。
 
 ## 从日期中提取日期组件
 
@@ -20,7 +20,7 @@ NSDate *date = [NSDate date];
 [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit) fromDate:date];
 ```
 
-其中`components`参数是一个用来获取日期组件值的[掩码](http://zh.wikipedia.org/zh-cn/%E6%8E%A9%E7%A0%81)([bitmask](http://en.wikipedia.org/wiki/Bitmask))，有下面这些值可以选择：
+其中`components`参数是一个用来获取日期组件值的[掩码](https://zh.wikipedia.org/zh-cn/%E6%8E%A9%E7%A0%81)([bitmask](https://en.wikipedia.org/wiki/Bitmask))，有下面这些值可以选择：
 
 - `NSEraCalendarUnit`
 - `NSYearCalendarUnit`

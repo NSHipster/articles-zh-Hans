@@ -23,7 +23,7 @@ Playgrounds 本质上并不是 Swift 语言的一个特性——相反的，他�
 
 本周，我们将要透过 Playgrounds 的表面，告诉你那些能够带给你开发极大帮助的工具。继续阅读关于 Playground 的 sources 和 resource，captured values 和 extended execution，以及整合的 rich formatting，讲 Playground 变成了具有互动性的教学工具。
 
-> **注意:** 最近刚刚发行的电子版本的 [_NSHipster: Obscure Topics in Cocoa & Swift_](http://gum.co/nshipster-swift) 包括了一个 Playgrounds 的包—每一个对应书中的一个章节。每一个 Playground 都提供了一个探索和实验里面所提到的概念的机会，包括延伸的案例。
+> **注意:** 最近刚刚发行的电子版本的 [_NSHipster: Obscure Topics in Cocoa & Swift_](https://gum.co/nshipster-swift) 包括了一个 Playgrounds 的包—每一个对应书中的一个章节。每一个 Playground 都提供了一个探索和实验里面所提到的概念的机会，包括延伸的案例。
 
 ## Sources
 
@@ -127,9 +127,9 @@ task.resume()
 
 ### Lists of Links
 
-- [NSHipster](http://nshipster.com)
-- [ASCIIwwdc](http://asciiwwdc.com)
-- [SwiftDoc](http://swiftdoc.org)
+- [NSHipster](https://nshipster.com)
+- [ASCIIwwdc](https://asciiwwdc.com)
+- [SwiftDoc](https://swiftdoc.org)
 
 ### Images, Too
 

@@ -16,8 +16,8 @@ status:
 
 总有些时候，屏幕上出现了一些信息，但是你_就是不能使用_。不管是被限制在一个小小的 table view cell 里的航班信息，或是一个不能点击的 URL，用户在这种时候只能被迫去发挥想象力，因为没有现成的办法供他们使用。
 
-过去的文章中，我们提到过[本地化（localization）](http://nshipster.cn/nslocalizedstring)和[辅助功能（accessibility）
-](http://nshipster.com/uiaccessibility)支持是把高品质应用和其他应用所区分开的两个特性，这周我们再往这个名单里添加一项：**编辑操作**。
+过去的文章中，我们提到过[本地化（localization）](https://nshipster.cn/nslocalizedstring)和[辅助功能（accessibility）
+](https://nshipster.com/uiaccessibility)支持是把高品质应用和其他应用所区分开的两个特性，这周我们再往这个名单里添加一项：**编辑操作**。
 
 ### 复制，剪切，粘贴，删除，选择
 

@@ -20,7 +20,7 @@ NSHipster 本周披露的知识点是关于我们平时关心最少的、但又�
 
 每个应用都使用 `UIApplicationDelegate -application:didFinishLaunchingWithOptions:`（更精确地说以后或许也包含 `-application:willFinishLaunchingWithOptions:`） 启动。应用调用这个方法来告诉 delegate 进程已经启动完毕，已经准备好运行了。
 
-在 [Springboard](http://en.wikipedia.org/wiki/SpringBoard) 中点击图标应用就开始启动了，但也有其他一些启动的方法。比如说注册了自定义 URL scheme 的应用可以以类似于 `twitter://` 的方式从一个 URL 启动。应用可以通过推送通知或地理位置变更启动。
+在 [Springboard](https://en.wikipedia.org/wiki/SpringBoard) 中点击图标应用就开始启动了，但也有其他一些启动的方法。比如说注册了自定义 URL scheme 的应用可以以类似于 `twitter://` 的方式从一个 URL 启动。应用可以通过推送通知或地理位置变更启动。
 
 查明应用为什么以及是如何启动的，就是 `launchOptions` 参数的职责所在。就像 `userInfo` 字典一样，在 `-application:didFinishLaunchingWithOptions:` 的 `launchOptions` 中也包含很多特别命名的键。
 
@@ -59,7 +59,7 @@ if (fileURL) {
 
 ## 响应通知
 
-不要和 [`NSNotification`](http://nshipster.com/nsnotification-and-nsnotificationcenter/) 混淆了，应用可以通过本地（local）或远程（remote）通知打开。
+不要和 [`NSNotification`](https://nshipster.com/nsnotification-and-nsnotificationcenter/) 混淆了，应用可以通过本地（local）或远程（remote）通知打开。
 
 ### 推送通知
 

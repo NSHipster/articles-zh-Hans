@@ -14,7 +14,7 @@ excerpt: "在 NSA 披露的间谍活动中，在大众的关注下，元数据�
 
 在 UNIX 文件系统中的每个文件，都有关联的元数据。事实上，一个路径，权限和时间戳是使一个文件之所以成为文件的属性，而不只是一个数据点。
 
-但是，在 OS X 和 iOS，额外的元数据可以存储在[**扩展文件属性**](http://en.wikipedia.org/wiki/Extended_file_attributes)中。这是在 OS X Tiger 中被引入的，把那些少量的，应用程序特定的数据关联到一个文件来说是完美的解决办法。EAs 存储在 HFS+ 文件系统的 B*-Tree 中，并在OS X Lion 和 iOS 5 中有最大 128KB 的容量。
+但是，在 OS X 和 iOS，额外的元数据可以存储在[**扩展文件属性**](https://en.wikipedia.org/wiki/Extended_file_attributes)中。这是在 OS X Tiger 中被引入的，把那些少量的，应用程序特定的数据关联到一个文件来说是完美的解决办法。EAs 存储在 HFS+ 文件系统的 B*-Tree 中，并在OS X Lion 和 iOS 5 中有最大 128KB 的容量。
 
 你问这是什么样的信息？在终端调用 `ls` 命令，并通过 `@` 选项来查看在众目睽睽下隐藏了什么样的信息。
 
@@ -43,7 +43,7 @@ ssize_t listxattr(const char *path, char *namebuf, size_t size, int options);
 int removexattr(const char *path, const char *name, int options);
 ```
 
-为了显示这些功能，我们来假设使用扩展属性把一个 [HTTP Etag](http://en.wikipedia.org/wiki/HTTP_ETag) 与一个文件相关联：
+为了显示这些功能，我们来假设使用扩展属性把一个 [HTTP Etag](https://en.wikipedia.org/wiki/HTTP_ETag) 与一个文件相关联：
 
 ```objc
 NSHTTPURLResponse *response = ...;

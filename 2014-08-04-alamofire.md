@@ -10,7 +10,7 @@ status:
 
 Swift 像是在 iOS 开发者社区中按下了一个“重启”按钮，成了很多常年使用 Objective-C 的开发者的新宠儿。
 
-一夜之间，大家谈论的主题从命名空间([namespacing](http://nshipster.com/namespacing/)) 和方法交叉([swizzling](http://nshipster.com/method-swizzling/))，延伸到泛型 ([generics](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Generics.html#//apple_ref/doc/uid/TP40014097-CH26-XID_272))和类型推导([type inference](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/TypeCasting.html#//apple_ref/doc/uid/TP40014097-CH22-XID_487))。每年这个时候， Twitter 上通常会充斥着关于最新的 API 的讨论，以及将要发布的硬件设备的传言。然而今年，一切都被 Swift 占领了。
+一夜之间，大家谈论的主题从命名空间([namespacing](https://nshipster.com/namespacing/)) 和方法交叉([swizzling](https://nshipster.com/method-swizzling/))，延伸到泛型 ([generics](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Generics.html#//apple_ref/doc/uid/TP40014097-CH26-XID_272))和类型推导([type inference](https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/TypeCasting.html#//apple_ref/doc/uid/TP40014097-CH22-XID_487))。每年这个时候， Twitter 上通常会充斥着关于最新的 API 的讨论，以及将要发布的硬件设备的传言。然而今年，一切都被 Swift 占领了。
 
 Swift 有着全新的语法，语言规范还处在不断演进的过程当中。Swift 已经吸引了新老开发者的关注，给 iOS & OS X 开发带来了新的想象空间。
 
@@ -59,7 +59,7 @@ Alamofire.request(.GET, "http://httpbin.org/get")
 
 一个很小的语法差异也有可能对一个语言的通用惯例产生广泛的影响。
 
-在人们对于 Objective-C 的诸多抱怨当中，首当其中的便是使用方括号来表示消息传递([message passing](http://en.wikipedia.org/wiki/Message_passing))。使用 `[ ]` 语法的潜在影响之一，就是很难把方法调用串联在一起。尽管有 Xcode 自动补全的帮助， `@property` 点(.)语法，以及 [key-value coding key-paths](http://nshipster.com/kvc-collection-operators/) 的支持，大家还是很难在代码中看到嵌套层次很深的函数调用。
+在人们对于 Objective-C 的诸多抱怨当中，首当其中的便是使用方括号来表示消息传递([message passing](https://en.wikipedia.org/wiki/Message_passing))。使用 `[ ]` 语法的潜在影响之一，就是很难把方法调用串联在一起。尽管有 Xcode 自动补全的帮助， `@property` 点(.)语法，以及 [key-value coding key-paths](https://nshipster.com/kvc-collection-operators/) 的支持，大家还是很难在代码中看到嵌套层次很深的函数调用。
 
 > Objective-C 2.0 中引入了属性点(.)语法，在很大程度上，这种妥协反而使得语法上的矛盾更严重了。最近这些年语法惯例才重新开始稳定下来。
 
@@ -227,6 +227,6 @@ override var data: NSData! {
 
 > 另外，AFNetworking 也可以很方便地在 Swift 中使用，和使用其它的 Objective-C 代码没有什么区别。Alamofire 作为一个单独的项目，从发送 HTTP 请求这个问题出发，致力于对新语言的特性和范式进行探索。
 
-Alamofire 1.0 计划在 Swift 1.0 版本发布时同时释出（具体什么时候就看苹果了）。里程碑当中的一部分包括[完成全部文档](http://nshipster.com/swift-documentation/)，以及借助于 [Xcode 6 的测试支持](http://nshipster.com/xctestcase/) 和 [Kenneth Reitz](http://www.kennethreitz.org) 编写的 [httpbin](http://httpbin.org)，实现 100% 的单元测试覆盖率。
+Alamofire 1.0 计划在 Swift 1.0 版本发布时同时释出（具体什么时候就看苹果了）。里程碑当中的一部分包括[完成全部文档](https://nshipster.com/swift-documentation/)，以及借助于 [Xcode 6 的测试支持](https://nshipster.com/xctestcase/) 和 [Kenneth Reitz](http://www.kennethreitz.org) 编写的 [httpbin](http://httpbin.org)，实现 100% 的单元测试覆盖率。
 
 我们每个人都在尽最大努力去理解如何设计，实现以及发布 Swift 代码。Alamofire 只是众多激动人心的新库当中的一个，它们将会在接下来的数月乃至数年时间当中，指导语言本身以及社区的发展。对于想参与其中的人，欢迎你们做出贡献。俗话说得好：[pull requests 永远不嫌多](https://github.com/Alamofire/Alamofire/compare/)。

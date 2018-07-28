@@ -7,7 +7,7 @@ author: Mattt
 translator: Croath Liu
 ---
 
-`NSLinguisticTagger` 在语言学功能上来讲是一把名副其实的瑞士军刀，它可以讲自然语言的字符串[标记](http://en.wikipedia.org/wiki/Tokenization)为单词、确定词性和[词根](http://en.wikipedia.org/wiki/Word_stem)、划分出人名地名和组织名称、告诉你字符串使用的语言和[语系](http://en.wikipedia.org/wiki/Writing_system)。
+`NSLinguisticTagger` 在语言学功能上来讲是一把名副其实的瑞士军刀，它可以讲自然语言的字符串[标记](https://en.wikipedia.org/wiki/Tokenization)为单词、确定词性和[词根](https://en.wikipedia.org/wiki/Word_stem)、划分出人名地名和组织名称、告诉你字符串使用的语言和[语系](https://en.wikipedia.org/wiki/Writing_system)。
 
 对于我们大多数人来说，这其中蕴含着意义远超过我们所知道的，但或许也只是我们没有合适的机会使用而已。但是，几乎所有使用某种方式来处理自然语言的应用如果能够用上 `NSLinguisticTagger` ，或许就会润色不少，没准会催生一批新特性呢。
 
@@ -43,7 +43,7 @@ tagger.string = question;
 
 如果我们过滤名词、动词、地名，就会得到结果：`[is, weather, San Francisco]`。
 
-仅以来这个结果，或者配合[潜在语义映射（Latent Semantic Mapping）](http://developer.apple.com/library/mac/#documentation/LatentSemanticMapping/Reference/LatentSemanticMapping_header_reference/Reference/reference.html)库，我们就可以推断出合理解释，然后就可以通过调用相关API去获取旧金山此时此刻的天气状况了。
+仅以来这个结果，或者配合[潜在语义映射（Latent Semantic Mapping）](https://developer.apple.com/library/mac/#documentation/LatentSemanticMapping/Reference/LatentSemanticMapping_header_reference/Reference/reference.html)库，我们就可以推断出合理解释，然后就可以通过调用相关API去获取旧金山此时此刻的天气状况了。
 
 ## 特征标记方案
 
