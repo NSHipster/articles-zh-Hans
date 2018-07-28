@@ -44,7 +44,7 @@ excerpt: "直到最近之前，应用程序，甚至是跨应用程序启动的�
 
 用户可以在 iOS 6.1 新加的设置页面来选择限制广告跟踪，位置在 **设置 > 通用 > 关于本机 > 广告** (在 iOS 9.2 上，这个设置的位置已经修改： 设置 > 隐私 > 广告 [译者注])：
 
-![Limit Ad Tracking](https://nshipster.s3.amazonaws.com/ad-support-limit-ad-tracking.png)
+![Limit Ad Tracking]({% asset ad-support-limit-ad-tracking.png @path %})
 
 ## NSUUID & CFUUIDRef
 
@@ -107,4 +107,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 ---
 
 当然，UUID 还有许多其他用途：用于记录在分布式系统的主标识符，临时文件的名称，或甚至是一个散色生成器（把十六进制串成每组 6 个，一共 5 组的表示方式！）。但在 iOS 上，它主要还是用于跟踪，用于发现在网络和可能性的汪洋中遗失了什么。理解你有多独特是了解一切的第一步。
+
+```
+
 ```
