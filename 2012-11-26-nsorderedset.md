@@ -84,7 +84,7 @@ NSMutableOrderedSet* mutable = [immutable mutableCopy];
 
 这是对使用 Core Data 的人来说极好的消息，因为它解决了一个长期存在的烦恼（没有办法对一个关系集合做任意的排序）。从前，你不得不添加一个`位置`属性，当每次集合被修改时都要重新计算这个属性。没有一个内置的方法去验证你的位置集合是一个唯一的或者没有间隙的序列。
 
-`NSOrderedSet`用这种方式*对我们的[请求](http://bugreport.apple.com/)做出了回应*。
+`NSOrderedSet`用这种方式*对我们的[请求](https://bugreport.apple.com/)做出了回应*。
 
 不幸的是，对于 API 的设计者来说，在 Foundation 中它的存在创建了一个在诱人的麻烦和误导之间的东西。
 
