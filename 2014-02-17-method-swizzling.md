@@ -1,8 +1,8 @@
 ---
 title: Method Swizzling
 author: Mattt
-category: Objective-C
 translator: Daniel Hu
+category: Objective-C
 excerpt: "Method swizzling 用来改变已存在的 selector 映射的方法实现。Method swizzling 通过在运行时修改类的消息分发列表中 selector 与实现的映射使得在运行时修改方法的调用成为可能。"
 status:
     swift: n/a
@@ -29,7 +29,7 @@ Method swizzling 用于改变一个已经存在的 selector 的实现。这项�
 这可以通过在每个视图控制器的 viewDidAppear: 方法中添加追踪代码来实现，但这样会大量重复的样板代码。继承是另一种可行的方式，但是这要求所有被继承的视图控制器如 UIViewController, UITableViewController, UINavigationController 都在 viewDidAppear：实现追踪代码，这同样会造成很多重复代码。
 幸运的是，这里有另外一种可行的方式：从 category 实现 **method swizzling** 。下面是实现方式：
 
-``` {objective-c}
+```objc
 #import <objc/runtime.h>
 
 @implementation UIViewController (Tracking)
@@ -86,12 +86,12 @@ Method swizzling 用于改变一个已经存在的 selector 的实现。这项�
 
 到此我们已经知道为什么，应该在哪些地方使用 method swizzling，下面介绍如何使用 method swizzling：
 
-##+load vs +initialize
+## +load vs +initialize
 
 **swizzling 应该只在 +load 中完成。**
 在 Objective-C 的运行时中，每个类有两个方法都会自动调用。+load 是在一个类被初始装载时调用，+initialize 是在应用第一次调用该类的类方法或实例方法前调用的。两个方法都是可选的，并且只有在方法被实现的情况下才会被调用。
 
-##dispatch_once
+## dispatch_once
 
 **swizzling 应该只在 dispatch_once 中完成。**
 
@@ -112,7 +112,7 @@ Method swizzling 修改了类的消息分发列表使得已经存在的 selector
 
 下面代码在正常情况下会出现循环：
 
-``` {objective-c}
+```objc
 - (void)xxx_viewWillAppear:(BOOL)animated {
     [self xxx_viewWillAppear:animated];
     NSLog(@"viewWillAppear: %@", NSStringFromClass([self class]));
@@ -135,5 +135,3 @@ Method swizzling 修改了类的消息分发列表使得已经存在的 selector
 * * * 
 
 [associated objects](https://nshipster.cn/associated-objects/) 的链接， method swizzling 是 Objective-C 拥有的强大特性，但请谨慎使用。
-
-
