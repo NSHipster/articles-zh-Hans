@@ -101,7 +101,7 @@ newPasswordTextField.passwordRules = UITextInputPasswordRules(descriptor: "requi
 
 不光是只有你会觉得直接使用没有良好抽象的字符串格式令人感到不安。
 
-下面是一种将密码规则封装成 Swift API 的方式：
+下面是一种将密码规则封装成 Swift API 的方式（[可以作为 Swift package 获取](https://github.com/NSHipster/PasswordRules)）：
 
 ```swift
 enum PasswordRule {
