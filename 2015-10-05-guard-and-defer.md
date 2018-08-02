@@ -10,8 +10,8 @@ category: Swift
 excerpt: >
     Swift 2.0 带来了两个新的能够简化程序和提高效率的控制流表达形式。前者可以让代码编写更流畅，后者则相反的能够让执行推迟。
 revisions:
-     "2015-10-05": First Publication
-     "2018-08-01": Updated for Swift 4.2
+     "2015-10-05": 首次发布
+     "2018-08-01": 为 Swift 4.2 更新
  status:
      swift: 4.2
      reviewed: August 1, 2018
@@ -21,6 +21,8 @@ revisions:
 
 > —[Edsger W. Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra),
 > [《Go To 有害论》](https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf)
+
+很遗憾，他的文章通常只因为使《\_\_\_\_有害论》这种文章标题在程序员中流行起来，还有网上对这些论文不妥当的抨击出现时，才会被想起。因为 Dijkstra （照常）提出了一个很好的观点：**代码结构应该反映其行为。**
 
 Swift 2.0 带来了两个新的能够简化程序和提高效率的控制流表达形式：`guard` 和 `defer`。前者可以让代码编写更流畅，后者能够让执行推迟。
 
@@ -32,76 +34,140 @@ Swift 2.0 带来了两个新的能够简化程序和提高效率的控制流表�
 
 ## guard
 
-`guard` 是一个新的条件声明，表示如果条件不满足时退出当前 block。任何被声明成 `guard` 的 optional 绑定在其他函数或 block 中都是可用的，并强制在 `else` 中用 `return` 来退出函数、`continue` 或 `break` 退出循环，或者用一个类似  `fatalError()` 的 `@noreturn` 函数来退出，以离开当前的上下文：
+`guard` 是一个要求表达式的值为 `true` 从而继续执行的条件语句。如果表达式为 `false`，则会执行必须提供的 `else` 分支。
+
+```swift
+func sayHello(numberOfTimes: Int) {
+    guard numberOfTimes > 0 else {
+        return
+    }
+
+    for _ in 1...numberOfTimes {
+        print("Hello!")
+    }
+}
+```
+
+`guard` 语句中的 `else` 分支必须退出当前的区域，通过使用 `return` 来退出函数，`continue` 或者 `break` 来退出循环，或者使用像 `fatalError(_:file:line:)` 这种返回 [`Never`](https://nshipster.com/never) 的函数。
+
+`guard` 语句和 optional 绑定组合在一起非常好用。在 `guard` 语句的条件里进行的 optional 绑定可以在函数或闭包其后的部分使用。
+
+对比一下 `guard-let` 语句和 `if-let` 语句中的 optional 绑定：
+
+```swift
+var name: String?
+
+if let name = name {
+    // name 在这里面不是 optional（类型是 String）
+}
+// name 在外面是 optional（类型是 String?）
+
+
+guard let name = name else {
+    return
+}
+
+// name 从这里开始都不是 optional 了（类型是 String）
+```
+
+如果说在 [Swift 1.2](/swift-1.2/) 中介绍的并行 optional 绑定领导了对 [厄运金字塔](http://www.scottlogic.com/blog/2014/12/08/swift-optional-pyramids-of-doom.html) 的革命，那么 `guard` 声明则与之一并将金字塔摧毁。
 
 ```swift
 for imageName in imageNamesList {
-    guard let image = UIImage(named: imageName) 
+    guard let image = UIImage(named: imageName)
         else { continue }
-    
+
     // do something with image
 }
 ```
 
-我们来对比一下使用 `guard` 关键字之后能如何帮助我们避免错误。例如，我们创建一个字符串转为 `UInt8` 的初始化方法。`UInt8` 已经实现了一个可以接受 `String` 的初始化方法并且可以抛出错误，但是如果上下文出现了我们不能预知的问题，比如说格式错误了，或者超出了数值边界，应该怎么办呢？我们新实现的初始化方法将抛出一个能够提供更多错误信息的 `ConversionError`。
+### 使用 guard 来避免过多的缩进和错误
+
+我们来对比一下使用 `guard` 关键字之后能如何改善代码且帮助我们避免错误。
+
+比如，我们要实现一个 `readBedtimeStory()` 函数：
 
 ```swift
-enum ConversionError : ErrorType {
-    case InvalidFormat, OutOfBounds, Unknown
+enum StoryError: Error {
+    case missing
+    case illegible
+    case tooScary
 }
 
-extension UInt8 {
-    init(fromString string: String) throws {
-        // check the string's format
-        if let _ = string.rangeOfString("^\\d+$", options: [.RegularExpressionSearch]) {
-
-            // make sure the value is in bounds
-            if string.compare("\(UInt8.max)", options: [.NumericSearch]) != NSComparisonResult.OrderedAscending {
-                throw ConversionError.OutOfBounds
-            }
-            
-            // do the built-in conversion
-            if let value = UInt8(string) {
-                self.init(value)
+func readBedtimeStory() throws {
+    if let url = Bundle.main.url(forResource: "book",
+                               withExtension: "txt")
+    {
+        if let data = try Data(contentsOf: url),
+            let story = String(data: data, encoding: .utf8)
+        {
+            if story.contains("👹") {
+                throw StoryError.tooScary
             } else {
-                throw ConversionError.Unknown
+                print("Once upon a time... \(story)")
             }
+        } else {
+            throw StoryError.illegible
         }
-        
-        throw ConversionError.InvalidFormat
+    } else {
+        throw StoryError.missing
     }
 }
 ```
 
-注意这个例子中格式检查和抛出错误格式的代码距离有多远，写出这样的代码并不理想。此外，真正的初始化被放在了两层深的 `if` 嵌套中。如果我们的代码写的有问题，里面有 bug 的话，根本不能一眼看出问题在哪。这里面有什么问题你能立刻发现吗？如果我不告诉你的话，你能知道到底是哪部分代码出了问题吗？
+要读一个睡前故事，我们需要能找到一本书，这本故事书必须要是可读的，并且故事不能太吓人（**请不要让怪物出现在书的结尾，谢谢你！**）。
 
-下面我们来用 `guard` 改善一下这段代码：
+请注意 `throw` 语句离检查本身有多远。你需要读完整个方法来找到如果没有 `book.txt` 会发生什么。
+
+像一本好书一样，代码应该讲述一个故事：有着易懂的情节，清晰的开端、发展和结尾。（请尝试不要写太多「后现代」风格的代码。）
+
+使用 `guard` 语句组织代码可以让代码读起来更加的线性：
 
 ```swift
-extension UInt8 {
-    init(fromString string: String) throws {
-        // check the string's format
-        guard let _ = string.rangeOfString("^\\d+$", options: [.RegularExpressionSearch]) 
-            else { throw ConversionError.InvalidFormat }
-        
-        // make sure the value is in bounds
-        guard string.compare("\(UInt8.max)", options: [.NumericSearch]) != NSComparisonResult.OrderedDescending 
-            else { throw ConversionError.OutOfBounds }
-
-        // do the built-in conversion
-        guard let value = UInt(string) 
-            else { throw ConversionError.Unknown }
-        
-        self.init(value)
+func readBedtimeStory() throws {
+    guard let url = Bundle.main.url(forResource: "book",
+                                  withExtension: "txt")
+    else {
+        throw StoryError.missing
     }
+
+    guard let data = try? Data(contentsOf: url),
+        let story = String(data: data, encoding: .utf8)
+    else {
+        throw StoryError.illegible
+    }
+
+    if story.contains("👹") {
+        throw StoryError.tooScary
+    }
+
+    print("Once upon a time ...\(story)")
 }
 ```
 
-这样就好多了。每一个错误都在相应的检查之后立刻被抛出，所以我们可以按照左手边的代码顺序来梳理工作流的顺序。
+**这样就好多了！** 每一个错误都在相应的检查之后立刻被抛出，所以我们可以按照左手边的代码顺序来梳理工作流的顺序。
 
-更重要的是，用 `guard` 能够避免我们第一次写代码时候的逻辑错误，第一次我们写的最后一个 `throw` 每次都被调用了，因为它不在 `else` 里面。使用 `guard` 编译器会强制我们在 else-block 里跳出当前上下文，这保证了 `throw` 只在他们应该出现的时候被调用。
+### 不要在 guard 中双重否定
 
-同时请注意中间那个 `guard` 语句并不是严格必需的。因为它并不能转换一个 optional 值，所以只用 `if` 语句也能完美工作，在这种情况下使用 `guard` 只是从控制层面保证了安全 —— 让编译器确保如果测试失败也能够退出初始化函数，所以就没有必要为每一个 `throw` 或可能产生错误的地方写注释来避免逻辑混淆了。
+不要滥用这个新的流程控制机制——特别是在条件表达式已经表示否定的情况下。
+
+举个例子，如果你想要在一个字符串为空是提早退出，不要这样写：
+
+```swift
+// 啊？
+guard !string.isEmpty else {
+    return
+}
+```
+
+保持简单。自然的走下去。避免双重否定。
+
+```swift
+// 噢！
+if string.isEmtpy {
+    return
+}
+```
 
 ## defer
 
