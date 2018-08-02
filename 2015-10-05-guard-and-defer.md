@@ -171,71 +171,56 @@ if string.isEmtpy {
 
 ## defer
 
-在错误处理方面，`guard` 和新的 `throw` 语法之间，Swift 2.0 也鼓励用尽早返回错误（这也是 NSHipster 最喜欢的方式）来代替嵌套 if 的处理方式。尽早返回让处理更清晰了，但是已经被初始化（可能也正在被使用）的资源必须在返回前被处理干净。
+在错误处理方面，`guard` 和新的 `throw` 语法之间，Swift 鼓励用尽早返回错误（这也是 NSHipster 最喜欢的方式）来代替嵌套 if 的处理方式。尽早返回让处理更清晰了，但是已经被初始化（可能也正在被使用）的资源必须在返回前被处理干净。
 
-新的 `defer` 关键字为此提供了安全又简单的处理方式：声明一个 block，当前代码执行的闭包退出时会执行该 block。下面的代码是使用 Accelerate framework 对 `vImage` 进行操作的一些函数（这个函数是从 [image resizing](https://nshipster.com/image-resizing/) 这篇文章中截取的）：
+`defer` 关键字为此提供了安全又简单的处理方式：声明一个 block，当前代码执行的闭包退出时会执行该 block。
+
+看看下面这个包装了系统调用 `gethostname(2)` 的函数，用来返回当前系统的[主机名称](https://zh.wikipedia.org/zh-cn/主機名稱)：
 
 ```swift
-func resizeImage(url: NSURL) -> UIImage? {
-    // ...
-    let dataSize: Int = ...
-    let destData = UnsafeMutablePointer<UInt8>.alloc(dataSize)
-    var destBuffer = vImage_Buffer(data: destData, ...)
-    
-    // scale the image from sourceBuffer to destBuffer
-    var error = vImageScale_ARGB8888(&sourceBuffer, &destBuffer, ...)
-    guard error == kvImageNoError
-        else {
-            destData.dealloc(dataSize)  // 1
-            return nil
-        }
-    
-    // create a CGImage from the destBuffer
-    guard let destCGImage = vImageCreateCGImageFromBuffer(&destBuffer, &format, ...) 
-        else {
-            destData.dealloc(dataSize)  // 2
-            return nil
-        }
-    destData.dealloc(dataSize)          // 3
-    // ...
+import Darwin
+
+func currentHostName() -> String {
+    let capacity = Int(NI_MAXHOST)
+    let buffer = UnsafeMutablePointer<Int8>.allocate(capacity: capacity)
+
+    guard gethostname(buffer, capacity) == 0 else {
+        buffer.deallocate()
+        return "localhost"
+    }
+
+    let hostname = String(cString: buffer)
+    buffer.deallocate()
+
+    return hostname
 }
 ```
 
-这里有一个在最开始就创建的 `UnsafeMutablePointer<UInt8>` 用于存储目标数据，但是我 *既要* 在错误发生后销毁它，*又要* 在正常流程下不再使用它时对其进行销毁。
+这里有一个在最开始就创建的 `UnsafeMutablePointer<UInt8>` 用于存储目标数据，但是我**既要**在错误发生后销毁它，**又要**在正常流程下不再使用它时对其进行销毁。
 
 这种设计很容易导致错误，而且不停地在做重复工作。
 
-`defer` 语句能让我们在做完主体工作之后不会忘记脏数据，也能让代码更简洁。虽然 `defer` block 紧接着 `alloc()` 出现，但会等到当前上下文结束的时候才真正执行：
+通过使用 `defer` 语句，我们可以排除潜在的错误并且简化代码：
 
 ```swift
-func resizeImage(url: NSURL) -> UIImage? {
-    // ...
-    let dataSize: Int = ...
-    let destData = UnsafeMutablePointer<UInt8>.alloc(dataSize)
-    defer {
-        destData.dealloc(dataSize)
+func currentHostName() -> String {
+    let capacity = Int(NI_MAXHOST)
+    let buffer = UnsafeMutablePointer<Int8>.allocate(capacity: capacity)
+    defer { buffer.deallocate() }
+
+    guard gethostname(buffer, capacity) == 0 else {
+        return "localhost"
     }
-    
-    var destBuffer = vImage_Buffer(data: destData, ...)
-    
-    // scale the image from sourceBuffer to destBuffer
-    var error = vImageScale_ARGB8888(&sourceBuffer, &destBuffer, ...)
-    guard error == kvImageNoError 
-        else { return nil }
-    
-    // create a CGImage from the destBuffer
-    guard let destCGImage = vImageCreateCGImageFromBuffer(&destBuffer, &format, ...) 
-        else { return nil }
-    // ...
+
+    return String(cString: buffer)
 }
 ```
 
-多亏了 `defer`，`destData` 才能无论在哪个点退出函数都可以被释放。
+尽管 `defer` 紧接着出现在 `allocate(capacity:)` 调用之后，但它要等到当前区域结束时才会被执行。多亏了 `defer`，`buffer` 才能无论在哪个点退出函数都可以被释放。
 
-安全又干净，Swift 优势发挥到极致。
+考虑在任何需要配对调用的 API 上都使用 `defer`，比如 `allocate(capacity:)` / `deallocate()`、`wait()` / `signal()` 和 `open()` / `close()`。这样的话，你不仅可以消除一种程序员易犯的错误，还能让 Dijkstra 自豪地用它的母语德语说：「Goed gedaan!」。
 
-> `defer` 的 block 执行顺序和书写的顺序是相反的，这种相反的顺序是必要的，是为了确保每样东西的 defer block 在被创建的时候，该元素依然在当前上下文中存在。
-
+### 
 
 ### (其他情况下)  Defer 会带来坏处
 
@@ -263,4 +248,3 @@ postfix func ++(inout x: Int) -> Int {
 ---
 
 「聪明的程序员明白自己的局限性」，我们必须权衡每种语言特性的好处和其成本。类似于 `guard` 的新特性能让代码流程上更线性，可读性更高，就应该尽可能使用。同样 `defer` 也解决了重要的问题，但是会强迫我们一定要找到它声明的地方才能追踪到其销毁的方法，因为声明方法很容易被滚动出了视野之外，所以应该尽可能遵循它出现的初衷尽可能少地使用，避免造成混淆和晦涩。
-
