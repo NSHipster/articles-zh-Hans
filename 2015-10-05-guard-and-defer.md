@@ -44,7 +44,7 @@ among programmers and their ill-considered online diatribes.
 Because (as usual) Dijkstra was making an excellent point:
 **the structure of code should reflect its behavior**.
 
-很遗憾，他的文章通常只因为使《\_\_\_\_有害论》这种文章标题在程序员中流行起来，还有网上对这些论文不妥当的抨击出现时，才会被想起。因为 Dijkstra （照常）提出了一个很好的观点：**代码结构应该反映其行为。**
+很遗憾，他的文章通常只因为使《\_\_\_\_有害论》这种文章标题在程序员中流行起来，还有网上对这些论文不妥当的抨击出现时，才会被想起。因为 Dijkstra（照常）提出了一个很好的观点：**代码结构应该反映其行为。**
 
 Swift 2.0 introduced two new control statements
 that aimed to simplify and streamline the programs we write:
@@ -367,7 +367,121 @@ _"Goed gedaan!" he'd say, in his native Dutch_.
 
 考虑在任何需要配对调用的 API 上都使用 `defer`，比如 `allocate(capacity:)` / `deallocate()`、`wait()` / `signal()` 和 `open()` / `close()`。这样的话，你不仅可以消除一种程序员易犯的错误，还能让 Dijkstra 自豪地用它的母语德语说：「Goed gedaan!」。
 
-### (其他情况下)  Defer 会带来坏处
+### Deferring Frequently
+### 多次推迟
+
+If you use multiple `defer` statements in the same scope,
+they're executed in reverse order of appearance ---
+like a stack.
+This reverse order is a vital detail,
+ensuring everything that was in scope when a deferred block was created
+will still be in scope when the block is executed.
+
+如果在同一个作用域内使用多个 `defer` 语句，它们会根据出现顺序反过来执行——像栈一样。这个反序是非常重要的细节，保证了被延迟的代码块创建时作用域内存在的东西，在代码块执行同样存在。
+
+For example,
+running the following code prints the output below:
+
+举个例子，执行这段代码会得到下面的输出：
+
+```swift
+func procrastinate() {
+    defer { print("wash the dishes") }
+    defer { print("take out the recycling") }
+    defer { print("clean the refrigerator") }
+
+    print("play videogames")
+}
+```
+
+<samp>
+play videogames<br/>
+clean the refrigerator<br/>
+take out the recycling<br/>
+wash the dishes<br/>
+</samp>
+
+> What happens if you nest `defer` statements, like this?
+
+> 如果你像这样嵌套 `defer` 语句，会怎么样？
+
+```swift
+defer { defer { print("clean the gutter") } }
+```
+
+> Your first thought might be that it pushes the statement
+> to the very bottom of the stack.
+> But that's not what happens.
+> Think it through,
+> and then test your hypothesis in a Playground.
+
+> 你的第一想法可能是语句会被压入栈的最底部。但并不是这样的。仔细想一想，然后在 Playground 里验证你的猜想。
+
+### Deferring Judgement
+### 判断推迟
+
+If a variable is referenced in the body of a `defer` statement,
+its final value is evaluated.
+That is to say:
+`defer` blocks don't capture the current value of a variable.
+
+如果在 `defer` 语句中引用了一个变量，执行时会用到变量最终的值。换句话说：`defer` 代码块不会捕获变量当前的值。
+
+If you run this next code sample,
+you'll get the output that follows:
+
+如果你运行这段代码，你会得到下面的输出：
+
+```swift
+func flipFlop() {
+    var position = "It's pronounced /ɡɪf/"
+    defer { print(position) }
+
+    position = "It's pronounced /dʒɪf/"
+    defer { print(position) }
+}
+```
+
+<samp>
+It's pronounced /dʒɪf/ <br/>
+It's pronounced /dʒɪf/
+</samp>
+
+### Deferring Demurely
+### 端庄的推迟
+
+Another thing to keep in mind
+is that `defer` blocks can't break out of their scope.
+So if you try to call a method that can throw,
+the error can't be passed to the surrounding context.
+
+另一件需要注意的事情，那就是 `defer` 代码块无法跳出它所在的作用域。因此如你尝试调用一个会 throw 的方法，抛出的错误就无法传递到其周围的上下文。
+
+```swift
+func burnAfterReading(file url: URL) throws {
+    defer { try FileManager.default.removeItem(at: url) }
+    // 🛑 Errors not handled
+
+    let string = try String(contentsOf: url)
+}
+```
+
+Instead,
+you can either ignore the error by using `try?`
+or simply move the statement out of the `defer` block
+and at the end of the function to execute conventionally.
+
+作为替代，你可以使用 `try?` 来无视掉错误，或者直接将语句移出 `defer` 代码块，将其放到函数的最后，正常的执行。
+
+### (Any Other) Defer Considered Harmful
+###（其他情况下）Defer 会带来坏处
+
+As handy as the `defer` statement is,
+be aware of how its capabilities can lead to confusing,
+untraceable code.
+It may be tempting to use `defer` in cases
+where a function needs to return a value that should also be modified,
+as in this typical implementation of the postfix `++` operator:
 
 虽然 `defer` 像一个语法糖一样，但也要小心使用避免形成容易误解、难以阅读的代码。在某些情况下你可能会尝试用 `defer` 来对某些值返回之前做最后一步的处理，例如说在后置运算符 `++` 的实现中：
 
@@ -379,6 +493,9 @@ postfix func ++(inout x: Int) -> Int {
 }
 ```
 
+In this case, `defer` offers a clever alternative.
+Why create a temporary variable when we can just defer the increment?
+
 在这种情况下，可以用 `defer` 来进行一个很另类的操作。如果能在 defer 中处理的话为什么要创建临时变量呢？ 
 
 ```swift
@@ -388,8 +505,27 @@ postfix func ++(inout x: Int) -> Int {
 }
 ```
 
+Clever indeed, yet this inversion of the function's flow harms readability.
+Using `defer` to explicitly alter a program's flow,
+rather than to clean up allocated resources,
+will lead to a twisted and tangled execution process.
+
 这种写法确实聪明，但这样却颠倒了函数的逻辑顺序，极大降低了代码的可读性。应该严格遵循 `defer` 在整个程序最后运行以释放已申请资源的原则，其他任何使用方法都可能让代码乱成一团。
 
 ---
 
-「聪明的程序员明白自己的局限性」，我们必须权衡每种语言特性的好处和其成本。类似于 `guard` 的新特性能让代码流程上更线性，可读性更高，就应该尽可能使用。同样 `defer` 也解决了重要的问题，但是会强迫我们一定要找到它声明的地方才能追踪到其销毁的方法，因为声明方法很容易被滚动出了视野之外，所以应该尽可能遵循它出现的初衷尽可能少地使用，避免造成混淆和晦涩。
+"As wise programmers aware of our limitations,"
+we must weigh the benefits of each language feature against its costs.
+
+「聪明的程序员明白自己的局限性」，我们必须权衡每种语言特性的好处和其成本。
+
+A new statement like `guard` leads to a more linear, more readable program;
+apply it as widely as possible.
+
+类似于 `guard` 的新特性能让代码流程上更线性，可读性更高，就应该尽可能使用。
+
+Likewise, `defer` solves a significant challenge
+but forces us to keep track of its declaration as it scrolls out of sight;
+reserve it for its minimum intended purpose to prevent confusion and obscurity.
+
+同样 `defer` 也解决了重要的问题，但是会强迫我们一定要找到它声明的地方才能追踪到其销毁的方法，因为声明方法很容易被滚动出了视野之外，所以应该尽可能遵循它出现的初衷尽可能少地使用，避免造成混淆和晦涩。
