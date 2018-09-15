@@ -368,7 +368,7 @@ _"Goed gedaan!" he'd say, in his native Dutch_.
 考虑在任何需要配对调用的 API 上都使用 `defer`，比如 `allocate(capacity:)` / `deallocate()`、`wait()` / `signal()` 和 `open()` / `close()`。这样的话，你不仅可以消除一种程序员易犯的错误，还能让 Dijkstra 自豪地用它的母语德语说：「Goed gedaan!」。
 
 ### Deferring Frequently
-### 多次推迟
+### 经常 defer
 
 If you use multiple `defer` statements in the same scope,
 they're executed in reverse order of appearance ---
@@ -418,7 +418,7 @@ defer { defer { print("clean the gutter") } }
 > 你的第一想法可能是语句会被压入栈的最底部。但并不是这样的。仔细想一想，然后在 Playground 里验证你的猜想。
 
 ### Deferring Judgement
-### 判断推迟
+### 正确 defer
 
 If a variable is referenced in the body of a `defer` statement,
 its final value is evaluated.
@@ -448,7 +448,7 @@ It's pronounced /dʒɪf/
 </samp>
 
 ### Deferring Demurely
-### 端庄的推迟
+### 仔细 defer
 
 Another thing to keep in mind
 is that `defer` blocks can't break out of their scope.
