@@ -1,13 +1,10 @@
 ---
 title: CMMotionActivity
 author: Mattt
+translator: Bei Li
 category: Cocoa
 excerpt: >
-  Today's iPhones are packed with a full complement of sensors that includes
-  cameras, barometers, gyroscopes, magnetometers, and accelerometers.
-  Like humans, they use permutations of different sensory information
-  to make determinations about their position and orientation,
-  often by means quite similar to our own biomechanical processes.
+  如今的 iPhone 都有着一整套的传感器，包括相机、气压计、陀螺仪、磁强计和加速规。和人类一样，它们使用不同感觉信息的组合来确定其位置和朝向，通常和我们自身的生物力学过程非常相似。
 status:
   swift: 4.2
 ---
@@ -22,11 +19,15 @@ which sense changes in rotation,
 and the <dfn>otoliths</dfn>,
 which are sensitive to horizontal and vertical forces.
 
+人类通过组合视觉、本体感觉和前庭系统得到的感觉信息来察觉自身的运动。其中前庭系统起到主要作用，前庭系统由感觉旋转的<dfn>半规管</dfn>和对水平与垂直受力敏感的<dfn>耳石</dfn>构成。
+
 Today's iPhones are packed with a full complement of sensors that includes
 cameras, barometers, gyroscopes, magnetometers, and accelerometers.
 Like humans, they use permutations of different sensory information
 to make determinations about their position and orientation,
 often by means quite similar to our own biomechanical processes.
+
+如今的 iPhone 都有着一整套的传感器，包括相机、气压计、陀螺仪、磁强计和加速规。和人类一样，它们使用不同感觉信息的组合来确定其位置和朝向，通常和我们自身的生物力学过程非常相似。
 
 Making sense of sensory inputs ---
 no matter their origin ---
@@ -36,11 +37,15 @@ There's just so much information to consider.
 and we're still confused by newfangled inventions like
 elevators, planes, and roller coasters.)
 
+让感觉输入有意义——不管它们是从哪里来的——是非常有挑战性的。需要考虑的信息实在太多了。（见鬼，我们这个种族花了小几百万年才搞定这件事，然而我们还是会被像电梯、飞机和过山车这些新奇的发明弄晕。）
+
 After several major OS releases and hardware versions,
 Apple devices have become adroit at differentiating between different
 means of locomotion.
 But before you run off and try to write your own implementation,
 stop and consider using the built-in APIs discussed in this week's article.
+
+经过几个版本的系统与硬件更新，苹果的设备变得擅长于区分运动的不同意义。在你跑去尝试自己实现前，停下来考虑一下使用这周文章中讨论的内置 API。
 
 ---
 
