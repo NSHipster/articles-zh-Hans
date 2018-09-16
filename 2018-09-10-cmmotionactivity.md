@@ -55,6 +55,8 @@ and tells you (to what degree of certainty)
 whether the user is currently moving,
 and if they're walking, running, biking, or driving in an automobile.
 
+在 iOS 和 watchOS 上，`CMMotionActivityManager` 处理设备中传感器的原始数据并告诉你（有多确定）用户是否正在移动，和用户是在行走、跑步、骑行或者开车。
+
 To use this API,
 you create an activity manager
 and start listening for activity updates
@@ -62,6 +64,8 @@ using the `startActivityUpdates` method.
 Each time the device updates the motion activity,
 it executes the specified closure,
 passing a `CMMotionActivity` object.
+
+要使用这个 API，首先创建一个活动管理器，然后使用 `startActivityUpdates` 方法来开始监听活动更新。每当设备更新了运动相关活动，它就会执行指定的闭包，并传入一个 `CMMotionActivity` 对象。
 
 ```swift
 let manager = CMMotionActivityManager()
@@ -97,9 +101,13 @@ By using dedicated hardware,
 the system can offload all sensor processing from the CPU
 and minimize energy usage.
 
+`CMMotionActivityManager` 由 Core Motion 框架提供。支持 Core Motion 的设备都装备了一个运动辅助处理器。通过使用专用硬件，系统可以将所有传感器处理工作从 CPU 上移除掉，并减少电量的使用。
+
 The first of the _M-series_ coprocessors was the M7,
 which arrived in September 2013 with the iPhone 5S.
 This coincided with the release of iOS 7 and the Core Motion APIs.
+
+第一款 **M 系列**辅助处理器是 M7，在 2013 年九月与 iPhone 5S 一同面世。iOS 7 和 Core Motion API 也与此同时发布。
 
 ## Feature Drivers
 
