@@ -247,10 +247,13 @@ and use that information to determine the correct behavior for your app.
 每个 `CMMotionActivity` 对象还包括了一个其值可能为 `.low`、`.medium` 或 `.high` 的 `confidence` 属性。不幸的是，文档没有提供多少关于这些值的有用信息，或者如何使用。对于这种情况，推荐使用一种经验性的方法：实际测试你的应用，观察不同情况下出现的 `confidence` 值，使用这些信息来修正应用的行为。
 
 ## Combining with Location Queries
+## 与位置查询组合使用
 
 Depending on your use case,
 it might make sense to coordinate Core Motion readings with
 [Core Location](https://nshipster.com/core-location-in-ios-8/) data.
+
+根据你的实际情况，组合使用 Core Motion 和 [Core Location](https://nshipster.cn/core-location-in-ios-8/) 数据可能是有意义的。
 
 You can combine changes in location over time
 with low-confidence motion activity readings
@@ -258,13 +261,21 @@ to increase accuracy.
 Here are some general guidelines for typical ranges of speeds
 for each of the modes of transportation:
 
+你可以组合一段时间的位置变化和把握比较低的运动活动数据来提高精确度。这里有一些不同移动方式典型速度范围的指导方针：
+
 - Walking speeds typically peak at 2.5 meters per second (5.6 mph, 9 km/h)
+- 步行速度通常最高能达到 2.5 米每秒（5.6 mph, 9 km/h）
 - Running speeds range from 2.5 to 7.5 meters per second (5.6 – 16.8 mph, 9 – 27 km/h)
+- 跑步速度范围从 2.5 到 7.5 米每秒（5.6 – 16.8 mph, 9 – 27 km/h）
 - Cycling speeds range from 3 to 12 meters per second (6.7 – 26.8 mph, 10.8 – 43.2 km/h)
+- 骑行速度范围从 3 到 12 米每秒（6.7 – 26.8 mph, 10.8 – 43.2 km/h）
 - Automobile speeds can exceed 100 meters per second (220 mph, 360 km/h)
+- 汽车的速度可以超过 100 米每秒（220 mph, 360 km/h）
 
 Alternatively, you might use location data to change the UI
 depending on whether the current location is in a body of water.
+
+或者，你可能会使用位置数据来改变 UI，取决于现在的位置是否在一片水域。
 
 ```swift
 if currentLocation.intersects(waterRegion) {
@@ -283,12 +294,18 @@ Reason being,
 location data requires turning on the GPS and/or cellular radio,
 which are both energy intensive.
 
+然而，位置数据应该只在绝对必要的时候再查询——当你需要查询时，也应该尽量少的查询，比如只检测显著的位置改变。这样的原因是，获取位置数据要求使用 GPS 且/或移动网络，它们都非常耗电。
+
 ---
 
 `CMMotionActivityManager` is one of many great APIs in Core Motion
 that you can use to build immersive, responsive apps.
 
+`CMMotionActivityManager` 是 Core Motion 里那些好用 API 的其中一个，你可以使用它来构造沉浸、反应灵敏的应用。
+
 If you haven't considered the potential of
 incorporating device motion into your app
 (or maybe haven't looked at Core Motion for a while),
 you might be surprised at what's possible.
+
+如果你还没有考虑过将设备运动信息纳入应用的可能性（或者可能你很久没有关注过 Core Motion），你可能会被它能做到的事情惊讶到。
