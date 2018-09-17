@@ -110,11 +110,14 @@ This coincided with the release of iOS 7 and the Core Motion APIs.
 第一款 **M 系列**辅助处理器是 M7，在 2013 年九月与 iPhone 5S 一同面世。iOS 7 和 Core Motion API 也与此同时发布。
 
 ## Feature Drivers
+## 司机功能
 
 Possibly the most well-known use of motion activities is
 ["Do Not Disturb While Driving"](https://support.apple.com/en-us/HT208090),
 added in iOS 11.
 Automotive detection got much better with the introduction of this feature.
+
+可能运动活动最广为人知的使用是 iOS 11 中新增的[「驾驶勿扰」](https://support.apple.com/zh-cn/HT208090)功能。这项功能推出后，对于开车的检测变好了很多。
 
 > At low speeds, it's hard to distinguish automobile travel from other means
 > using accelerometer data alone.
@@ -123,6 +126,8 @@ Automotive detection got much better with the introduction of this feature.
 > Because cars and other vehicles are often enclosed in metal,
 > electromagnetic flux is reduced.
 
+> 在速度比较低的情况下，只使用加速规的数据是很难区分驾车行驶和其他活动的。我们只能猜测，有可能 iPhone 是使用磁强计的数据来实现这项功能的。因为汽车和其他机动车辆通常被金属围绕着，电磁通量会被减少。
+
 Beyond safety concerns,
 some apps might change their behavior
 according to the current mode of transportation.
@@ -130,6 +135,8 @@ For example,
 a delivery service app might relay changes in motion activity to a server
 to recalculate estimated ETA or change the UI to communicate
 that the courier has parked their vehicle and are now approaching by foot.
+
+除了安全相关的考虑，一些应用可能会根据当前的交通模式改变行为。比如，一个快递应用可能会发送运动活动改变到服务器来重新计算预计到达时间，或者更新 UI 来表明快递员已经停下了车子，正在走路接近。
 
 ## Traveling Without Moving
 
