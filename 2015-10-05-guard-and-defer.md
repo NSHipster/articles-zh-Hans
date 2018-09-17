@@ -1,18 +1,33 @@
 ---
 title: guard & defer
-author: Nate Cook
-translator: Croath Liu
+author: Mattt & Nate Cook
+authors:
+    - Nate Cook
+    - Mattt
+translator: 
+    - Croath Liu
+    - Bei Li
 category: Swift
-excerpt: "最近更新的 Swift 2.0 带来了两个新的能够简化程序和提高效率的控制流表达形式：`guard` 和 `defer`。前者可以让代码编写更流畅，后者能够让执行推迟。我们应该如何使用这两个新的声明方式呢？`guard` 和 `defer` 将如何帮我们厘清程序和进程间的对应关系呢？"
+excerpt: >
+    Swift 2.0 带来了两个新的能够简化程序和提高效率的控制流表达形式。前者可以让代码编写更流畅，后者则相反的能够让执行推迟。
+revisions:
+    "2015-10-05": 首次发布
+    "2018-08-01": 为 Swift 4.2 更新
 status:
-    swift: 2.0
+    swift: 4.2
+    reviewed: August 1, 2018
 ---
 
 > 「我们应该（聪明的程序员明白自己的局限性）尽力……让文本里的程序（program）和时间轴上的进程（process）的对应尽量简单。」
+>
+> —[Edsger W. Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra),
+> [《Go To 有害论》](https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf)
 
-> —[Edsger W. Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra), 《Go To 有害论》
+很遗憾，他的文章通常只因为使《\_\_\_\_有害论》这种文章标题在程序员中流行起来，还有网上对这些论文不妥当的抨击出现时，才会被想起。因为 Dijkstra（照常）提出了一个很好的观点：**代码结构应该反映其行为。**
 
-最近更新的 Swift 2.0 带来了两个新的能够简化程序和提高效率的控制流表达形式：`guard` 和 `defer`。前者可以让代码编写更流畅，后者能够让执行推迟。我们应该如何使用这两个新的声明方式呢？`guard` 和 `defer` 将如何帮我们厘清程序和进程间的对应关系呢？
+Swift 2.0 带来了两个新的能够简化程序和提高效率的控制流表达形式：`guard` 和 `defer`。前者可以让代码编写更流畅，后者能够让执行推迟。
+
+我们应该如何使用这两个新的声明方式呢？`guard` 和 `defer` 将如何帮我们厘清程序和进程间的对应关系呢？
 
 我们 defer（推迟）一下 `defer` 先看 `guard`。
 
@@ -20,148 +35,260 @@ status:
 
 ## guard
 
-如果说在 [Swift 1.2](/swift-1.2/) 中介绍的并行 optional 绑定领导了对 [厄运金字塔](http://www.scottlogic.com/blog/2014/12/08/swift-optional-pyramids-of-doom.html) 的革命，那么 `guard` 声明则与之一并将金字塔摧毁。
+`guard` 是一个要求表达式的值为 `true` 从而继续执行的条件语句。如果表达式为 `false`，则会执行必须提供的 `else` 分支。
 
-`guard` 是一个新的条件声明，表示如果条件不满足时退出当前 block。任何被声明成 `guard` 的 optional 绑定在其他函数或 block 中都是可用的，并强制在 `else` 中用 `return` 来退出函数、`continue` 或 `break` 退出循环，或者用一个类似  `fatalError()` 的 `@noreturn` 函数来退出，以离开当前的上下文：
+```swift
+func sayHello(numberOfTimes: Int) {
+    guard numberOfTimes > 0 else {
+        return
+    }
+
+    for _ in 1...numberOfTimes {
+        print("Hello!")
+    }
+}
+```
+
+`guard` 语句中的 `else` 分支必须退出当前的区域，通过使用 `return` 来退出函数，`continue` 或者 `break` 来退出循环，或者使用像 `fatalError(_:file:line:)` 这种返回 [`Never`](https://nshipster.com/never) 的函数。
+
+`guard` 语句和 optional 绑定组合在一起非常好用。在 `guard` 语句的条件里进行的 optional 绑定可以在函数或闭包其后的部分使用。
+
+对比一下 `guard-let` 语句和 `if-let` 语句中的 optional 绑定：
+
+```swift
+var name: String?
+
+if let name = name {
+    // name 在这里面不是 optional（类型是 String）
+}
+// name 在外面是 optional（类型是 String?）
+
+
+guard let name = name else {
+    return
+}
+
+// name 从这里开始都不是 optional 了（类型是 String）
+```
+
+如果说在 [Swift 1.2](/swift-1.2/) 中介绍的并行 optional 绑定领导了对 [厄运金字塔](http://www.scottlogic.com/blog/2014/12/08/swift-optional-pyramids-of-doom.html) 的革命，那么 `guard` 声明则与之一并将金字塔摧毁。
 
 ```swift
 for imageName in imageNamesList {
-    guard let image = UIImage(named: imageName) 
+    guard let image = UIImage(named: imageName)
         else { continue }
-    
+
     // do something with image
 }
 ```
 
-我们来对比一下使用 `guard` 关键字之后能如何帮助我们避免错误。例如，我们创建一个字符串转为 `UInt8` 的初始化方法。`UInt8` 已经实现了一个可以接受 `String` 的初始化方法并且可以抛出错误，但是如果上下文出现了我们不能预知的问题，比如说格式错误了，或者超出了数值边界，应该怎么办呢？我们新实现的初始化方法将抛出一个能够提供更多错误信息的 `ConversionError`。
+### 使用 guard 来避免过多的缩进和错误
+
+我们来对比一下使用 `guard` 关键字之后能如何改善代码且帮助我们避免错误。
+
+比如，我们要实现一个 `readBedtimeStory()` 函数：
 
 ```swift
-enum ConversionError : ErrorType {
-    case InvalidFormat, OutOfBounds, Unknown
+enum StoryError: Error {
+    case missing
+    case illegible
+    case tooScary
 }
 
-extension UInt8 {
-    init(fromString string: String) throws {
-        // check the string's format
-        if let _ = string.rangeOfString("^\\d+$", options: [.RegularExpressionSearch]) {
-
-            // make sure the value is in bounds
-            if string.compare("\(UInt8.max)", options: [.NumericSearch]) != NSComparisonResult.OrderedAscending {
-                throw ConversionError.OutOfBounds
-            }
-            
-            // do the built-in conversion
-            if let value = UInt8(string) {
-                self.init(value)
+func readBedtimeStory() throws {
+    if let url = Bundle.main.url(forResource: "book",
+                               withExtension: "txt")
+    {
+        if let data = try? Data(contentsOf: url),
+            let story = String(data: data, encoding: .utf8)
+        {
+            if story.contains("👹") {
+                throw StoryError.tooScary
             } else {
-                throw ConversionError.Unknown
+                print("Once upon a time... \(story)")
             }
+        } else {
+            throw StoryError.illegible
         }
-        
-        throw ConversionError.InvalidFormat
+    } else {
+        throw StoryError.missing
     }
 }
 ```
 
-注意这个例子中格式检查和抛出错误格式的代码距离有多远，写出这样的代码并不理想。此外，真正的初始化被放在了两层深的 `if` 嵌套中。如果我们的代码写的有问题，里面有 bug 的话，根本不能一眼看出问题在哪。这里面有什么问题你能立刻发现吗？如果我不告诉你的话，你能知道到底是哪部分代码出了问题吗？
+要读一个睡前故事，我们需要能找到一本书，这本故事书必须要是可读的，并且故事不能太吓人（**请不要让怪物出现在书的结尾，谢谢你！**）。
 
-下面我们来用 `guard` 改善一下这段代码：
+请注意 `throw` 语句离检查本身有多远。你需要读完整个方法来找到如果没有 `book.txt` 会发生什么。
+
+像一本好书一样，代码应该讲述一个故事：有着易懂的情节，清晰的开端、发展和结尾。（请尝试不要写太多「后现代」风格的代码。）
+
+使用 `guard` 语句组织代码可以让代码读起来更加的线性：
 
 ```swift
-extension UInt8 {
-    init(fromString string: String) throws {
-        // check the string's format
-        guard let _ = string.rangeOfString("^\\d+$", options: [.RegularExpressionSearch]) 
-            else { throw ConversionError.InvalidFormat }
-        
-        // make sure the value is in bounds
-        guard string.compare("\(UInt8.max)", options: [.NumericSearch]) != NSComparisonResult.OrderedDescending 
-            else { throw ConversionError.OutOfBounds }
-
-        // do the built-in conversion
-        guard let value = UInt(string) 
-            else { throw ConversionError.Unknown }
-        
-        self.init(value)
+func readBedtimeStory() throws {
+    guard let url = Bundle.main.url(forResource: "book",
+                                  withExtension: "txt")
+    else {
+        throw StoryError.missing
     }
+
+    guard let data = try? Data(contentsOf: url),
+        let story = String(data: data, encoding: .utf8)
+    else {
+        throw StoryError.illegible
+    }
+
+    if story.contains("👹") {
+        throw StoryError.tooScary
+    }
+
+    print("Once upon a time ...\(story)")
 }
 ```
 
-这样就好多了。每一个错误都在相应的检查之后立刻被抛出，所以我们可以按照左手边的代码顺序来梳理工作流的顺序。
+**这样就好多了！** 每一个错误都在相应的检查之后立刻被抛出，所以我们可以按照左手边的代码顺序来梳理工作流的顺序。
 
-更重要的是，用 `guard` 能够避免我们第一次写代码时候的逻辑错误，第一次我们写的最后一个 `throw` 每次都被调用了，因为它不在 `else` 里面。使用 `guard` 编译器会强制我们在 else-block 里跳出当前上下文，这保证了 `throw` 只在他们应该出现的时候被调用。
+### 不要在 guard 中双重否定
 
-同时请注意中间那个 `guard` 语句并不是严格必需的。因为它并不能转换一个 optional 值，所以只用 `if` 语句也能完美工作，在这种情况下使用 `guard` 只是从控制层面保证了安全 —— 让编译器确保如果测试失败也能够退出初始化函数，所以就没有必要为每一个 `throw` 或可能产生错误的地方写注释来避免逻辑混淆了。
+不要滥用这个新的流程控制机制——特别是在条件表达式已经表示否定的情况下。
+
+举个例子，如果你想要在一个字符串为空是提早退出，不要这样写：
+
+```swift
+// 啊？
+guard !string.isEmpty else {
+    return
+}
+```
+
+保持简单。自然的走下去。避免双重否定。
+
+```swift
+// 噢！
+if string.isEmtpy {
+    return
+}
+```
 
 ## defer
 
-在错误处理方面，`guard` 和新的 `throw` 语法之间，Swift 2.0 也鼓励用尽早返回错误（这也是 NSHipster 最喜欢的方式）来代替嵌套 if 的处理方式。尽早返回让处理更清晰了，但是已经被初始化（可能也正在被使用）的资源必须在返回前被处理干净。
+在错误处理方面，`guard` 和新的 `throw` 语法之间，Swift 鼓励用尽早返回错误（这也是 NSHipster 最喜欢的方式）来代替嵌套 if 的处理方式。尽早返回让处理更清晰了，但是已经被初始化（可能也正在被使用）的资源必须在返回前被处理干净。
 
-新的 `defer` 关键字为此提供了安全又简单的处理方式：声明一个 block，当前代码执行的闭包退出时会执行该 block。下面的代码是使用 Accelerate framework 对 `vImage` 进行操作的一些函数（这个函数是从 [image resizing](https://nshipster.com/image-resizing/) 这篇文章中截取的）：
+`defer` 关键字为此提供了安全又简单的处理方式：声明一个 block，当前代码执行的闭包退出时会执行该 block。
+
+看看下面这个包装了系统调用 `gethostname(2)` 的函数，用来返回当前系统的[主机名称](https://zh.wikipedia.org/zh-cn/主機名稱)：
 
 ```swift
-func resizeImage(url: NSURL) -> UIImage? {
-    // ...
-    let dataSize: Int = ...
-    let destData = UnsafeMutablePointer<UInt8>.alloc(dataSize)
-    var destBuffer = vImage_Buffer(data: destData, ...)
-    
-    // scale the image from sourceBuffer to destBuffer
-    var error = vImageScale_ARGB8888(&sourceBuffer, &destBuffer, ...)
-    guard error == kvImageNoError
-        else {
-            destData.dealloc(dataSize)  // 1
-            return nil
-        }
-    
-    // create a CGImage from the destBuffer
-    guard let destCGImage = vImageCreateCGImageFromBuffer(&destBuffer, &format, ...) 
-        else {
-            destData.dealloc(dataSize)  // 2
-            return nil
-        }
-    destData.dealloc(dataSize)          // 3
-    // ...
+import Darwin
+
+func currentHostName() -> String {
+    let capacity = Int(NI_MAXHOST)
+    let buffer = UnsafeMutablePointer<Int8>.allocate(capacity: capacity)
+
+    guard gethostname(buffer, capacity) == 0 else {
+        buffer.deallocate()
+        return "localhost"
+    }
+
+    let hostname = String(cString: buffer)
+    buffer.deallocate()
+
+    return hostname
 }
 ```
 
-这里有一个在最开始就创建的 `UnsafeMutablePointer<UInt8>` 用于存储目标数据，但是我 *既要* 在错误发生后销毁它，*又要* 在正常流程下不再使用它时对其进行销毁。
+这里有一个在最开始就创建的 `UnsafeMutablePointer<UInt8>` 用于存储目标数据，但是我**既要**在错误发生后销毁它，**又要**在正常流程下不再使用它时对其进行销毁。
 
 这种设计很容易导致错误，而且不停地在做重复工作。
 
-`defer` 语句能让我们在做完主体工作之后不会忘记脏数据，也能让代码更简洁。虽然 `defer` block 紧接着 `alloc()` 出现，但会等到当前上下文结束的时候才真正执行：
+通过使用 `defer` 语句，我们可以排除潜在的错误并且简化代码：
 
 ```swift
-func resizeImage(url: NSURL) -> UIImage? {
-    // ...
-    let dataSize: Int = ...
-    let destData = UnsafeMutablePointer<UInt8>.alloc(dataSize)
-    defer {
-        destData.dealloc(dataSize)
+func currentHostName() -> String {
+    let capacity = Int(NI_MAXHOST)
+    let buffer = UnsafeMutablePointer<Int8>.allocate(capacity: capacity)
+    defer { buffer.deallocate() }
+
+    guard gethostname(buffer, capacity) == 0 else {
+        return "localhost"
     }
-    
-    var destBuffer = vImage_Buffer(data: destData, ...)
-    
-    // scale the image from sourceBuffer to destBuffer
-    var error = vImageScale_ARGB8888(&sourceBuffer, &destBuffer, ...)
-    guard error == kvImageNoError 
-        else { return nil }
-    
-    // create a CGImage from the destBuffer
-    guard let destCGImage = vImageCreateCGImageFromBuffer(&destBuffer, &format, ...) 
-        else { return nil }
-    // ...
+
+    return String(cString: buffer)
 }
 ```
 
-多亏了 `defer`，`destData` 才能无论在哪个点退出函数都可以被释放。
+尽管 `defer` 紧接着出现在 `allocate(capacity:)` 调用之后，但它要等到当前区域结束时才会被执行。多亏了 `defer`，`buffer` 才能无论在哪个点退出函数都可以被释放。
 
-安全又干净，Swift 优势发挥到极致。
+考虑在任何需要配对调用的 API 上都使用 `defer`，比如 `allocate(capacity:)` / `deallocate()`、`wait()` / `signal()` 和 `open()` / `close()`。这样的话，你不仅可以消除一种程序员易犯的错误，还能让 Dijkstra 自豪地用它的母语德语说：「Goed gedaan!」。
 
-> `defer` 的 block 执行顺序和书写的顺序是相反的，这种相反的顺序是必要的，是为了确保每样东西的 defer block 在被创建的时候，该元素依然在当前上下文中存在。
+### 经常 defer
 
+如果在同一个作用域内使用多个 `defer` 语句，它们会根据出现顺序反过来执行——像栈一样。这个反序是非常重要的细节，保证了被延迟的代码块创建时作用域内存在的东西，在代码块执行同样存在。
 
-### (其他情况下)  Defer 会带来坏处
+举个例子，执行这段代码会得到下面的输出：
+
+```swift
+func procrastinate() {
+    defer { print("wash the dishes") }
+    defer { print("take out the recycling") }
+    defer { print("clean the refrigerator") }
+
+    print("play videogames")
+}
+```
+
+<samp>
+play videogames<br/>
+clean the refrigerator<br/>
+take out the recycling<br/>
+wash the dishes<br/>
+</samp>
+
+> 如果你像这样嵌套 `defer` 语句，会怎么样？
+
+```swift
+defer { defer { print("clean the gutter") } }
+```
+
+> 你的第一想法可能是语句会被压入栈的最底部。但并不是这样的。仔细想一想，然后在 Playground 里验证你的猜想。
+
+### 正确 defer
+
+如果在 `defer` 语句中引用了一个变量，执行时会用到变量最终的值。换句话说：`defer` 代码块不会捕获变量当前的值。
+
+如果你运行这段代码，你会得到下面的输出：
+
+```swift
+func flipFlop() {
+    var position = "It's pronounced /ɡɪf/"
+    defer { print(position) }
+
+    position = "It's pronounced /dʒɪf/"
+    defer { print(position) }
+}
+```
+
+<samp>
+It's pronounced /dʒɪf/ <br/>
+It's pronounced /dʒɪf/
+</samp>
+
+### 仔细 defer
+
+另一件需要注意的事情，那就是 `defer` 代码块无法跳出它所在的作用域。因此如你尝试调用一个会 throw 的方法，抛出的错误就无法传递到其周围的上下文。
+
+```swift
+func burnAfterReading(file url: URL) throws {
+    defer { try FileManager.default.removeItem(at: url) }
+    // 🛑 Errors not handled
+
+    let string = try String(contentsOf: url)
+}
+```
+
+作为替代，你可以使用 `try?` 来无视掉错误，或者直接将语句移出 `defer` 代码块，将其放到函数的最后，正常的执行。
+
+### （其他情况下）Defer 会带来坏处
 
 虽然 `defer` 像一个语法糖一样，但也要小心使用避免形成容易误解、难以阅读的代码。在某些情况下你可能会尝试用 `defer` 来对某些值返回之前做最后一步的处理，例如说在后置运算符 `++` 的实现中：
 
@@ -186,5 +313,8 @@ postfix func ++(inout x: Int) -> Int {
 
 ---
 
-「聪明的程序员明白自己的局限性」，我们必须权衡每种语言特性的好处和其成本。类似于 `guard` 的新特性能让代码流程上更线性，可读性更高，就应该尽可能使用。同样 `defer` 也解决了重要的问题，但是会强迫我们一定要找到它声明的地方才能追踪到其销毁的方法，因为声明方法很容易被滚动出了视野之外，所以应该尽可能遵循它出现的初衷尽可能少地使用，避免造成混淆和晦涩。
+「聪明的程序员明白自己的局限性」，我们必须权衡每种语言特性的好处和其成本。
 
+类似于 `guard` 的新特性能让代码流程上更线性，可读性更高，就应该尽可能使用。
+
+同样 `defer` 也解决了重要的问题，但是会强迫我们一定要找到它声明的地方才能追踪到其销毁的方法，因为声明方法很容易被滚动出了视野之外，所以应该尽可能遵循它出现的初衷尽可能少地使用，避免造成混淆和晦涩。
