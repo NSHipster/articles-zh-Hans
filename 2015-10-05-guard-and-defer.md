@@ -4,14 +4,14 @@ author: Mattt & Nate Cook
 authors:
     - Nate Cook
     - Mattt
-translator: 
+translators: 
     - Croath Liu
     - Bei Li
 category: Swift
 excerpt: >
     Swift 2.0 带来了两个新的能够简化程序和提高效率的控制流表达形式。前者可以让代码编写更流畅，后者则相反的能够让执行推迟。
 revisions:
-    "2015-10-05": 首次发布
+    "2015-10-05": 首次发布
     "2018-08-01": 为 Swift 4.2 更新
 status:
     swift: 4.2
