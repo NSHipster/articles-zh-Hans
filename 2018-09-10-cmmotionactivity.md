@@ -45,7 +45,7 @@ means of locomotion.
 But before you run off and try to write your own implementation,
 stop and consider using the built-in APIs discussed in this week's article.
 
-经过几个版本的系统与硬件更新，苹果的设备变得擅长于区分运动的不同意义。在你跑去尝试自己实现前，停下来考虑一下使用这周文章中讨论的内置 API。
+经过几个版本的系统与硬件更新，苹果的设备变得擅长于区分不同运动方式。在你跑去尝试自己实现前，停下来考虑一下使用这周文章中讨论的内置 API。
 
 ---
 
@@ -101,13 +101,13 @@ By using dedicated hardware,
 the system can offload all sensor processing from the CPU
 and minimize energy usage.
 
-`CMMotionActivityManager` 由 Core Motion 框架提供。支持 Core Motion 的设备都装备了一个运动辅助处理器。通过使用专用硬件，系统可以将所有传感器处理工作从 CPU 上移除掉，并减少电量的使用。
+`CMMotionActivityManager` 由 Core Motion 框架提供。支持 Core Motion 的设备都装备了一个运动协处理器。通过使用专用硬件，系统可以将所有传感器处理工作从 CPU 上卸载掉，并减少电量的使用。
 
 The first of the _M-series_ coprocessors was the M7,
 which arrived in September 2013 with the iPhone 5S.
 This coincided with the release of iOS 7 and the Core Motion APIs.
 
-第一款 **M 系列**辅助处理器是 M7，在 2013 年九月与 iPhone 5S 一同面世。iOS 7 和 Core Motion API 也与此同时发布。
+第一款 **M 系列**协处理器是 M7，在 2013 年九月与 iPhone 5S 一同面世。iOS 7 和 Core Motion API 也与此同时发布。
 
 ## Feature Drivers
 ## 司机功能
@@ -149,7 +149,7 @@ as logic dictates that
 you can either be walking or driving a car at a given moment,
 but not both.
 
-`CMMotionActivity` 对每种运动类型都有一个布尔值属性，并且还有还有一个设备是否停滞的属性。这似乎违反直觉，逻辑上来说你在同一时间只能步行或者开车，但不能一起进行。
+`CMMotionActivity` 对每种运动类型都有一个布尔值属性，并且还有还有一个设备是否处于静止状态的属性。这似乎违反直觉，逻辑上来说你在同一时间只能步行或者开车，但不能一起进行。
 
 This point is clarified by the [`CMMotionActivity` documentation](https://developer.apple.com/documentation/coremotion/cmmotionactivity):
 
@@ -244,7 +244,7 @@ test your app in the field to
 see when different confidence values are produced
 and use that information to determine the correct behavior for your app.
 
-每个 `CMMotionActivity` 对象还包括了一个其值可能为 `.low`、`.medium` 或 `.high` 的 `confidence` 属性。不幸的是，文档没有提供多少关于这些值的有用信息，或者如何使用。对于这种情况，推荐使用一种经验性的方法：实际测试你的应用，观察不同情况下出现的 `confidence` 值，使用这些信息来修正应用的行为。
+每个 `CMMotionActivity` 对象还包括了一个其值可能为 `.low`、`.medium` 或 `.high` 的 `confidence` 属性。不幸的是，文档既没有提供多少关于这些值的有用信息，也没有它们要如何使用。对于这种情况，推荐使用一种经验性的方法：实际测试你的应用，观察不同情况下出现的 `confidence` 值，使用这些信息来修正应用的行为。
 
 ## Combining with Location Queries
 ## 与位置查询组合使用
@@ -301,11 +301,11 @@ which are both energy intensive.
 `CMMotionActivityManager` is one of many great APIs in Core Motion
 that you can use to build immersive, responsive apps.
 
-`CMMotionActivityManager` 是 Core Motion 里那些好用 API 的其中一个，你可以使用它来构造沉浸、反应灵敏的应用。
+`CMMotionActivityManager` 是 Core Motion 里那些好用 API 的其中一个，你可以使用它来构造沉浸般的、快速响应的应用。
 
 If you haven't considered the potential of
 incorporating device motion into your app
 (or maybe haven't looked at Core Motion for a while),
 you might be surprised at what's possible.
 
-如果你还没有考虑过将设备运动信息纳入应用的可能性（或者可能你很久没有关注过 Core Motion），你可能会被它能做到的事情惊讶到。
+如果你还没有考虑过将设备运动信息纳入应用的潜力（或者可能你很久没有关注过 Core Motion），你可能会被它能做到的事情惊讶到。
