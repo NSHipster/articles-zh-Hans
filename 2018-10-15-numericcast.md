@@ -1,6 +1,7 @@
 ---
 title: numericCast(_:)
 author: Mattt
+translator: Bei Li
 category: Swift
 excerpt: >
   Getting code to compile is different than doing things correctly.
@@ -11,12 +12,16 @@ status:
 
 Everyone has their favorite analogy to describe programming.
 
+每个人在描述编程时都有其最喜爱的类比。
+
 It's woodworking or it's knitting or it's gardening.
 Or maybe it's problem solving and storytelling and making art.
 That programming is like writing there is no doubt;
 the question is whether it's poetry or prose.
 And if programming is like music,
 it's always jazz for whatever reason.
+
+类比成木工、编织或者园艺。又或者可能类比成解决问题、讲故事或者制作艺术品。毫无疑问，编程与写作也很像；问题是更像诗歌还是散文。如果编程像音乐的话，不管怎么样它都应该是爵士乐。
 
 But perhaps the closest point of comparison for what we do all day
 comes from Middle Eastern folk tales:
@@ -28,6 +33,8 @@ No matter what you call them,
 you're certainly familiar with their habit of granting wishes,
 and the misfortune that inevitably causes.
 
+或许对我们每天所做工作最近似的类比来自中东民间故事：打开任何版本的《一千零一夜（أَلْف لَيْلَة وَلَيْلَة）》，你会找到对一种被称作<dfn>镇尼</dfn>、<dfn>杰尼</dfn>、<dfn>精灵</dfn>或者 🧞‍ 的神奇生物的描述。不管你怎么称呼它们，你一定熟悉它们实现愿望的习惯，和必然会引起的不幸。
+
 In many ways,
 computers are the physical embodiment of metaphysical wish fulfillment.
 Like a genie, a computer will happily go along with whatever you tell it to do,
@@ -35,10 +42,14 @@ with no regard for what your actual intent may have been.
 And by the time you've realized your error,
 it may be too late to do anything about it.
 
+从许多方面来看，电脑是抽象的愿望满足机的物理体现。像精灵一样，电脑会开心的执行任何你告诉它要做的事，而不会考虑你真正的意图是什么。之后当你意识到自己的错误时，就已经太晚了。
+
 As a Swift developer,
 there's a good chance that you've been hit by integer type conversion errors
 and thought
 "I wish these warnings would go away and my code would finally compile."
+
+作为一个 Swift 开发者，很有可能你遇到过整数类型转换错误并想着「我希望这些警告赶紧消失，代码能编译通过」。
 
 If that sounds familiar,
 you'll happy to learn about `numericCast(_:)`,
@@ -47,11 +58,15 @@ that may be exactly what you were hoping for.
 But be careful what you wish for,
 it might just come true.
 
+如果这听起来很熟悉，那你会对学习 `numbericCast(_:)` 感到高兴，它是 Swift Standard Libray 中一个小小的实用函数，有可能正是你所希望的。但是请小心提出你的愿望，它有可能马上会成真。
+
 ---
 
 Let's start by dispelling any magical thinking
 about what `numericCast(_:)` does by
 [looking at its implementation](https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Integers.swift#L3508-L3510):
+
+让我们从消除觉得 `numericCast(_:)` 有什么魔法开始，通过[查看它的实现](https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Integers.swift#L3508-L3510)：
 
 ```swift
 public func numericCast<T : BinaryInteger, U : BinaryInteger>(_ x: T) -> U {
@@ -62,11 +77,15 @@ public func numericCast<T : BinaryInteger, U : BinaryInteger>(_ x: T) -> U {
 (As we learned in [our article about `Never`](/never),
 even the smallest amount of Swift code can have a big impact.)
 
+（像从[我们有关 `Never` 的文章](/never)里学到的一样，极小量的 Swift 代码也能有巨大的作用。） 
+
 The [`BinaryInteger`](https://developer.apple.com/documentation/swift/binaryinteger) protocol
 was introduced in Swift 4
 as part of an overhaul to how numbers work in the language.
 It provides a unified interface for working with integers,
 both signed and unsigned, and of all shapes and sizes.
+
+Swift 4 推出的 [`BinaryInteger`](https://developer.apple.com/documentation/swift/binaryinteger) 协议，作为语言中整个数字实现的一部分。它提供了与整数工作的统一接口，包括有符号和无符号，还有所有的结构和大小。
 
 When you convert an integer value to another type,
 it's possible that the value can't be represented by that type.
@@ -75,21 +94,33 @@ to an unsigned integer (for example, `-42` as a `UInt`),
 or when a value exceeds the representable range of the destination type
 (for example, `UInt8` can only represent numbers between `0` and `255`).
 
+当你将一个整数值转换为另一个类型时，另一个类型有可能无法表示这个值。这会发生在你尝试将一个有符号整数转换成一个无符号整数时（比如将 `-42` 转换为 `UInt`）或者数值超过了目标类型所能表示的范围时（比如 `UInt8` 只能表示 `0` 到 `255` 之间的数字）。
+
 `BinaryInteger` defines four strategies of conversion between integer types,
 each with different behaviors for handling out-of-range values:
+
+`BinaryInteger` 为整数类型转换定义了四种策略，每一种在处理超出范围的值时都有不同行为：
 
 - **Range-Checked Conversion**
   ([`init(_:)`](https://developer.apple.com/documentation/swift/binaryinteger/2885704-init)):
   Trigger a runtime error for out-of-range values
+- **范围检查转换**（[`init(_:)`](https://developer.apple.com/documentation/swift/binaryinteger/2885704-init)）：
+  遇到超出范围的值时触发运行时错误
 - **Exact Conversion**
   ([`init?(exactly:)`](https://developer.apple.com/documentation/swift/binaryinteger/2925955-init)):
   Return `nil` for out-of-range values
+- **准确转换**（[`init?(exactly:)`](https://developer.apple.com/documentation/swift/binaryinteger/2925955-init)）：
+  遇到超出范围的值时返回 `nil`
 - **Clamping Conversion**
   ([`init(clamping:)`](https://developer.apple.com/documentation/swift/binaryinteger/2886143-init)):
   Use the closest representable value for out-of-range values
+- **钳制转换**（[`init(clamping:)`](https://developer.apple.com/documentation/swift/binaryinteger/2886143-init)）：
+  遇到超出范围的值时使用最近可表示的值
 - **Bit Pattern Conversion**
   ([`init(truncatingIfNeeded:)`](https://developer.apple.com/documentation/swift/binaryinteger/2925529-init)):
   Truncate to the width of the target integer type
+- **位模式转换**（[`init(truncatingIfNeeded:)`](https://developer.apple.com/documentation/swift/binaryinteger/2925529-init)）：
+  截断至目标整数类型宽度
 
 The correct conversion strategy
 depends on the situation in which it's being used.
@@ -102,13 +133,19 @@ calling this function with out-of-range values
 causes a runtime error
 (specifically, it traps on overflow in `-O` and `-Onone`).
 
+正确的转换策略取决于使用时的情况。有些时候，希望能钳制数值到可表示的范围；有些时候，最好不要获取到任何值。对于 `numbericCast(_:)` 来说，它为了方便使用了范围检查转换。缺点就是使用超过范围的数值调用这个函数会导致运行时错误（具体来说，在 `-O` 和 `-Onone` 时陷入溢出错误）。
+
 {% info %}
 
 For more information about the changes to how numbers work in Swift 4,
 see [SE-0104: "Protocol-oriented integers"](https://github.com/apple/swift-evolution/blob/master/proposals/0104-improved-integers.md).
 
+更多有关 Swift 4 中数字实现改变的信息，请查阅 [SE-0104: "Protocol-oriented integers"](https://github.com/apple/swift-evolution/blob/master/proposals/0104-improved-integers.md)。
+
 This subject is also discussed at length in the
 [Flight School Guide to Numbers](https://gumroad.com/l/swift-numbers).
+
+这个主题也在[《Swift 数字详解》](https://juejin.im/book/5b260350e51d4558c2322fbe)中有更详细的讨论。
 
 {% endinfo %}
 
