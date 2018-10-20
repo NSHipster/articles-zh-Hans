@@ -150,9 +150,12 @@ This subject is also discussed at length in the
 {% endinfo %}
 
 ## Thinking Literally, Thinking Critically
+## 字面地思考，批判地思考
 
 Before we go any further,
 let's take a moment to talk about integer literals.
+
+在更进一步之前，让我们先来谈论一下整数字面量。
 
 [As we've discussed in previous articles](https://nshipster.com/swift-literals/),
 Swift provides a convenient and extensible way to represent values in source code.
@@ -160,9 +163,13 @@ When used in combination with the language's use of type inference,
 things often "just work"
 ...which is nice and all, but can be confusing when things "just don't".
 
+[我们在之前的文章讨论过](https://nshipster.com/swift-literals/)，Swift 提供了一个方便且可扩展的方式来在源代码中表示值。当和语言中的类型推断一起使用时，它们通常「可以工作」……这样一切都很好，但是当它们「无法工作」就非常令人困惑了。
+
 Consider the following example
 in which arrays of signed and unsigned integers
 are initialized from identical literal values:
+
+思考下面的例子，有符号整型数组和无符号整型数组使用同样的字面量初始化：
 
 ```swift
 let arrayOfInt: [Int] = [1, 2, 3]
@@ -172,6 +179,8 @@ let arrayOfUInt: [UInt] = [1, 2, 3]
 Despite their seeming equivalence,
 we can't, for example, do this:
 
+尽管它们好像是相等的，但我们不能，比如，做这个：
+
 ```swift
 arrayOfInt as [UInt] // Error: Cannot convert value of type '[Int]' to type '[UInt]' in coercion
 ```
@@ -179,11 +188,15 @@ arrayOfInt as [UInt] // Error: Cannot convert value of type '[Int]' to type '[UI
 One way to reconcile this issue
 would be to pass the `numericCast` function as an argument to `map(_:)`:
 
+解决这个问题的一种方式是，将 `numericCast` 函数作为参数传入 `map(_:)`：
+
 ```swift
 arrayOfInt.map(numericCast) as [UInt]
 ```
 
 This is equivalent to passing the `UInt` range-checked initializer directly:
+
+这样等同于直接传入 `UInt` 范围检查构造器：
 
 ```swift
 arrayOfInt.map(UInt.init)
@@ -191,6 +204,8 @@ arrayOfInt.map(UInt.init)
 
 But let's take another look at that example,
 this time using slightly different values:
+
+让我们再看一次这个例子，这次使用稍微不同的数值：
 
 ```swift
 let arrayOfNegativeInt: [Int] = [-1, -2, -3]
@@ -200,8 +215,12 @@ arrayOfNegativeInt.map(numericCast) as [UInt] // 🧞‍ Fatal error: Negative v
 As a run-time approximation of compile-time type functionality
 `numericCast(_:)` is closer to `as!` than `as` or `as?`.
 
+作为一个编译时类型功能的运行时近似物，`numericCast(_:)` 更像是 `as!` 而不是 `as` 或 `as?`。
+
 Compare this to what happens if you instead pass
 the exact conversion initializer, `init?(exactly:)`:
+
+将这个和传入精确转换构造器 `init?(exactly:)` 的结果相比：
 
 ```swift
 let arrayOfNegativeInt: [Int] = [-1, -2, -3]
@@ -213,7 +232,10 @@ is a blunt instrument,
 and it's important to understand what tradeoffs you're making
 when you decide to use it.
 
+`numericCast(_:)`，像它内在的范围检查转换一样，是一个钝器，当你决定使用它时，明白你在折中什么是非常重要的。
+
 ## The Cost of Being Right
+## 正确的代价
 
 In Swift,
 the general guidance is to use `Int` for integer values
@@ -231,8 +253,12 @@ with an `Int`,
 despite the fact that any possible value would fit into an 8-bit integer
 with plenty of room to spare.
 
+在 Swift 中，通常指导是为整数值使用 `Int`（且为浮点值使用 `Double`），除非有**非常**好的理由来使用更具体的类型。尽管 `Collection` 的 `count` 在定义上是非负的，但我们使用 `Int` 而不是 `UInt`。因为在与其他 API 交互时转换来转换去类型的代价要比更精确类型带来的好处要大。同样的原因，用 `Int` 来表示小数字几乎总是会更好，比如[工作日数字](https://nshipster.com/datecomponents)，尽管它所有的可能值用一个 8 位整型存储都绰绰有余。
+
 The best argument for this practice
 is a 5-minute conversation with a C API from Swift.
+
+理解这个实践最好的方式就是在 Swift 里和 C API 对话几分钟。
 
 Older and lower-level C APIs are rife with
 architecture-dependent type definitions
@@ -243,8 +269,12 @@ like headers to pointers,
 they can be a breaking point for some
 (and I don't mean the debugging kind).
 
+古老且低级的 C API 里充斥着体系结构相关的类型定义和细微调整过的值存储空间。独立的来看，它们是可管理的。但从像头文件到指针这些互操作性麻烦上看，它们对某些问题可能会是一个断点（我不是在说调试中那种）。
+
 `numericCast(_:)` is there for when you're tired of seeing red
 and just want to get things to compile.
+
+当你看红色看到烦，只想要编译通过时，`numericCast(_:)` 就在那等着你。
 
 ## Random Acts of Compiling
 
