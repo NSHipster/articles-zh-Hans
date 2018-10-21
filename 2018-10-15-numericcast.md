@@ -162,13 +162,13 @@ When used in combination with the language's use of type inference,
 things often "just work"
 ...which is nice and all, but can be confusing when things "just don't".
 
-[我们在之前的文章讨论过](https://nshipster.com/swift-literals/)，Swift 提供了一个方便且可扩展的方式来在源代码中表示值。当和语言中的类型推断一起使用时，它们通常「可以工作」……这样一切都很好，但是当它们「无法工作」就非常令人困惑了。
+[我们在之前的文章讨论过](https://nshipster.com/swift-literals/)，Swift 提供了一个方便且可扩展的方式来在源代码中表示值。当和语言中的类型推断一起使用时，它们通常「可以工作」……这样一切都很好，但是当它们「无法工作」时就非常令人困惑了。
 
 Consider the following example
 in which arrays of signed and unsigned integers
 are initialized from identical literal values:
 
-思考下面的例子，有符号整型数组和无符号整型数组使用同样的字面量初始化：
+考虑下面的例子，有符号整型数组和无符号整型数组使用同样的字面量初始化：
 
 ```swift
 let arrayOfInt: [Int] = [1, 2, 3]
@@ -231,7 +231,7 @@ is a blunt instrument,
 and it's important to understand what tradeoffs you're making
 when you decide to use it.
 
-`numericCast(_:)`，像它内在的范围检查转换一样，是一个钝器，当你决定使用它时，明白你在折中什么是非常重要的。
+`numericCast(_:)`，像它内在的范围检查转换一样，是一个钝器，当你决定使用它时，明白你在权衡什么是非常重要的。
 
 ## The Cost of Being Right
 ## 正确的代价
@@ -276,7 +276,7 @@ and just want to get things to compile.
 当你看红色看到烦，只想要编译通过时，`numericCast(_:)` 就在那等着你。
 
 ## Random Acts of Compiling
-## 随机表演编译
+## 随机数的编译
 
 The [example in the official docs](https://developer.apple.com/documentation/swift/2884564-numericcast)
 should be familiar to many of us:
