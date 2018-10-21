@@ -4,8 +4,7 @@ author: Mattt
 translator: Bei Li
 category: Swift
 excerpt: >
-  Getting code to compile is different than doing things correctly.
-  But sometimes it takes the former to ultimately get to the latter.
+  编译通过的代码和正确的代码是不一样的。但有时候需要通过前者来最终获得后者。
 status:
   swift: 4.2
 ---
@@ -277,14 +276,19 @@ and just want to get things to compile.
 当你看红色看到烦，只想要编译通过时，`numericCast(_:)` 就在那等着你。
 
 ## Random Acts of Compiling
+## 随机表演编译
 
 The [example in the official docs](https://developer.apple.com/documentation/swift/2884564-numericcast)
 should be familiar to many of us:
+
+很多人应该会熟悉[官方文档中的例子](https://developer.apple.com/documentation/swift/2884564-numericcast)：
 
 Prior to [SE-0202](https://github.com/apple/swift-evolution/blob/master/proposals/0202-random-unification.md),
 the standard practice for generating numbers in Swift (on Apple platforms)
 involved importing the `Darwin` framework
 and calling the `arc4random_uniform(3)` function:
+
+在 [SE-0202](https://github.com/apple/swift-evolution/blob/master/proposals/0202-random-unification.md) 之前，（在苹果的平台上）Swift 中生成随机数的标准实践需要引入 `Darwin` 框架然后调用 `arc4random_uniform(3)` 函数：
 
 ```c
 uint32_t arc4random_uniform(uint32_t __upper_bound)
@@ -293,6 +297,8 @@ uint32_t arc4random_uniform(uint32_t __upper_bound)
 `arc4random` requires not one but two separate type conversions in Swift:
 first for the upper bound parameter (`Int` → `UInt32`)
 and second for the return value (`UInt32` → `Int`):
+
+在 Swift 中使用 `arc4random` 需要进行不止一次而是两次类型转换：一是上限参数（`Int` → `UInt32`），二是返回值（`UInt32` → `Int`）：
 
 ```swift
 import Darwin
@@ -304,8 +310,12 @@ func random(in range: Range<Int>) -> Int {
 
 _Gross._
 
+**真恶心。**
+
 By using `numericCast(_:)`, we can make things a little more readable,
 albeit longer:
+
+通过使用 `numericCast(_:)`，我们可以让代码更可读一些，尽管也会变长一点：
 
 ```swift
 import Darwin
@@ -321,12 +331,18 @@ Instead, it serves as an indicator
 that the conversion is perfunctory ---
 the minimum of what's necessary to get the code to compile.
 
+在这里 `numericCast(_:)` 没有做任何类型合适的构造器做不到的事情。它的作用是指明这个转换是敷衍的——为了让代码编译需要做的最少的事情。
+
 But as we've learned from our run-ins with genies,
 we should be careful what we wish for.
+
+不过从前言有关精灵的事情中学到，我们应该谨慎的对待我们的愿望。
 
 Upon closer inspection,
 it's apparent that the example usage of `numericCast(_:)` has a critical flaw:
 _it traps on values that exceed `UInt32.max`!_
+
+经过仔细检查，上面对例子中对 `numericCast(_:)` 的使用有一个明显的缺陷：**当值超过 `UInt32.max` 时会造成崩溃！**
 
 ```swift
 random(in: 0..<0x1_0000_0000) // 🧞‍ Fatal error: Not enough bits to represent the passed value
@@ -338,6 +354,8 @@ we'll see that it uses clamping, rather than range-checked, conversion.
 And instead of delegating to a convenience function like `arc4random_uniform`,
 it [populates values from a buffer of random bytes](https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Random.swift#L156-L177).
 
+如果我们查看现在 `Int.random(in: 0...10)` [在 Swift Standard Library 中的实现](https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Integers.swift#L2537-L2560)，可以看到其使用了钳制转换而不是类型检查转换。并且[从一个随机字节缓冲区中取值]（https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Random.swift#L156-L177）而不是委托给像 `arc4random_uniform` 这样的简便函数。
+
 ---
 
 Getting code to compile is different than doing things correctly.
@@ -348,6 +366,8 @@ It also has the added benefit of
 signaling potential misbehavior more clearly than
 a conventional type initializer.
 
+编译通过的代码和正确的代码是不一样的。但有时候需要通过前者来最终获得后者。审慎的使用，`numericCast(_:)` 会是一个方便且能快速解决问题的工具。和类型转换构造器相比它还有表明潜在异常行为的好处。
+
 Ultimately, programming is about describing _exactly_ what we want ---
 often with painstaking detail.
 There's no genie-equivalent CPU instruction for "Do the Right Thing"
@@ -357,3 +377,5 @@ Fortunately for us,
 Swift allows us to do this in a way that's
 safer and more concise than many other languages.
 And honestly, who could wish for anything more?
+
+根本上来说，编程就是**准确**描述我们想要怎么样——通常伴随艰苦的细节。并没有一个和精灵似的「做正确的事情」 CPU 指令（就算有的话，[我们能信赖它吗](ttps://github.com/FixIssue/FixCode)？）。幸好，Swift 可以让我们比其他很多语言更安全和简洁的做这些事情。老实说，谁还能要求更多呢？
