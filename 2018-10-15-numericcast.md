@@ -11,7 +11,7 @@ status:
 
 Everyone has their favorite analogy to describe programming.
 
-每个人在描述编程时都有其最喜爱的类比。
+每个人都曾将编程比喻成其他事物。
 
 It's woodworking or it's knitting or it's gardening.
 Or maybe it's problem solving and storytelling and making art.
@@ -178,7 +178,7 @@ let arrayOfUInt: [UInt] = [1, 2, 3]
 Despite their seeming equivalence,
 we can't, for example, do this:
 
-尽管它们好像是相等的，但我们不能，比如，做这个：
+尽管它们好像是相等的，但我们不能做下面例子中的事情：
 
 ```swift
 arrayOfInt as [UInt] // Error: Cannot convert value of type '[Int]' to type '[UInt]' in coercion
@@ -276,7 +276,7 @@ and just want to get things to compile.
 当你看红色看到烦，只想要编译通过时，`numericCast(_:)` 就在那等着你。
 
 ## Random Acts of Compiling
-## 随机数的编译
+## 编译的随机性
 
 The [example in the official docs](https://developer.apple.com/documentation/swift/2884564-numericcast)
 should be familiar to many of us:
