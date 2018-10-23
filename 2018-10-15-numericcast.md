@@ -159,7 +159,7 @@ func random(in range: Range<Int>) -> Int {
 random(in: 0..<0x1_0000_0000) // 🧞‍ Fatal error: Not enough bits to represent the passed value
 ```
 
-如果我们查看现在 `Int.random(in: 0...10)` [在 Swift Standard Library 中的实现](https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Integers.swift#L2537-L2560)，可以看到其使用了钳制转换而不是类型检查转换。并且[从一个随机字节缓冲区中取值]（https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Random.swift#L156-L177）而不是委托给像 `arc4random_uniform` 这样的简便函数。
+如果我们查看现在 `Int.random(in: 0...10)` [在 Swift Standard Library 中的实现](https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Integers.swift#L2537-L2560)，可以看到其使用了钳制转换而不是类型检查转换。并且[从一个随机字节缓冲区中取值](https://github.com/apple/swift/blob/7f7b4f12d3138c5c259547c49c3b41415cd4206e/stdlib/public/core/Random.swift#L156-L177)而不是委托给像 `arc4random_uniform` 这样的简便函数。
 
 ---
 
