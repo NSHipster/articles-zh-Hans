@@ -1,4 +1,18 @@
 ---
+title: macOS Dynamic Desktop
+author: Mattt
+category: ""
+excerpt: >
+  Dark Mode is one of the most popular additions to macOS ---
+  especially among us developer types.
+  If you triangulate between that and Night Shift, 
+  introduced a couple of years prior,
+  you get the Dynamic Desktop feature, new in Mojave.
+status:
+  swift: 4.2
+---
+
+---
 title: "macOS 动态桌面"
 author: Mattt
 translator: saitjr
