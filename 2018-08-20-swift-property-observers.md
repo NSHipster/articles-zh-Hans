@@ -23,7 +23,7 @@ Albert Einstein popularized the phrase "spooky action at a distance"
 in his [critique](https://en.wikipedia.org/wiki/EPR_paradox)
 of the prevailing interpretation of quantum mechanics by Niels Bohr.
 
-到了 20 世纪 30 年代，Rube Goldberg 已成为家喻户晓的名字，与 [“自营餐巾”](https://upload.wikimedia.org/wikipedia/commons/a/a9/Rube_Goldberg%27s_%22Self-Operating_Napkin%22_%28cropped%29.gif) 等漫画中描绘的奇异复杂和异想天开的发明同义。大约在同一时期，阿尔伯特·爱因斯坦对尼尔斯·玻尔量子力学的普遍解释进行了 [批判](https://en.wikipedia.org/wiki/EPR_paradox)，并从中提出了“鬼魅似的远距作用”这一词汇。
+到了 20 世纪 30 年代，Rube Goldberg 已成为家喻户晓的名字，与[“自营餐巾”](https://upload.wikimedia.org/wikipedia/commons/a/a9/Rube_Goldberg%27s_%22Self-Operating_Napkin%22_%28cropped%29.gif) 等漫画中描绘的奇异复杂和异想天开的发明同义。大约在同一时期，阿尔伯特·爱因斯坦对尼尔斯·玻尔量子力学的普遍解释进行了[批判](https://zh.wikipedia.org/wiki/%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6-%E6%B3%A2%E5%A4%9A%E5%B0%94%E6%96%AF%E5%9F%BA-%E7%BD%97%E6%A3%AE%E4%BD%AF%E8%B0%AC)，并从中提出了“鬼魅似的远距作用”这一词汇。
 
 Nearly a century later,
 modern software development has become what might be seen as
@@ -42,7 +42,7 @@ Yet despite their misgivings about code that produces side effects,
 there are sometimes occasions where such techniques
 may clarify rather than confound.
 
-作为软件开发人员，我们提倡尽可能减少代码中的远程操作。这是根据一些众所周知的规范法则得出的，如 [单一职责原则](https://en.wikipedia.org/wiki/Single_responsibility_principle)、[最少意外原则](https://en.wikipedia.org/wiki/Principle_of_least_astonishment) 和 [笛米特法则](https://en.wikipedia.org/wiki/Law_of_Demeter)。尽管它们可能会对代码产生一定的副作用，但更多的时候这些原则能使代码逻辑变得清晰。
+作为软件开发人员，我们提倡尽可能减少代码中的远程操作。这是根据一些众所周知的规范法则得出的，如[单一职责原则](https://zh.wikipedia.org/wiki/%E5%8D%95%E4%B8%80%E5%8A%9F%E8%83%BD%E5%8E%9F%E5%88%99)、[最少意外原则](https://en.wikipedia.org/wiki/Principle_of_least_astonishment) 和[得墨忒耳定律](https://zh.wikipedia.org/wiki/%E5%BE%97%E5%A2%A8%E5%BF%92%E8%80%B3%E5%AE%9A%E5%BE%8B)。尽管它们可能会对代码产生一定的副作用，但更多的时候这些原则能使代码逻辑变得清晰。
 
 Such is the focus of this week's article about property observers in Swift,
 which offer a built-in, lightweight alternative
@@ -50,7 +50,7 @@ to more formalized solutions like
 model-view-viewmodel (MVVM)
 functional reactive programming (FRP).
 
-这是本周关于 Swift 属性观察文章的焦点，它提出了一种内置的轻量级替代方案，适用于更正式的解决方案，如模型 - 视图 - 视图模型（MVVM）函数响应式编程（FRP）。
+这是本周文章的焦点 Swift 属性观察器，它是系统内置的，比模型 - 视图 - 视图模型（MVVM）、函数响应式编程（FRP）这些更正式的解决方案更轻量。
 
 ---
 
@@ -59,7 +59,7 @@ There are two kinds of properties in Swift:
 <dfn>computed properties</dfn>, which perform a calculation based on that state.
 For example,
 
-Swift 中有两种属性：*存储属性*，它们将状态和对象相关联；*计算属性*，则根据该状态执行计算。例如，
+Swift 中有两种属性：<dfn>存储属性</dfn>，它们将状态和对象相关联；<dfn>计算属性</dfn>，则根据该状态执行计算。例如，
 
 ```swift
 struct S {
@@ -92,7 +92,7 @@ The `willSet` observer runs before the new value is stored
 and the `didSet` observer runs after.
 And they run regardless of whether the old value is equal to the new value.
 
-当你声明一个存储属性，你可以使用闭包定义一个 *属性观察器*，该闭包中的代码会在属性被设值的时候执行。`willSet` 观察器会在属性被赋新值之前被运行，`didSet` 观察器则会在属性被赋新值之后运行。无论新值是否等于属性的旧值它们都会被执行。
+当你声明一个存储属性，你可以使用闭包定义一个 <dfn>属性观察器</dfn>，该闭包中的代码会在属性被设值的时候执行。`willSet` 观察器会在属性被赋新值之前被运行，`didSet` 观察器则会在属性被赋新值之后运行。无论新值是否等于属性的旧值它们都会被执行。
 
 ```swift
 struct S {
@@ -139,7 +139,7 @@ but that's
 [a bug that will soon be fixed](https://twitter.com/jckarter/status/926459181661536256),
 so you shouldn't depend on this behavior.
 
-需要注意的是当属性在初始化方法中进行赋值时，不会触发观察器的代码。从 Swift4.2 开始，你可以将赋值逻辑包装在 `defer` 代码块来解决这个问题，但这是 [一个很快就会被修复的问题](https://twitter.com/jckarter/status/926459181661536256)，因此你不需要依赖于这种行为。
+需要注意的是当属性在初始化方法中进行赋值时，不会触发观察器的代码。从 Swift4.2 开始，你可以将赋值逻辑包装在 `defer` 代码块来解决这个问题，但这是[一个很快就会被修复的问题](https://twitter.com/jckarter/status/926459181661536256)，因此你不需要依赖于这种行为。
 
 {% endwarning %}
 
@@ -330,7 +330,7 @@ we can give him what's for!
 communicate errors to him in a reasonable manner
 rather than failing silently or allowing invalid data)
 
-一个可抛出异常的初始化方法可以向调用者发送错误信息，这是 `didSet` 观察器无法做到的。现在面对 [兰韦尔普尔古因吉尔戈格里惠尔恩德罗布尔兰蒂西利奥戈戈戈赫](https://zh.wikipedia.org/wiki/%E5%85%B0%E9%9F%A6%E5%B0%94%E6%99%AE%E5%B0%94%E5%8F%A4%E5%9B%A0%E5%90%89%E5%B0%94%E6%88%88%E6%A0%BC%E9%87%8C%E6%83%A0%E5%B0%94%E6%81%A9%E5%BE%B7%E7%BD%97%E5%B8%83%E5%B0%94%E5%85%B0%E8%92%82%E8%A5%BF%E5%88%A9%E5%A5%A5%E6%88%88%E6%88%88%E6%88%88%E8%B5%AB) 的 *约翰尼* 这样的麻烦制造者，我们能为他做些什么！（换言之，以合理的方式传达错误比提供无效的数据更好）
+一个可抛出异常的初始化方法可以向调用者发送错误信息，这是 `didSet` 观察器无法做到的。现在面对[兰韦尔普尔古因吉尔戈格里惠尔恩德罗布尔兰蒂西利奥戈戈戈赫](https://zh.wikipedia.org/wiki/%E5%85%B0%E9%9F%A6%E5%B0%94%E6%99%AE%E5%B0%94%E5%8F%A4%E5%9B%A0%E5%90%89%E5%B0%94%E6%88%88%E6%A0%BC%E9%87%8C%E6%83%A0%E5%B0%94%E6%81%A9%E5%BE%B7%E7%BD%97%E5%B8%83%E5%B0%94%E5%85%B0%E8%92%82%E8%A5%BF%E5%88%A9%E5%A5%A5%E6%88%88%E6%88%88%E6%88%88%E8%B5%AB) 的 *约翰尼* 这样的麻烦制造者，我们能为他做些什么！（换言之，以合理的方式传达错误比提供无效的数据更好）
 
 
 ## Propagating Dependent State
@@ -396,7 +396,7 @@ _Pretty cool, right?_
 You could even cascade this behavior across multiple observed properties a la
 [that one scene from _Mousehunt_](https://www.youtube.com/watch?v=TVAhhVrpkwM).
 
-你甚至可以像 [*捕鼠记* 中描绘的场景](https://www.youtube.com/watch?v=TVAhhVrpkwM) 一样，将行为与多个观察属性级联起来
+你甚至可以像[*捕鼠记* 中描绘的场景](https://www.youtube.com/watch?v=TVAhhVrpkwM) 一样，将行为与多个观察属性级联起来
 
 ---
 
@@ -413,7 +413,6 @@ to embrace the chaos of the system.
 Always following the rules is such a _Bohr_.
 
 然而，在这摇摇欲坠的抽象塔的顶端，一定限度的系统混乱是诱人的，有时是值得的。一直遵循规则的是波尔理论而非爱因斯坦。
-
 
 
 
