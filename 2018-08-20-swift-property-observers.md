@@ -139,7 +139,7 @@ but that's
 [a bug that will soon be fixed](https://twitter.com/jckarter/status/926459181661536256),
 so you shouldn't depend on this behavior.
 
-需要注意的是当属性在初始化方法中进行赋值时，不会触发观察器的代码。从 Swift4.2 开始，你可以将赋值逻辑包装在 `defer` 代码块来解决这个问题，但这是[一个很快就会被修复的问题](https://twitter.com/jckarter/status/926459181661536256)，因此你不需要依赖于这种行为。
+需要注意的是当属性在初始化方法中进行赋值时，不会触发观察器的代码。从 Swift4.2 开始，你可以将赋值逻辑包装在 `defer` 代码块来解决这个问题，但这是[一个很快就会被修复的问题](https://twitter.com/jckarter/status/926459181661536256)，因此你不应该依赖于这种行为。
 
 {% endwarning %}
 
@@ -385,9 +385,9 @@ the following happens automatically:
 2. The `title` of the view controller is set to the new track title
 3. The new track's audio is loaded and played
 
-- 之前轨道的音频都会暂停
-- 视图控制器的 `title` 会被设置为新轨道对象的标题
-- 新轨道对象的音频信息会被加载并播放
+1. 之前轨道的音频都会暂停
+2. 视图控制器的 `title` 会被设置为新轨道对象的标题
+3. 新轨道对象的音频信息会被加载并播放
 
 _Pretty cool, right?_
 
