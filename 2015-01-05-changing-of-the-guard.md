@@ -4,6 +4,7 @@ author: Mattt
 category: ""
 translator: Croath Liu
 excerpt: "An important site announcement."
+published: false
 ---
 
 我从 2012 年夏天开始着手 NSHipster。利用日常和 Cocoa 和 Objective-C 打交道的过程中获得的心得体会进行的写作练习很快就变成了让我尽可能完善自己技术的全方位热情。
