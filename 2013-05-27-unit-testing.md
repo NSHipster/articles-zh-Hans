@@ -4,7 +4,7 @@ title: 单元测试
 author: Mattt
 ref: "https://developer.apple.com/library/mac/#documentation/DeveloperTools/Conceptual/UnitTesting/00-About_Unit_Testing/about.html"
 framework: Testing
-rating: 8.9
+retired: true
 translator: Candyan
 ---
 

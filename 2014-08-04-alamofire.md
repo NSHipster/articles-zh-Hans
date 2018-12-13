@@ -3,9 +3,10 @@ title: Alamofire
 author: Mattt
 translator: Chester Liu
 category: Open Source
+retired: true
 excerpt: "尽管我们离使用 Swift 发布 App 还有几个月的时间，已经有若干使用这门新语言的开源项目开始生根发芽了，Alamofire 便是这些项目中的一个。"
 status:
-    swift: 1.1
+  swift: 1.1
 ---
 
 Swift 像是在 iOS 开发者社区中按下了一个“重启”按钮，成了很多常年使用 Objective-C 的开发者的新宠儿。
@@ -20,7 +21,7 @@ Swift 有着全新的语法，语言规范还处在不断演进的过程当中�
 
 > 利益相关：这篇文章，以及其余 NSHipster 的内容，都是由 AFNetworking 和 Alamofire 的作者所创作的。这让我有足够的资格去谈论这些项目的技术细节和选型，但是也确实让我没办法对它们的价值进行客观的评价。因此在阅读下面的内容时，请保持谨慎和怀疑的态度。
 
-* * *
+---
 
 [Alamofire](https://github.com/Alamofire/Alamofire) 是一个使用 Swift 编写的 HTTP 网络库，它构建于 NSURLSession 和 Foundation 库的 URL 加载系统之上，对高层的网络操作提供了方便的 Swift 接口。
 
@@ -104,7 +105,6 @@ Alamofire.request(.GET, "http://httpbin.org/get", parameters: ["foo": "bar"])
 
 下面要讲到的是 Swift 中非常酷的一个特性：枚举。在 C 和 Objective-C 中枚举基本上就是整数类型的一个 `typedef` 声明，然而在 Swift 当中，枚举类型支持形参化使用，还可以有自己的方法。
 
-
 Alamofire 使用 `ParameterEncoding` 这个枚举类型，把编码参数的逻辑全都封装到一个 HTTP 消息表示中：
 
 ```swift
@@ -126,7 +126,6 @@ enum ParameterEncoding {
 对每个 `ParameterEncoding` 的 case 来说，`encode` 方法可以把请求和参数进行处理，转换成新的请求（同时还有一个可选的错误返回值）。
 
 对于复杂的，多层嵌套结构的参数，建议使用 JSON 格式进行参数编码：
-
 
 > 对于要进行 URL-encoded 的参数来说，并没有一个统一的标准规定参数的数据结构。也就是说，不同的 Web 应用可能会对参数进行不同的解析处理。更糟糕的是，有一些特定的数据结构根本就没办法用字符串形式进行清晰的表达。这就是为什么在 Web API 提供支持的情况下，对于所有比键值对(key-value)结构复杂的数据，都建议使用 JSON（或者 XML 和 plist）来进行编码。
 
@@ -221,7 +220,7 @@ override var data: NSData! {
 
 在组成 Alamofire 的不到 1000 行的代码中还有很多干货。对于所有有志于 Swift 语言的开发者和 API 作者们，我都建议你们[深入项目的源代码](https://github.com/Alamofire/Alamofire)，以更好地了解底层的实现内幕。
 
-* * *
+---
 
 > 可能有人会想，那 AFNetworking 呢？放心，**AFNetworking 依然稳定而且可靠，并且会继续被维护**。事实上，在接下来的几个月时间里，开发者将在 AFNetworking 2 以及它的一方扩展上继续投入大量的工作，以提高测试覆盖率，同时完善文档。
 

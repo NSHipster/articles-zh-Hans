@@ -3,14 +3,15 @@ title: "Long Live Cocoa"
 author: Nate Cook
 translator: Henry Lee
 category: Miscellaneous
+retired: true
 excerpt: "Swift 是一个对于我们大多数人而言十分令人兴奋的语言，但是它依旧崭新。Objective-C 的稳定性和 Cocoa 的底蕴也意味着 Swift 确实没有准备好成为巨大改变的驱动力，至少现在没有。Cocoa 的深度和它提供的力量，与 Swift 携手让 Cocoa 变得从未如此相关与有前景。事实上，作为一个 Cocoa 开发者我不认为有比现在更兴奋的时候。"
 ---
 
-现在正是属于 Watch 的2015年的伊始，也是 Swift 的第一年，也是 NSHipster 的一个小小的新起点。在我们为新设备和下一个 beta 版本的 Xcode 的发布兴奋之前，或者在我们为 WWDC 2015 的行程准备之前，让我们先花点时间看看我们今天用的这些工具，以及他们现在的样子：Objective-C、Swift 和最重要的 Cocoa。
+现在正是属于 Watch 的 2015 年的伊始，也是 Swift 的第一年，也是 NSHipster 的一个小小的新起点。在我们为新设备和下一个 beta 版本的 Xcode 的发布兴奋之前，或者在我们为 WWDC 2015 的行程准备之前，让我们先花点时间看看我们今天用的这些工具，以及他们现在的样子：Objective-C、Swift 和最重要的 Cocoa。
 
 Swift 是一个对于我们大多数人而言十分令人兴奋的语言，但它依旧崭新。Objective-C 的稳定性和 Cocoa 的底蕴也意味着 Swift 确实没有准备好成为[巨大改变](/the-death-of-cocoa/)的驱动力，至少现在没有。Cocoa 的深度和它提供的力量，与 Swift 携手让 Cocoa 变得从未如此相关与有前景。事实上，作为一个 Cocoa 开发者我并不认为有比现在更兴奋的时刻。
 
-* * *
+---
 
 Cocoa 是一个可以非常深的 API，你只要把一些常用工具从表面挖深一点点，你就会发现一堆被藏起来的功能。无须太远，你可以直接从 [Mattt](/authors/mattt-thompson/) 这几年来做过的不可思议的工作中找到证据，这些证据告诉我们，其实还有很多我们并不知道的 Cocoa 能做到的。举几个例子来说：
 
@@ -54,7 +55,7 @@ func UTCreateStringForOSType(inOSType: OSType) -> Unmanaged<CFString>!
 
 在收到了一个 `Unmanaged<CFString>!` 以后，你接下来需要用 `.takeRetainedValue()` 和 `.takeUnretainedValue()` 来得到一个已经内存管理好的 `CFString` 实例，而究竟调用那个，你需要去看文档或者知道管理结果是否是 retained 或者 unretained 的既有习惯。而标注了这些方法以后，苹果为你做了这些工作，保证了在 Cocoa 的很大范围内的内存安全。
 
-* * *
+---
 
 另外的是，Swift 不仅拥抱了 Cocoa 的接口，它还提高了 Cocoa 的接口。例如可敬的 `CGRect`，作为一个 C 结构体，它不能包含任何类方法，所以所有的[操作 `CGRect` 的方法](/cggeometry/)都存在在上层函数里。这些工具很强大，但是你需要确切知道他们的存在并去用他们。这里是将一个 `CGRect` 分成四份的四行代码，可能需要查三次文档：
 
@@ -65,7 +66,7 @@ CGRectDivide(sourceRect, &nextRect, &remainingRect, 250, CGRectMinXEdge);
 NSLog("Remaining rect: %@", NSStringFromCGRect(remainingRect));
 ```
 
-但是在 Swift 里，结构体也欣然地有了实例方法和计算过的属性，所以 Core Graphics 拓展了 `CGRect ` 来让找到并且使用这些方法变得更加容易了。由于 `CGRect *` 的方法全都被放进了实力函数或者属性里，上面的代码可以简化成这样：
+但是在 Swift 里，结构体也欣然地有了实例方法和计算过的属性，所以 Core Graphics 拓展了 `CGRect` 来让找到并且使用这些方法变得更加容易了。由于 `CGRect *` 的方法全都被放进了实力函数或者属性里，上面的代码可以简化成这样：
 
 ```swift
 let (nextRect, remainingRect) = sourceRect.rectsByDividing(250, CGRectEdge.MinXEdge)
@@ -76,7 +77,7 @@ println("Remaining rect: \(remainingRect)")
 
 自然，同时使用 Cocoa 和 Swift 有时候是难堪的。 当难堪缺失发生的时候，一般是在用 Objective-C 的惯用模式的时候。代理、target-selector 和 `NSInvocation` 依旧有他们的位置，不过 Swift 有了更好用的闭包，有时候似乎为了完成一件简单的事情而增加一个或者多个函数，但是给 Cocoa 带来更多闭包或者 block 的函数能让现有的 Cocoa 类型轻松地越过障碍。
 
-例如，`NSTimer` 有一个很好的接口，不管是通过 target-selector 还是 `NSInovation` 的模式，他需要一个 Objective-C 的方法来调用。当定义这个计时器的时候，我们很可能有了所有需要的东西，[有了这个使用自动桥接的 Core Foundation对应类 `CFTimer` 写的简单的`NSTimer`拓展](https://gist.github.com/natecook1000/b0285b518576b22c4dc8)，我们分分钟就开始进入业务逻辑：
+例如，`NSTimer` 有一个很好的接口，不管是通过 target-selector 还是 `NSInovation` 的模式，他需要一个 Objective-C 的方法来调用。当定义这个计时器的时候，我们很可能有了所有需要的东西，[有了这个使用自动桥接的 Core Foundation 对应类 `CFTimer` 写的简单的`NSTimer`拓展](https://gist.github.com/natecook1000/b0285b518576b22c4dc8)，我们分分钟就开始进入业务逻辑：
 
 ```swift
 let message = "Are we there yet?"
@@ -91,7 +92,6 @@ NSTimer.scheduledTimerWithTimeInterval(10, repeats: true) { [weak self] timer in
 // I swear I'll turn this car around.
 ```
 
-* * *
+---
 
-其实这篇文章完全没有在反驳[Mattt的上一篇文章](/the-death-of-cocoa/)，越过无垠的时间轴，我们肯定有一天会在土卫六的表面用我们的 42 吋iPad来用 Cocoa 的继承者来编码，但是只要 Cocoa 存在一天，难道不是依旧*很棒*么？
-
+其实这篇文章完全没有在反驳[Mattt 的上一篇文章](/the-death-of-cocoa/)，越过无垠的时间轴，我们肯定有一天会在土卫六的表面用我们的 42 吋 iPad 来用 Cocoa 的继承者来编码，但是只要 Cocoa 存在一天，难道不是依旧*很棒*么？
