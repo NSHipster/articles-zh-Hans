@@ -2,7 +2,7 @@
 title: "Long Live Cocoa"
 author: Nate Cook
 translator: Henry Lee
-category: ""
+category: Miscellaneous
 excerpt: "Swift 是一个对于我们大多数人而言十分令人兴奋的语言，但是它依旧崭新。Objective-C 的稳定性和 Cocoa 的底蕴也意味着 Swift 确实没有准备好成为巨大改变的驱动力，至少现在没有。Cocoa 的深度和它提供的力量，与 Swift 携手让 Cocoa 变得从未如此相关与有前景。事实上，作为一个 Cocoa 开发者我不认为有比现在更兴奋的时候。"
 ---
 
