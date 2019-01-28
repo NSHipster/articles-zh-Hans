@@ -8,7 +8,7 @@ excerpt: >
   Yet there are occasions when action-at-a-distance 
   may do more to clarify rather than confound.
   
-  现代软件开发已经被视为可能成为 Goldbergian 装置的典范。然而在进行一些远程操作时，它将显得更加清晰。
+  现代软件开发已经被视为可能成为鲁布·戈德堡机械装置的典范。然而在进行一些远程操作时，它将显得更加清晰。
 status:
   swift: 4.2
 ---
@@ -198,7 +198,7 @@ because they make it difficult to reason about program behavior.
 But many Objective-C developers had come to rely on the ability to
 inject additional behavior into getter or setter methods as needed.
 
-编程过程中我们通常想要避免引入副作用，因为它会导致难以推断程序的行为。但很多 Objective-C 开发者已经依赖于这种特性，他们会根据需要在 getter 或 setter 中注入各种额外的行为。
+编程过程中我们通常想要避免引入副作用，因为它会导致程序的行为难以推断。但很多 Objective-C 开发者已经依赖于这种特性，他们会根据需要在 getter 或 setter 中注入各种额外的行为。
 
 Swift's design for properties formalized these patterns
 and created a distinction between side effects
@@ -236,7 +236,7 @@ Here are a couple ideas for your consideration:
 Sometimes you want to impose additional constraints
 on what values are acceptable for a type.
 
-有时，你希望对类型确定的值增加额外的约束。
+有时，你希望对类型接受的值增加额外的约束。
 
 For example,
 if you were developing an app that interfaced with a government bureaucracy,
@@ -396,7 +396,7 @@ _Pretty cool, right?_
 You could even cascade this behavior across multiple observed properties a la
 [that one scene from _Mousehunt_](https://www.youtube.com/watch?v=TVAhhVrpkwM).
 
-你甚至可以像[*捕鼠记* 中描绘的场景](https://www.youtube.com/watch?v=TVAhhVrpkwM) 一样，将行为与多个观察属性级联起来
+你甚至可以像[*捕鼠记* 中描绘的场景](https://www.youtube.com/watch?v=TVAhhVrpkwM) 一样，将行为与多个观察属性级联起来。
 
 ---
 
