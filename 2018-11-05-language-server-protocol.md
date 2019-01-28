@@ -495,4 +495,4 @@ I believe this decision demonstrates an increased willingness within
 (at least some small part of) the company
 for collaboration and transparency.
 
-通过让 Xcode 支持开放的 Language Server Protocol 标准，苹果正在履行其在苹果生态系统之外的平台上实现 Swift 成功的承诺。我认为这是可行的：工具（或缺少工具）通常是技术获得人心的关键决定因素。但或许更重要的是，我认为这一决定表明，公司内部（至少是一小部分）对合作和透明度的意愿有所增强。
+通过让 Xcode 支持开放的 Language Server Protocol 标准，苹果正在履行其承诺，让 Swift 成功应用于苹果生态体系之外。我认为这是可行的：工具（或缺少工具）通常是技术获得人心的关键决定因素。但或许更重要的是，我认为这一决定表明，公司内部（至少是一小部分）对合作和透明度的意愿有所增强。
