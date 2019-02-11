@@ -218,7 +218,7 @@ and better guarantees about mechanisms like
 Key-Value Observing (KVO) and
 Key-Value Coding (KVC) that interact with properties.
 
-正因为如此，我们才可以获取更一致的语义，并更好地保证键值观察（KVO）和健值编码（KVC）等属性交互机制。
+正因为如此，我们才可以获取更一致的语义，并更好地保证键值观察（KVO）和键值编码（KVC）等属性交互机制。
 
 ---
 
@@ -391,7 +391,7 @@ the following happens automatically:
 
 _Pretty cool, right?_
 
-很酷, 对吗?
+_很酷, 对吗?_
 
 You could even cascade this behavior across multiple observed properties a la
 [that one scene from _Mousehunt_](https://www.youtube.com/watch?v=TVAhhVrpkwM).
