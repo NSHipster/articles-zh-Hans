@@ -1,13 +1,10 @@
 ---
+layout: post
 title: Swift Property Observers
 author: Mattt
+translator: Hale
 category: Swift
 excerpt: >
-  Modern software development has become what might be seen as
-  the quintessence of Goldbergian contraption.
-  Yet there are occasions when action-at-a-distance 
-  may do more to clarify rather than confound.
-  
   现代软件开发已经被视为可能成为鲁布·戈德堡机械装置的典范。然而在进行一些远程操作时，它将显得更加清晰。
 status:
   swift: 4.2
