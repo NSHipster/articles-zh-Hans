@@ -4,7 +4,7 @@ author: Mattt
 translator: Xiang Wang
 category: Cocoa
 excerpt: >
-    有很多加速网络请求的技术：压缩和流技术、缓存和预加载、连接池和多路复用、延迟和后台运行。然而，还有一种比它们优先级更高，效果更好的优化策略：_不要在刚开始的地方发送请求_。
+    有很多加速网络请求的技术：压缩和流技术、缓存和预加载、连接池和多路复用、延迟和后台运行。然而，还有一种比它们优先级更高，效果更好的优化策略：_压根就不发请求_。
 status:
     swift: 4.2
 ---
@@ -31,7 +31,7 @@ can mean _billions_ of dollars in annual revenue.
 So it's no surprise those very same companies
 have committed so much engineering effort into making the web fast.
 
-对于谷歌、亚马逊和 Netflix 这样的大型的互联网公司而言，这里和那里额外的一秒钟可能意味着年收入里的 _数十亿_ 美金。所以那些公司投入如此多的工程努力来让网页更快，也没有什么奇怪的了。
+对于谷歌、亚马逊和 Netflix 这样的大型的互联网公司而言，加载时多花一秒钟就意味着损失 _数十亿_ 美元的年收入。所以那些公司投入如此多的工程努力来让网页更快，也没有什么奇怪的了。
 
 There are many techniques for speeding up a network request:
 compressing and streaming,
@@ -42,7 +42,7 @@ And yet there's one optimization strategy
 that both predates and outperforms them all:
 _not making the request in the first place_.
 
-有很多加速网络请求的技术：压缩和流技术、缓存和预加载、连接池和多路复用、延迟和后台运行。然而，还有一种比它们优先级更高，效果更好的优化策略：_不要在刚开始的地方发送请求_。
+有很多加速网络请求的技术：压缩和流技术、缓存和预加载、连接池和多路复用、延迟和后台运行。然而，还有一种比它们优先级更高，效果更好的优化策略：_压根就不发请求_。
 
 Apps, by virtue of being downloaded ahead of time,
 have a unique advantage over conventional web pages in this respect.
@@ -67,21 +67,21 @@ or version of Metal.
 Just request an asset by name,
 and the most appropriate one is provided automatically.
 
-Asset Catalog 允许你根据当前设备的特点来组织资源文件。对于一个给定的图片，你可以根据设备（iPhone、iPad、Apple Watch、Apple TV、Mac）、屏幕分辨率（`@2x` / `@3x`）或者色域（sRGB / P3），提供不同的文件。对于其他类型的 asset，你可能根据可用内存或者 Metal 版本的不同而提供不同的文件。请求 asset 时仅需提供名字，最合适的那个资源就会自动返回。
+Asset Catalog 允许你根据当前设备的特性来组织资源文件。对于一个给定的图片，你可以根据设备（iPhone、iPad、Apple Watch、Apple TV、Mac）、屏幕分辨率（`@2x` / `@3x`）或者色域（sRGB / P3），提供不同的文件。对于其他类型的 asset，你可能根据可用内存或者 Metal 版本的不同而提供不同的文件。请求 asset 时仅需提供名字，最合适的那个资源就会自动返回。
 
 Beyond offering a more convenient API,
 Asset Catalogs let apps take advantage of
 [app thinning](https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f),
 resulting in smaller installations that are optimized for each user's device.
 
-除了提供更简便的 API，Asset Catalog 还允许 App 使用 [App 瘦身](https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f) 为每个用户设备提供一个经过优化的更小的安装包。
+除了提供更简便的 API，Asset Catalog 还允许 App 使用 [app thinning](https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f) 为每个用户设备提供一个经过优化的更小的安装包。
 
 Images are far and away the most common types of assets,
 but as of iOS 9 and macOS El Capitan,
 resources like JSON, XML and other data file can join in the fun by way of
 [`NSDataAsset`](https://developer.apple.com/documentation/uikit/nsdataasset).
 
-图片是最常见的 Asset 类型，但是从 iOS 9 和 macOS El Capitan 开始，JSON、XML 和其他数据文件之类的资源也可以通过 [`NSDataAsset`](https://developer.apple.com/documentation/uikit/nsdataasset) 加入到这种乐趣中。
+图片是最常见的 Asset 类型，但是从 iOS 9 和 macOS El Capitan 开始，JSON、XML 和其他数据文件之类的资源也可以通过 [`NSDataAsset`](https://developer.apple.com/documentation/uikit/nsdataasset) 这种有趣的方式参与进来。
 
 ## How to Store and Retrieve Data with Asset Catalog
 
@@ -158,7 +158,7 @@ with the filename and
 [Universal Type Identifier](https://en.wikipedia.org/wiki/Uniform_Type_Identifier).
 of the file.
 
-当你这么做时，Xcode 会把那个文件复制到 `.dataset` 子目录，并将它的文件名和 [通用类型标识符（Universal Type Identifier）](https://en.wikipedia.org/wiki/Uniform_Type_Identifier) 更新到 `contents.json` 元数据文件。
+当你这么做时，Xcode 会把那个文件复制到 `.dataset` 子目录，并将它的文件名和 [通用类型标识符（Universal Type Identifier）](https://zh.wikipedia.org/wiki/统一类型标识) 更新到 `contents.json` 元数据文件。
 
 ```json
 {
@@ -213,7 +213,7 @@ Data sets don't typically benefit from app thinning features of Asset Catalogs
 (most JSON files, for example,
 couldn't care less about what version of Metal is supported by the device).
 
-Data set 通常无法从 Asset Catalog 的 App 瘦身特性中获益（例如，大部分的 JSON 文件都不太关心设备所支持的 Metal 版本）。
+Data set 通常无法从 Asset Catalog 的 app thinning 特性中获益（例如，大部分的 JSON 文件都不太关心设备所支持的 Metal 版本）。
 
 But for our color palette app example,
 we might provide different color lists on devices with a wide-gamut display.
@@ -308,7 +308,7 @@ Although the Assets Catalog performs lossless compression of image assets,
 nothing from the documentation, Xcode Help, or WWDC sessions  
 indicate that any such optimization is done for data assets (at least not yet).
 
-虽然 Assets Catalog 会对 image asset 执行的无损压缩，但没有任何文档、Xcode 帮助或 WWDC 会议指出 data asset 上也存在这种优化（至少目前没有）。
+虽然 Assets Catalog 会对 image asset 执行无损压缩，但没有任何文档、Xcode 帮助或 WWDC session 指出 data asset 上也存在这种优化（至少目前没有）。
 
 For data assets larger than, say, a few hundred kilobytes,
 you should consider using compression.
@@ -394,7 +394,7 @@ enjoy fast, ubiquitous network access over WiFi and LTE,
 this isn't true for everyone,
 and certainly not all the time.
 
-尽管你倾向于认为你的所有用户都享受着快速的、无处不在的 WiFi 和 LTE 网络，但这并不适用于所有人，也不适用于所有时段。
+尽管人们容易认为所有用户都享受着快速的、无处不在的 WiFi 和 LTE 网络，但这并不适用于所有人，也不适用于所有时段。
 
 Take a moment to see what networking calls your app makes at launch,
 and consider if any of these might benefit from being pre-loaded.
