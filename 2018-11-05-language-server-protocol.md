@@ -174,7 +174,7 @@ LLVM 的核心是中间表示（intermediate representation，IR）。LLVM 所�
 
 看看苹果 Swift 项目负责人 Ted Kremenek 的 [这篇论坛帖子](https://forums.swift.org/t/new-lsp-language-service-supporting-swift-and-c-family-languages-for-any-editor-and-platform/17024/29):
 
-> @akyrtzi 所描述的 LSP 服务将比今天的 SourceKit 更强大。
+> [Argyrios] 所描述的 LSP 服务将比今天的 SourceKit 更强大。
 
 LSP 对 Xcode 团队来说是一个机遇，让他们使用一种新的方法实现 Swift 集成，并可以将其应用在语言和工具自 1.0 版本发布以来四年中的所有改进上。
 
