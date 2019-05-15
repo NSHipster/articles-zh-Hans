@@ -161,7 +161,6 @@ enum {
 typedef NSUInteger NSEnumerationOptions;
 ```
 
-> - `NSEnumerationConcurrent`: Specifies that the Block enumeration should be concurrent. The order of invocation is nondeterministic and undefined; this flag is a hint and may be ignored by the implementation under some circumstances; the code of the Block must be safe against concurrent invocation.
 > - `NSEnumerationConcurrent`: 指示 Block 遍历应当是并发的。遍历的顺序是不确定而且未定义的；这个标志位是一个提示，可能在某些情况下会被实现方忽略；Block 中的代码必须在并发调用的情况下是安全的。
 
 > - `NSEnumerationReverse`: 指示遍历应该是反向进行的，这个选项在 `NSArray` 和 `NSIndexSet` 中可用；在 `NSDictionary` 和 `NSSet` 中，以及和 `NSEnumerationConcurrent` 同时使用的情况下，行为是未定义的。
