@@ -93,7 +93,7 @@ NSURL *fileURL = [directoryURL URLByAppendingPathComponent:fileName];
 
 ## 向临时文件中写入内容
 
-除非向文件中写入了内容或更新闻的时间戳，否则文件不会被建立。
+除非向文件中写入了内容或更新文件的时间戳，否则文件不会被建立。
 
 ### NSData -writeToURL:options:error
 

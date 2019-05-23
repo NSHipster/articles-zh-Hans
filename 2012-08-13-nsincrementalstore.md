@@ -63,8 +63,6 @@ NSMutableDictionary *mutableMetadata = [NSMutableDictionary dictionary];
 
 ### `-executeRequest:withContext:error:`
 
-Here's where things get interesting, from an implementation standpoint. (And where it all goes to hell, from an API design standpoint)
-
 从实现的角度，事情开始有意思起来了（但是从接口设计角度来说，那就糟透了）。
 
 `executeRequest:withContext:error:`方法须要传进去三个参数，分别是`NSPersistentStoreRequest`、`NSManagedObjectContext`和一个`NSError`指针。

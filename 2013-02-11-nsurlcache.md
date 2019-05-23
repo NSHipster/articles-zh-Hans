@@ -92,7 +92,7 @@ HTTP 请求和回应用 [headers](http://www.w3.org/Protocols/rfc2616/rfc2616-se
 在默认情况下，`NSURLRequest` 会用当前时间决定是否返回缓存的数据。为了更精确地控制，允许使用以下请求头：
 
 * `If-Modified-Since` - 这个请求头与 `Last-Modified` 回应头相对应。把这个值设为同一终端最后一次请求时返回的 `Last-Modified` 字段的值。
-* `If-None-Match` - 这个请求头与与 `Etag` 回应头相对应。使用同一终端最后一次请求的 `Etag` 值。
+* `If-None-Match` - 这个请求头与 `Etag` 回应头相对应。使用同一终端最后一次请求的 `Etag` 值。
 
 ### Response Cache Headers
 

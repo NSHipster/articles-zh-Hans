@@ -149,7 +149,7 @@ objc_getAssociatedObject(self, &kAssociatedObjectKey);
 
 - **添加私有属性用于更好地去实现细节。**当扩展一个内建类的行为时，保持附加属性的状态可能非常必要。注意以下说的是一种非常_教科书式_的关联对象的用例：AFNetworking在 `UIImageView` 的category上用了关联对象来[保持一个operation对象](https://github.com/AFNetworking/AFNetworking/blob/2.1.0/UIKit%2BAFNetworking/UIImageView%2BAFNetworking.m#L57-L63)，用于从网络上某URL异步地获取一张图片。
 - **添加public属性来增强category的功能。**有些情况下这种(通过关联对象)让category行为更灵活的做法比在用一个带变量的方法来实现更有意义。在这些情况下，可以用关联对象实现一个一个对外开放的属性。回到上个AFNetworking的例子中的 `UIImageView` category，[它的 `imageResponseSerializer`](https://github.com/AFNetworking/AFNetworking/blob/2.1.0/UIKit%2BAFNetworking/UIImageView%2BAFNetworking.h#L60-L65)方法允许图片通过一个滤镜来显示、或在缓存到硬盘之前改变图片的内容。
-- **创建一个用于KVO的关联观察者。**当在一个category的实现中使用[KVO](https://nshipster.com/key-value-observing/)时，建议用一个自定义的关联对象而不是该对象本身作观察者。ng an associated observer for KVO**. When using [KVO](https://nshipster.com/key-value-observing/) in a category implementation, it is recommended that a custom associated-object be used as an observer, rather than the object observing itself.
+- **创建一个用于KVO的关联观察者。**当在一个category的实现中使用[KVO](https://nshipster.com/key-value-observing/)时，建议用一个自定义的关联对象而不是该对象本身作观察者。
 
 ## 反例
 
@@ -161,6 +161,7 @@ objc_getAssociatedObject(self, &kAssociatedObjectKey);
     - 当响应动作不方便使用时使用的[手势动作捕捉](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/GestureRecognizer_basics/GestureRecognizer_basics.html)。
     - 行为可以在其他对象中被代理实现时要用[代理(delegate)](https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/Delegation.html)。
     - 用[NSNotification 和 NSNotificationCenter](https://nshipster.com/nsnotification-and-nsnotificationcenter/)进行松耦合化的跨系统的事件通知。
+
 * * *
 
 比起其他解决问题的方法，关联对象应该被视为最后的选择（事实上category也不应该作为首选方法）。
