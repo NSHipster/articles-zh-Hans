@@ -130,8 +130,6 @@ self.presentViewController(alertController, animated: true) {
 
 `UIAlertController` 并不只是对已有的 API 做了清理，而是进行了标准化归纳。以前，预设的样式闲置有很多（swizzling 虽然可以提供更多的功能但还是有很大风险）。`UIAlertController` 让以前看起来很神奇的事情变为了可能。
 
-`UIAlertController` is not just a cleanup of pre-existing APIs, it's a generalization of them. Previously, one was constrained to whatever presets were provided (swizzling in additional functionality at their own risk). With `UIAlertController`, it's possible to do a lot more out-of-the-box:
-
 ### 带有警示按钮的 Alert
 
 ![Alert with Destructive Button]({% asset uialertcontroller-alert-cancel-destroy.png @path %})

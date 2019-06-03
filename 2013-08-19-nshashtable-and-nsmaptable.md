@@ -65,7 +65,7 @@ NSLog(@"Members: %@", [hashTable allObjects]);
 - `NSMapTable` 可以在加入成员时进行 `copy` 操作。
 - `NSMapTable` 可以存储任意的指针，通过指针来进行相等性和散列检查。
 
-> *注意：* `NSMapTable` 专注于强引用和弱引用，意外着 Swift 中流行的值类型是不适用的，只能用于引用类型。
+> *注意：* `NSMapTable` 专注于强引用和弱引用，意味着 Swift 中流行的值类型是不适用的，只能用于引用类型。
 
 ### 用法
 
@@ -140,4 +140,3 @@ extension NSMapTable {
 ---
 
 和往常一样，记住一点，编程并不是要做到多么聪明：永远先从最高的抽象层次去尝试解决问题。`NSSet` 和 `NSDictionary` 都是 _非常好_  的工具。在 99% 的情况下，它们毋庸置疑是正确的选择。如果你碰到的问题包含上面提到的具体的内存管理需求，那么 `NSHashTable` 和 `NSMapTable` 值得你一看。
-```

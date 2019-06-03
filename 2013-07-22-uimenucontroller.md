@@ -174,4 +174,3 @@ func handleLongPressGesture(recognizer: UIGestureRecognizer) {
 - 对于可编辑的控件，保证你的 `paste:` 实现能够处理各种有效或者无效输入
 
 如果移动计算在绝大部分人的生活中都占了非常大的比例，我们有必要尽我们最大的努力去提升移动设备的使用效率。经过你细致考虑并采用的 `UIMenuController`，不会成为没有人注意到的无用功。
-```
