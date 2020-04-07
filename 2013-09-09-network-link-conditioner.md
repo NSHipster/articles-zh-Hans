@@ -18,20 +18,27 @@ excerpt: "产品设计是一种感同身受。知道用户想要什么，他们�
 ## 安装
 
 Network Link Conditioner 可以在 “Xcode 的硬件 IO 工具” 包中找到。这可以从[苹果开发者下载](https://developer.apple.com/downloads/index.action?q=Hardware%20IO%20Tools)页面下载。
-
-![Download]({% asset network-link-conditioner-download.png @path %})
-
 搜索 “Network Link Conditioner”，然后选择正确版本的 “Xcode 的硬件 IO 工具” 包。
 
-![Package]({% asset network-link-conditioner-dmg.png @path %})
+<picture>
+    <source srcset="{% asset network-link-conditioner-dmg--dark.png @path %}" media="(prefers-color-scheme: dark)">
+    <img src="{% asset network-link-conditioner-dmg--light.png @path %}" alt="Additional Tools - Hardware" loading="lazy">
+</picture>
+
 
 下载完成后，打开 DMG，然后双击 “Network Link Condition.prefPane” 来进行安装。
 
-![System Preferences]({% asset network-link-conditioner-install.png @path %})
+<picture>
+    <source srcset="{% asset network-link-conditioner-install--dark.png @path %}" media="(prefers-color-scheme: dark)">
+    <img src="{% asset network-link-conditioner-install--light.png @path %}" alt="Install Network Link Conditioner" loading="lazy">
+</picture>
 
 现在起，你可以在系统设置的底部启用 Network Link Conditioner。
 
-![Network Link Conditioner]({% asset network-link-conditioner-system-preference.png @path %})
+<picture>
+    {% comment %}<source srcset="{% network-link-conditioner-preference-pane--dark.png @path %}" media="(prefers-color-scheme: dark)">{% endcomment %}
+    <img src="{% asset network-link-conditioner-preference-pane--light.png @path %}" alt="Network Link Conditioner" loading="lazy">
+</picture>
 
 启用后，Network Link Conditioner 可以根据内置的某个预设来改变 iPhone 模拟器的网络环境根：
 
